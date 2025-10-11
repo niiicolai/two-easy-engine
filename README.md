@@ -112,6 +112,12 @@ npm run build
 npm test
 ```
 
+### Deploy to NPM
+```
+npm run build
+npm publish
+```
+
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.
 
