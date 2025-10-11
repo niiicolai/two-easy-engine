@@ -94,7 +94,13 @@ npm install two-easy-engine
 
 ## Development
 
-### Run examples
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Show examples
 
 ```bash
 npm run preview

@@ -1,6 +1,6 @@
 {
   "name": "two-easy-engine",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple 2D library.",
   "files": [
     "dist"
@@ -18,11 +18,13 @@
   "keywords": ["2d", "canvas", "engine", "graphics"],
   "author": "Nicolai Berg Andersen",
   "license": "MIT",
-  "dependencies": {
-    "canvas": "^3.2.0",
-    "vitest": "^3.2.4"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niiicolai/two-easy-engine.git"
   },
   "devDependencies": {
+    "canvas": "^3.2.0",
+    "vitest": "^3.2.4",
     "@eslint/js": "^9.37.0",
     "eslint": "^9.37.0",
     "globals": "^16.4.0",
