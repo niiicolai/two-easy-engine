@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "module": "ESNext"
+  },
+  "include": ["src/**/*", "index.js"]
+}
