@@ -143,6 +143,7 @@ npm run docs:gen # generate docs
 npm run docs:dev # dev view
 npm run docs:build # build static files
 npm run docs:preview # prod. preview
+npm run docs:deploy # deploy docs
 ```
 
 ## Contributing
