@@ -39,10 +39,6 @@ export default {
             link: "/examples/random_color_animation",
           },
           {
-            text: "Light Follows Mouse",
-            link: "/examples/light_follows_mouse",
-          },
-          {
             text: "Orbit Particles Animation",
             link: "/examples/orbit_particles_animation",
           },
@@ -57,6 +53,14 @@ export default {
           {
             text: "Equalizer-style Animation",
             link: "/examples/equalizer_style_animation",
+          },
+          {
+            text: "Light Follows Mouse",
+            link: "/examples/light_follows_mouse",
+          },
+          {
+            text: "Camera Pan and Zoom",
+            link: "/examples/camera_pan_zoom",
           },
         ],
       },

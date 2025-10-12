@@ -45,7 +45,10 @@
 
       const numBars = 60;
       const spacing = 10;
-      const barWidth = (window.innerWidth - spacing * (numBars - 1)) / numBars;
+      const barWidth = Math.max(
+        5,
+        (window.innerWidth - spacing * (numBars - 1)) / numBars
+      );
       const bars = [];
       const baseY = window.innerHeight / 2;
 
@@ -57,7 +60,10 @@
 
         const geom = new Two.RectGeometry(barWidth, 50);
         const mesh = new Two.Mesh(geom, material);
-        mesh.transform.position.set(i * (barWidth + spacing) + barWidth / 2, baseY);
+        mesh.transform.position.set(
+          i * (barWidth + spacing) + barWidth / 2,
+          baseY
+        );
         mesh.setUserData({
           height: 50,
           hue,
@@ -79,7 +85,9 @@
 
             // Simulate an audio wave
             const height =
-              100 + Math.sin(time + i * 0.4) * 80 + Math.sin(time * 0.7 + i * 0.3) * 40;
+              100 +
+              Math.sin(time + i * 0.4) * 80 +
+              Math.sin(time * 0.7 + i * 0.3) * 40;
 
             // Smooth animation
             data.height += (height - data.height) * 0.15;
