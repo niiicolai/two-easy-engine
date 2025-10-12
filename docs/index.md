@@ -1,15 +1,12 @@
-<div style="display:flex;gap:3em;">
-  <img 
-      src="/images/logo.png" 
-      alt="TwoEasyEngine Logo" 
-      width="160" 
-      style="flex-shrink: 0; border-radius: 1rem;"
-  />
-  <p>
-    <strong>TwoEasyEngine</strong> is a lightweight 2D rendering library built on HTML5 Canvas.
-    It provides a clean, object-oriented API for creating interactive scenes, managing meshes, controlling cameras, and animating objects, with minimal setup.
-  </p>
-</div>
+<img 
+    src="/images/logo.png" 
+    alt="TwoEasyEngine Logo" 
+    width="360" 
+    style="flex-shrink: 0; border-radius: 1rem;margin:auto;"
+/>
+
+**TwoEasyEngine** is a lightweight 2D rendering library built on HTML5 Canvas.
+It provides a clean, object-oriented API for creating interactive scenes, managing meshes, controlling cameras, and animating objects, with minimal setup.
 
 ### Features
 
