@@ -2,7 +2,7 @@
 
 ## Preview
 
-<iframe src="/demos/quick_start.html" width="100%" height="400px" style="border:1px solid #ccc;"></iframe>
+<iframe src="/two-easy-engine/demos/quick_start.html" width="100%" height="400px" style="border:1px solid #ccc;"></iframe>
 
 ## Code
 ```html

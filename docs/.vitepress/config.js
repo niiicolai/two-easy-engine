@@ -15,6 +15,7 @@ function getApiSidebar() {
 }
 
 export default {
+  base: "/two-easy-engine/",
   title: "TwoEasyEngine",
   description: "2D library for the HTML5 Canvas",
   themeConfig: {
