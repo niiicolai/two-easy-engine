@@ -125,7 +125,30 @@ declare class Camera2D {
  */
 declare class Object2D {
     transform: Transform;
-    onRender(ctx: any): void;
+    zIndex: number;
+    visible: boolean;
+    scene: any;
+    /**
+     * @function setVisible - Sets the visibility of the object
+     * @param {boolean} visible - Whether the object should be visible
+     * @returns {void}
+     * @throws Will throw an error if visible is not a boolean
+     */
+    setVisible(visible: boolean): void;
+    /**
+     * @function setZIndex - Sets the z-index of the object for rendering order
+     * @param {number} zIndex - The z-index value
+     * @returns {void}
+     * @throws Will throw an error if zIndex is not a number
+     */
+    setZIndex(zIndex: number): void;
+    /**
+     * @function onRender - Placeholder method to be overridden by subclasses for rendering
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context
+     * @returns {void}
+     * @throws Will throw an error if the context is not a CanvasRenderingContext2D
+     */
+    onRender(ctx: CanvasRenderingContext2D): void;
 }
 
 /**
@@ -148,6 +171,11 @@ declare class Scene {
      * @throws {Error} If child is not of type Object2D
      */
     remove(child: Object2D): void;
+    /**
+     * @function sortChildrenByZIndex - Sorts the children based on their zIndex property
+     * @returns {void}
+     */
+    sortChildrenByZIndex(): void;
     /**
      * @function render - Renders all 2D objects in the scene onto the given canvas context
      * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to render the scene onto
@@ -273,12 +301,18 @@ declare class Mesh extends Object2D {
     constructor(geometry: any, material: any);
     geometry: Geometry;
     material: Material;
-    /**
-     * @function onRender - Draws the mesh onto the given canvas context
-     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
-     * @returns {void}
-     */
-    onRender(ctx: CanvasRenderingContext2D): void;
 }
 
-export { Camera2D, CircleGeometry, Geometry, Material, Mesh, Object2D, RectGeometry, Render2D, Scene, Transform, Vector2 };
+/**
+ * @class PointLight2D - A simple 2D light source for Canvas rendering.
+ * @extends Object2D
+ */
+declare class PointLight2D extends Object2D {
+    constructor(radius?: number, intensity?: number, color?: string, colorStop?: string);
+    radius: number;
+    intensity: number;
+    color: string;
+    colorStop: string;
+}
+
+export { Camera2D, CircleGeometry, Geometry, Material, Mesh, Object2D, PointLight2D, RectGeometry, Render2D, Scene, Transform, Vector2 };
