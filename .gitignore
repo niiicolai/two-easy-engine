@@ -1,0 +1,39 @@
+# Node dependencies
+node_modules/
+
+# Build outputs (library)
+dist/
+two-easy-engine-*.tgz
+
+# Build outputs (docs)
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+.vitepress/dist/
+.vitepress/cache/
+
+# Generated JSDoc files
+docs/api.md
+docs/api/
+api.md
+api/
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+*.tmp
+
+# Environment files
+.env
+.env.*
+env
+
+# Editor and OS-specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*.old
