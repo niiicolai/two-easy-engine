@@ -1,4 +1,4 @@
-# TwoEasyEngine
+![Logo](/images/logo.png)
 
 A lightweight 2D library built on HTML5 Canvas, providing a simple, object-oriented API for scenes, meshes, cameras, and animations.
 
