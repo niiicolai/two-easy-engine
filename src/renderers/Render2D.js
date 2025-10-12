@@ -2,10 +2,27 @@ import { Scene } from "../scenes/Scene.js";
 import { Camera2D } from "../cameras/Camera2D.js";
 
 /**
- * @class Render2D - Manages rendering of a 2D scene onto a canvas
- * @description This class handles the rendering process, including setting up the canvas and drawing the scene using the camera.
+ * @class Render2D
+ * @classdesc This class handles the rendering process, including setting up the canvas and drawing the scene using the camera.
  */
 export class Render2D {
+  /**
+   * @constructor
+   * @param {HTMLCanvasElement} canvas - The canvas element 
+   * @param {Scene} scene - The scene
+   * @param {Camera2D} camera - The camera
+   * @param {Object} [options] - Render configuration options.
+   * @param {number} [options.width=window.innerWidth] - Initial canvas width
+   * @param {number} [options.height=window.innerHeight] - Initial canvas height
+   * @param {number} [options.devicePixelRatio=window.devicePixelRatio] - Initial device pixel ratio
+   * @param {string} [options.backgroundColor='transparent'] - Initial background color
+   * @throws {Error} If canvas is not of type HTMLCanvasElement
+   * @throws {Error} If scene is not of type Scene
+   * @throws {Error} If camera is not of type Camera2D
+   * @throws {Error} If options.width or options.height is not a number
+   * @throws {Error} If options.devicePixelRatio is not a number
+   * @throws {Error} If options.backgroundColor is not a string
+   */
   constructor(
     canvas,
     scene,
@@ -17,7 +34,7 @@ export class Render2D {
       backgroundColor: 'transparent'
     }
   ) {
-    const { width, height, devicePixelRatio } = options;
+    const { width, height, devicePixelRatio, backgroundColor } = options;
 
     if (!(canvas instanceof HTMLCanvasElement)) {
       throw new Error("canvas must be of type HTMLCanvasElement");
@@ -35,6 +52,9 @@ export class Render2D {
     if (typeof devicePixelRatio !== "number") {
       throw new Error("devicePixelRatio must be a number");
     }
+    if (typeof backgroundColor !== "string") {
+      throw new Error("backgroundColor must be a number");
+    }
 
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
@@ -45,7 +65,8 @@ export class Render2D {
   }
 
   /**
-   * @function setSize - Sets the size of the canvas
+   * @function setSize
+   * @description Sets the size of the canvas
    * @param {number} width - The width of the canvas
    * @param {number} height - The height of the canvas
    * @returns {void}
@@ -61,7 +82,8 @@ export class Render2D {
   }
 
   /**
-   * @function setDevicePixelRatio - Sets the device pixel ratio for the canvas
+   * @function setDevicePixelRatio
+   * @description Sets the device pixel ratio for the canvas
    * @param {number} dpr - The device pixel ratio
    * @returns {void}
    * @throws {Error} If dpr is not a number
@@ -75,7 +97,8 @@ export class Render2D {
   }
 
   /**
-   * @function recalculateDevicePixelRatio - Recalculates the canvas size based on the device pixel ratio
+   * @function recalculateDevicePixelRatio
+   * @description Recalculates the canvas size based on the device pixel ratio
    * @returns {void}
    */
   recalculateDevicePixelRatio() {
@@ -88,7 +111,8 @@ export class Render2D {
   }
 
   /**
-   * @function render - Renders the scene onto the canvas using the camera
+   * @function render
+   * @description Renders the scene onto the canvas using the camera
    * @returns {void}
    */
   render() {
@@ -102,11 +126,14 @@ export class Render2D {
   }
 
   /**
-   * @function requestAnimationFrame - A helper method that simplifies the use of requestAnimationFrame
+   * @function requestAnimationFrame
+   * @description A helper method that simplifies the use of requestAnimationFrame
    * @param {Object} options - Options for beforeRender and afterRender callbacks
    * @param {Function} options.beforeRender - A callback function to be called before each render
    * @param {Function} options.afterRender - A callback function to be called after each render
    * @returns {void}
+   * @throws {Error} If options.beforeRender is not a function
+   * @throws {Error} If options.afterRender is not a function
    */
   requestAnimationFrame(
     options = {

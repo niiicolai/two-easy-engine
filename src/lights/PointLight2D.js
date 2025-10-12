@@ -1,10 +1,22 @@
 import { Object2D } from "../core/Object2D.js";
 
 /**
- * @class PointLight2D - A simple 2D light source for Canvas rendering.
+ * @class PointLight2D
  * @extends Object2D
+ * @classdesc A simple 2D light source for Canvas rendering.
  */
 export class PointLight2D extends Object2D {
+  /**
+   * @constructor
+   * @param {number} radius - The radius of the light
+   * @param {number} intensity - The intensity of the light
+   * @param {string} color - The color of the light
+   * @param {string} colorStop - The colorStop of the light
+   * @throws {Error} If the radius is not a positive number.
+   * @throws {Error} If the intensity is not a positive number.
+   * @throws {Error} If the color is not a string.
+   * @throws {Error} If the colorStop is not a string.
+   */
   constructor(
     radius = 100, 
     intensity = 1, 
@@ -13,12 +25,12 @@ export class PointLight2D extends Object2D {
   ) {
     super();
 
-    if (typeof radius !== "number") {
-      throw new Error("radius must be a number");
+    if (typeof radius !== "number" || radius < 0) {
+      throw new Error("radius must be a positive number");
     }
 
-    if (typeof intensity !== "number") {
-      throw new Error("intensity must be a number");
+    if (typeof intensity !== "number" || radius < 0) {
+      throw new Error("intensity must be a positive number");
     }
 
     if (typeof color !== "string") {
@@ -37,7 +49,8 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function onRender - Renders the light effect on the given 2D rendering context.
+   * @function onRender
+   * @description Renders the light effect on the given 2D rendering context.
    * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
    * @throws Will throw an error if the context is not a CanvasRenderingContext2D.
    */

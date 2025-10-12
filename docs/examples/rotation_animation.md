@@ -1,40 +1,10 @@
-<img 
-    src="./docs/public/images/logo.png" 
-    alt="TwoEasyEngine Logo" 
-    width="160" 
-    style="flex-shrink: 0; border-radius: 1rem;"
-  />
+# Rotation Animation
 
-**TwoEasyEngine** is a lightweight 2D library built on
-**HTML5 Canvas**, offering a simple, object-oriented API for
-scenes, meshes, cameras, and animations.
+## Preview
 
-### Features
+<iframe src="/demos/quick_start.html" width="100%" height="400px" style="border:1px solid #ccc;"></iframe>
 
-- Meshes with geometry and materials (RectGeometry, CircleGeometry)
-- Camera support with position, rotation, and zoom (Camera2D)
-- Responsive canvas rendering with device pixel ratio support
-- Vector transformations (position, rotation, scale)
-- Scene management for adding and rendering 2D objects
-- Simple animation loop with requestAnimationFrame wrapper
-- Written in modern JavaScript with TypeScript type declarations
-
-## Installation
-
-Install **TwoEasyEngine** via npm:
-
-```bash
-npm install two-easy-engine
-```
-
-Or using Yarn:
-
-```bash
-yarn add two-easy-engine
-```
-
-## Quick Start
-Create an HTML file with the following content to create a basic scene:
+## Code
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -109,46 +79,4 @@ Create an HTML file with the following content to create a basic scene:
 </html>
 ```
 
-## Development
 
-### Install dependencies
-
-```bash
-npm install
-```
-
-### Build static files
-
-```bash
-npm run build
-```
-
-### Run all test
-
-```bash
-npm test
-```
-
-### Deploy to NPM
-
-```bash
-npm run build
-npm publish
-```
-
-### Docs
-
-```bash
-npm run docs:gen # generate docs
-npm run docs:dev # dev view
-npm run docs:build # build static files
-npm run docs:preview # prod. preview
-```
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request on GitHub.
-
-## License MIT License
-
-See [LICENSE](/LICENSE) for more information.

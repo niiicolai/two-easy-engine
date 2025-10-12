@@ -4,6 +4,7 @@ import { Camera2D } from "./src/cameras/Camera2D.js";
 import { Scene } from "./src/scenes/Scene.js";
 import { Render2D } from "./src/renderers/Render2D.js";
 import { Material } from "./src/materials/Material.js";
+import { BasicMaterial } from "./src/materials/BasicMaterial.js";
 import { Geometry } from "./src/geometries/Geometry.js";
 import { RectGeometry } from "./src/geometries/RectGeometry.js";
 import { CircleGeometry } from "./src/geometries/CircleGeometry.js";
@@ -18,6 +19,7 @@ export {
   Scene,
   Render2D,
   Material,
+  BasicMaterial,
   Geometry,
   RectGeometry,
   CircleGeometry,

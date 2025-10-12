@@ -1,8 +1,14 @@
 /**
- * @class Vector2 - A mutable 2D vector class
- * @description This class provides basic vector operations such as addition, subtraction, scaling, and normalization.
+ * @class Vector2
+ * @classdesc This class provides basic vector operations such as addition, subtraction, scaling, and normalization.
  */
 export class Vector2 {
+  /**
+   * @constructor
+   * @param {number} x - The x coordinate
+   * @param {number} y - The y coordinate
+   * @throws {Error} If x or y are not numbers.
+   */
   constructor(x = 0, y = 0) {
     if (typeof x !== "number" || typeof y !== "number") {
       throw new Error("x and y must be numbers");
@@ -13,7 +19,8 @@ export class Vector2 {
   }
 
   /**
-   * @function clone - Creates a copy of the vector
+   * @function clone
+   * @description Creates a copy of the vector
    * @returns {Vector2} A new Vector2 instance with the same x and y values
    */
   clone() {
@@ -21,7 +28,8 @@ export class Vector2 {
   }
 
   /**
-   * @function set - Sets the x and y values of the vector
+   * @function set
+   * @description Sets the x and y values of the vector
    * @param {number} x - The new x value
    * @param {number} y - The new y value
    * @returns {void}
@@ -37,7 +45,8 @@ export class Vector2 {
   }
 
   /**
-   * @function translate - Translates the vector by given x and y offsets
+   * @function translate
+   * @description Translates the vector by given x and y offsets
    * @param {number} x - The x offset
    * @param {number} y - The y offset
    * @returns {void}
@@ -53,7 +62,8 @@ export class Vector2 {
   }
 
   /**
-   * @function add - Adds another vector to this vector
+   * @function add
+   * @description Adds another vector to this vector
    * @param {Vector2} v - The vector to add
    * @returns {void}
    * @throws {Error} If v is not of type Vector2
@@ -68,7 +78,8 @@ export class Vector2 {
   }
 
   /**
-   * @function subtract - Subtracts another vector from this vector
+   * @function subtract
+   * @description Subtracts another vector from this vector
    * @param {Vector2} v - The vector to subtract
    * @returns {void}
    * @throws {Error} If v is not of type Vector2
@@ -83,7 +94,8 @@ export class Vector2 {
   }
 
   /**
-   * @function dot - Computes the dot product with another vector
+   * @function dot
+   * @description Computes the dot product with another vector
    * @param {Vector2} v - The other vector
    * @returns {number} The dot product
    * @throws {Error} If v is not of type Vector2
@@ -96,7 +108,8 @@ export class Vector2 {
   }
 
   /**
-   * @function vectorTo - Computes the vector from this vector to another vector
+   * @function vectorTo
+   * @description Computes the vector from this vector to another vector
    * @param {Vector2} v - The target vector
    * @returns {Vector2} A new Vector2 representing the vector from this to v
    * @throws {Error} If v is not of type Vector2
@@ -109,7 +122,8 @@ export class Vector2 {
   }
 
   /**
-   * @function multiplyScalar - Multiplies this vector by a scalar
+   * @function multiplyScalar
+   * @description Multiplies this vector by a scalar
    * @param {number} s - The scalar to multiply by
    * @returns {void}
    * @throws {Error} If s is not a number
@@ -124,7 +138,8 @@ export class Vector2 {
   }
 
   /**
-   * @function divideScalar - Divides this vector by a scalar
+   * @function divideScalar
+   * @description Divides this vector by a scalar
    * @param {number} s - The scalar to divide by
    * @returns {void}
    * @throws {Error} If s is not a number
@@ -142,7 +157,8 @@ export class Vector2 {
   }
 
   /**
-   * @function length - Computes the length (magnitude) of the vector
+   * @function length
+   * @description Computes the length (magnitude) of the vector
    * @returns {number} The length of the vector
    */
   length() {
@@ -150,7 +166,8 @@ export class Vector2 {
   }
 
   /**
-   * @function normalize - Normalizes the vector to have a length of 1
+   * @function normalize
+   * @description Normalizes the vector to have a length of 1
    * @returns {void}
    * @throws {Error} If attempting to normalize a zero-length vector
    */

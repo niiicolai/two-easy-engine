@@ -13,43 +13,15 @@
         height: 100%;
       }
       #canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100vh;
-      }
-      .canvas-overlay {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        color: white;
-        font-family: Arial, sans-serif;
-        z-index: 10;
-      }
-      .canvas-overlay a {
-        color: #39ff14;
-        text-decoration: none;
-        font-weight: bold;
-      }
-      .canvas-overlay a:hover {
-        text-decoration: underline;
-      }
-      .canvas-overlay h1 {
-        font-size: 18px;
-        margin: 10px 0 0 0;
-        max-width: 400px;
       }
     </style>
   </head>
   <body>
     <canvas id="canvas"></canvas>
-    <div class="canvas-overlay">
-      <a href="../index.html">Back to Index</a>
-      <h1>Point Light Scene Example</h1>
-    </div>
     <script type="module">
-      import * as Two from "../dist/two-easy-engine.js";
+      import * as Two from "./dist/two-easy-engine.js";
 
       const canvas = document.getElementById("canvas");
       const camera = new Two.Camera2D();
@@ -73,7 +45,7 @@
       );
       scene.add(light);
 
-      const material = new Two.Material({
+      const material = new Two.BasicMaterial({
         fillStyle: "#39ff14",
         strokeStyle: "#39ff11",
         lineWidth: 2,

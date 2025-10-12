@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
+      #canvas {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script type="module">
+      import * as Two from "./dist/two-easy-engine.js";
+
+      const canvas = document.getElementById("canvas");
+      const camera = new Two.Camera2D();
+      const scene = new Two.Scene();
+      const render = new Two.Render2D(canvas, scene, camera, {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        devicePixelRatio: window.devicePixelRatio || 1,
+        backgroundColor: "black",
+      });
+
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+
+      const material = new Two.BasicMaterial({
+        fillStyle: "#39ff14",
+        strokeStyle: "#39ff11",
+        lineWidth: 2,
+      });
+
+      const circleGeometry = new Two.CircleGeometry(55);
+      const circleMesh = new Two.Mesh(circleGeometry, material);
+      circleMesh.transform.position.set(
+        window.innerWidth / 2,
+        window.innerHeight / 2
+      );
+      scene.add(circleMesh);
+
+      window.onresize = () => {
+        render.setSize(window.innerWidth, window.innerHeight);
+        circleMesh.transform.position.set(
+          window.innerWidth / 2,
+          window.innerHeight / 2
+        );
+      };
+
+      render.requestAnimationFrame({
+        beforeRender: () => {
+          circleMesh.transform.scale.set(
+            1 + Math.sin(Date.now() * 0.01) * 0.1,
+            1 + Math.sin(Date.now() * 0.01) * 0.1
+          );
+        },
+      });
+    </script>
+  </body>
+</html>
