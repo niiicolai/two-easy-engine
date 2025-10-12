@@ -151,4 +151,4 @@ Contributions are welcome! Please open an issue or submit a pull request on GitH
 
 ## License MIT License
 
-See [LICENSE](/LICENSE) for more information.
+See [LICENSE](/LICENSE.md) for more information.
