@@ -21,6 +21,8 @@ export class Scene {
     }
 
     this.children.push(child);
+    child.scene = this;
+    this.sortChildrenByZIndex();
   }
 
   /**
@@ -37,7 +39,17 @@ export class Scene {
     const index = this.children.indexOf(child);
     if (index !== -1) {
       this.children.splice(index, 1);
+      child.scene = null;
+      this.sortChildrenByZIndex();
     }
+  }
+
+  /**
+   * @function sortChildrenByZIndex - Sorts the children based on their zIndex property
+   * @returns {void}
+   */
+  sortChildrenByZIndex() {
+    this.children.sort((a, b) => a.zIndex - b.zIndex);
   }
 
   /**
@@ -50,6 +62,10 @@ export class Scene {
       throw new Error("ctx must be of type CanvasRenderingContext2D");
     }
 
-    this.children.forEach((child) => child.onRender(ctx));
+    this.children.forEach((child) => {
+      if (child.visible) {
+        child.onRender(ctx);
+      }
+    });
   }
 }

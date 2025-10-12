@@ -9,6 +9,7 @@ import { RectGeometry } from "./src/geometries/RectGeometry.js";
 import { CircleGeometry } from "./src/geometries/CircleGeometry.js";
 import { Object2D } from "./src/core/Object2D.js";
 import { Mesh } from "./src/meshes/Mesh.js";
+import { PointLight2D } from "./src/lights/PointLight2D.js";
 
 export {
   Vector2,
@@ -22,4 +23,5 @@ export {
   CircleGeometry,
   Object2D,
   Mesh,
+  PointLight2D,
 };

@@ -134,7 +134,7 @@ class l {
     this.position = e, this.rotation = t, this.scale = r;
   }
 }
-class y {
+class d {
   constructor(e = {
     zoom: 1
   }) {
@@ -165,16 +165,44 @@ class y {
     e.restore();
   }
 }
-class w {
+class c {
   constructor() {
-    this.transform = new l();
+    this.transform = new l(), this.zIndex = 0, this.visible = !0, this.scene = null;
   }
+  /**
+   * @function setVisible - Sets the visibility of the object
+   * @param {boolean} visible - Whether the object should be visible
+   * @returns {void}
+   * @throws Will throw an error if visible is not a boolean
+   */
+  setVisible(e) {
+    if (typeof e != "boolean")
+      throw new Error("visible must be a boolean");
+    this.visible = e;
+  }
+  /**
+   * @function setZIndex - Sets the z-index of the object for rendering order
+   * @param {number} zIndex - The z-index value
+   * @returns {void}
+   * @throws Will throw an error if zIndex is not a number
+   */
+  setZIndex(e) {
+    if (typeof e != "number")
+      throw new Error("zIndex must be a number");
+    this.zIndex = e, this.scene && this.scene.sortChildrenByZIndex();
+  }
+  /**
+   * @function onRender - Placeholder method to be overridden by subclasses for rendering
+   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context
+   * @returns {void}
+   * @throws Will throw an error if the context is not a CanvasRenderingContext2D
+   */
   onRender(e) {
     if (!(e instanceof CanvasRenderingContext2D))
       throw new Error("ctx must be of type CanvasRenderingContext2D");
   }
 }
-class d {
+class y {
   constructor() {
     this.children = [];
   }
@@ -185,9 +213,9 @@ class d {
    * @throws {Error} If child is not of type Object2D
    */
   add(e) {
-    if (!(e instanceof w))
+    if (!(e instanceof c))
       throw new Error("child must be of type Object2D");
-    this.children.push(e);
+    this.children.push(e), e.scene = this, this.sortChildrenByZIndex();
   }
   /**
    * @function remove - Removes a 2D object from the scene
@@ -196,10 +224,17 @@ class d {
    * @throws {Error} If child is not of type Object2D
    */
   remove(e) {
-    if (!(e instanceof w))
+    if (!(e instanceof c))
       throw new Error("child must be of type Object2D");
     const t = this.children.indexOf(e);
-    t !== -1 && this.children.splice(t, 1);
+    t !== -1 && (this.children.splice(t, 1), e.scene = null, this.sortChildrenByZIndex());
+  }
+  /**
+   * @function sortChildrenByZIndex - Sorts the children based on their zIndex property
+   * @returns {void}
+   */
+  sortChildrenByZIndex() {
+    this.children.sort((e, t) => e.zIndex - t.zIndex);
   }
   /**
    * @function render - Renders all 2D objects in the scene onto the given canvas context
@@ -209,7 +244,9 @@ class d {
   render(e) {
     if (!(e instanceof CanvasRenderingContext2D))
       throw new Error("ctx must be of type CanvasRenderingContext2D");
-    this.children.forEach((t) => t.onRender(e));
+    this.children.forEach((t) => {
+      t.visible && t.onRender(e);
+    });
   }
 }
 class b {
@@ -222,9 +259,9 @@ class b {
     const { width: h, height: s, devicePixelRatio: a } = n;
     if (!(e instanceof HTMLCanvasElement))
       throw new Error("canvas must be of type HTMLCanvasElement");
-    if (!(t instanceof d))
+    if (!(t instanceof y))
       throw new Error("scene must be of type Scene");
-    if (!(r instanceof y))
+    if (!(r instanceof d))
       throw new Error("camera must be of type Camera");
     if (typeof h != "number" || typeof s != "number")
       throw new Error("width and height must be numbers");
@@ -293,7 +330,7 @@ class b {
     window.requestAnimationFrame(n.bind(this));
   }
 }
-class u {
+class w {
   constructor(e = { fillStyle: null, strokeStyle: null, lineWidth: null }) {
     const { fillStyle: t = null, strokeStyle: r = null, lineWidth: n = 1 } = e;
     if (t !== null && typeof t != "string")
@@ -315,7 +352,7 @@ class m {
    * @throws {Error} If not implemented in subclass
    */
   draw(e, t, r) {
-    throw e instanceof CanvasRenderingContext2D ? r instanceof u ? t instanceof l ? new Error("draw method must be implemented in subclass") : new Error("transform must be of type Transform") : new Error("material must be of type Material") : new Error("ctx must be of type CanvasRenderingContext2D");
+    throw e instanceof CanvasRenderingContext2D ? r instanceof w ? t instanceof l ? new Error("draw method must be implemented in subclass") : new Error("transform must be of type Transform") : new Error("material must be of type Material") : new Error("ctx must be of type CanvasRenderingContext2D");
   }
 }
 class p extends m {
@@ -336,12 +373,12 @@ class p extends m {
   draw(e, t, r) {
     if (!(e instanceof CanvasRenderingContext2D))
       throw new Error("ctx must be of type CanvasRenderingContext2D");
-    if (!(r instanceof u))
+    if (!(r instanceof w))
       throw new Error("material must be of type Material");
     if (!(t instanceof l))
       throw new Error("transform must be of type Transform");
-    const { position: n, scale: h } = t, { x: s, y: a } = n, f = this.width * h.x, c = this.height * h.y;
-    e.save(), e.translate(s + f / 2, a + c / 2), e.rotate(t.rotation), e.translate(-(s + f / 2), -(a + c / 2)), r.fillStyle && (e.fillStyle = r.fillStyle, e.fillRect(s, a, f, c)), r.strokeStyle && (e.strokeStyle = r.strokeStyle, e.lineWidth = r.lineWidth, e.strokeRect(s, a, f, c)), e.restore();
+    const { position: n, scale: h } = t, { x: s, y: a } = n, f = this.width * h.x, u = this.height * h.y;
+    e.save(), e.translate(s + f / 2, a + u / 2), e.rotate(t.rotation), e.translate(-(s + f / 2), -(a + u / 2)), r.fillStyle && (e.fillStyle = r.fillStyle, e.fillRect(s, a, f, u)), r.strokeStyle && (e.strokeStyle = r.strokeStyle, e.lineWidth = r.lineWidth, e.strokeRect(s, a, f, u)), e.restore();
   }
 }
 class E extends m {
@@ -360,7 +397,7 @@ class E extends m {
   draw(e, t, r) {
     if (!(e instanceof CanvasRenderingContext2D))
       throw new Error("ctx must be of type CanvasRenderingContext2D");
-    if (!(r instanceof u))
+    if (!(r instanceof w))
       throw new Error("material must be of type Material");
     if (!(t instanceof l))
       throw new Error("transform must be of type Transform");
@@ -368,11 +405,11 @@ class E extends m {
     e.beginPath(), e.arc(s, a, f, 0, Math.PI * 2), e.closePath(), r.fillStyle && (e.fillStyle = r.fillStyle, e.fill()), r.strokeStyle && (e.strokeStyle = r.strokeStyle, e.lineWidth = r.lineWidth, e.stroke());
   }
 }
-class v extends w {
+class g extends c {
   constructor(e, t) {
     if (super(), !(e instanceof m))
       throw new Error("geometry must be of type Geometry");
-    if (!(t instanceof u))
+    if (!(t instanceof w))
       throw new Error("material must be of type Material");
     this.geometry = e, this.material = t;
   }
@@ -385,16 +422,41 @@ class v extends w {
     super.onRender(e), this.geometry.draw(e, this.transform, this.material);
   }
 }
+class x extends c {
+  constructor(e = 100, t = 1, r = "rgba(255,255,200,1)", n = "rgba(255, 255, 200, 0.0)") {
+    if (super(), typeof e != "number")
+      throw new Error("radius must be a number");
+    if (typeof t != "number")
+      throw new Error("intensity must be a number");
+    if (typeof r != "string")
+      throw new Error("color must be a string");
+    if (typeof n != "string")
+      throw new Error("colorStop must be a string");
+    this.radius = e, this.intensity = t, this.color = r, this.colorStop = n, this.zIndex = 1;
+  }
+  /**
+   * @function onRender - Renders the light effect on the given 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
+   * @throws Will throw an error if the context is not a CanvasRenderingContext2D.
+   */
+  onRender(e) {
+    if (!(e instanceof CanvasRenderingContext2D))
+      throw new Error("ctx must be of type CanvasRenderingContext2D");
+    const { x: t, y: r } = this.transform.position, n = e.createRadialGradient(t, r, 0, t, r, this.radius);
+    n.addColorStop(0, this.color), n.addColorStop(1, this.colorStop), e.save(), e.globalAlpha = this.intensity, e.fillStyle = n, e.fillRect(t - this.radius, r - this.radius, this.radius * 2, this.radius * 2), e.restore();
+  }
+}
 export {
-  y as Camera2D,
+  d as Camera2D,
   E as CircleGeometry,
   m as Geometry,
-  u as Material,
-  v as Mesh,
-  w as Object2D,
+  w as Material,
+  g as Mesh,
+  c as Object2D,
+  x as PointLight2D,
   p as RectGeometry,
   b as Render2D,
-  d as Scene,
+  y as Scene,
   l as Transform,
   o as Vector2
 };
