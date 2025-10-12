@@ -204,7 +204,18 @@ class w {
    * @constructor
    */
   constructor() {
-    this.transform = new f(), this.zIndex = 0, this.visible = !0, this.scene = null;
+    this.transform = new f(), this.zIndex = 0, this.visible = !0, this.scene = null, this.userData = {};
+  }
+  /**
+   * @function setUserData
+   * @description Sets the userData property reserved for custom user data
+   * @param {object} userData - the userData object
+   * @returns {void}
+   */
+  setUserData(e) {
+    if (typeof e != "object")
+      throw new Error("userData must be a object");
+    this.userData = e;
   }
   /**
    * @function setVisible

@@ -42,6 +42,22 @@ export default {
             text: "Light Follows Mouse",
             link: "/examples/light_follows_mouse",
           },
+          {
+            text: "Orbit Particles Animation",
+            link: "/examples/orbit_particles_animation",
+          },
+          {
+            text: "Matrix-style Animation",
+            link: "/examples/matrix_style_animation",
+          },
+          {
+            text: "Particle Explosion Animation",
+            link: "/examples/particle_explosion_animation",
+          },
+          {
+            text: "Equalizer-style Animation",
+            link: "/examples/equalizer_style_animation",
+          },
         ],
       },
       {

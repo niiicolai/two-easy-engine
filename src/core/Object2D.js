@@ -13,6 +13,21 @@ export class Object2D {
     this.zIndex = 0;
     this.visible = true;
     this.scene = null;
+    this.userData = {};
+  }
+
+  /**
+   * @function setUserData
+   * @description Sets the userData property reserved for custom user data
+   * @param {object} userData - the userData object
+   * @returns {void}
+   */
+  setUserData(userData) {
+    if (typeof userData !== "object") {
+      throw new Error("userData must be a object");
+    }
+
+    this.userData = userData;
   }
 
   /**
