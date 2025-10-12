@@ -14,13 +14,13 @@ describe("Scene", () => {
 
   it("should throw an error if radius is not a number", () => {
     expect(() => new PointLight2D("100", 1, 'rgba(255,255,200,1)')).toThrow(
-      "radius must be a number"
+      "radius must be a positive number"
     );
   });
 
   it("should throw an error if intensity is not a number", () => {
     expect(() => new PointLight2D(100, "1", 'rgba(255,255,200,1)')).toThrow(
-      "intensity must be a number"
+      "intensity must be a positive number"
     );
   });
 

@@ -1,10 +1,16 @@
 import { Transform } from "../core/Transform.js";
 
 /**
- * @class Camera2D - Represents a camera in 2D space
- * @description This class provides functionality to control the view of the scene, including position, rotation, and zoom.
+ * @class Camera2D 
+ * @classdesc This class provides functionality to control the view of the scene, including position, rotation, and zoom.
  */
 export class Camera2D {
+  /**
+   * Create a new Camera2D instance.
+   * @constructor
+   * @param {Object} [options] - Camera configuration options.
+   * @param {number} [options.zoom=1] - Initial zoom level of the camera.
+   */
   constructor(options = {
     zoom: 1,
   }) {
@@ -19,7 +25,8 @@ export class Camera2D {
   }
 
   /**
-   * @function apply - Applies the camera transformation to the given canvas context
+   * @function apply
+   * @description Applies the camera transformation to the given canvas context
    * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to apply the transformation to
    * @returns {void}
    * @throws {Error} If ctx is not of type CanvasRenderingContext2D
@@ -38,7 +45,8 @@ export class Camera2D {
   }
 
   /**
-   * @function restore - Restores the canvas context to its state before the camera transformation was applied
+   * @function restore
+   * @description Restores the canvas context to its state before the camera transformation was applied
    * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to restore
    * @returns {void}
    */

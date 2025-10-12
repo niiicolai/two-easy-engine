@@ -1,8 +1,8 @@
 import { Object2D } from "../core/Object2D.js";
 
 /**
- * @class Scene - Represents a collection of 2D objects to be rendered
- * @description This class manages a list of 2D objects and provides methods to add, remove, and render them.
+ * @class Scene
+ * @classdesc This class manages a list of 2D objects and provides methods to add, remove, and render them.
  */
 export class Scene {
   constructor() {
@@ -10,7 +10,8 @@ export class Scene {
   }
 
   /**
-   * @function add - Adds a 2D object to the scene
+   * @function add
+   * @description Adds a 2D object to the scene
    * @param {Object2D} child - The 2D object to add to the scene
    * @returns {void}
    * @throws {Error} If child is not of type Object2D
@@ -26,7 +27,8 @@ export class Scene {
   }
 
   /**
-   * @function remove - Removes a 2D object from the scene
+   * @function remove
+   * @description Removes a 2D object from the scene
    * @param {Object2D} child - The 2D object to remove from the scene
    * @returns {void}
    * @throws {Error} If child is not of type Object2D
@@ -45,7 +47,8 @@ export class Scene {
   }
 
   /**
-   * @function sortChildrenByZIndex - Sorts the children based on their zIndex property
+   * @function sortChildrenByZIndex
+   * @description Sorts the children based on their zIndex property
    * @returns {void}
    */
   sortChildrenByZIndex() {
@@ -53,9 +56,11 @@ export class Scene {
   }
 
   /**
-   * @function render - Renders all 2D objects in the scene onto the given canvas context
+   * @function render
+   * @description Renders all 2D objects in the scene onto the given canvas context
    * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to render the scene onto
    * @returns {void}
+   * @throws {Error} If ctx is not of type CanvasRenderingContext2D
    */
   render(ctx) {
     if (!(ctx instanceof CanvasRenderingContext2D)) {

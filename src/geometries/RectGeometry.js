@@ -3,10 +3,18 @@ import { Transform } from "../core/Transform.js";
 import { Material } from "../materials/Material.js";
 
 /**
- * @class RectGeometry - Represents a rectangle geometry
- * @description This class provides a rectangle shape with width and height properties.
+ * @class RectGeometry
+ * @extends Geometry
+ * @classdesc This class provides a rectangle shape with width and height properties.
  */
 export class RectGeometry extends Geometry {
+  /**
+   * @constructor
+   * @param {number} width - The width of the rectangle (must be positive).
+   * @param {number} height - The height of the rectangle (must be positive).
+   * @throws {Error} If the width is not a positive number.
+   * @throws {Error} If the height is not a positive number.
+   */
   constructor(width, height) {
     super();
 
@@ -22,7 +30,8 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * @function draw - Draws the rectangle onto the given canvas context
+   * @function draw
+   * @description Draws the rectangle onto the given canvas context
    * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the rectangle
    * @param {Material} material - The material to use for rendering the rectangle
@@ -51,13 +60,10 @@ export class RectGeometry extends Geometry {
     ctx.translate(-(x + width / 2), -(y + height / 2));
 
     if (material.fillStyle) {
-      ctx.fillStyle = material.fillStyle;
       ctx.fillRect(x, y, width, height);
     }
 
     if (material.strokeStyle) {
-      ctx.strokeStyle = material.strokeStyle;
-      ctx.lineWidth = material.lineWidth;
       ctx.strokeRect(x, y, width, height);
     }
 
