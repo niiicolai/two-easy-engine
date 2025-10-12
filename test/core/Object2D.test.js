@@ -70,4 +70,10 @@ describe("Object2D", () => {
       "ctx must be of type CanvasRenderingContext2D"
     );
   });
+
+  it("setUserData() should set userData", () => {
+    const object = new Object2D();
+    object.setUserData({ life: 1 });
+    expect(object.userData.life).toBe(1);
+  });
 });
