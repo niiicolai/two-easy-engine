@@ -64,7 +64,8 @@ Create an HTML file with the following content to create a basic scene:
       // Get the canvas element
       const canvas = document.getElementById("canvas");
 
-      // Create a camera, scene, and renderer
+      // Create a clock, camera, scene, and renderer
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const render = new Two.Render2D(canvas, scene, camera, {
@@ -101,7 +102,10 @@ Create an HTML file with the following content to create a basic scene:
       // Animation loop
       render.requestAnimationFrame({
         beforeRender: () => {
-          mesh.transform.rotation += 0.01; // Rotate the rectangle
+          const speed = 1.5;
+          const delta = clock.getDeltaTime();
+
+          mesh.transform.rotation += delta * speed; // Rotate the rectangle
         },
       });
     </script>
