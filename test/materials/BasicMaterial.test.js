@@ -1,6 +1,7 @@
 import { expect, describe, it } from "vitest";
 import { createCanvas } from "canvas";
 import { BasicMaterial } from "../../src/materials/BasicMaterial.js";
+import { Color } from "../../src/colors/Color.js";
 
 describe("BasicMaterial", () => {
   it("should create a Material instance with null properties", () => {
@@ -24,13 +25,13 @@ describe("BasicMaterial", () => {
 
   it("should throw an error for invalid fillStyle", () => {
     expect(() => new BasicMaterial({ fillStyle: 123 })).toThrow(
-      "fillStyle must be a string or null"
+      "fillStyle must be a Color, string or null"
     );
   });
 
   it("should throw an error for invalid strokeStyle", () => {
     expect(() => new BasicMaterial({ strokeStyle: {} })).toThrow(
-      "strokeStyle must be a string or null"
+      "strokeStyle must be a Color, string or null"
     );
   });
 
@@ -44,6 +45,25 @@ describe("BasicMaterial", () => {
     expect(() => new BasicMaterial({ texture2D: -5 })).toThrow(
       "texture2D must be of type Texture2D or null"
     );
+  });
+
+  it("should support both string and Color for fillStyle and strokeStyle", () => {
+    const color = new Color("red");
+    const material = new BasicMaterial({
+      fillStyle: color,
+      strokeStyle: color
+    });
+    const material2 = new BasicMaterial({
+      fillStyle: "blue",
+      strokeStyle: "blue"
+    });
+    const canvas = createCanvas(800, 600);
+    const ctx = canvas.getContext("2d");
+
+    material.apply(ctx);
+    material2.apply(ctx);
+    // Since we can't easily test canvas drawing, we'll just ensure no errors are thrown
+    expect(true).toBe(true);
   });
 
   it("should implement the apply method", () => {

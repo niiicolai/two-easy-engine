@@ -83,6 +83,30 @@ describe("Render2D", () => {
     );
   });
 
+  it("setBackgroundColor should set backgroundColor", () => {
+    const canvas = createCanvas(800, 600);
+    const scene = new Scene();
+    const camera = new Camera2D();
+    const render = new Render2D(canvas, scene, camera, {
+      width: 800,
+      height: 600,
+      devicePixelRatio: 1,
+      backgroundColor: "red"
+    });
+    render.setBackgroundColor("blue");
+    expect(render.options.backgroundColor).toBe("blue");
+  });
+
+  it("setBackgroundColor should throw an error if the backgroundColor is not a string or color", () => {
+    const canvas = createCanvas(800, 600);
+    const scene = new Scene();
+    const camera = new Camera2D();
+    const render = new Render2D(canvas, scene, camera);
+    expect(() => render.setBackgroundColor({})).toThrow(
+      "backgroundColor must be of type Color or string"
+    );
+  });
+
   it("should render the scene", () => {
     const canvas = createCanvas(800, 600);
     const scene = new Scene();

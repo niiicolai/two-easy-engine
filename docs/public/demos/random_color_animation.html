@@ -30,20 +30,18 @@
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
+      const backgroundColor = new Two.HslaColor(360, 100, 50, 1);
       const render = new Two.Render2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
-        backgroundColor: "black",
+        backgroundColor,
       });
 
       // Create a rectangle mesh
       const geometry = new Two.RectGeometry(150, 150);
-      const material = new Two.BasicMaterial({
-        fillStyle: "#39ff14",
-        strokeStyle: "#39ff11",
-        lineWidth: 2,
-      });
+      const fillStyle = new Two.RgbaColor(0, 0, 0, 1);
+      const material = new Two.BasicMaterial({ fillStyle });
       const mesh = new Two.Mesh(geometry, material);
       mesh.transform.position.set(
         window.innerWidth / 2 - mesh.geometry.width / 2,
@@ -65,12 +63,9 @@
         beforeRender: () => {
           const speed = 3;
           const time = clock.getElapsedTime();
+          const hue = (time * 60 * speed) % 360;
 
-          const fillHue = (time * 60 * speed) % 360;
-          const strokeHue = (time * 60 * speed + 20) % 360;
-
-          material.fillStyle = `hsl(${fillHue}, 100%, 50%)`;
-          material.strokeStyle = `hsl(${strokeHue}, 100%, 50%)`;
+          backgroundColor.setHue(hue);
         },
       });
     </script>

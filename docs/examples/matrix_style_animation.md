@@ -47,22 +47,24 @@
       const numColumns = Math.floor(window.innerWidth / 20);
       const numParticles = numColumns * 10;
       const particles = [];
+      const minSpeed = 150;
+      const maxSpeed = 250;
 
       for (let i = 0; i < numParticles; i++) {
+        const fillStyle = new Two.RgbaColor(0, 255, 70, 0.8);
+        const strokeStyle = new Two.RgbaColor(0, 255, 70, 1);
         const material = new Two.BasicMaterial({
-          fillStyle: "rgba(0, 255, 70, 0.8)",
-          strokeStyle: "rgba(0, 255, 70, 1)",
+          fillStyle,
+          strokeStyle,
           lineWidth: 1,
         });
         const geom = new Two.RectGeometry(6, 14);
         const mesh = new Two.Mesh(geom, material);
+
         mesh.transform.position.set(
           Math.random() * window.innerWidth,
           Math.random() * window.innerHeight
         );
-
-        const minSpeed = 150;
-        const maxSpeed = 250;
         mesh.setUserData({
           speed: minSpeed + Math.random() * (maxSpeed - minSpeed),
         });
@@ -75,6 +77,12 @@
         render.setSize(window.innerWidth, window.innerHeight);
       };
 
+      // Fade configuration
+      const baseAlpha = 0.6; // baseline opacity
+      const alphaAmplitude = 0.4; // how much the alpha varies (+/-)
+      const timeFrequency = 0.002; // speed of the alpha over time
+      const positionFrequency = 0.02; // variation based on Y position
+
       render.requestAnimationFrame({
         beforeRender: () => {
           const delta = clock.getDeltaTime();
@@ -83,19 +91,15 @@
             // Move downward
             p.transform.position.y += p.userData.speed * delta;
 
-            // Fade slightly as it moves
-            const baseFade = 0.6; // baseline opacity
-            const fadeAmplitude = 0.4; // how much the fade varies (+/-)
-            const timeFrequency = 0.002; // speed of the fade over time
-            const positionFrequency = 0.02; // variation based on Y position
-            const fade =
-              baseFade +
+            // Fade out
+            const alpha =
+              baseAlpha +
               Math.sin(
                 delta * timeFrequency +
                   p.transform.position.y * positionFrequency
               ) *
-                fadeAmplitude;
-            p.material.fillStyle = `rgba(0, 255, 70, ${fade})`;
+                alphaAmplitude;
+            p.material.fillStyle.setAlpha(alpha);
 
             // Reset when offscreen
             if (p.transform.position.y > window.innerHeight + 20) {

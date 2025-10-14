@@ -1,5 +1,6 @@
 import { Material } from "./Material.js";
 import { Texture2D } from "../core/Texture2D.js";
+import { Color } from "../colors/Color.js";
 
 /**
  * @class BasicMaterial
@@ -10,8 +11,8 @@ export class BasicMaterial extends Material {
   /**
    * @constructor
    * @param {Object} [options] - Material configuration options.
-   * @param {string|null} [options.fillStyle=null] - Initial fill style
-   * @param {string|null} [options.strokeStyle=null] - Initial stroke style
+   * @param {string|Color|null} [options.fillStyle=null] - Initial fill style
+   * @param {string|Color|null} [options.strokeStyle=null] - Initial stroke style
    * @param {number|null} [options.lineWidth=null] - Initial line width
    * @param {Texture2D|null} [options.texture2D=null] - Image texture
    * @throws {Error} If the fillStyle is not null or a string.
@@ -36,11 +37,11 @@ export class BasicMaterial extends Material {
       texture2D = null,
     } = options;
 
-    if (fillStyle !== null && typeof fillStyle !== "string") {
-      throw new Error("fillStyle must be a string or null");
+    if (fillStyle !== null && typeof fillStyle !== "string" && !(fillStyle instanceof Color)) {
+      throw new Error("fillStyle must be a Color, string or null");
     }
-    if (strokeStyle !== null && typeof strokeStyle !== "string") {
-      throw new Error("strokeStyle must be a string or null");
+    if (strokeStyle !== null && typeof strokeStyle !== "string" && !(strokeStyle instanceof Color)) {
+      throw new Error("strokeStyle must be a Color, string or null");
     }
     if (
       lineWidth !== null &&
@@ -75,11 +76,15 @@ export class BasicMaterial extends Material {
     if (this.texture2D) {
       ctx.fillStyle = this.texture2D.createPattern(ctx);
     } else if (this.fillStyle) {
-      ctx.fillStyle = this.fillStyle;
+      ctx.fillStyle = (this.fillStyle instanceof Color)
+        ? this.fillStyle.toString()
+        : this.fillStyle;
     }
 
     if (this.strokeStyle) {
-      ctx.strokeStyle = this.strokeStyle;
+      ctx.strokeStyle = (this.strokeStyle instanceof Color)
+        ? this.strokeStyle.toString()
+        : this.strokeStyle;
     }
 
     if (this.lineWidth) {

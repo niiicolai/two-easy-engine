@@ -37,9 +37,8 @@
       });
 
       // Create a single circle
-      const material = new Two.BasicMaterial({
-        fillStyle: "rgba(0, 255, 100, 1)",
-      });
+      const fillStyle = new Two.RgbaColor(0, 255, 100, 1);
+      const material = new Two.BasicMaterial({ fillStyle });
       const geometry = new Two.CircleGeometry(80);
       const circle = new Two.Mesh(geometry, material);
       circle.transform.position.set(window.innerWidth / 2, window.innerHeight / 2);
@@ -57,8 +56,8 @@
           const speed = 1.5;
           const time = clock.getElapsedTime();
           const alpha = (Math.sin(time * speed) + 1) / 2;
-        
-          circle.material.fillStyle = `rgba(0, 255, 100, ${alpha})`;
+          
+          fillStyle.setAlpha(alpha);
         },
       });
     </script>

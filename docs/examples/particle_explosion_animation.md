@@ -48,7 +48,7 @@
         window.innerWidth / 2,
         window.innerHeight / 2
       );
-
+      
       const fadeSpeed = 0.8;
       const minSpeed = 250;
       const maxSpeed = 550;
@@ -60,12 +60,8 @@
       // Create explosion particles
       for (let i = 0; i < numParticles; i++) {
         const hue = (i / numParticles) * 360;
-        const material = new Two.BasicMaterial({
-          fillStyle: `hsl(${hue}, 100%, 60%)`,
-          strokeStyle: `hsl(${hue}, 100%, 60%)`,
-          lineWidth: 1,
-        });
-
+        const fillStyle = new Two.HslaColor(hue, 100, 60, 1);
+        const material = new Two.BasicMaterial({ fillStyle });
         const geom = new Two.CircleGeometry(3 + Math.random() * 2);
         const mesh = new Two.Mesh(geom, material);
         mesh.transform.position.set(center.x, center.y);
@@ -107,7 +103,7 @@
             // Fade out gradually
             p.userData.life -= delta * fadeSpeed;
             const alpha = Math.max(0, p.userData.life);
-            p.material.fillStyle = `rgba(0, 255, 100, ${alpha})`;
+            p.material.fillStyle.setAlpha(alpha);
 
             // Scale down a bit as it fades
             p.transform.scale.set(alpha, alpha);

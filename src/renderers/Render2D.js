@@ -1,5 +1,6 @@
 import { Scene } from "../scenes/Scene.js";
 import { Camera2D } from "../cameras/Camera2D.js";
+import { Color } from "../colors/Color.js";
 
 /**
  * @class Render2D
@@ -8,20 +9,20 @@ import { Camera2D } from "../cameras/Camera2D.js";
 export class Render2D {
   /**
    * @constructor
-   * @param {HTMLCanvasElement} canvas - The canvas element 
+   * @param {HTMLCanvasElement} canvas - The canvas element
    * @param {Scene} scene - The scene
    * @param {Camera2D} camera - The camera
    * @param {Object} [options] - Render configuration options.
    * @param {number} [options.width=window.innerWidth] - Initial canvas width
    * @param {number} [options.height=window.innerHeight] - Initial canvas height
    * @param {number} [options.devicePixelRatio=window.devicePixelRatio] - Initial device pixel ratio
-   * @param {string} [options.backgroundColor='transparent'] - Initial background color
+   * @param {string|Color} [options.backgroundColor='transparent'] - Initial background color
    * @throws {Error} If canvas is not of type HTMLCanvasElement
    * @throws {Error} If scene is not of type Scene
    * @throws {Error} If camera is not of type Camera2D
    * @throws {Error} If options.width or options.height is not a number
    * @throws {Error} If options.devicePixelRatio is not a number
-   * @throws {Error} If options.backgroundColor is not a string
+   * @throws {Error} If options.backgroundColor is not a string or Color
    */
   constructor(
     canvas,
@@ -31,7 +32,7 @@ export class Render2D {
       width: window.innerWidth,
       height: window.innerHeight,
       devicePixelRatio: window.devicePixelRatio || 1,
-      backgroundColor: 'transparent'
+      backgroundColor: "transparent",
     }
   ) {
     const { width, height, devicePixelRatio, backgroundColor } = options;
@@ -45,15 +46,17 @@ export class Render2D {
     if (!(camera instanceof Camera2D)) {
       throw new Error("camera must be of type Camera");
     }
-
     if (typeof width !== "number" || typeof height !== "number") {
       throw new Error("width and height must be numbers");
     }
     if (typeof devicePixelRatio !== "number") {
       throw new Error("devicePixelRatio must be a number");
     }
-    if (typeof backgroundColor !== "string") {
-      throw new Error("backgroundColor must be a number");
+    if (
+      typeof backgroundColor !== "string" &&
+      !(backgroundColor instanceof Color)
+    ) {
+      throw new Error("backgroundColor must be of type Color or string");
     }
 
     this.canvas = canvas;
@@ -62,6 +65,23 @@ export class Render2D {
     this.camera = camera;
     this.options = options;
     this.recalculateDevicePixelRatio();
+  }
+
+  /**
+   * @function setBackgroundColor
+   * @description Sets the background color
+   * @param {string|Color} backgroundColor - The color
+   * @returns {void}
+   * @throws {Error} If backgroundColor is not a string or Color
+   */
+  setBackgroundColor(backgroundColor) {
+    if (
+      typeof backgroundColor !== "string" &&
+      !(backgroundColor instanceof Color)
+    ) {
+      throw new Error("backgroundColor must be of type Color or string");
+    }
+    this.options.backgroundColor = backgroundColor;
   }
 
   /**
@@ -118,7 +138,10 @@ export class Render2D {
   render() {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.fillStyle = this.options.backgroundColor || 'transparent';
+    ctx.fillStyle =
+      this.options.backgroundColor instanceof Color
+        ? this.options.backgroundColor.toString()
+        : this.options.backgroundColor;
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.camera.apply(ctx);
     this.scene.render(ctx);
