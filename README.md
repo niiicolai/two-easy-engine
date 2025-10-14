@@ -1,3 +1,5 @@
+[![CI](https://github.com/niiicolai/two-easy-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/niiicolai/two-easy-engine/actions/workflows/ci.yml)
+
 <img 
     src="./docs/public/images/logo.png" 
     alt="TwoEasyEngine Logo" 
