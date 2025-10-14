@@ -51,6 +51,8 @@
       const logoOffset = new Two.Vector2(50, 50);
       const circleOffset = new Two.Vector2(120, 0);
 
+      const fillStyle = new Two.RgbaColor(255, 255, 255, 1);
+
       const logoImg = document.getElementById("logoImg");
       const logoTexture = new Two.Texture2D({
         image: logoImg, // Use a HTMLImageElement or string
@@ -61,7 +63,7 @@
         imageOffsetY: 0,
       });
       const logoMaterial = new Two.BasicMaterial({
-        fillStyle: "rgba(255,255,255,1)",
+        fillStyle,
         texture2D: logoTexture,
       });
       const logoGeom = new Two.RectGeometry(150, 100);
@@ -78,7 +80,7 @@
         imageOffsetY: 0,
       });
       const imageRectMaterial = new Two.BasicMaterial({
-        fillStyle: "rgba(255,255,255,1)",
+        fillStyle,
         texture2D: rectTexture,
       });
       const rectGeom = new Two.RectGeometry(100, 100);
@@ -98,7 +100,7 @@
         imageOffsetY: 50,
       });
       const imageCircleMaterial = new Two.BasicMaterial({
-        fillStyle: "rgba(255,255,255,1)",
+        fillStyle,
         texture2D: circleTexture,
       });
       const circleGeom = new Two.CircleGeometry(50);

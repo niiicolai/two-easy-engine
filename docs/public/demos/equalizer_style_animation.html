@@ -44,23 +44,19 @@
       );
       const bars = [];
       const baseY = window.innerHeight / 2;
+      const baseHeight = 50;
 
       for (let i = 0; i < numBars; i++) {
-        const hue = (i / numBars) * 120 + 100; // greenish gradient
-        const material = new Two.BasicMaterial({
-          fillStyle: `hsl(${hue}, 100%, 50%)`,
-        });
-
+        const hue = (i / numBars) * 120 + 100;
+        const fillStyle = new Two.HslaColor(hue, 100, 60, 1);
+        const material = new Two.BasicMaterial({ fillStyle });
         const geom = new Two.RectGeometry(barWidth, 50);
         const mesh = new Two.Mesh(geom, material);
         mesh.transform.position.set(
           i * (barWidth + spacing) + barWidth / 2,
           baseY
         );
-        mesh.setUserData({
-          height: 50,
-          hue,
-        });
+        mesh.setUserData({ height: baseHeight });
         scene.add(mesh);
         bars.push(mesh);
       }
@@ -71,7 +67,6 @@
 
       render.requestAnimationFrame({
         beforeRender: () => {
-          const baseHeight = 50;
           const time = clock.getElapsedTime();
 
           bars.forEach((bar, i) => {
@@ -91,8 +86,8 @@
             bar.transform.position.y = baseY;
 
             // Color shift based on height
-            const brightness = 40 + (data.height / 200) * 30;
-            bar.material.fillStyle = `hsl(${data.hue}, 100%, ${brightness}%)`;
+            const lightness = 40 + (data.height / 200) * 30;
+            bar.material.fillStyle.setLightness(lightness);
           });
         },
       });

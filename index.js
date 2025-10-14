@@ -13,6 +13,9 @@ import { CircleGeometry } from "./src/geometries/CircleGeometry.js";
 import { Object2D } from "./src/core/Object2D.js";
 import { Mesh } from "./src/meshes/Mesh.js";
 import { PointLight2D } from "./src/lights/PointLight2D.js";
+import { Color } from "./src/colors/Color.js";
+import { RgbaColor } from "./src/colors/RgbaColor.js";
+import { HslaColor } from "./src/colors/HslaColor.js";
 
 export {
   Vector2,
@@ -30,4 +33,7 @@ export {
   Object2D,
   Mesh,
   PointLight2D,
+  Color,
+  HslaColor,
+  RgbaColor,
 };

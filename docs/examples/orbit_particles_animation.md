@@ -50,11 +50,8 @@
       // Create orbiting circles
       for (let i = 0; i < numParticles; i++) {
         const hue = (i / numParticles) * 360;
-        const material = new Two.BasicMaterial({
-          fillStyle: `hsl(${hue}, 100%, 60%)`,
-          strokeStyle: "black",
-          lineWidth: 1,
-        });
+        const fillStyle = new Two.HslaColor(hue, 100, 60, 1);
+        const material = new Two.BasicMaterial({ fillStyle });
         const circle = new Two.CircleGeometry(5);
         const mesh = new Two.Mesh(circle, material);
         scene.add(mesh);
