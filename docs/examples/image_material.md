@@ -29,12 +29,14 @@
     </style>
   </head>
   <body>
+    <img src="/two-easy-engine/images/logo.png" id="logoImg" hidden />
     <canvas id="canvas"></canvas>
 
     <script type="module">
       import * as Two from "two-easy-engine";
 
       const canvas = document.getElementById("canvas");
+
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
@@ -49,8 +51,9 @@
       const logoOffset = new Two.Vector2(50, 50);
       const circleOffset = new Two.Vector2(120, 0);
 
+      const logoImg = document.getElementById("logoImg");
       const logoTexture = new Two.Texture2D({
-        image: "/two-easy-engine/images/logo.png",
+        image: logoImg, // Use a HTMLImageElement or string
         imageRepeat: "repeat",
         imageWidth: 100,
         imageHeight: 100,
