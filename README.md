@@ -8,8 +8,6 @@
 
 </div>
 
-
-
 <img 
     src="./docs/public/images/logo.png" 
     alt="TwoEasyEngine Logo" 
