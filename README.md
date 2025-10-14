@@ -1,6 +1,7 @@
 [![CI](https://github.com/niiicolai/two-easy-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/niiicolai/two-easy-engine/actions/workflows/ci.yml)
+[![pages-build-deployment](https://github.com/niiicolai/two-easy-engine/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/niiicolai/two-easy-engine/actions/workflows/pages/pages-build-deployment)
 [![npm version](https://img.shields.io/npm/v/two-easy-engine.svg)](https://www.npmjs.com/package/two-easy-engine)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 
 <img 
     src="./docs/public/images/logo.png" 
