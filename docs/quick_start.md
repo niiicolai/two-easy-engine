@@ -49,7 +49,8 @@ import * as Two from "two-easy-engine";
 // Get the canvas element
 const canvas = document.getElementById("canvas");
 
-// Create a camera, scene, and renderer
+// Create a clock, camera, scene, and renderer
+const clock = new Two.Clock();
 const camera = new Two.Camera2D();
 const scene = new Two.Scene();
 const render = new Two.Render2D(canvas, scene, camera, {
@@ -62,6 +63,7 @@ const render = new Two.Render2D(canvas, scene, camera, {
 
 Explanation:
 
+- `Clock` tracks time elapsed and frame delta time.
 - `Camera2D` controls what part of the scene is visible.
 - `Scene` holds all your objects (meshes).
 - `Render2D` draws the scene onto the canvas.
@@ -115,11 +117,16 @@ window.onresize = () => {
 ```js
 render.requestAnimationFrame({
   beforeRender: () => {
-    mesh.transform.rotation += 0.01; // rotate the rectangle
+    const speed = 1.5;
+    const delta = clock.getDeltaTime();
+
+    mesh.transform.rotation += delta * speed; // Rotate the rectangle
   },
 });
 ```
 
+- `render.requestAnimationFrame` starts the animation loop.
+- `clock.getDeltaTime` use delta time for frame-rate-independent updates.
 - The `beforeRender` callback runs on each frame.
 - `mesh.transform.rotation` rotates the rectangle continuously.
 
@@ -154,7 +161,8 @@ render.requestAnimationFrame({
       // Get the canvas element
       const canvas = document.getElementById("canvas");
 
-      // Create a camera, scene, and renderer
+      // Create a clock, camera, scene, and renderer
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const render = new Two.Render2D(canvas, scene, camera, {
@@ -191,7 +199,10 @@ render.requestAnimationFrame({
       // Animation loop
       render.requestAnimationFrame({
         beforeRender: () => {
-          mesh.transform.rotation += 0.01; // Rotate the rectangle
+          const speed = 1.5;
+          const delta = clock.getDeltaTime();
+
+          mesh.transform.rotation += delta * speed; // Rotate the rectangle
         },
       });
     </script>

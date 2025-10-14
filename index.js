@@ -3,6 +3,8 @@ import { Transform } from "./src/core/Transform.js";
 import { Camera2D } from "./src/cameras/Camera2D.js";
 import { Scene } from "./src/scenes/Scene.js";
 import { Render2D } from "./src/renderers/Render2D.js";
+import { Texture2D } from "./src/core/Texture2D.js";
+import { Clock } from "./src/core/Clock.js";
 import { Material } from "./src/materials/Material.js";
 import { BasicMaterial } from "./src/materials/BasicMaterial.js";
 import { Geometry } from "./src/geometries/Geometry.js";
@@ -18,6 +20,8 @@ export {
   Camera2D,
   Scene,
   Render2D,
+  Texture2D,
+  Clock,
   Material,
   BasicMaterial,
   Geometry,

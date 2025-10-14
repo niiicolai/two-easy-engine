@@ -24,6 +24,7 @@
       import * as Two from "/two-easy-engine/demos/two-easy-engine.js";
 
       const canvas = document.getElementById("canvas");
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const render = new Two.Render2D(canvas, scene, camera, {
@@ -38,18 +39,17 @@
         strokeStyle: "#39ff11",
         lineWidth: 2,
       });
-
-      const circleGeometry = new Two.CircleGeometry(55);
-      const circleMesh = new Two.Mesh(circleGeometry, material);
-      circleMesh.transform.position.set(
+      const geometry = new Two.CircleGeometry(55);
+      const mesh = new Two.Mesh(geometry, material);
+      mesh.transform.position.set(
         window.innerWidth / 2,
         window.innerHeight / 2
       );
-      scene.add(circleMesh);
+      scene.add(mesh);
 
       window.onresize = () => {
         render.setSize(window.innerWidth, window.innerHeight);
-        circleMesh.transform.position.set(
+        mesh.transform.position.set(
           window.innerWidth / 2,
           window.innerHeight / 2
         );
@@ -57,9 +57,13 @@
 
       render.requestAnimationFrame({
         beforeRender: () => {
-          circleMesh.transform.scale.set(
-            1 + Math.sin(Date.now() * 0.01) * 0.1,
-            1 + Math.sin(Date.now() * 0.01) * 0.1
+          const speed = 3;
+          const amplitude = 0.1;
+          const time = clock.getElapsedTime();
+
+          mesh.transform.scale.set(
+            1 + Math.sin(time * speed) * amplitude,
+            1 + Math.sin(time * speed) * amplitude
           );
         },
       });

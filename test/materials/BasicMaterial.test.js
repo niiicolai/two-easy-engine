@@ -40,6 +40,12 @@ describe("BasicMaterial", () => {
     );
   });
 
+  it("should throw an error for invalid texture2D", () => {
+    expect(() => new BasicMaterial({ texture2D: -5 })).toThrow(
+      "texture2D must be of type Texture2D or null"
+    );
+  });
+
   it("should implement the apply method", () => {
     const material = new BasicMaterial();
     const canvas = createCanvas(800, 600);

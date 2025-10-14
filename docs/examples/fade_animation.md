@@ -1,32 +1,39 @@
+# Fade Animation
+
+## Preview
+
+<iframe src="/two-easy-engine/demos/fade_animation.html" width="100%" height="400px" style="border:1px solid #ccc;"></iframe>
+
+## Code
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      body,
-      html {
+      html, body {
         margin: 0;
         padding: 0;
         overflow: hidden;
         width: 100%;
         height: 100%;
+        background: black;
       }
       #canvas {
         width: 100%;
         height: 100vh;
+        display: block;
       }
     </style>
   </head>
   <body>
     <canvas id="canvas"></canvas>
+
     <script type="module">
-      import * as Two from "/two-easy-engine/demos/two-easy-engine.js";
+      import * as Two from "two-easy-engine";
 
-      // Get the canvas element
       const canvas = document.getElementById("canvas");
-
-      // Create a clock, camera, scene, and renderer
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
@@ -37,39 +44,32 @@
         backgroundColor: "black",
       });
 
-      // Create a rectangle mesh
-      const mesh = new Two.Mesh(
-        new Two.RectGeometry(50, 50),
-        new Two.BasicMaterial({
-          fillStyle: "#39ff14",
-          strokeStyle: "#39ff11",
-          lineWidth: 2,
-        })
-      );
-      mesh.transform.position.set(
-        window.innerWidth / 2 - mesh.geometry.width / 2,
-        window.innerHeight / 2 - mesh.geometry.height / 2
-      );
-      scene.add(mesh);
+      // Create a single circle
+      const material = new Two.BasicMaterial({
+        fillStyle: "rgba(0, 255, 100, 1)",
+      });
+      const geometry = new Two.CircleGeometry(80);
+      const circle = new Two.Mesh(geometry, material);
+      circle.transform.position.set(window.innerWidth / 2, window.innerHeight / 2);
+      scene.add(circle);
 
-      // Handle window resize to ensure responsiveness rendering
-      window.onresize = () => {
-        mesh.transform.position.set(
-          window.innerWidth / 2 - mesh.geometry.width / 2,
-          window.innerHeight / 2 - mesh.geometry.height / 2
-        );
+      // Resize handler
+      window.addEventListener("resize", () => {
         render.setSize(window.innerWidth, window.innerHeight);
-      };
+        circle.transform.position.set(window.innerWidth / 2, window.innerHeight / 2);
+      });
 
-      // Animation loop
+      // Animation: simple alpha fade
       render.requestAnimationFrame({
         beforeRender: () => {
           const speed = 1.5;
-          const delta = clock.getDeltaTime();
-
-          mesh.transform.rotation += delta * speed; // Rotate the rectangle
+          const time = clock.getElapsedTime();
+          const alpha = (Math.sin(time * speed) + 1) / 2;
+        
+          circle.material.fillStyle = `rgba(0, 255, 100, ${alpha})`;
         },
       });
     </script>
   </body>
 </html>
+```

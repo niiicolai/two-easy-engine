@@ -52,22 +52,22 @@ export class RectGeometry extends Geometry {
     const { x, y } = position;
     const width = this.width * scale.x;
     const height = this.height * scale.y;
+    const halfWidth = width / 2;
+    const halfHeight = height / 2;
 
-    // Rotate around the center of the rectangle
     ctx.save();
-    ctx.translate(x + width / 2, y + height / 2);
+    ctx.translate(x + halfWidth, y + halfHeight);
     ctx.rotate(transform.rotation);
-    ctx.translate(-(x + width / 2), -(y + height / 2));
+    ctx.translate(-halfWidth, -halfHeight);
 
     if (material.fillStyle) {
-      ctx.fillRect(x, y, width, height);
+      ctx.fillRect(0, 0, width, height);
     }
 
     if (material.strokeStyle) {
-      ctx.strokeRect(x, y, width, height);
+      ctx.strokeRect(0, 0, width, height);
     }
 
-    // restore the context to its original state
     ctx.restore();
   }
 }

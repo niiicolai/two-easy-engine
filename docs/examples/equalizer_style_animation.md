@@ -34,6 +34,7 @@
       import * as Two from "two-easy-engine";
 
       const canvas = document.getElementById("canvas");
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const render = new Two.Render2D(canvas, scene, camera, {
@@ -78,19 +79,20 @@
 
       render.requestAnimationFrame({
         beforeRender: () => {
-          const time = Date.now() * 0.002;
+          const baseHeight = 50;
+          const time = clock.getElapsedTime();
 
           bars.forEach((bar, i) => {
             const data = bar.userData;
 
             // Simulate an audio wave
             const height =
-              100 +
+              baseHeight +
               Math.sin(time + i * 0.4) * 80 +
               Math.sin(time * 0.7 + i * 0.3) * 40;
 
             // Smooth animation
-            data.height += (height - data.height) * 0.15;
+            data.height += height - data.height;
 
             // Update transform
             bar.transform.scale.set(1, data.height / 50);

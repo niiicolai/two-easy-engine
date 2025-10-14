@@ -48,9 +48,13 @@ export class CircleGeometry extends Geometry {
     const { position, scale } = transform;
     const { x, y } = position;
     const radius = this.radius * ((scale.x + scale.y) / 2); // Average scale for uniform scaling
-    
+
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(transform.rotation);
+
     ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
     ctx.closePath();
 
     if (material.fillStyle) {
@@ -60,5 +64,7 @@ export class CircleGeometry extends Geometry {
     if (material.strokeStyle) {
       ctx.stroke();
     }
+
+    ctx.restore();
   }
 }

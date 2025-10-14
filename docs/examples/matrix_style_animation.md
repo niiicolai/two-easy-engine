@@ -34,6 +34,7 @@
       import * as Two from "two-easy-engine";
 
       const canvas = document.getElementById("canvas");
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const render = new Two.Render2D(canvas, scene, camera, {
@@ -51,18 +52,20 @@
         const material = new Two.BasicMaterial({
           fillStyle: "rgba(0, 255, 70, 0.8)",
           strokeStyle: "rgba(0, 255, 70, 1)",
-          lineWidth: null,
+          lineWidth: 1,
         });
-
-        // Each particle is a small rectangle
         const geom = new Two.RectGeometry(6, 14);
         const mesh = new Two.Mesh(geom, material);
-
         mesh.transform.position.set(
           Math.random() * window.innerWidth,
           Math.random() * window.innerHeight
         );
-        mesh.setUserData({ speed: 0.5 + Math.random() * 1 });
+
+        const minSpeed = 150;
+        const maxSpeed = 250;
+        mesh.setUserData({
+          speed: minSpeed + Math.random() * (maxSpeed - minSpeed),
+        });
 
         scene.add(mesh);
         particles.push(mesh);
@@ -74,15 +77,24 @@
 
       render.requestAnimationFrame({
         beforeRender: () => {
+          const delta = clock.getDeltaTime();
+
           particles.forEach((p) => {
             // Move downward
-            p.transform.position.y += p.userData.speed * 4;
+            p.transform.position.y += p.userData.speed * delta;
 
             // Fade slightly as it moves
+            const baseFade = 0.6; // baseline opacity
+            const fadeAmplitude = 0.4; // how much the fade varies (+/-)
+            const timeFrequency = 0.002; // speed of the fade over time
+            const positionFrequency = 0.02; // variation based on Y position
             const fade =
-              0.6 +
-              Math.sin(Date.now() * 0.002 + p.transform.position.y * 0.02) *
-                0.4;
+              baseFade +
+              Math.sin(
+                delta * timeFrequency +
+                  p.transform.position.y * positionFrequency
+              ) *
+                fadeAmplitude;
             p.material.fillStyle = `rgba(0, 255, 70, ${fade})`;
 
             // Reset when offscreen

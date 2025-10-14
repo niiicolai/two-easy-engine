@@ -34,6 +34,7 @@ export default {
         items: [
           { text: "Rotation Animation", link: "/examples/rotation_animation" },
           { text: "Pulse Animation", link: "/examples/pulse_animation" },
+          { text: "Fade Animation", link: "/examples/fade_animation" },
           {
             text: "Random Color Animation",
             link: "/examples/random_color_animation",
@@ -62,6 +63,18 @@ export default {
             text: "Camera Pan and Zoom",
             link: "/examples/camera_pan_zoom",
           },
+          {
+            text: "Image Material",
+            link: "/examples/image_material",
+          },
+          // Map example
+          // Audio example
+          // Transparent example
+          // Snake game example
+          // Top-down shooter example
+          // Top-down RPG example
+          // custom geometry example
+          // custom material example
         ],
       },
       {

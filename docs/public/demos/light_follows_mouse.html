@@ -24,6 +24,7 @@
       import * as Two from "/two-easy-engine/demos/two-easy-engine.js";
 
       const canvas = document.getElementById("canvas");
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const render = new Two.Render2D(canvas, scene, camera, {
@@ -36,7 +37,7 @@
       const light = new Two.PointLight2D(
         200,
         1,
-        "rgba(255,255,200,0.5)",
+        "rgba(255,255,200, 0.7)",
         "rgba(255, 255, 200, 0.0)"
       );
       light.transform.position.set(
@@ -50,7 +51,6 @@
         strokeStyle: "#39ff11",
         lineWidth: 2,
       });
-
       const rectGeometry = new Two.RectGeometry(20, 20);
       const rectMesh = new Two.Mesh(rectGeometry, material);
       rectMesh.transform.position.set(
@@ -75,9 +75,12 @@
 
       render.requestAnimationFrame({
         beforeRender: () => {
+          const speed = 0.5;
+          const delta = clock.getDeltaTime();
+
+          rectMesh.transform.rotation += delta * speed;
           light.transform.position.x = mouse.x;
           light.transform.position.y = mouse.y;
-          rectMesh.transform.rotation += 0.01;
         },
       });
     </script>

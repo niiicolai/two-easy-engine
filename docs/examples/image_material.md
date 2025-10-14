@@ -1,0 +1,139 @@
+# Image Material
+
+## Preview
+
+<iframe src="/two-easy-engine/demos/image_material.html" width="100%" height="400px" style="border:1px solid #ccc;"></iframe>
+
+## Code
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        background: black;
+      }
+      #canvas {
+        width: 100%;
+        height: 100vh;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <script type="module">
+      import * as Two from "two-easy-engine";
+
+      const canvas = document.getElementById("canvas");
+      const clock = new Two.Clock();
+      const camera = new Two.Camera2D();
+      const scene = new Two.Scene();
+      const render = new Two.Render2D(canvas, scene, camera, {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        devicePixelRatio: window.devicePixelRatio || 1,
+        backgroundColor: "black",
+      });
+
+      const rectOffset = new Two.Vector2(-150, -50);
+      const logoOffset = new Two.Vector2(50, 50);
+      const circleOffset = new Two.Vector2(120, 0);
+
+      const logoTexture = new Two.Texture2D({
+        image: "/two-easy-engine/images/logo.png",
+        imageRepeat: "repeat",
+        imageWidth: 100,
+        imageHeight: 100,
+        imageOffsetX: 0,
+        imageOffsetY: 0,
+      });
+      const logoMaterial = new Two.BasicMaterial({
+        fillStyle: "rgba(255,255,255,1)",
+        texture2D: logoTexture,
+      });
+      const logoGeom = new Two.RectGeometry(150, 100);
+      const logoMesh = new Two.Mesh(logoGeom, logoMaterial);
+      logoMesh.transform.position.set(logoOffset.x, logoOffset.y);
+      scene.add(logoMesh);
+
+      const rectTexture = new Two.Texture2D({
+        image: "/two-easy-engine/images/square-test.png",
+        imageRepeat: "repeat",
+        imageWidth: 100,
+        imageHeight: 100,
+        imageOffsetX: 0,
+        imageOffsetY: 0,
+      });
+      const imageRectMaterial = new Two.BasicMaterial({
+        fillStyle: "rgba(255,255,255,1)",
+        texture2D: rectTexture,
+      });
+      const rectGeom = new Two.RectGeometry(100, 100);
+      const rectMesh = new Two.Mesh(rectGeom, imageRectMaterial);
+      rectMesh.transform.position.set(
+        window.innerWidth / 2 + rectOffset.x,
+        window.innerHeight / 2 + rectOffset.y
+      );
+      scene.add(rectMesh);
+
+      const circleTexture = new Two.Texture2D({
+        image: "/two-easy-engine/images/circle-test.png",
+        imageRepeat: "repeat",
+        imageWidth: 100,
+        imageHeight: 100,
+        imageOffsetX: 50,
+        imageOffsetY: 50,
+      });
+      const imageCircleMaterial = new Two.BasicMaterial({
+        fillStyle: "rgba(255,255,255,1)",
+        texture2D: circleTexture,
+      });
+      const circleGeom = new Two.CircleGeometry(50);
+      const circleMesh = new Two.Mesh(circleGeom, imageCircleMaterial);
+      circleMesh.transform.position.set(
+        window.innerWidth / 2 + circleOffset.x,
+        window.innerHeight / 2 + circleOffset.y
+      );
+      scene.add(circleMesh);
+
+      window.onresize = () => {
+        render.setSize(window.innerWidth, window.innerHeight);
+      };
+
+      render.requestAnimationFrame({
+        beforeRender: () => {
+          const movementSpeed = 0.5;
+          const rotationSpeed = 1.5;
+          const radius = 50;
+          const time = clock.getElapsedTime() * movementSpeed;
+          const delta = clock.getDeltaTime() * rotationSpeed;
+
+          logoTexture.setImageOffset((time * 50) % 100, 0);
+
+          rectMesh.transform.rotation += delta;
+          circleMesh.transform.rotation += delta;
+
+          rectMesh.transform.position.set(
+            Math.sin(time) * radius + window.innerWidth / 2 + rectOffset.x,
+            Math.cos(time) * radius + window.innerHeight / 2 + rectOffset.y
+          );
+          circleMesh.transform.position.set(
+            Math.sin(time) * radius + window.innerWidth / 2 + circleOffset.x,
+            Math.cos(time) * radius + window.innerHeight / 2 + circleOffset.y
+          );
+        },
+      });
+    </script>
+  </body>
+</html>
+```

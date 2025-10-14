@@ -1,7 +1,10 @@
-import { CanvasRenderingContext2D, createCanvas } from "canvas";
+import { CanvasRenderingContext2D, createCanvas, Image, DOMMatrix } from "canvas";
 
 globalThis.HTMLCanvasElement = createCanvas().constructor;
 globalThis.CanvasRenderingContext2D = CanvasRenderingContext2D;
+globalThis.HTMLImageElement = Image;
+globalThis.Image = Image;
+globalThis.DOMMatrix = DOMMatrix;
 globalThis.window = {
     innerWidth: 800,
     innerHeight: 600,
