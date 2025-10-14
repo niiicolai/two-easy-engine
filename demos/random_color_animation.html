@@ -26,7 +26,8 @@
       // Get the canvas element
       const canvas = document.getElementById("canvas");
 
-      // Create a camera, scene, and renderer
+      // Create a clock, camera, scene, and renderer
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const render = new Two.Render2D(canvas, scene, camera, {
@@ -37,7 +38,7 @@
       });
 
       // Create a rectangle mesh
-      const geometry = new Two.RectGeometry(50, 50);
+      const geometry = new Two.RectGeometry(150, 150);
       const material = new Two.BasicMaterial({
         fillStyle: "#39ff14",
         strokeStyle: "#39ff11",
@@ -62,11 +63,14 @@
       // Animation loop
       render.requestAnimationFrame({
         beforeRender: () => {
-          // Update Color
-          material.fillStyle = `hsl(${(Date.now() * 0.05) % 360}, 100%, 50%)`;
-          material.strokeStyle = `hsl(${
-            (Date.now() * 0.05 + 20) % 360
-          }, 100%, 50%)`;
+          const speed = 3;
+          const time = clock.getElapsedTime();
+
+          const fillHue = (time * 60 * speed) % 360;
+          const strokeHue = (time * 60 * speed + 20) % 360;
+
+          material.fillStyle = `hsl(${fillHue}, 100%, 50%)`;
+          material.strokeStyle = `hsl(${strokeHue}, 100%, 50%)`;
         },
       });
     </script>

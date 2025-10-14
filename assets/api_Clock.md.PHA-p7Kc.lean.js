@@ -1,0 +1,1 @@
+import{_ as a,c as t,o,ae as d}from"./chunks/framework.Cn4FPLDc.js";const h=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"api/Clock.md","filePath":"api/Clock.md"}'),l={name:"api/Clock.md"};function n(i,e,c,s,r,p){return o(),t("div",null,[...e[0]||(e[0]=[d("",19)])])}const u=a(l,[["render",n]]);export{h as __pageData,u as default};

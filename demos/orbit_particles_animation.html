@@ -26,6 +26,7 @@
       import * as Two from "/two-easy-engine/demos/two-easy-engine.js";
 
       const canvas = document.getElementById("canvas");
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const render = new Two.Render2D(canvas, scene, camera, {
@@ -35,26 +36,27 @@
         backgroundColor: "black",
       });
 
-      const numParticles = 60;
-      const baseRadius = 180;
+      const numParticles = 30;
       const particles = [];
 
       // Create orbiting circles
       for (let i = 0; i < numParticles; i++) {
+        const hue = (i / numParticles) * 360;
         const material = new Two.BasicMaterial({
-          fillStyle: `hsl(${(i / numParticles) * 360}, 100%, 60%)`,
+          fillStyle: `hsl(${hue}, 100%, 60%)`,
           strokeStyle: "black",
           lineWidth: 1,
         });
-
-        const circle = new Two.CircleGeometry(6);
+        const circle = new Two.CircleGeometry(5);
         const mesh = new Two.Mesh(circle, material);
-        mesh.setUserData({ angle: (i / numParticles) * Math.PI * 2 });
         scene.add(mesh);
         particles.push(mesh);
       }
 
-      const center = new Two.Vector2(window.innerWidth / 2, window.innerHeight / 2);
+      const center = new Two.Vector2(
+        window.innerWidth / 2,
+        window.innerHeight / 2
+      );
 
       window.onresize = () => {
         render.setSize(window.innerWidth, window.innerHeight);
@@ -63,13 +65,15 @@
 
       render.requestAnimationFrame({
         beforeRender: () => {
-          const time = Date.now() * 0.00000008;
-          particles.forEach((p, i) => {
-            const speed = 0.15 + Math.sin(i * 0.3 + time) * 0.05;
-            const radius = baseRadius + Math.sin(time * 2 + i) * 15;
+          const speed = 0.5;
+          const baseRadius = 120;
+          const time = clock.getElapsedTime();
+          const radius = baseRadius + Math.sin(time * speed);
 
-            const x = center.x + Math.cos(p.userData.angle + time * speed) * radius;
-            const y = center.y + Math.sin(p.userData.angle + time * speed) * radius;
+          particles.forEach((p, i) => {
+            const angle = (i / numParticles) * Math.PI * 2;
+            const x = center.x + Math.cos(angle + time * speed) * radius;
+            const y = center.y + Math.sin(angle + time * speed) * radius;
 
             p.transform.position.set(x, y);
           });

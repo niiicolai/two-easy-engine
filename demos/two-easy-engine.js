@@ -1,4 +1,4 @@
-class i {
+class o {
   /**
    * @constructor
    * @param {number} x - The x coordinate
@@ -16,7 +16,7 @@ class i {
    * @returns {Vector2} A new Vector2 instance with the same x and y values
    */
   clone() {
-    return new i(this.x, this.y);
+    return new o(this.x, this.y);
   }
   /**
    * @function set
@@ -52,7 +52,7 @@ class i {
    * @throws {Error} If v is not of type Vector2
    */
   add(e) {
-    if (!(e instanceof i))
+    if (!(e instanceof o))
       throw new Error("v must be of type Vector2");
     this.x += e.x, this.y += e.y;
   }
@@ -64,7 +64,7 @@ class i {
    * @throws {Error} If v is not of type Vector2
    */
   subtract(e) {
-    if (!(e instanceof i))
+    if (!(e instanceof o))
       throw new Error("v must be of type Vector2");
     this.x -= e.x, this.y -= e.y;
   }
@@ -76,7 +76,7 @@ class i {
    * @throws {Error} If v is not of type Vector2
    */
   dot(e) {
-    if (!(e instanceof i))
+    if (!(e instanceof o))
       throw new Error("v must be of type Vector2");
     return this.x * e.x + this.y * e.y;
   }
@@ -88,9 +88,9 @@ class i {
    * @throws {Error} If v is not of type Vector2
    */
   vectorTo(e) {
-    if (!(e instanceof i))
+    if (!(e instanceof o))
       throw new Error("v must be of type Vector2");
-    return new i(e.x - this.x, e.y - this.y);
+    return new o(e.x - this.x, e.y - this.y);
   }
   /**
    * @function multiplyScalar
@@ -150,17 +150,17 @@ class f {
    * @throws {Error} If the rotation is not a number.
    * @throws {Error} If the scale is not a Vector2.
    */
-  constructor(e = new i(), t = 0, r = new i(1, 1)) {
-    if (!(e instanceof i))
+  constructor(e = new o(), t = 0, r = new o(1, 1)) {
+    if (!(e instanceof o))
       throw new Error("position must be of type Vector2");
     if (typeof t != "number")
       throw new Error("rotation must be a number");
-    if (!(r instanceof i))
+    if (!(r instanceof o))
       throw new Error("scale must be of type Vector2");
     this.position = e, this.rotation = t, this.scale = r;
   }
 }
-class d {
+class y {
   /**
    * Create a new Camera2D instance.
    * @constructor
@@ -199,7 +199,7 @@ class d {
     e.restore();
   }
 }
-class w {
+class c {
   /**
    * @constructor
    */
@@ -253,7 +253,7 @@ class w {
       throw new Error("ctx must be of type CanvasRenderingContext2D");
   }
 }
-class b {
+class g {
   constructor() {
     this.children = [];
   }
@@ -265,7 +265,7 @@ class b {
    * @throws {Error} If child is not of type Object2D
    */
   add(e) {
-    if (!(e instanceof w))
+    if (!(e instanceof c))
       throw new Error("child must be of type Object2D");
     this.children.push(e), e.scene = this, this.sortChildrenByZIndex();
   }
@@ -277,7 +277,7 @@ class b {
    * @throws {Error} If child is not of type Object2D
    */
   remove(e) {
-    if (!(e instanceof w))
+    if (!(e instanceof c))
       throw new Error("child must be of type Object2D");
     const t = this.children.indexOf(e);
     t !== -1 && (this.children.splice(t, 1), e.scene = null, this.sortChildrenByZIndex());
@@ -305,7 +305,7 @@ class b {
     });
   }
 }
-class y {
+class x {
   /**
    * @constructor
    * @param {HTMLCanvasElement} canvas - The canvas element 
@@ -323,26 +323,26 @@ class y {
    * @throws {Error} If options.devicePixelRatio is not a number
    * @throws {Error} If options.backgroundColor is not a string
    */
-  constructor(e, t, r, n = {
+  constructor(e, t, r, i = {
     width: window.innerWidth,
     height: window.innerHeight,
     devicePixelRatio: window.devicePixelRatio || 1,
     backgroundColor: "transparent"
   }) {
-    const { width: l, height: s, devicePixelRatio: a, backgroundColor: h } = n;
+    const { width: s, height: a, devicePixelRatio: h, backgroundColor: l } = i;
     if (!(e instanceof HTMLCanvasElement))
       throw new Error("canvas must be of type HTMLCanvasElement");
-    if (!(t instanceof b))
+    if (!(t instanceof g))
       throw new Error("scene must be of type Scene");
-    if (!(r instanceof d))
+    if (!(r instanceof y))
       throw new Error("camera must be of type Camera");
-    if (typeof l != "number" || typeof s != "number")
+    if (typeof s != "number" || typeof a != "number")
       throw new Error("width and height must be numbers");
-    if (typeof a != "number")
+    if (typeof h != "number")
       throw new Error("devicePixelRatio must be a number");
-    if (typeof h != "string")
+    if (typeof l != "string")
       throw new Error("backgroundColor must be a number");
-    this.canvas = e, this.ctx = e.getContext("2d"), this.scene = t, this.camera = r, this.options = n, this.recalculateDevicePixelRatio();
+    this.canvas = e, this.ctx = e.getContext("2d"), this.scene = t, this.camera = r, this.options = i, this.recalculateDevicePixelRatio();
   }
   /**
    * @function setSize
@@ -406,13 +406,170 @@ class y {
       throw new Error("beforeRender must be a function");
     if (r && typeof r != "function")
       throw new Error("afterRender must be a function");
-    function n() {
-      t && t(), this.render(), r && r(), window.requestAnimationFrame(n.bind(this));
+    function i() {
+      t && t(), this.render(), r && r(), window.requestAnimationFrame(i.bind(this));
     }
-    window.requestAnimationFrame(n.bind(this));
+    window.requestAnimationFrame(i.bind(this));
   }
 }
-class u {
+const u = ["repeat", "repeat-x", "repeat-y", "no-repeat"];
+class E {
+  /**
+   * @constructor
+   * @param {Object} [options] - Texture2D configuration options.
+   * @param {HTMLImageElement|string} [options.image] - Image or image URL for texture
+   * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"} [options.imageRepeat="repeat"] - Pattern repeat mode
+   * @param {number} [options.imageOffsetX=0] - image offset x
+   * @param {number} [options.imageOffsetY=0] - image offset y
+   * @param {number|null} [options.imageWidth=null] - image width
+   * @param {number|null} [options.imageHeight=null] - image height
+   * @throws {Error} If the image is not a string or HTMLImageElement.
+   * @throws {Error} If the imageRepeat is not a string or valid type.
+   * @throws {Error} If the imageOffsetX is not a number.
+   * @throws {Error} If the imageWidth is not null or a number.
+   * @throws {Error} If the imageHeight is not null or a number.
+   */
+  constructor(e = {
+    image: null,
+    imageRepeat: "repeat",
+    imageOffsetX: 0,
+    imageOffsetY: 0,
+    imageWidth: null,
+    imageHeight: null
+  }) {
+    const {
+      image: t = null,
+      imageRepeat: r = "repeat",
+      imageOffsetX: i = 0,
+      imageOffsetY: s = 0,
+      imageWidth: a = null,
+      imageHeight: h = null
+    } = e;
+    if (typeof t != "string" && !(t instanceof HTMLImageElement))
+      throw new Error("image must be a string or HTMLImageElement");
+    if (typeof r != "string" && !u.includes(r))
+      throw new Error(
+        `imageRepeat must be string with value: ${u.join(
+          ", "
+        )}`
+      );
+    this.image = null, this.imageRepeat = r, this.pattern = null, this.patternTransform = null, this.setImageOffset(i, s), this.setImageSize(a, h), t && this.setImage(t, r);
+  }
+  /**
+   * @function createPattern
+   * @description Create the pattern based on the image and configuration
+   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
+   * @returns {CanvasPattern|null}
+   * @throws {Error} If the ctx is not of type CanvasRenderingContext2D.
+   */
+  createPattern(e) {
+    if (!(e instanceof CanvasRenderingContext2D))
+      throw new Error("ctx must be of type CanvasRenderingContext2D");
+    return !this.image || !this.image.complete ? null : this.pattern ? this.pattern : (this.pattern = e.createPattern(this.image, this.imageRepeat), this.rebuildTransform(), this.pattern);
+  }
+  /**
+   * @function rebuildTransform
+   * @description Position and scale the pattern's transform
+   * @returns {void}
+   */
+  rebuildTransform() {
+    if (!this.pattern) return;
+    const e = this.imageWidth ? this.imageWidth / this.image.naturalWidth : 1, t = this.imageHeight ? this.imageHeight / this.image.naturalHeight : 1;
+    this.patternTransform ?? (this.patternTransform = new DOMMatrix()), this.patternTransform.a = 1, this.patternTransform.b = 0, this.patternTransform.c = 0, this.patternTransform.d = 1, this.patternTransform.e = 0, this.patternTransform.f = 0, this.patternTransform.translateSelf(this.imageOffsetX, this.imageOffsetY), this.patternTransform.scaleSelf(e, t), this.pattern.setTransform(this.patternTransform);
+  }
+  /**
+   * @function setImageOffset
+   * @description Set the image's offset 
+   * @param {number} [imageOffsetX] - image offset x
+   * @param {number} [imageOffsetY] - image offset y
+   * @returns {void}
+   * @throws {Error} If the imageOffsetX is not a number.
+   * @throws {Error} If the imageOffsetY is not a number.
+   */
+  setImageOffset(e, t) {
+    if (typeof e != "number")
+      throw new Error("imageOffsetX must be a number");
+    if (typeof t != "number")
+      throw new Error("imageOffsetY must be a number");
+    this.imageOffsetX = e, this.imageOffsetY = t, this.rebuildTransform();
+  }
+  /**
+   * @function setImageSize
+   * @description Set the image's width and height
+   * @param {number|null} [imageWidth] - image width
+   * @param {number|null} [imageHeight] - image height
+   * @returns {void}
+   * @throws {Error} If the imageWidth is not null or a number.
+   * @throws {Error} If the imageHeight is not null or a number.
+   */
+  setImageSize(e, t) {
+    if (e !== null && (typeof e != "number" || e <= 0))
+      throw new Error("imageWidth must be a positive number or null");
+    if (t !== null && (typeof t != "number" || t <= 0))
+      throw new Error("imageHeight must be a positive number or null");
+    this.imageWidth = e, this.imageHeight = t, this.rebuildTransform();
+  }
+  /**
+   * @function setImage
+   * @description Loads and sets an image.
+   * @param {HTMLImageElement|string} image - An <img> element or a URL string
+   * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"} [repeat="repeat"] - Pattern repeat mode
+   * @returns {void}
+   * @throws {Error} If the image is not a string or HTMLImageElement.
+   * @throws {Error} If the imageRepeat is not a string or valid type.
+   */
+  setImage(e, t = "repeat") {
+    if (this.imageRepeat = t, typeof e != "string" && !(e instanceof HTMLImageElement))
+      throw new Error("image must be a string or HTMLImageElement");
+    if (typeof t != "string" && !u.includes(t))
+      throw new Error(
+        `repeat must be string with value: ${u.join(", ")}`
+      );
+    if (this.pattern = null, typeof e == "string") {
+      const r = new Image();
+      r.src = e, r.onload = () => {
+        this.image = r;
+      }, this.image = r;
+    } else e instanceof HTMLImageElement && (this.image = e);
+  }
+}
+class C {
+  /**
+   * @constructor
+   */
+  constructor() {
+    this.startTime = performance.now(), this.oldTime = this.startTime, this.elapsedTime = 0, this.deltaTime = 0, this.lastFrame = 0;
+  }
+  /**
+   * @function _updateTime
+   * @description Update the internal time values
+   * @returns {void}
+   */
+  _updateTime() {
+    const e = performance.now();
+    if (e !== this.lastFrame) {
+      const t = e;
+      this.deltaTime = (t - this.oldTime) / 1e3, this.elapsedTime = (t - this.startTime) / 1e3, this.oldTime = t, this.lastFrame = e;
+    }
+  }
+  /**
+   * @function getElapsedTime
+   * @description Get the time elapsed (in seconds) since instantiation
+   * @returns {number}
+   */
+  getElapsedTime() {
+    return this._updateTime(), this.elapsedTime;
+  }
+  /**
+   * @function getDeltaTime
+   * @description Returns the time elapsed (in seconds) since the last frame or call.
+   * @returns {number}
+   */
+  getDeltaTime() {
+    return this._updateTime(), this.deltaTime;
+  }
+}
+class m {
   /**
    * @function apply
    * @description Apply the draw style to the given ctx
@@ -425,27 +582,41 @@ class u {
     throw e instanceof CanvasRenderingContext2D ? new Error("apply method must be implemented in subclass") : new Error("ctx must be of type CanvasRenderingContext2D");
   }
 }
-class p extends u {
+class v extends m {
   /**
    * @constructor
    * @param {Object} [options] - Material configuration options.
-   * @param {string} [options.fillStyle=null] - Initial fill style
-   * @param {string} [options.strokeStyle=null] - Initial stroke style
-   * @param {number} [options.lineWidth=null] - Initial line width
+   * @param {string|null} [options.fillStyle=null] - Initial fill style
+   * @param {string|null} [options.strokeStyle=null] - Initial stroke style
+   * @param {number|null} [options.lineWidth=null] - Initial line width
+   * @param {Texture2D|null} [options.texture2D=null] - Image texture
    * @throws {Error} If the fillStyle is not null or a string.
    * @throws {Error} If the strokeStyle is not null or a string.
    * @throws {Error} If the lineWidth is not null or a number.
+   * @throws {Error} If the texture2D is not null or a Texture2D.
    */
-  constructor(e = { fillStyle: null, strokeStyle: null, lineWidth: null }) {
+  constructor(e = {
+    fillStyle: null,
+    strokeStyle: null,
+    lineWidth: null,
+    texture2D: null
+  }) {
     super();
-    const { fillStyle: t = null, strokeStyle: r = null, lineWidth: n = null } = e;
+    const {
+      fillStyle: t = null,
+      strokeStyle: r = null,
+      lineWidth: i = null,
+      texture2D: s = null
+    } = e;
     if (t !== null && typeof t != "string")
       throw new Error("fillStyle must be a string or null");
     if (r !== null && typeof r != "string")
       throw new Error("strokeStyle must be a string or null");
-    if (n !== null && (typeof n != "number" || n <= 0))
+    if (i !== null && (typeof i != "number" || i <= 0))
       throw new Error("lineWidth must be a positive number or null");
-    this.fillStyle = e.fillStyle, this.strokeStyle = e.strokeStyle, this.lineWidth = e.lineWidth;
+    if (s !== null && !(s instanceof E))
+      throw new Error("texture2D must be of type Texture2D or null");
+    this.fillStyle = t, this.strokeStyle = r, this.lineWidth = i, this.texture2D = s;
   }
   /**
    * @function apply
@@ -457,10 +628,10 @@ class p extends u {
   apply(e) {
     if (!(e instanceof CanvasRenderingContext2D))
       throw new Error("ctx must be of type CanvasRenderingContext2D");
-    this.fillStyle && (e.fillStyle = this.fillStyle), this.strokeStyle && (e.strokeStyle = this.strokeStyle), this.lineWidth && (e.lineWidth = this.lineWidth);
+    this.texture2D ? e.fillStyle = this.texture2D.createPattern(e) : this.fillStyle && (e.fillStyle = this.fillStyle), this.strokeStyle && (e.strokeStyle = this.strokeStyle), this.lineWidth && (e.lineWidth = this.lineWidth);
   }
 }
-class m {
+class p {
   /**
    * @function draw
    * @description Draws the geometry onto the given canvas context
@@ -474,10 +645,10 @@ class m {
    * @throws {Error} If not implemented in subclass
    */
   draw(e, t, r) {
-    throw e instanceof CanvasRenderingContext2D ? r instanceof u ? t instanceof f ? new Error("draw method must be implemented in subclass") : new Error("transform must be of type Transform") : new Error("material must be of type Material") : new Error("ctx must be of type CanvasRenderingContext2D");
+    throw e instanceof CanvasRenderingContext2D ? r instanceof m ? t instanceof f ? new Error("draw method must be implemented in subclass") : new Error("transform must be of type Transform") : new Error("material must be of type Material") : new Error("ctx must be of type CanvasRenderingContext2D");
   }
 }
-class E extends m {
+class R extends p {
   /**
    * @constructor
    * @param {number} width - The width of the rectangle (must be positive).
@@ -503,15 +674,15 @@ class E extends m {
   draw(e, t, r) {
     if (!(e instanceof CanvasRenderingContext2D))
       throw new Error("ctx must be of type CanvasRenderingContext2D");
-    if (!(r instanceof u))
+    if (!(r instanceof m))
       throw new Error("material must be of type Material");
     if (!(t instanceof f))
       throw new Error("transform must be of type Transform");
-    const { position: n, scale: l } = t, { x: s, y: a } = n, h = this.width * l.x, c = this.height * l.y;
-    e.save(), e.translate(s + h / 2, a + c / 2), e.rotate(t.rotation), e.translate(-(s + h / 2), -(a + c / 2)), r.fillStyle && e.fillRect(s, a, h, c), r.strokeStyle && e.strokeRect(s, a, h, c), e.restore();
+    const { position: i, scale: s } = t, { x: a, y: h } = i, l = this.width * s.x, w = this.height * s.y, d = l / 2, b = w / 2;
+    e.save(), e.translate(a + d, h + b), e.rotate(t.rotation), e.translate(-d, -b), r.fillStyle && e.fillRect(0, 0, l, w), r.strokeStyle && e.strokeRect(0, 0, l, w), e.restore();
   }
 }
-class g extends m {
+class T extends p {
   /**
    * @constructor
    * @param {number} radius - The radius of the circle (must be positive).
@@ -536,15 +707,15 @@ class g extends m {
   draw(e, t, r) {
     if (!(e instanceof CanvasRenderingContext2D))
       throw new Error("ctx must be of type CanvasRenderingContext2D");
-    if (!(r instanceof u))
+    if (!(r instanceof m))
       throw new Error("material must be of type Material");
     if (!(t instanceof f))
       throw new Error("transform must be of type Transform");
-    const { position: n, scale: l } = t, { x: s, y: a } = n, h = this.radius * ((l.x + l.y) / 2);
-    e.beginPath(), e.arc(s, a, h, 0, Math.PI * 2), e.closePath(), r.fillStyle && e.fill(), r.strokeStyle && e.stroke();
+    const { position: i, scale: s } = t, { x: a, y: h } = i, l = this.radius * ((s.x + s.y) / 2);
+    e.save(), e.translate(a, h), e.rotate(t.rotation), e.beginPath(), e.arc(0, 0, l, 0, Math.PI * 2), e.closePath(), r.fillStyle && e.fill(), r.strokeStyle && e.stroke(), e.restore();
   }
 }
-class x extends w {
+class D extends c {
   /**
    * @constructor
    * @param {Geometry} geometry - The mesh's geometry
@@ -553,9 +724,9 @@ class x extends w {
    * @throws {Error} If material  is not of type Material
    */
   constructor(e, t) {
-    if (super(), !(e instanceof m))
+    if (super(), !(e instanceof p))
       throw new Error("geometry must be of type Geometry");
-    if (!(t instanceof u))
+    if (!(t instanceof m))
       throw new Error("material must be of type Material");
     this.geometry = e, this.material = t;
   }
@@ -569,7 +740,7 @@ class x extends w {
     super.onRender(e), this.material.apply(e), this.geometry.draw(e, this.transform, this.material);
   }
 }
-class C extends w {
+class S extends c {
   /**
    * @constructor
    * @param {number} radius - The radius of the light
@@ -581,16 +752,16 @@ class C extends w {
    * @throws {Error} If the color is not a string.
    * @throws {Error} If the colorStop is not a string.
    */
-  constructor(e = 100, t = 1, r = "rgba(255,255,200,1)", n = "rgba(255, 255, 200, 0.0)") {
+  constructor(e = 100, t = 1, r = "rgba(255,255,200,1)", i = "rgba(255, 255, 200, 0.0)") {
     if (super(), typeof e != "number" || e < 0)
       throw new Error("radius must be a positive number");
     if (typeof t != "number" || e < 0)
       throw new Error("intensity must be a positive number");
     if (typeof r != "string")
       throw new Error("color must be a string");
-    if (typeof n != "string")
+    if (typeof i != "string")
       throw new Error("colorStop must be a string");
-    this.radius = e, this.intensity = t, this.color = r, this.colorStop = n, this.zIndex = 1;
+    this.radius = e, this.intensity = t, this.color = r, this.colorStop = i, this.zIndex = 1;
   }
   /**
    * @function onRender
@@ -601,22 +772,24 @@ class C extends w {
   onRender(e) {
     if (!(e instanceof CanvasRenderingContext2D))
       throw new Error("ctx must be of type CanvasRenderingContext2D");
-    const { x: t, y: r } = this.transform.position, n = e.createRadialGradient(t, r, 0, t, r, this.radius);
-    n.addColorStop(0, this.color), n.addColorStop(1, this.colorStop), e.save(), e.globalAlpha = this.intensity, e.fillStyle = n, e.fillRect(t - this.radius, r - this.radius, this.radius * 2, this.radius * 2), e.restore();
+    const { x: t, y: r } = this.transform.position, i = e.createRadialGradient(t, r, 0, t, r, this.radius);
+    i.addColorStop(0, this.color), i.addColorStop(1, this.colorStop), e.save(), e.globalAlpha = this.intensity, e.fillStyle = i, e.fillRect(t - this.radius, r - this.radius, this.radius * 2, this.radius * 2), e.restore();
   }
 }
 export {
-  p as BasicMaterial,
-  d as Camera2D,
-  g as CircleGeometry,
-  m as Geometry,
-  u as Material,
-  x as Mesh,
-  w as Object2D,
-  C as PointLight2D,
-  E as RectGeometry,
-  y as Render2D,
-  b as Scene,
+  v as BasicMaterial,
+  y as Camera2D,
+  T as CircleGeometry,
+  C as Clock,
+  p as Geometry,
+  m as Material,
+  D as Mesh,
+  c as Object2D,
+  S as PointLight2D,
+  R as RectGeometry,
+  x as Render2D,
+  g as Scene,
+  E as Texture2D,
   f as Transform,
-  i as Vector2
+  o as Vector2
 };
