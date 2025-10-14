@@ -172,7 +172,7 @@ export class Texture2D {
 
   /**
    * @function setImage
-   * @description Loads and sets an image texture for this material.
+   * @description Loads and sets an image.
    * @param {HTMLImageElement|string} image - An <img> element or a URL string
    * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"} [repeat="repeat"] - Pattern repeat mode
    * @returns {void}
