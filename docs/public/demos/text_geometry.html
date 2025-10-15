@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
+      #canvas {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" placeholder="Enter text" value="Hello World" id="text" />
+    <button id="btn">Update Text</button>
+    <canvas id="canvas"></canvas>
+    <script type="module">
+      import * as Two from "/two-easy-engine/demos/two-easy-engine.js";
+
+      // Get the canvas element
+      const canvas = document.getElementById("canvas");
+      const input = document.getElementById("text");
+      const btn = document.getElementById("btn");
+
+      // Create a clock, camera, scene, and renderer
+      const clock = new Two.Clock();
+      const camera = new Two.Camera2D();
+      const scene = new Two.Scene();
+      const render = new Two.Render2D(canvas, scene, camera, {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        devicePixelRatio: window.devicePixelRatio || 1,
+        backgroundColor: "black",
+      });
+
+      // Create a text mesh
+      const texture2D = new Two.Texture2D({
+        image: "/two-easy-engine/images/square-test.png",
+        imageRepeat: "repeat",
+        imageWidth: 100,
+        imageHeight: 100,
+        imageOffsetX: 0,
+        imageOffsetY: 0,
+      });
+      const geometry = new Two.TextGeometry(input.value, {
+        font: "32px arial",
+        textAlign: "center",
+        textBaseline: "middle",
+        direction: "ltr",
+      });
+      const fillStyle = new Two.Color("white");
+      const material = new Two.BasicMaterial({ fillStyle, texture2D });
+      const mesh = new Two.Mesh(geometry, material);
+      mesh.transform.position.set(
+        window.innerWidth / 2,
+        window.innerHeight / 2
+      );
+      scene.add(mesh);
+
+      // Update text on btn click
+      btn.onclick = () => {
+        geometry.text = input.value;
+      }
+
+      // Handle window resize to ensure responsiveness rendering
+      window.onresize = () => {
+        mesh.transform.position.set(
+          window.innerWidth / 2,
+          window.innerHeight / 2
+        );
+        render.setSize(window.innerWidth, window.innerHeight);
+      };
+
+      const speed = 1.5;
+      const radius = 50;
+
+      // Animation loop
+      render.requestAnimationFrame({
+        beforeRender: () => {
+          const delta = clock.getDeltaTime();
+          const time = clock.getElapsedTime();
+
+          mesh.transform.position.set(
+            Math.sin(time * speed) * radius + window.innerWidth / 2,
+            Math.cos(time * speed) * radius + window.innerHeight / 2
+          );
+          mesh.transform.rotation += delta * speed;
+        },
+      });
+    </script>
+  </body>
+</html>

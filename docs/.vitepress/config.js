@@ -67,6 +67,10 @@ export default {
             text: "Image Material",
             link: "/examples/image_material",
           },
+          {
+            text: "Text Geometry",
+            link: "/examples/text_geometry",
+          },
           // Map example
           // Audio example
           // Transparent example
