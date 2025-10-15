@@ -40,18 +40,15 @@
       backgroundColor: "#111",
     });
 
-    // --- Create colorful grid ---
+    // Create colorful grid
     const gridSize = 10;
     const spacing = 100;
 
     for (let x = -gridSize; x <= gridSize; x++) {
       for (let y = -gridSize; y <= gridSize; y++) {
         const hue = ((x + gridSize) / (gridSize * 2)) * 360;
-        const material = new Two.BasicMaterial({
-          fillStyle: `hsl(${hue}, 80%, 50%)`,
-          strokeStyle: "#222",
-        });
-
+        const fillStyle = new Two.HslaColor(hue, 80, 50, 1);
+        const material = new Two.BasicMaterial({ fillStyle });
         const geometry = new Two.RectGeometry(60, 60);
         const mesh = new Two.Mesh(geometry, material);
         mesh.transform.position.set(x * spacing, y * spacing);
@@ -59,7 +56,7 @@
       }
     }
 
-    // --- Camera Controls (mouse + touch) ---
+    // Camera Controls (mouse + touch)
     let isDragging = false;
     let lastPos = { x: 0, y: 0 };
     let lastTouchDist = null;
@@ -95,7 +92,7 @@
       camera.zoom = Math.max(0.1, Math.min(5, camera.zoom));
     });
 
-    // --- Touch controls ---
+    // Touch controls
     canvas.addEventListener("touchstart", (e) => {
       if (e.touches.length === 1) {
         // One finger: start pan
