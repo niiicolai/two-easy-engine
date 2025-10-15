@@ -10,6 +10,7 @@ import { BasicMaterial } from "./src/materials/BasicMaterial.js";
 import { Geometry } from "./src/geometries/Geometry.js";
 import { RectGeometry } from "./src/geometries/RectGeometry.js";
 import { CircleGeometry } from "./src/geometries/CircleGeometry.js";
+import { TextGeometry } from "./src/geometries/TextGeometry.js";
 import { Object2D } from "./src/core/Object2D.js";
 import { Mesh } from "./src/meshes/Mesh.js";
 import { PointLight2D } from "./src/lights/PointLight2D.js";
@@ -30,6 +31,7 @@ export {
   Geometry,
   RectGeometry,
   CircleGeometry,
+  TextGeometry,
   Object2D,
   Mesh,
   PointLight2D,

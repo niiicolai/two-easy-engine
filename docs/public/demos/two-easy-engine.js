@@ -1,4 +1,4 @@
-class o {
+class h {
   /**
    * @constructor
    * @param {number} x - The x coordinate
@@ -16,7 +16,7 @@ class o {
    * @returns {Vector2} A new Vector2 instance with the same x and y values
    */
   clone() {
-    return new o(this.x, this.y);
+    return new h(this.x, this.y);
   }
   /**
    * @function set
@@ -52,7 +52,7 @@ class o {
    * @throws {Error} If v is not of type Vector2
    */
   add(t) {
-    if (!(t instanceof o))
+    if (!(t instanceof h))
       throw new Error("v must be of type Vector2");
     this.x += t.x, this.y += t.y;
   }
@@ -64,7 +64,7 @@ class o {
    * @throws {Error} If v is not of type Vector2
    */
   subtract(t) {
-    if (!(t instanceof o))
+    if (!(t instanceof h))
       throw new Error("v must be of type Vector2");
     this.x -= t.x, this.y -= t.y;
   }
@@ -76,7 +76,7 @@ class o {
    * @throws {Error} If v is not of type Vector2
    */
   dot(t) {
-    if (!(t instanceof o))
+    if (!(t instanceof h))
       throw new Error("v must be of type Vector2");
     return this.x * t.x + this.y * t.y;
   }
@@ -88,9 +88,9 @@ class o {
    * @throws {Error} If v is not of type Vector2
    */
   vectorTo(t) {
-    if (!(t instanceof o))
+    if (!(t instanceof h))
       throw new Error("v must be of type Vector2");
-    return new o(t.x - this.x, t.y - this.y);
+    return new h(t.x - this.x, t.y - this.y);
   }
   /**
    * @function multiplyScalar
@@ -150,17 +150,17 @@ class u {
    * @throws {Error} If the rotation is not a number.
    * @throws {Error} If the scale is not a Vector2.
    */
-  constructor(t = new o(), e = 0, r = new o(1, 1)) {
-    if (!(t instanceof o))
+  constructor(t = new h(), e = 0, r = new h(1, 1)) {
+    if (!(t instanceof h))
       throw new Error("position must be of type Vector2");
     if (typeof e != "number")
       throw new Error("rotation must be a number");
-    if (!(r instanceof o))
+    if (!(r instanceof h))
       throw new Error("scale must be of type Vector2");
     this.position = t, this.rotation = e, this.scale = r;
   }
 }
-class g {
+class x {
   /**
    * Create a new Camera2D instance.
    * @constructor
@@ -253,7 +253,7 @@ class b {
       throw new Error("ctx must be of type CanvasRenderingContext2D");
   }
 }
-class E {
+class S {
   constructor() {
     this.children = [];
   }
@@ -305,7 +305,7 @@ class E {
     });
   }
 }
-class h {
+class l {
   /**
    * @constructor
    * @param {string} colorStr - a string representation of the color
@@ -325,7 +325,7 @@ class h {
     return this.colorStr;
   }
 }
-class x {
+class T {
   /**
    * @constructor
    * @param {HTMLCanvasElement} canvas - The canvas element
@@ -349,18 +349,18 @@ class x {
     devicePixelRatio: window.devicePixelRatio || 1,
     backgroundColor: "transparent"
   }) {
-    const { width: i, height: a, devicePixelRatio: f, backgroundColor: l } = n;
+    const { width: i, height: o, devicePixelRatio: a, backgroundColor: f } = n;
     if (!(t instanceof HTMLCanvasElement))
       throw new Error("canvas must be of type HTMLCanvasElement");
-    if (!(e instanceof E))
+    if (!(e instanceof S))
       throw new Error("scene must be of type Scene");
-    if (!(r instanceof g))
+    if (!(r instanceof x))
       throw new Error("camera must be of type Camera");
-    if (typeof i != "number" || typeof a != "number")
+    if (typeof i != "number" || typeof o != "number")
       throw new Error("width and height must be numbers");
-    if (typeof f != "number")
+    if (typeof a != "number")
       throw new Error("devicePixelRatio must be a number");
-    if (typeof l != "string" && !(l instanceof h))
+    if (typeof f != "string" && !(f instanceof l))
       throw new Error("backgroundColor must be of type Color or string");
     this.canvas = t, this.ctx = t.getContext("2d"), this.scene = e, this.camera = r, this.options = n, this.recalculateDevicePixelRatio();
   }
@@ -372,7 +372,7 @@ class x {
    * @throws {Error} If backgroundColor is not a string or Color
    */
   setBackgroundColor(t) {
-    if (typeof t != "string" && !(t instanceof h))
+    if (typeof t != "string" && !(t instanceof l))
       throw new Error("backgroundColor must be of type Color or string");
     this.options.backgroundColor = t;
   }
@@ -417,7 +417,7 @@ class x {
    */
   render() {
     const t = this.ctx;
-    t.clearRect(0, 0, this.canvas.width, this.canvas.height), t.fillStyle = this.options.backgroundColor instanceof h ? this.options.backgroundColor.toString() : this.options.backgroundColor, t.fillRect(0, 0, this.canvas.width, this.canvas.height), this.camera.apply(t), this.scene.render(t), this.camera.restore(t);
+    t.clearRect(0, 0, this.canvas.width, this.canvas.height), t.fillStyle = this.options.backgroundColor instanceof l ? this.options.backgroundColor.toString() : this.options.backgroundColor, t.fillRect(0, 0, this.canvas.width, this.canvas.height), this.camera.apply(t), this.scene.render(t), this.camera.restore(t);
   }
   /**
    * @function requestAnimationFrame
@@ -445,7 +445,7 @@ class x {
   }
 }
 const w = ["repeat", "repeat-x", "repeat-y", "no-repeat"];
-class C {
+class R {
   /**
    * @constructor
    * @param {Object} [options] - Texture2D configuration options.
@@ -474,8 +474,8 @@ class C {
       imageRepeat: r = "repeat",
       imageOffsetX: n = 0,
       imageOffsetY: i = 0,
-      imageWidth: a = null,
-      imageHeight: f = null
+      imageWidth: o = null,
+      imageHeight: a = null
     } = t;
     if (typeof e != "string" && !(e instanceof HTMLImageElement))
       throw new Error("image must be a string or HTMLImageElement");
@@ -485,7 +485,7 @@ class C {
           ", "
         )}`
       );
-    this.image = null, this.imageRepeat = r, this.pattern = null, this.patternTransform = null, this.setImageOffset(n, i), this.setImageSize(a, f), e && this.setImage(e, r);
+    this.image = null, this.imageRepeat = r, this.pattern = null, this.patternTransform = null, this.setImageOffset(n, i), this.setImageSize(o, a), e && this.setImage(e, r);
   }
   /**
    * @function createPattern
@@ -565,7 +565,7 @@ class C {
     } else t instanceof HTMLImageElement && (this.image = t);
   }
 }
-class S {
+class v {
   /**
    * @constructor
    */
@@ -614,7 +614,7 @@ class m {
     throw t instanceof CanvasRenderingContext2D ? new Error("apply method must be implemented in subclass") : new Error("ctx must be of type CanvasRenderingContext2D");
   }
 }
-class R extends m {
+class D extends m {
   /**
    * @constructor
    * @param {Object} [options] - Material configuration options.
@@ -640,13 +640,13 @@ class R extends m {
       lineWidth: n = null,
       texture2D: i = null
     } = t;
-    if (e !== null && typeof e != "string" && !(e instanceof h))
+    if (e !== null && typeof e != "string" && !(e instanceof l))
       throw new Error("fillStyle must be a Color, string or null");
-    if (r !== null && typeof r != "string" && !(r instanceof h))
+    if (r !== null && typeof r != "string" && !(r instanceof l))
       throw new Error("strokeStyle must be a Color, string or null");
     if (n !== null && (typeof n != "number" || n <= 0))
       throw new Error("lineWidth must be a positive number or null");
-    if (i !== null && !(i instanceof C))
+    if (i !== null && !(i instanceof R))
       throw new Error("texture2D must be of type Texture2D or null");
     this.fillStyle = e, this.strokeStyle = r, this.lineWidth = n, this.texture2D = i;
   }
@@ -660,7 +660,7 @@ class R extends m {
   apply(t) {
     if (!(t instanceof CanvasRenderingContext2D))
       throw new Error("ctx must be of type CanvasRenderingContext2D");
-    this.texture2D ? t.fillStyle = this.texture2D.createPattern(t) : this.fillStyle && (t.fillStyle = this.fillStyle instanceof h ? this.fillStyle.toString() : this.fillStyle), this.strokeStyle && (t.strokeStyle = this.strokeStyle instanceof h ? this.strokeStyle.toString() : this.strokeStyle), this.lineWidth && (t.lineWidth = this.lineWidth);
+    this.texture2D ? t.fillStyle = this.texture2D.createPattern(t) : this.fillStyle && (t.fillStyle = this.fillStyle instanceof l ? this.fillStyle.toString() : this.fillStyle), this.strokeStyle && (t.strokeStyle = this.strokeStyle instanceof l ? this.strokeStyle.toString() : this.strokeStyle), this.lineWidth && (t.lineWidth = this.lineWidth);
   }
 }
 class p {
@@ -680,7 +680,7 @@ class p {
     throw t instanceof CanvasRenderingContext2D ? r instanceof m ? e instanceof u ? new Error("draw method must be implemented in subclass") : new Error("transform must be of type Transform") : new Error("material must be of type Material") : new Error("ctx must be of type CanvasRenderingContext2D");
   }
 }
-class v extends p {
+class $ extends p {
   /**
    * @constructor
    * @param {number} width - The width of the rectangle (must be positive).
@@ -710,11 +710,11 @@ class v extends p {
       throw new Error("material must be of type Material");
     if (!(e instanceof u))
       throw new Error("transform must be of type Transform");
-    const { position: n, scale: i } = e, { x: a, y: f } = n, l = this.width * i.x, c = this.height * i.y, d = l / 2, y = c / 2;
-    t.save(), t.translate(a + d, f + y), t.rotate(e.rotation), t.translate(-d, -y), r.fillStyle && t.fillRect(0, 0, l, c), r.strokeStyle && t.strokeRect(0, 0, l, c), t.restore();
+    const { position: n, scale: i } = e, { x: o, y: a } = n, f = this.width * i.x, c = this.height * i.y, d = f / 2, y = c / 2;
+    t.save(), t.translate(o + d, a + y), t.rotate(e.rotation), t.translate(-d, -y), r.fillStyle && t.fillRect(0, 0, f, c), r.strokeStyle && t.strokeRect(0, 0, f, c), t.restore();
   }
 }
-class T extends p {
+class I extends p {
   /**
    * @constructor
    * @param {number} radius - The radius of the circle (must be positive).
@@ -743,11 +743,89 @@ class T extends p {
       throw new Error("material must be of type Material");
     if (!(e instanceof u))
       throw new Error("transform must be of type Transform");
-    const { position: n, scale: i } = e, { x: a, y: f } = n, l = this.radius * ((i.x + i.y) / 2);
-    t.save(), t.translate(a, f), t.rotate(e.rotation), t.beginPath(), t.arc(0, 0, l, 0, Math.PI * 2), t.closePath(), r.fillStyle && t.fill(), r.strokeStyle && t.stroke(), t.restore();
+    const { position: n, scale: i } = e, { x: o, y: a } = n, f = this.radius * ((i.x + i.y) / 2);
+    t.save(), t.translate(o, a), t.rotate(e.rotation), t.beginPath(), t.arc(0, 0, f, 0, Math.PI * 2), t.closePath(), r.fillStyle && t.fill(), r.strokeStyle && t.stroke(), t.restore();
   }
 }
-class D extends b {
+const g = ["start", "end", "left", "right", "center"], E = [
+  "top",
+  "hanging",
+  "middle",
+  "alphabetic",
+  "ideographic",
+  "bottom"
+], C = ["ltr", "rtl", "inherit"];
+class k extends p {
+  /**
+   * @constructor
+   * @param {string} text - The text content to generate geometry for.
+   * @param {Object} [options] - The geometry options.
+   * @param {number|null} [options.maxWidth=null] - The maximum width allowed for the text layout.
+   * @param {string|null} [options.font=null] - The font family used for the text content.
+   * @param {"start"|"end"|"left"|"right"|"center"|null} [options.textAlign=null] - The horizontal alignment of the text content.
+   * @param {"top"|"hanging"|"middle"|"alphabetic"|"ideographic"|"bottom"|null} [options.textBaseline=null] - The vertical alignment of the text content.
+   * @param {"ltr"|"rtl"|"inherit"|null} [options.direction=null] - The direction of the text content.
+   * @throws {Error} If text is not a string.
+   * @throws {Error} If maxWidth is not a positive number.
+   * @throws {Error} If font is not a string.
+   * @throws {Error} If textAlign is not a valid alignment keyword.
+   * @throws {Error} If textBaseline is not a valid baseline keyword.
+   * @throws {Error} If direction is not a valid direction keyword.
+   */
+  constructor(t, e = {
+    maxWidth: null,
+    font: null,
+    textAlign: null,
+    textBaseline: null,
+    direction: null
+  }) {
+    super();
+    const { maxWidth: r = null, font: n = null, textAlign: i = null, textBaseline: o = null, direction: a = null } = e;
+    if (typeof t != "string")
+      throw new Error("text must be a string");
+    if (r !== null && typeof r != "number")
+      throw new Error("maxWidth must be a number or null");
+    if (n !== null && typeof n != "string")
+      throw new Error("font must be a string or null");
+    if (i !== null && typeof i != "string" && !g.includes(i))
+      throw new Error(
+        `textAlign must be a string with value: ${g.join(
+          ", "
+        )}`
+      );
+    if (o !== null && typeof o != "string" && !E.includes(o))
+      throw new Error(
+        `textBaseline must be a string with value: ${E.join(
+          ", "
+        )}`
+      );
+    if (a !== null && typeof a != "string" && !C.includes(a))
+      throw new Error(
+        `direction must be a string with value: ${C.join(
+          ", "
+        )}`
+      );
+    this.text = t, this.options = e;
+  }
+  /**
+   * @function draw
+   * @description Draws the text onto the given canvas context
+   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
+   * @param {Transform} transform - The transform to apply to the text
+   * @param {Material} material - The material to use for rendering the text
+   * @returns {void}
+   */
+  draw(t, e, r) {
+    if (!(t instanceof CanvasRenderingContext2D))
+      throw new Error("ctx must be of type CanvasRenderingContext2D");
+    if (!(r instanceof m))
+      throw new Error("material must be of type Material");
+    if (!(e instanceof u))
+      throw new Error("transform must be of type Transform");
+    t.save(), t.translate(e.position.x, e.position.y), t.rotate(e.rotation), this.options.font && (t.font = this.options.font), this.options.textAlign && (t.textAlign = this.options.textAlign), this.options.textBaseline && (t.textBaseline = this.options.textBaseline), this.options.direction && (t.direction = this.options.direction), r.fillStyle && t.fillText(this.text, 0, 0, this.options.maxWidth), r.strokeStyle && t.strokeText(this.text, 0, 0, this.options.maxWidth), t.restore();
+  }
+}
+class P extends b {
   /**
    * @constructor
    * @param {Geometry} geometry - The mesh's geometry
@@ -772,7 +850,7 @@ class D extends b {
     super.onRender(t), this.material.apply(t), this.geometry.draw(t, this.transform, this.material);
   }
 }
-class $ extends b {
+class M extends b {
   /**
    * @constructor
    * @param {number} radius - The radius of the light
@@ -808,7 +886,7 @@ class $ extends b {
     n.addColorStop(0, this.color), n.addColorStop(1, this.colorStop), t.save(), t.globalAlpha = this.intensity, t.fillStyle = n, t.fillRect(e - this.radius, r - this.radius, this.radius * 2, this.radius * 2), t.restore();
   }
 }
-class I extends h {
+class z extends l {
   /**
    * @constructor
    * @param {number} r - red (0-255)
@@ -832,9 +910,9 @@ class I extends h {
    * @throws {Error} if a is not between 0 and 1
    */
   set(t, e, r, n) {
-    if ([t, e, r].forEach((i, a) => {
+    if ([t, e, r].forEach((i, o) => {
       if (typeof i != "number" || i < 0 || i > 255)
-        throw new Error(["r", "g", "b"][a] + " must be a number between 0 and 255");
+        throw new Error(["r", "g", "b"][o] + " must be a number between 0 and 255");
     }), typeof n != "number" || n < 0 || n > 1)
       throw new Error("a must be a number between 0 and 1");
     this.r = t, this.g = e, this.b = r, this.a = n, this.updateColorStr();
@@ -912,7 +990,7 @@ class I extends h {
     return `rgb(${this.r}, ${this.g}, ${this.b})`;
   }
 }
-class k extends h {
+class W extends l {
   /**
    * @constructor
    * @param {number} h - hue (0-360)
@@ -1021,22 +1099,23 @@ class k extends h {
   }
 }
 export {
-  R as BasicMaterial,
-  g as Camera2D,
-  T as CircleGeometry,
-  S as Clock,
-  h as Color,
+  D as BasicMaterial,
+  x as Camera2D,
+  I as CircleGeometry,
+  v as Clock,
+  l as Color,
   p as Geometry,
-  k as HslaColor,
+  W as HslaColor,
   m as Material,
-  D as Mesh,
+  P as Mesh,
   b as Object2D,
-  $ as PointLight2D,
-  v as RectGeometry,
-  x as Render2D,
-  I as RgbaColor,
-  E as Scene,
-  C as Texture2D,
+  M as PointLight2D,
+  $ as RectGeometry,
+  T as Render2D,
+  z as RgbaColor,
+  S as Scene,
+  k as TextGeometry,
+  R as Texture2D,
   u as Transform,
-  o as Vector2
+  h as Vector2
 };
