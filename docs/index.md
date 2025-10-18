@@ -1,3 +1,7 @@
+::: warning
+**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for web workers and other rendering contexts is added.
+:::
+
 <img 
     src="/images/logo.png" 
     alt="TwoEasyEngine Logo" 
