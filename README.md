@@ -14,6 +14,8 @@
 **HTML5 Canvas**, offering a simple, object-oriented API for
 scenes, meshes, cameras, and animations.
 
+**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for web workers and other rendering contexts is added.
+
 ### Features
 
 - Meshes with geometry and materials (RectGeometry, CircleGeometry)
