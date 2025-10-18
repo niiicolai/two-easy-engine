@@ -1,7 +1,13 @@
+**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for web workers and other rendering contexts is added.
+
+---
+
 [![CI](https://github.com/niiicolai/two-easy-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/niiicolai/two-easy-engine/actions/workflows/ci.yml)
 [![pages-build-deployment](https://github.com/niiicolai/two-easy-engine/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/niiicolai/two-easy-engine/actions/workflows/pages/pages-build-deployment)
 [![npm version](https://img.shields.io/npm/v/two-easy-engine.svg)](https://www.npmjs.com/package/two-easy-engine)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
+
+---
 
 <img 
     src="./docs/public/images/logo.png" 
@@ -13,8 +19,6 @@
 **TwoEasyEngine** is a lightweight 2D library built on
 **HTML5 Canvas**, offering a simple, object-oriented API for
 scenes, meshes, cameras, and animations.
-
-**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for web workers and other rendering contexts is added.
 
 ### Features
 
