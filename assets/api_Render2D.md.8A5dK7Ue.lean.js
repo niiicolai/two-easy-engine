@@ -1,1 +1,0 @@
-import{_ as t,c as d,o,ae as a}from"./chunks/framework.Cn4FPLDc.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"api/Render2D.md","filePath":"api/Render2D.md"}'),r={name:"api/Render2D.md"};function n(i,e,c,s,l,h){return o(),d("div",null,[...e[0]||(e[0]=[a("",46)])])}const b=t(r,[["render",n]]);export{u as __pageData,b as default};
