@@ -1,7 +1,7 @@
 import { expect, describe, it } from "vitest";
 import { createCanvas } from "canvas";
 import { BasicMaterial } from "../../src/materials/BasicMaterial.js";
-import { Color } from "../../src/colors/Color.js";
+import { RgbaColor } from "../../src/colors/RgbaColor.js";
 
 describe("BasicMaterial", () => {
   it("should create a Material instance with null properties", () => {
@@ -13,25 +13,26 @@ describe("BasicMaterial", () => {
   });
 
   it("should create a Material instance with custom properties", () => {
+    const color = new RgbaColor(1, 1, 1, 1);
     const material = new BasicMaterial({
-      fillStyle: "red",
-      strokeStyle: "blue",
+      fillStyle: color,
+      strokeStyle: color,
       lineWidth: 5,
     });
-    expect(material.fillStyle).toBe("red");
-    expect(material.strokeStyle).toBe("blue");
+    expect(material.fillStyle).toBe(color);
+    expect(material.strokeStyle).toBe(color);
     expect(material.lineWidth).toBe(5);
   });
 
   it("should throw an error for invalid fillStyle", () => {
     expect(() => new BasicMaterial({ fillStyle: 123 })).toThrow(
-      "fillStyle must be a Color, string or null"
+      "fillStyle must be a Color or null"
     );
   });
 
   it("should throw an error for invalid strokeStyle", () => {
     expect(() => new BasicMaterial({ strokeStyle: {} })).toThrow(
-      "strokeStyle must be a Color, string or null"
+      "strokeStyle must be a Color or null"
     );
   });
 
@@ -47,39 +48,13 @@ describe("BasicMaterial", () => {
     );
   });
 
-  it("should support both string and Color for fillStyle and strokeStyle", () => {
-    const color = new Color("red");
-    const material = new BasicMaterial({
-      fillStyle: color,
-      strokeStyle: color
-    });
-    const material2 = new BasicMaterial({
-      fillStyle: "blue",
-      strokeStyle: "blue"
-    });
-    const canvas = createCanvas(800, 600);
-    const ctx = canvas.getContext("2d");
-
-    material.apply(ctx);
-    material2.apply(ctx);
-    // Since we can't easily test canvas drawing, we'll just ensure no errors are thrown
-    expect(true).toBe(true);
-  });
-
-  it("should implement the apply method", () => {
+  it("should implement the applyToContext2D method", () => {
     const material = new BasicMaterial();
     const canvas = createCanvas(800, 600);
     const ctx = canvas.getContext("2d");
 
-    material.apply(ctx);
+    material.applyToContext2D(ctx);
     // Since we can't easily test canvas drawing, we'll just ensure no errors are thrown
     expect(true).toBe(true);
-  });
-
-  it("apply() should throw an error if ctx is not of type CanvasRenderingContext2D", () => {
-    const material = new BasicMaterial();
-    expect(() => material.apply({})).toThrow(
-      "ctx must be of type CanvasRenderingContext2D"
-    );
   });
 });

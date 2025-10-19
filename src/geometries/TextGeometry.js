@@ -47,9 +47,15 @@ export class TextGeometry extends Geometry {
       direction: null,
     }
   ) {
-    super();
+    super("TextGeometry");
 
-    const { maxWidth = null, font = null, textAlign = null, textBaseline = null, direction = null } = options;
+    const {
+      maxWidth = null,
+      font = null,
+      textAlign = null,
+      textBaseline = null,
+      direction = null,
+    } = options;
 
     if (typeof text !== "string") {
       throw new Error("text must be a string");
@@ -104,17 +110,14 @@ export class TextGeometry extends Geometry {
   }
 
   /**
-   * @function draw
-   * @description Draws the text onto the given canvas context
+   * @function drawContext2D
+   * @description Draws the text onto the given canvas 2D context
    * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the text
    * @param {Material} material - The material to use for rendering the text
    * @returns {void}
    */
-  draw(ctx, transform, material) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      throw new Error("ctx must be of type CanvasRenderingContext2D");
-    }
+  drawContext2D(ctx, transform, material) {
     if (!(material instanceof Material)) {
       throw new Error("material must be of type Material");
     }

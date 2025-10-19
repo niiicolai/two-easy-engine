@@ -38,7 +38,7 @@
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Render2D(canvas, scene, camera, {
+      const render = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
@@ -49,8 +49,8 @@
       const mesh = new Two.Mesh(
         new Two.RectGeometry(50, 50),
         new Two.BasicMaterial({
-          fillStyle: "#39ff14",
-          strokeStyle: "#39ff11",
+          fillStyle: new Two.RgbaColor(0, 255, 0, 1),
+          strokeStyle: new Two.RgbaColor(0, 200, 0, 1),
           lineWidth: 2,
         })
       );

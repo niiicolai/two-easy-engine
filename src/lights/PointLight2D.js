@@ -1,3 +1,5 @@
+import { Color } from "../colors/Color.js";
+import { RgbaColor } from "../colors/RgbaColor.js";
 import { Object2D } from "../core/Object2D.js";
 
 /**
@@ -10,18 +12,18 @@ export class PointLight2D extends Object2D {
    * @constructor
    * @param {number} radius - The radius of the light
    * @param {number} intensity - The intensity of the light
-   * @param {string} color - The color of the light
-   * @param {string} colorStop - The colorStop of the light
+   * @param {Color} color - The color of the light
+   * @param {Color} colorStop - The colorStop of the light
    * @throws {Error} If the radius is not a positive number.
    * @throws {Error} If the intensity is not a positive number.
-   * @throws {Error} If the color is not a string.
-   * @throws {Error} If the colorStop is not a string.
+   * @throws {Error} If the color is not a Color.
+   * @throws {Error} If the colorStop is not a Color.
    */
   constructor(
-    radius = 100, 
-    intensity = 1, 
-    color = 'rgba(255,255,200,1)',
-    colorStop = 'rgba(255, 255, 200, 0.0)',
+    radius = 100,
+    intensity = 1,
+    color = new RgbaColor(255, 255, 200, 1),
+    colorStop = new RgbaColor(255, 255, 200, 0)
   ) {
     super();
 
@@ -33,12 +35,12 @@ export class PointLight2D extends Object2D {
       throw new Error("intensity must be a positive number");
     }
 
-    if (typeof color !== "string") {
-      throw new Error("color must be a string");
+    if (!(color instanceof Color)) {
+      throw new Error("color must be a Color");
     }
 
-    if (typeof colorStop !== "string") {
-      throw new Error("colorStop must be a string");
+    if (!(colorStop instanceof Color)) {
+      throw new Error("colorStop must be a Color");
     }
 
     this.radius = radius;
@@ -49,26 +51,28 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function onRender
+   * @function drawContext2D
    * @description Renders the light effect on the given 2D rendering context.
    * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
-   * @throws Will throw an error if the context is not a CanvasRenderingContext2D.
+   * @returns {void}
+   * @throws {Error} If ctx is not of type CanvasRenderingContext2D
    */
-  onRender(ctx) {
+  drawContext2D(ctx) {
     if (!(ctx instanceof CanvasRenderingContext2D)) {
-      throw new Error('ctx must be of type CanvasRenderingContext2D');
+      throw new Error("ctx must be of type CanvasRenderingContext2D");
     }
 
+    const { radius, color, colorStop, intensity } = this;
     const { x, y } = this.transform.position;
 
-    const gradient = ctx.createRadialGradient(x, y, 0, x, y, this.radius);
-    gradient.addColorStop(0, this.color);
-    gradient.addColorStop(1, this.colorStop);
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+    gradient.addColorStop(0, color.toString());
+    gradient.addColorStop(1, colorStop.toString());
 
     ctx.save();
-    ctx.globalAlpha = this.intensity;
+    ctx.globalAlpha = intensity;
     ctx.fillStyle = gradient;
-    ctx.fillRect(x - this.radius, y - this.radius, this.radius * 2, this.radius * 2);
+    ctx.fillRect(x - radius, y - radius, radius * 2, radius * 2);
     ctx.restore();
   }
 }

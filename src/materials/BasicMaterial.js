@@ -11,8 +11,8 @@ export class BasicMaterial extends Material {
   /**
    * @constructor
    * @param {Object} [options] - Material configuration options.
-   * @param {string|Color|null} [options.fillStyle=null] - Initial fill style
-   * @param {string|Color|null} [options.strokeStyle=null] - Initial stroke style
+   * @param {Color|null} [options.fillStyle=null] - Initial fill style
+   * @param {Color|null} [options.strokeStyle=null] - Initial stroke style
    * @param {number|null} [options.lineWidth=null] - Initial line width
    * @param {Texture2D|null} [options.texture2D=null] - Image texture
    * @throws {Error} If the fillStyle is not null or a string.
@@ -37,11 +37,11 @@ export class BasicMaterial extends Material {
       texture2D = null,
     } = options;
 
-    if (fillStyle !== null && typeof fillStyle !== "string" && !(fillStyle instanceof Color)) {
-      throw new Error("fillStyle must be a Color, string or null");
+    if (fillStyle !== null && !(fillStyle instanceof Color)) {
+      throw new Error("fillStyle must be a Color or null");
     }
-    if (strokeStyle !== null && typeof strokeStyle !== "string" && !(strokeStyle instanceof Color)) {
-      throw new Error("strokeStyle must be a Color, string or null");
+    if (strokeStyle !== null && !(strokeStyle instanceof Color)) {
+      throw new Error("strokeStyle must be a Color or null");
     }
     if (
       lineWidth !== null &&
@@ -49,9 +49,7 @@ export class BasicMaterial extends Material {
     ) {
       throw new Error("lineWidth must be a positive number or null");
     }
-    if (
-      texture2D !== null && !(texture2D instanceof Texture2D)
-    ) {
+    if (texture2D !== null && !(texture2D instanceof Texture2D)) {
       throw new Error("texture2D must be of type Texture2D or null");
     }
 
@@ -62,29 +60,20 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function apply
-   * @description Apply the draw style to the given ctx
-   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
+   * @function applyToContext2D
+   * @description Apply the material configuration to the given canvas 2D context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @returns {void}
-   * @throws {Error} If ctx is not of type CanvasRenderingContext2D
    */
-  apply(ctx) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      throw new Error("ctx must be of type CanvasRenderingContext2D");
-    }
-
+  applyToContext2D(ctx) {
     if (this.texture2D) {
       ctx.fillStyle = this.texture2D.createPattern(ctx);
     } else if (this.fillStyle) {
-      ctx.fillStyle = (this.fillStyle instanceof Color)
-        ? this.fillStyle.toString()
-        : this.fillStyle;
+      ctx.fillStyle = this.fillStyle.toString();
     }
 
     if (this.strokeStyle) {
-      ctx.strokeStyle = (this.strokeStyle instanceof Color)
-        ? this.strokeStyle.toString()
-        : this.strokeStyle;
+      ctx.strokeStyle = this.strokeStyle.toString();
     }
 
     if (this.lineWidth) {

@@ -1,4 +1,4 @@
-**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for web workers and other rendering contexts is added.
+**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for other rendering contexts is added.
 
 ---
 
@@ -22,13 +22,14 @@ scenes, meshes, cameras, and animations.
 
 ### Features
 
-- Meshes with geometry and materials (RectGeometry, CircleGeometry)
-- Camera support with position, rotation, and zoom (Camera2D)
-- Responsive canvas rendering with device pixel ratio support
-- Vector transformations (position, rotation, scale)
-- Scene management for adding and rendering 2D objects
-- Simple animation loop with requestAnimationFrame wrapper
-- Written in modern JavaScript with TypeScript type declarations
+- **Meshes with geometry and materials**: Easily create shapes like Rectangles and Circles.
+- **Texture2D support**: Use images in materials to display patterns beyond solid colors.
+- **Vector transformations**: Manipulate position, rotation, and scale with ease.
+- **Camera2D support**: Control position, rotation, and zoom for dynamic scenes.
+- **Scene management**: Organize and render multiple 2D objects efficiently.
+- **Offscreen canvas support**: Use the library with an offscreen canvas in a Worker thread. 
+- **Simple animation loop**: Built-in `requestAnimationFrame` wrapper for easy management.
+- **TypeScript ready**: Modern JavaScript with type declarations for IDE autocompletion.
 
 ## Installation
 
@@ -79,7 +80,7 @@ Create an HTML file with the following content to create a basic scene:
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Render2D(canvas, scene, camera, {
+      const render = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
@@ -90,8 +91,8 @@ Create an HTML file with the following content to create a basic scene:
       const mesh = new Two.Mesh(
         new Two.RectGeometry(50, 50),
         new Two.BasicMaterial({
-          fillStyle: "#39ff14",
-          strokeStyle: "#39ff11",
+          fillStyle: new Two.RgbaColor(0, 255, 0, 1),
+          strokeStyle: new Two.RgbaColor(0, 200, 0, 1),
           lineWidth: 2,
         })
       );

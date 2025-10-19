@@ -17,8 +17,8 @@ describe("Geometry", () => {
     const canvas = createCanvas(800, 600);
     const ctx = canvas.getContext("2d");
 
-    expect(() => geometry.draw(ctx, transform, material)).toThrow(
-      "draw method must be implemented in subclass"
+    expect(() => geometry.drawContext2D(ctx, transform, material)).toThrow(
+      "drawContext2D() must be implemented in the subclass"
     );
   });
 });

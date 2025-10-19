@@ -2,7 +2,7 @@ import { Vector2 } from "./src/core/Vector2.js";
 import { Transform } from "./src/core/Transform.js";
 import { Camera2D } from "./src/cameras/Camera2D.js";
 import { Scene } from "./src/scenes/Scene.js";
-import { Render2D } from "./src/renderers/Render2D.js";
+import { Renderer2D } from "./src/renderers/Renderer2D.js";
 import { Texture2D } from "./src/core/Texture2D.js";
 import { Clock } from "./src/core/Clock.js";
 import { Material } from "./src/materials/Material.js";
@@ -23,7 +23,7 @@ export {
   Transform,
   Camera2D,
   Scene,
-  Render2D,
+  Renderer2D,
   Texture2D,
   Clock,
   Material,

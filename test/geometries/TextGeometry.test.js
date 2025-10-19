@@ -3,6 +3,7 @@ import { createCanvas } from "canvas";
 import { TextGeometry } from "../../src/geometries/TextGeometry.js";
 import { Transform } from "../../src/core/Transform.js";
 import { Material } from "../../src/materials/Material.js";
+import { RgbaColor } from "../../src/colors/RgbaColor.js";
 
 describe("TextGeometry", () => {
   it("should create a TextGeometry instance with valid parameters", () => {
@@ -58,11 +59,11 @@ describe("TextGeometry", () => {
     );
   });
 
-  it("should draw text without throwing errors", () => {
+  it("should drawContext2D text without throwing errors", () => {
     const canvas = createCanvas(800, 600);
     const ctx = canvas.getContext("2d");
     const transform = new Transform();
-    const material = new Material({ fillStyle: "blue", strokeStyle: "red" });
+    const material = new Material({ fillStyle: new RgbaColor(1, 1, 1, 1) });
 
     const textGeo = new TextGeometry("Hello Canvas", {
       font: "16px Arial",
@@ -70,37 +71,27 @@ describe("TextGeometry", () => {
       textBaseline: "middle",
     });
 
-    expect(() => textGeo.draw(ctx, transform, material)).not.toThrow();
+    expect(() => textGeo.drawContext2D(ctx, transform, material)).not.toThrow();
   });
 
-  it("should throw an error when draw is called with invalid context", () => {
-    const textGeo = new TextGeometry("Hello");
-    const transform = new Transform();
-    const material = new Material({ fillStyle: "blue" });
-
-    expect(() => textGeo.draw({}, transform, material)).toThrow(
-      "ctx must be of type CanvasRenderingContext2D"
-    );
-  });
-
-  it("should throw an error when draw is called with invalid transform", () => {
+  it("should throw an error when drawContext2D is called with invalid transform", () => {
     const canvas = createCanvas(800, 600);
     const ctx = canvas.getContext("2d");
-    const material = new Material({ fillStyle: "blue" });
+    const material = new Material({ fillStyle: new RgbaColor(1, 1, 1, 1) });
     const textGeo = new TextGeometry("Hello");
 
-    expect(() => textGeo.draw(ctx, {}, material)).toThrow(
+    expect(() => textGeo.drawContext2D(ctx, {}, material)).toThrow(
       "transform must be of type Transform"
     );
   });
 
-  it("should throw an error when draw is called with invalid material", () => {
+  it("should throw an error when drawContext2D is called with invalid material", () => {
     const canvas = createCanvas(800, 600);
     const ctx = canvas.getContext("2d");
     const transform = new Transform();
     const textGeo = new TextGeometry("Hello");
 
-    expect(() => textGeo.draw(ctx, transform, {})).toThrow(
+    expect(() => textGeo.drawContext2D(ctx, transform, {})).toThrow(
       "material must be of type Material"
     );
   });

@@ -16,7 +16,7 @@ export class Mesh extends Object2D {
    * @throws {Error} If material  is not of type Material
    */
   constructor(geometry, material) {
-    super();
+    super('Mesh');
 
     if (!(geometry instanceof Geometry)) {
       throw new Error("geometry must be of type Geometry");
@@ -30,14 +30,13 @@ export class Mesh extends Object2D {
   }
 
   /**
-   * @function onRender
-   * @description Draws the mesh onto the given canvas context
-   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
+   * @function drawContext2D
+   * @description Draws the mesh onto the given canvas 2D context
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @returns {void}
    */
-  onRender(ctx) {
-    super.onRender(ctx);
-    this.material.apply(ctx);
-    this.geometry.draw(ctx, this.transform, this.material);
+  drawContext2D(ctx) {
+    this.material.applyToContext2D(ctx);
+    this.geometry.drawContext2D(ctx, this.transform, this.material);
   }
 }

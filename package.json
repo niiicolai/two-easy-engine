@@ -1,6 +1,6 @@
 {
   "name": "two-easy-engine",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A simple 2D library.",
   "files": [
     "dist"
@@ -46,5 +46,8 @@
     "vite": "^6.3.6",
     "vitepress": "^1.6.4",
     "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "uuid": "^13.0.0"
   }
 }
