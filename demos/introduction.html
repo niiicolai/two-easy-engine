@@ -77,6 +77,10 @@
 
       window.onresize = () => {
         render.setSize(window.innerWidth, window.innerHeight);
+        textMesh.transform.position.set(
+          window.innerWidth / 2,
+          window.innerHeight / 2
+        );
       };
 
       const moveSpeed = 0.3;
@@ -91,13 +95,16 @@
 
           for (let i = 0; i < num; i++) {
             const light = lights[i];
-            
+
             light.intensity = Math.random() * 2;
             light.color.setHue(hue);
             light.transform.position.y += moveSpeed;
 
             if (light.transform.position.y > window.innerHeight + 20) {
-              light.transform.position.set(Math.random() * window.innerWidth, -20);
+              light.transform.position.set(
+                Math.random() * window.innerWidth,
+                -20
+              );
             }
           }
         },
