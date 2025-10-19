@@ -2,12 +2,7 @@
 **⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for other rendering contexts is added.
 :::
 
-<img 
-    src="/images/logo.png" 
-    alt="TwoEasyEngine Logo" 
-    width="360" 
-    style="flex-shrink: 0; border-radius: 1rem;margin:auto;"
-/>
+<iframe src="/two-easy-engine/demos/introduction.html" width="100%" height="400px" style="border:1px solid #ccc;"></iframe>
 
 **TwoEasyEngine** is a lightweight 2D rendering library built on HTML5 Canvas.
 It provides a clean, object-oriented API for creating interactive scenes, managing meshes, controlling cameras, and animating objects, with minimal setup.
