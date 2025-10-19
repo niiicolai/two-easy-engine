@@ -1,14 +1,15 @@
-import { Scene } from "../scenes/Scene.js";
 import { Camera2D } from "../cameras/Camera2D.js";
 import { Color } from "../colors/Color.js";
+import { Scene } from "../scenes/Scene.js";
 
 /**
- * @class Render2D
- * @classdesc This class handles the rendering process, including setting up the canvas and drawing the scene using the camera.
+ * @class Renderer
+ * @classdesc The base renderer class
  */
-export class Render2D {
+export class Renderer {
   /**
    * @constructor
+   * @param {string} context - The canvas rendering context
    * @param {HTMLCanvasElement} canvas - The canvas element
    * @param {Scene} scene - The scene
    * @param {Camera2D} camera - The camera
@@ -25,6 +26,7 @@ export class Render2D {
    * @throws {Error} If options.backgroundColor is not a string or Color
    */
   constructor(
+    context,
     canvas,
     scene,
     camera,
@@ -36,15 +38,14 @@ export class Render2D {
     }
   ) {
     const { width, height, devicePixelRatio, backgroundColor } = options;
-
-    if (!(canvas instanceof HTMLCanvasElement)) {
-      throw new Error("canvas must be of type HTMLCanvasElement");
+    if (typeof context !== "string") {
+      throw new Error("context must be a string");
     }
     if (!(scene instanceof Scene)) {
       throw new Error("scene must be of type Scene");
     }
     if (!(camera instanceof Camera2D)) {
-      throw new Error("camera must be of type Camera");
+      throw new Error("camera must be of type Camera2D");
     }
     if (typeof width !== "number" || typeof height !== "number") {
       throw new Error("width and height must be numbers");
@@ -59,12 +60,13 @@ export class Render2D {
       throw new Error("backgroundColor must be of type Color or string");
     }
 
+    this.context = context;
     this.canvas = canvas;
-    this.ctx = canvas.getContext("2d");
     this.scene = scene;
     this.camera = camera;
     this.options = options;
-    this.recalculateDevicePixelRatio();
+    this.animationFrameId = null;
+    this.initContext();
   }
 
   /**
@@ -81,7 +83,12 @@ export class Render2D {
     ) {
       throw new Error("backgroundColor must be of type Color or string");
     }
+
     this.options.backgroundColor = backgroundColor;
+
+    if (this.worker) {
+      this.worker.postMessage({ cmd: "update_options", options: this.options });
+    }
   }
 
   /**
@@ -98,6 +105,7 @@ export class Render2D {
     }
     this.options.width = width;
     this.options.height = height;
+
     this.recalculateDevicePixelRatio();
   }
 
@@ -113,7 +121,18 @@ export class Render2D {
       throw new Error("dpr must be a number");
     }
     this.options.devicePixelRatio = dpr;
+
     this.recalculateDevicePixelRatio();
+  }
+
+  /**
+   * @function initContext
+   * @description Init the rendering context
+   */
+  initContext() {
+    throw new Error(
+      "initContext() is not implemented in the subclass"
+    );
   }
 
   /**
@@ -122,30 +141,20 @@ export class Render2D {
    * @returns {void}
    */
   recalculateDevicePixelRatio() {
-    const dpr = this.options.devicePixelRatio || 1;
-    const width = this.options.width * dpr;
-    const height = this.options.height * dpr;
-    this.canvas.width = width;
-    this.canvas.height = height;
-    this.ctx.scale(dpr, dpr);
+    throw new Error(
+      "recalculateDevicePixelRatio() is not implemented in the subclass"
+    );
   }
 
   /**
    * @function render
-   * @description Renders the scene onto the canvas using the camera
+   * @description Trigger a new render
    * @returns {void}
    */
   render() {
-    const ctx = this.ctx;
-    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.fillStyle =
-      this.options.backgroundColor instanceof Color
-        ? this.options.backgroundColor.toString()
-        : this.options.backgroundColor;
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.camera.apply(ctx);
-    this.scene.render(ctx);
-    this.camera.restore(ctx);
+    throw new Error(
+      "render() is not implemented in the subclass"
+    );
   }
 
   /**
@@ -180,9 +189,21 @@ export class Render2D {
       if (afterRender) {
         afterRender();
       }
-      window.requestAnimationFrame(loop.bind(this));
+      requestAnimationFrame(loop.bind(this));
     }
 
-    window.requestAnimationFrame(loop.bind(this));
+    this.animationFrameId = requestAnimationFrame(loop.bind(this));
+  }
+
+  /**
+   * @function cancelAnimationFrame
+   * @description A helper method that cancel the loop create from renderer.requestAnimationFrame
+   * @returns {void}
+   */
+  cancelAnimationFrame() {
+    if (!this.animationFrameId) return;
+
+    cancelAnimationFrame(this.animationFrameId);
+    this.animationFrameId = null;
   }
 }

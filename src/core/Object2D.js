@@ -1,4 +1,5 @@
 import { Transform } from "./Transform.js";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * @class Object2D
@@ -10,6 +11,7 @@ export class Object2D {
    */
   constructor() {
     this.transform = new Transform();
+    this.uuid = uuidv4();
     this.zIndex = 0;
     this.visible = true;
     this.scene = null;
@@ -65,15 +67,27 @@ export class Object2D {
   }
 
   /**
-   * @function onRender
-   * @description Placeholder method to be overridden by subclasses for rendering
-   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context
+   * @function draw
+   * @description Renders the light effect on the given 2D rendering context.
+   * @param {Renderer} renderer - The selected renderer
    * @returns {void}
-   * @throws Will throw an error if the context is not a CanvasRenderingContext2D
+   * @throws Will throw an error if the renderer.context is not supported
    */
-  onRender(ctx) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      throw new Error("ctx must be of type CanvasRenderingContext2D");
+  draw(renderer) {
+    if (renderer.context === "2d") {
+      this.drawContext2D(renderer.ctx);
+    } else {
+      throw new Error(`rendering context not supported: ${renderer.context}`);
     }
+  }
+
+  /**
+   * @function drawContext2D
+   * @description Renders the light effect on the given 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
+   * @returns {void}
+   */
+  drawContext2D() {
+    throw new Error("drawContext2D must be implemented in the subclass");
   }
 }

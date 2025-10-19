@@ -14,7 +14,7 @@ export class CircleGeometry extends Geometry {
    * @throws {Error} If the radius is not a positive number.
    */
   constructor(radius) {
-    super();
+    super("CircleGeometry");
 
     if (typeof radius !== "number" || radius <= 0) {
       throw new Error("radius must be a positive number");
@@ -24,20 +24,16 @@ export class CircleGeometry extends Geometry {
   }
 
   /**
-   * @function draw
-   * @description Draws the circle onto the given canvas context
-   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
+   * @function drawContext2D
+   * @description Draws the circle onto the given canvas 2D context
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the circle
    * @param {Material} material - The material to use for rendering the circle
    * @returns {void}
-   * @throws {Error} if ctx is not of type CanvasRenderingContext2D
    * @throws {Error} if material is not of type Material
    * @throws {Error} if transform is not of type Transform
    */
-  draw(ctx, transform, material) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      throw new Error("ctx must be of type CanvasRenderingContext2D");
-    }
+  drawContext2D(ctx, transform, material) {
     if (!(material instanceof Material)) {
       throw new Error("material must be of type Material");
     }

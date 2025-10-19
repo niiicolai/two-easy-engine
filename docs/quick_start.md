@@ -53,7 +53,7 @@ const canvas = document.getElementById("canvas");
 const clock = new Two.Clock();
 const camera = new Two.Camera2D();
 const scene = new Two.Scene();
-const render = new Two.Render2D(canvas, scene, camera, {
+const render = new Two.Renderer2D(canvas, scene, camera, {
   width: window.innerWidth,
   height: window.innerHeight,
   devicePixelRatio: window.devicePixelRatio || 1,
@@ -66,7 +66,7 @@ Explanation:
 - `Clock` tracks time elapsed and frame delta time.
 - `Camera2D` controls what part of the scene is visible.
 - `Scene` holds all your objects (meshes).
-- `Render2D` draws the scene onto the canvas.
+- `Renderer2D` draws the scene onto the canvas.
 
 ## 3. Add a rectangle mesh
 
@@ -75,8 +75,8 @@ Explanation:
 const mesh = new Two.Mesh(
   new Two.RectGeometry(50, 50), // width & height
   new Two.BasicMaterial({
-    fillStyle: "#39ff14",
-    strokeStyle: "#39ff11",
+    fillStyle: new Two.RgbaColor(0, 255, 0, 1),
+    strokeStyle: new Two.RgbaColor(0, 200, 0, 1),
     lineWidth: 2,
   })
 );
@@ -165,7 +165,7 @@ render.requestAnimationFrame({
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Render2D(canvas, scene, camera, {
+      const render = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
@@ -176,8 +176,8 @@ render.requestAnimationFrame({
       const mesh = new Two.Mesh(
         new Two.RectGeometry(50, 50),
         new Two.BasicMaterial({
-          fillStyle: "#39ff14",
-          strokeStyle: "#39ff11",
+          fillStyle: new Two.RgbaColor(0, 255, 0, 1),
+          strokeStyle: new Two.RgbaColor(0, 200, 0, 1),
           lineWidth: 2,
         })
       );

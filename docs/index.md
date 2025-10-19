@@ -1,5 +1,5 @@
 ::: warning
-**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for web workers and other rendering contexts is added.
+**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for other rendering contexts is added.
 :::
 
 <img 
@@ -15,9 +15,11 @@ It provides a clean, object-oriented API for creating interactive scenes, managi
 ### Features
 
 - **Meshes with geometry and materials**: Easily create shapes like Rectangles and Circles.
-- **Camera2D support**: Control position, rotation, and zoom for dynamic scenes.
-- **Responsive rendering**: Canvas adjusts for window size and device pixel ratio.
+- **Texture2D support**: Use images in materials to display patterns beyond solid colors.
 - **Vector transformations**: Manipulate position, rotation, and scale with ease.
+- **Camera2D support**: Control position, rotation, and zoom for dynamic scenes.
 - **Scene management**: Organize and render multiple 2D objects efficiently.
-- **Simple animation loop**: Built-in `requestAnimationFrame` wrapper for smooth animations.
+- **Offscreen canvas support**: Use the library with an offscreen canvas in a Worker thread. 
+- **Simple animation loop**: Built-in `requestAnimationFrame` wrapper for easy management.
 - **TypeScript ready**: Modern JavaScript with type declarations for IDE autocompletion.
+

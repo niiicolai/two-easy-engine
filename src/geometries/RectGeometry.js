@@ -16,7 +16,7 @@ export class RectGeometry extends Geometry {
    * @throws {Error} If the height is not a positive number.
    */
   constructor(width, height) {
-    super();
+    super("RectGeometry");
 
     if (typeof width !== "number" || width <= 0) {
       throw new Error("width must be a positive number");
@@ -30,17 +30,14 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * @function draw
-   * @description Draws the rectangle onto the given canvas context
-   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
+   * @function drawContext2D
+   * @description Draws the rectangle onto the given canvas 2D context
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the rectangle
    * @param {Material} material - The material to use for rendering the rectangle
    * @returns {void}
    */
-  draw(ctx, transform, material) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      throw new Error("ctx must be of type CanvasRenderingContext2D");
-    }
+  drawContext2D(ctx, transform, material) {
     if (!(material instanceof Material)) {
       throw new Error("material must be of type Material");
     }

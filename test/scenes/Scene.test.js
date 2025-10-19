@@ -64,46 +64,6 @@ describe("Scene", () => {
     expect(() => scene.remove({})).toThrow("child must be of type Object2D");
   });
 
-  it("should throw an error when rendering with a non-CanvasRenderingContext2D", () => {
-    const scene = new Scene();
-    expect(() => scene.render({})).toThrow(
-      "ctx must be of type CanvasRenderingContext2D"
-    );
-  });
-
-  it("should call onRender on each child when rendering", () => {
-    const scene = new Scene();
-    const child1 = new Object2D();
-    const child2 = new Object2D();
-    const canvas = createCanvas(800, 600);
-    const ctx = canvas.getContext("2d");
-    child1.onRender = vi.fn();
-    child2.onRender = vi.fn();
-    scene.add(child1);
-    scene.add(child2);
-    scene.render(ctx);
-
-    expect(child1.onRender).toHaveBeenCalledWith(ctx);
-    expect(child2.onRender).toHaveBeenCalledWith(ctx);
-  });
-
-  it("should not call onRender if a child.visible is set to false", () => {
-    const scene = new Scene();
-    const child1 = new Object2D();
-    const child2 = new Object2D();
-    const canvas = createCanvas(800, 600);
-    const ctx = canvas.getContext("2d");
-    child1.onRender = vi.fn();
-    child2.onRender = vi.fn();
-    scene.add(child1);
-    scene.add(child2);
-    child2.setVisible(false);
-    scene.render(ctx);
-
-    expect(child1.onRender).toHaveBeenCalledWith(ctx);
-    expect(child2.onRender).not.toHaveBeenCalledWith(ctx);
-  });
-
   it("should not fail when removing a child that is not in the scene", () => {
     const scene = new Scene();
     const child = new Object2D();

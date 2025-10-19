@@ -3,6 +3,7 @@ import { createCanvas } from "canvas";
 import { RectGeometry } from "../../src/geometries/RectGeometry.js";
 import { Transform } from "../../src/core/Transform.js";
 import { Material } from "../../src/materials/Material.js";
+import { RgbaColor } from "../../src/colors/RgbaColor.js";
 
 describe("RectGeometry", () => {
     it("should create a RectGeometry instance with custom parameters", () => {
@@ -23,42 +24,33 @@ describe("RectGeometry", () => {
         );
     });
 
-    it("should implement the draw method", () => {
+    it("should implement the drawContext2D method", () => {
         const rect = new RectGeometry(100, 50);
         const canvas = createCanvas(800, 600);
         const ctx = canvas.getContext("2d");
         const transform = new Transform();
-        const material = new Material({ fillStyle: "blue", strokeStyle: "red", lineWidth: 2 });
-        rect.draw(ctx, transform, material);
+        const material = new Material({ fillStyle: new RgbaColor(1, 1, 1, 1) });
+        rect.drawContext2D(ctx, transform, material);
         // Since we can't easily test canvas drawing, we'll just ensure no errors are thrown
         expect(true).toBe(true);
     });
 
-    it("should throw an error when draw is called with invalid context", () => {
-        const rect = new RectGeometry(100, 50);
-        const transform = new Transform();
-        const material = new Material({ fillStyle: "blue" });
-        expect(() => rect.draw({}, transform, material)).toThrow(
-            "ctx must be of type CanvasRenderingContext2D"
-        );
-    });
-
-    it("should throw an error when draw is called with invalid transform", () => {
+    it("should throw an error when drawContext2D is called with invalid transform", () => {
         const rect = new RectGeometry(100, 50);
         const canvas = createCanvas(800, 600);
         const ctx = canvas.getContext("2d");
-        const material = new Material({ fillStyle: "blue" });
-        expect(() => rect.draw(ctx, {}, material)).toThrow(
+        const material = new Material({ fillStyle: new RgbaColor(1, 1, 1, 1) });
+        expect(() => rect.drawContext2D(ctx, {}, material)).toThrow(
             "transform must be of type Transform"
         );
     });
 
-    it("should throw an error when draw is called with invalid material", () => {
+    it("should throw an error when drawContext2D is called with invalid material", () => {
         const rect = new RectGeometry(100, 50);
         const canvas = createCanvas(800, 600);
         const ctx = canvas.getContext("2d");
         const transform = new Transform();
-        expect(() => rect.draw(ctx, transform, {})).toThrow(
+        expect(() => rect.drawContext2D(ctx, transform, {})).toThrow(
             "material must be of type Material"
         );
     });

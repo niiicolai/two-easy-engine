@@ -4,18 +4,18 @@
  */
 export class Material {
   /**
-   * @function apply
-   * @description Apply the draw style to the given ctx
-   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
-   * @returns {void}
-   * @throws {Error} If ctx is not of type CanvasRenderingContext2D
-   * @throws {Error} If not implemented in subclass
+   * @constructor
    */
-  apply(ctx) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      throw new Error("ctx must be of type CanvasRenderingContext2D");
-    }
+  constructor() {
+  }
 
-    throw new Error("apply method must be implemented in subclass");
+  /**
+   * @function applyToContext2D
+   * @description Apply the material configuration to the given canvas 2D context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
+   * @returns {void}
+   */
+  applyToContext2D() {
+    throw new Error("applyToContext2D() must be implemented in the subclass");
   }
 }

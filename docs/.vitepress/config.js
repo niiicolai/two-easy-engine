@@ -71,6 +71,10 @@ export default {
             text: "Text Geometry",
             link: "/examples/text_geometry",
           },
+          {
+            text: "Offscreen Canvas",
+            link: "/examples/offscreen_canvas",
+          },
           // Map example
           // Audio example
           // Transparent example

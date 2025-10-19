@@ -38,7 +38,7 @@ export class Scene {
       throw new Error("child must be of type Object2D");
     }
 
-    const index = this.children.indexOf(child);
+    const index = this.children.findIndex((c) => c.uuid === child.uuid);
     if (index !== -1) {
       this.children.splice(index, 1);
       child.scene = null;
@@ -53,24 +53,5 @@ export class Scene {
    */
   sortChildrenByZIndex() {
     this.children.sort((a, b) => a.zIndex - b.zIndex);
-  }
-
-  /**
-   * @function render
-   * @description Renders all 2D objects in the scene onto the given canvas context
-   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to render the scene onto
-   * @returns {void}
-   * @throws {Error} If ctx is not of type CanvasRenderingContext2D
-   */
-  render(ctx) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      throw new Error("ctx must be of type CanvasRenderingContext2D");
-    }
-
-    this.children.forEach((child) => {
-      if (child.visible) {
-        child.onRender(ctx);
-      }
-    });
   }
 }

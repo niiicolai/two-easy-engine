@@ -8,13 +8,13 @@ describe("Material", () => {
     expect(material).toBeInstanceOf(Material);
   });
 
-  it("should throw an error when apply is called", () => {
+  it("should throw an error when applyToContext2D is called", () => {
     const material = new Material();
     const canvas = createCanvas(800, 600);
     const ctx = canvas.getContext("2d");
 
-    expect(() => material.apply(ctx)).toThrow(
-      "apply method must be implemented in subclass"
+    expect(() => material.applyToContext2D(ctx)).toThrow(
+      "applyToContext2D() must be implemented in the subclass"
     );
   });
 });
