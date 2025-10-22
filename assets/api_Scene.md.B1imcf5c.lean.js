@@ -1,1 +1,0 @@
-import{_ as d,c as t,o,ae as a}from"./chunks/framework.Cn4FPLDc.js";const b=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"api/Scene.md","filePath":"api/Scene.md"}'),r={name:"api/Scene.md"};function n(c,e,i,s,h,l){return o(),t("div",null,[...e[0]||(e[0]=[a("",23)])])}const m=d(r,[["render",n]]);export{b as __pageData,m as default};

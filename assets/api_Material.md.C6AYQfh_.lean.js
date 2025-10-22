@@ -1,0 +1,1 @@
+import{_ as t,c as e,o,ae as r}from"./chunks/framework.C4y2S-A3.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"api/Material.md","filePath":"api/Material.md"}'),l={name:"api/Material.md"};function i(n,a,d,s,c,p){return o(),e("div",null,[...a[0]||(a[0]=[r("",14)])])}const x=t(l,[["render",i]]);export{m as __pageData,x as default};

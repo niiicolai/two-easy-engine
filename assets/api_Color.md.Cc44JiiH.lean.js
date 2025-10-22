@@ -1,0 +1,1 @@
+import{_ as r,c as t,o as a,ae as e}from"./chunks/framework.C4y2S-A3.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"api/Color.md","filePath":"api/Color.md"}'),l={name:"api/Color.md"};function n(s,o,i,c,d,h){return a(),t("div",null,[...o[0]||(o[0]=[e("",20)])])}const C=r(l,[["render",n]]);export{u as __pageData,C as default};
