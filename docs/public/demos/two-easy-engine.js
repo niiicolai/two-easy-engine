@@ -23,7 +23,7 @@ class u {
    * @description Sets the x and y values of the vector
    * @param {number} x - The new x value
    * @param {number} y - The new y value
-   * @returns {void}
+   * @returns {Vector2} - this vector
    * @throws {Error} If x or y is not a number
    */
   set(t, e) {
@@ -36,7 +36,7 @@ class u {
    * @description Translates the vector by given x and y offsets
    * @param {number} x - The x offset
    * @param {number} y - The y offset
-   * @returns {void}
+   * @returns {Vector2} - this vector
    * @throws {Error} If x or y is not a number
    */
   translate(t, e) {
@@ -48,7 +48,7 @@ class u {
    * @function add
    * @description Adds another vector to this vector
    * @param {Vector2} v - The vector to add
-   * @returns {void}
+   * @returns {Vector2} - this vector
    * @throws {Error} If v is not of type Vector2
    */
   add(t) {
@@ -60,7 +60,7 @@ class u {
    * @function subtract
    * @description Subtracts another vector from this vector
    * @param {Vector2} v - The vector to subtract
-   * @returns {void}
+   * @returns {Vector2} - this vector
    * @throws {Error} If v is not of type Vector2
    */
   subtract(t) {
@@ -96,7 +96,7 @@ class u {
    * @function multiplyScalar
    * @description Multiplies this vector by a scalar
    * @param {number} s - The scalar to multiply by
-   * @returns {void}
+   * @returns {Vector2} - this vector
    * @throws {Error} If s is not a number
    */
   multiplyScalar(t) {
@@ -108,7 +108,7 @@ class u {
    * @function divideScalar
    * @description Divides this vector by a scalar
    * @param {number} s - The scalar to divide by
-   * @returns {void}
+   * @returns {Vector2} - this vector
    * @throws {Error} If s is not a number
    * @throws {Error} If division by zero is attempted
    */
@@ -138,7 +138,7 @@ class u {
   /**
    * @function normalize
    * @description Normalizes the vector to have a length of 1
-   * @returns {void}
+   * @returns {Vector2} - this vector
    * @throws {Error} If attempting to normalize a zero-length vector
    */
   normalize() {
@@ -915,7 +915,7 @@ class j extends d {
 class L extends d {
   /**
    * @constructor
-   * @param {Array.<[number, number, number, number]>} points - Array of 4-number arrays describing points/segments. Requires at least two entries.
+   * @param {Array.<Array<number>>} points - Array of 4-number arrays describing points/segments. Requires at least one entry.
    * @throws {Error} If points has less than one 4-number arrays
    * @throws {Error} If points has an array with less or more than four numbers
    */
