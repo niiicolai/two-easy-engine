@@ -18,8 +18,11 @@ export default {
   base: "/two-easy-engine/",
   title: "TwoEasyEngine",
   description: "2D library for the HTML5 Canvas",
+
   themeConfig: {
-    nav: [{ text: "Home", link: "/" }],
+    nav: [
+      { text: "Home", link: "/" },
+    ],
     sidebar: [
       {
         text: "Get Started",
@@ -75,14 +78,10 @@ export default {
             text: "Offscreen Canvas",
             link: "/examples/offscreen_canvas",
           },
-          // Map example
-          // Audio example
-          // Transparent example
-          // Snake game example
-          // Top-down shooter example
-          // Top-down RPG example
-          // custom geometry example
-          // custom material example
+          {
+            text: "Custom Line Shape",
+            link: "/examples/custom_line_shape",
+          }
         ],
       },
       {

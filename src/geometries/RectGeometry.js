@@ -16,7 +16,7 @@ export class RectGeometry extends Geometry {
    * @throws {Error} If the height is not a positive number.
    */
   constructor(width, height) {
-    super("RectGeometry");
+    super();
 
     if (typeof width !== "number" || width <= 0) {
       throw new Error("width must be a positive number");

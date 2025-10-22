@@ -42,6 +42,8 @@ export class Vector2 {
 
     this.x = x;
     this.y = y;
+
+    return this;
   }
 
   /**
@@ -59,6 +61,8 @@ export class Vector2 {
 
     this.x += dx;
     this.y += dy;
+
+    return this;
   }
 
   /**
@@ -69,12 +73,14 @@ export class Vector2 {
    * @throws {Error} If v is not of type Vector2
    */
   add(v) {
-    if (! (v instanceof Vector2)) {
+    if (!(v instanceof Vector2)) {
       throw new Error("v must be of type Vector2");
     }
 
     this.x += v.x;
     this.y += v.y;
+
+    return this;
   }
 
   /**
@@ -85,12 +91,14 @@ export class Vector2 {
    * @throws {Error} If v is not of type Vector2
    */
   subtract(v) {
-    if (! (v instanceof Vector2)) {
+    if (!(v instanceof Vector2)) {
       throw new Error("v must be of type Vector2");
     }
 
     this.x -= v.x;
     this.y -= v.y;
+
+    return this;
   }
 
   /**
@@ -101,15 +109,16 @@ export class Vector2 {
    * @throws {Error} If v is not of type Vector2
    */
   dot(v) {
-    if (! (v instanceof Vector2)) {
+    if (!(v instanceof Vector2)) {
       throw new Error("v must be of type Vector2");
     }
+
     return this.x * v.x + this.y * v.y;
   }
 
   /**
    * @function vectorTo
-   * @description Computes the vector from this vector to another vector
+   * @description Computes a new vector from this vector to another vector
    * @param {Vector2} v - The target vector
    * @returns {Vector2} A new Vector2 representing the vector from this to v
    * @throws {Error} If v is not of type Vector2
@@ -118,6 +127,7 @@ export class Vector2 {
     if (!(v instanceof Vector2)) {
       throw new Error("v must be of type Vector2");
     }
+
     return new Vector2(v.x - this.x, v.y - this.y);
   }
 
@@ -135,6 +145,8 @@ export class Vector2 {
 
     this.x *= s;
     this.y *= s;
+
+    return this;
   }
 
   /**
@@ -154,6 +166,8 @@ export class Vector2 {
     }
     this.x /= s;
     this.y /= s;
+
+    return this;
   }
 
   /**
@@ -163,6 +177,15 @@ export class Vector2 {
    */
   length() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
+  }
+
+  /**
+   * @function lengthSquared
+   * @description Computes the squared length of the vector.
+   * @returns {number} The squared length of the vector
+   */
+  lengthSquared() {
+    return this.x * this.x + this.y * this.y;
   }
 
   /**
@@ -176,6 +199,9 @@ export class Vector2 {
     if (len === 0) {
       throw new Error("Cannot normalize zero-length vector");
     }
+
     this.divideScalar(len);
+
+    return this;
   }
 }
