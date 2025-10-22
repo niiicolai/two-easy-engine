@@ -3,24 +3,33 @@ import { Transform } from "../core/Transform.js";
 import { Material } from "../materials/Material.js";
 
 /**
- * @class CircleGeometry
+ * @class LineGeometry
  * @extends Geometry
- * @classdesc This class provides a circle shape with a radius property.
+ * @classdesc This class provides a way to draw a custom shape using lines.
  */
-export class CircleGeometry extends Geometry {
+export class LineGeometry extends Geometry {
   /**
    * @constructor
-   * @param {number} radius - The radius of the circle (must be positive).
-   * @throws {Error} If the radius is not a positive number.
+   * @param {Array.<Array<number>>} points - Array of 4-number arrays describing points/segments. Requires at least one entry.
+   * @throws {Error} If points has less than one 4-number arrays
+   * @throws {Error} If points has an array with less or more than four numbers
    */
-  constructor(radius) {
+  constructor(points) {
     super();
 
-    if (typeof radius !== "number" || radius <= 0) {
-      throw new Error("radius must be a positive number");
+    if (!Array.isArray(points)) {
+      throw new Error("points must be an array of 4-number arrays");
     }
 
-    this.radius = radius;
+    if (points.length < 1) {
+      throw new Error("points must contain at least one 4-number arrays");
+    }
+
+    if (points.some((a) => a.length !== 4)) {
+      throw new Error("an array in points doesn't have a length of four");
+    }
+
+    this.points = points;
   }
 
   /**
@@ -43,24 +52,23 @@ export class CircleGeometry extends Geometry {
 
     const { position, scale } = transform;
     const { x, y } = position;
-    const radius = this.radius * ((scale.x + scale.y) / 2); // Average scale for uniform scaling
 
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(transform.rotation);
 
     ctx.beginPath();
-    ctx.arc(0, 0, radius, 0, Math.PI * 2);
-    ctx.closePath();
 
-    if (material.fillStyle) {
-      ctx.fill();
-    }
+    this.points.forEach((point) => {
+      ctx.moveTo(point[0] * scale.x, point[1] * scale.y);
+      ctx.lineTo(point[2] * scale.x, point[3] * scale.y);
+    });
 
     if (material.strokeStyle) {
       ctx.stroke();
     }
 
+    ctx.closePath();
     ctx.restore();
   }
 }

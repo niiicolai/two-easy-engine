@@ -5,10 +5,8 @@
 export class Geometry {
   /**
    * @constructor
-   * @param {string} name - The name of the geometry
    */
-  constructor(name) {
-    this.name = name;
+  constructor() {
   }
 
   /**

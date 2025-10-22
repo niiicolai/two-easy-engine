@@ -1,3 +1,11 @@
+# Custom Line Shape
+
+## Preview
+
+<iframe src="/two-easy-engine/demos/custom_line_shape.html" width="100%" height="400px" style="border:1px solid #ccc;"></iframe>
+
+## Code
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,7 +29,7 @@
   <body>
     <canvas id="canvas"></canvas>
     <script type="module">
-      import * as Two from "./index.js";
+      import * as Two from "two-easy-engine";
 
       const canvas = document.getElementById("canvas");
       const clock = new Two.Clock();
@@ -102,3 +110,4 @@
     </script>
   </body>
 </html>
+```

@@ -6,8 +6,9 @@
 
 ## Code
 
-**index.html**
-```html
+::: code-group
+
+```html [index.html]
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,8 +52,7 @@
 </html>
 ```
 
-**offscreen_canvas_worker.js**
-```js
+```js [offscreen_canvas_worker.js]
 import * as Two from "two-easy-engine"
 
 onmessage = (e) => {
@@ -93,3 +93,5 @@ onmessage = (e) => {
   }
 };
 ```
+
+:::

@@ -47,7 +47,7 @@ export class TextGeometry extends Geometry {
       direction: null,
     }
   ) {
-    super("TextGeometry");
+    super();
 
     const {
       maxWidth = null,
