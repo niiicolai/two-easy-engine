@@ -1,8 +1,9 @@
-import { expect, describe, it, vi } from "vitest";
+import { expect, describe, it } from "vitest";
 import { createCanvas } from "canvas";
 import { Renderer2D } from "../../src/renderers/Renderer2D.js";
 import { Scene } from "../../src/scenes/Scene.js";
 import { Camera2D } from "../../src/cameras/Camera2D.js";
+import { RgbaColor } from "../../src/colors/RgbaColor.js";
 
 describe("Renderer2D", () => {
   it("should create a Renderer2D instance", () => {
@@ -41,6 +42,8 @@ describe("Renderer2D", () => {
     render.setSize(1024, 768);
     expect(render.options.width).toBe(1024);
     expect(render.options.height).toBe(768);
+    expect(render.canvas.width).toBe(1024);
+    expect(render.canvas.height).toBe(768);
   });
 
   it("should throw an error if width or height is not a number", () => {
@@ -80,13 +83,29 @@ describe("Renderer2D", () => {
     const scene = new Scene();
     const camera = new Camera2D();
     const render = new Renderer2D(canvas, scene, camera, {
-      width: 800,
-      height: 600,
+      width: 2,
+      height: 2,
       devicePixelRatio: 1,
       backgroundColor: "red"
     });
-    render.setBackgroundColor("blue");
-    expect(render.options.backgroundColor).toBe("blue");
+    
+    // Check if canvas background is red.
+    render.render();
+    expect(getPixel(render.ctx, 0, 0)).toMatchObject({ r: 255, g: 0, b: 0, a: 255 });
+    expect(getPixel(render.ctx, 1, 0)).toMatchObject({ r: 255, g: 0, b: 0, a: 255 });
+    expect(getPixel(render.ctx, 0, 1)).toMatchObject({ r: 255, g: 0, b: 0, a: 255 });
+    expect(getPixel(render.ctx, 1, 0)).toMatchObject({ r: 255, g: 0, b: 0, a: 255 });
+    expect(render.options.backgroundColor).toBe("red");
+
+    // Check if canvas background is blue.
+    const blue = new RgbaColor(0, 0, 255);
+    render.setBackgroundColor(blue);
+    render.render();
+    expect(getPixel(render.ctx, 0, 0)).toMatchObject({ r: 0, g: 0, b: 255, a: 255 });
+    expect(getPixel(render.ctx, 1, 0)).toMatchObject({ r: 0, g: 0, b: 255, a: 255 });
+    expect(getPixel(render.ctx, 0, 1)).toMatchObject({ r: 0, g: 0, b: 255, a: 255 });
+    expect(getPixel(render.ctx, 1, 0)).toMatchObject({ r: 0, g: 0, b: 255, a: 255 });
+    expect(render.options.backgroundColor).toBe(blue);
   });
 
   it("setBackgroundColor should throw an error if the backgroundColor is not a string or color", () => {

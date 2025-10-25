@@ -125,9 +125,11 @@ export class TextGeometry extends Geometry {
       throw new Error("transform must be of type Transform");
     }
 
+    const { position, rotation } = transform;
+
     ctx.save();
-    ctx.translate(transform.position.x, transform.position.y);
-    ctx.rotate(transform.rotation);
+    ctx.translate(position.x, position.y);
+    ctx.rotate(rotation);
 
     if (this.options.font) {
       ctx.font = this.options.font;

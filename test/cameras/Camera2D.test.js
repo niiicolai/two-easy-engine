@@ -1,5 +1,4 @@
 import { expect, describe, it } from "vitest";
-import { createCanvas } from "canvas";
 import { Camera2D } from "../../src/cameras/Camera2D.js";
 import { Transform } from "../../src/core/Transform.js";
 

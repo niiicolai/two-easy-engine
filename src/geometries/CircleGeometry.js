@@ -41,13 +41,12 @@ export class CircleGeometry extends Geometry {
       throw new Error("transform must be of type Transform");
     }
 
-    const { position, scale } = transform;
-    const { x, y } = position;
-    const radius = this.radius * ((scale.x + scale.y) / 2); // Average scale for uniform scaling
+    const { position, rotation, scale } = transform;
+    const radius = this.radius * ((scale.x + scale.y) / 2);
 
     ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(transform.rotation);
+    ctx.translate(position.x, position.y);
+    ctx.rotate(rotation);
 
     ctx.beginPath();
     ctx.arc(0, 0, radius, 0, Math.PI * 2);

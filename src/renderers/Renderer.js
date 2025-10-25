@@ -128,6 +128,7 @@ export class Renderer {
   /**
    * @function initContext
    * @description Init the rendering context
+   * @returns {void}
    */
   initContext() {
     throw new Error(
@@ -160,9 +161,9 @@ export class Renderer {
   /**
    * @function requestAnimationFrame
    * @description A helper method that simplifies the use of requestAnimationFrame
-   * @param {Object} options - Options for beforeRender and afterRender callbacks
-   * @param {Function} options.beforeRender - A callback function to be called before each render
-   * @param {Function} options.afterRender - A callback function to be called after each render
+   * @param {Object} [options] - Options for beforeRender and afterRender callbacks
+   * @param {Function|null} [options.beforeRender] - A callback function to be called before each render
+   * @param {Function|null} [options.afterRender] - A callback function to be called after each render
    * @returns {void}
    * @throws {Error} If options.beforeRender is not a function
    * @throws {Error} If options.afterRender is not a function

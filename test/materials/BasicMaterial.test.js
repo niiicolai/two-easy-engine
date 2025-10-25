@@ -48,13 +48,21 @@ describe("BasicMaterial", () => {
     );
   });
 
-  it("should implement the applyToContext2D method", () => {
-    const material = new BasicMaterial();
+  it("applyToContext2D() should configure the ctx lineWidth, fillStyle, and strokeStyle", () => {
+    const color = new RgbaColor(255, 0, 0, 1);
+    const material = new BasicMaterial({
+      fillStyle: color,
+      strokeStyle: color,
+      lineWidth: 5,
+    });
     const canvas = createCanvas(800, 600);
     const ctx = canvas.getContext("2d");
+    const colorString = "#ff0000";
 
     material.applyToContext2D(ctx);
-    // Since we can't easily test canvas drawing, we'll just ensure no errors are thrown
-    expect(true).toBe(true);
+   
+    expect(ctx.fillStyle).toBe(colorString);
+    expect(ctx.strokeStyle).toBe(colorString);
+    expect(ctx.lineWidth).toBe(5);
   });
 });

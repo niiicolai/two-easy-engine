@@ -1,5 +1,7 @@
 import { Transform } from "./Transform.js";
 import { v4 as uuidv4 } from "uuid";
+// eslint-disable-next-line no-unused-vars
+import { Renderer } from "../renderers/Renderer.js";
 
 /**
  * @class Object2D
@@ -74,7 +76,7 @@ export class Object2D {
    * @throws Will throw an error if the renderer.context is not supported
    */
   draw(renderer) {
-    if (renderer.context === "2d") {
+    if (renderer?.context === "2d") {
       this.drawContext2D(renderer.ctx);
     } else {
       throw new Error(`rendering context not supported: ${renderer.context}`);
@@ -87,7 +89,6 @@ export class Object2D {
    * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
    * @returns {void}
    */
-  drawContext2D() {
-    throw new Error("drawContext2D must be implemented in the subclass");
-  }
+  // eslint-disable-next-line no-unused-vars
+  drawContext2D(ctx) {}
 }

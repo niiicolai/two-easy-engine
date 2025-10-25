@@ -45,17 +45,16 @@ export class RectGeometry extends Geometry {
       throw new Error("transform must be of type Transform");
     }
 
-    const { position, scale } = transform;
-    const { x, y } = position;
+    const { scale, position, rotation } = transform;
     const width = this.width * scale.x;
     const height = this.height * scale.y;
-    const halfWidth = width / 2;
-    const halfHeight = height / 2;
+    const pivotX = width / 2;
+    const pivotY = height / 2;
 
     ctx.save();
-    ctx.translate(x + halfWidth, y + halfHeight);
-    ctx.rotate(transform.rotation);
-    ctx.translate(-halfWidth, -halfHeight);
+    ctx.translate(position.x + pivotX, position.y + pivotY);
+    ctx.rotate(rotation);
+    ctx.translate(-pivotX, -pivotY);
 
     if (material.fillStyle) {
       ctx.fillRect(0, 0, width, height);
