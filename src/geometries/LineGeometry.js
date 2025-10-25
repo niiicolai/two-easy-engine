@@ -25,8 +25,10 @@ export class LineGeometry extends Geometry {
       throw new Error("points must contain at least one 4-number arrays");
     }
 
-    if (points.some((a) => a.length !== 4)) {
-      throw new Error("an array in points doesn't have a length of four");
+    if (points.some((a) => !Array.isArray(a) || a.length !== 4)) {
+      throw new Error(
+        "an array in points must be an array with a length of four numbers"
+      );
     }
 
     this.points = points;
@@ -50,13 +52,11 @@ export class LineGeometry extends Geometry {
       throw new Error("transform must be of type Transform");
     }
 
-    const { position, scale } = transform;
-    const { x, y } = position;
+    const { position, rotation, scale } = transform;
 
     ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(transform.rotation);
-
+    ctx.translate(position.x, position.y);
+    ctx.rotate(rotation);
     ctx.beginPath();
 
     this.points.forEach((point) => {

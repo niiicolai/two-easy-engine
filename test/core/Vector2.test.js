@@ -50,11 +50,23 @@ describe("Vector2", () => {
     expect(() => vec.set(10, null)).toThrow("x and y must be numbers");
   });
 
+  it("set() should return itself", () => {
+    const vec = new Vector2(1, 2);
+    const self = vec.set(2, 2);
+    expect(self).toBe(vec);
+  });
+
   it("translate(dx, dy) should correctly translate the vector", () => {
     const vec = new Vector2(10, 20);
     vec.translate(5, -10);
     expect(vec.x).toBe(15);
     expect(vec.y).toBe(10);
+  });
+
+  it("translate() should return itself", () => {
+    const vec = new Vector2(1, 2);
+    const self = vec.translate(2, 2);
+    expect(self).toBe(vec);
   });
 
   it("should throw an error if translate() is called with non-numeric values", () => {
@@ -73,6 +85,13 @@ describe("Vector2", () => {
     expect(vec1.y).toBe(35);
   });
 
+  it("add() should return itself", () => {
+    const vec = new Vector2(1, 2);
+    const vec2 = new Vector2(1, 2);
+    const self = vec.add(vec2);
+    expect(self).toBe(vec);
+  });
+
   it("should throw an error if add() is called with a non-Vector2", () => {
     const vec = new Vector2(10, 20);
     expect(() => vec.add({})).toThrow("v must be of type Vector2");
@@ -85,6 +104,13 @@ describe("Vector2", () => {
     vec1.subtract(vec2);
     expect(vec1.x).toBe(5);
     expect(vec1.y).toBe(5);
+  });
+
+  it("subtract() should return itself", () => {
+    const vec = new Vector2(1, 2);
+    const vec2 = new Vector2(1, 2);
+    const self = vec.subtract(vec2);
+    expect(self).toBe(vec);
   });
 
   it("should throw an error if subtract() is called with a non-Vector2", () => {
@@ -128,6 +154,12 @@ describe("Vector2", () => {
     expect(vec.y).toBe(8);
   });
 
+  it("multiplyScalar() should return itself", () => {
+    const vec = new Vector2(1, 2);
+    const self = vec.multiplyScalar(2);
+    expect(self).toBe(vec);
+  });
+
   it("should throw an error if multiplyScalar() is called with a non-numeric value", () => {
     const vec = new Vector2(3, 4);
     expect(() => vec.multiplyScalar("invalid")).toThrow(
@@ -141,6 +173,12 @@ describe("Vector2", () => {
     vec.divideScalar(2);
     expect(vec.x).toBe(3);
     expect(vec.y).toBe(4);
+  });
+
+  it("divideScalar() should return itself", () => {
+    const vec = new Vector2(1, 2);
+    const self = vec.divideScalar(2);
+    expect(self).toBe(vec);
   });
 
   it("should throw an error if divideScalar() is called with a non-numeric value", () => {
@@ -168,6 +206,11 @@ describe("Vector2", () => {
     expect(vec.length()).toBe(5);
   });
 
+  it("lengthSquared should return the vector's squared length", () => {
+    const vec = new Vector2(2, 3);
+    expect(vec.lengthSquared()).toBe(2 * 2 + 3 * 3);
+  });
+
   it("normalize() should convert the vector to a unit vector", () => {
     const vec = new Vector2(3, 4);
     vec.normalize();
@@ -176,10 +219,22 @@ describe("Vector2", () => {
     expect(vec.y).toBeCloseTo(0.8);
   });
 
+  it("normalize() should return itself", () => {
+    const vec = new Vector2(1, 2);
+    const self = vec.normalize();
+    expect(self).toBe(vec);
+  });
+
   it("should throw an error when normalizing a zero-length vector", () => {
     const vec = new Vector2(0, 0);
     expect(() => vec.normalize()).toThrow(
       "Cannot normalize zero-length vector"
     );
+  });
+
+  it("isEqual should return true if the values of two different vectors are equal", () => {
+    const vec = new Vector2(-3, 4);
+    const vec2 = new Vector2(-3, 4);
+    expect(vec.isEqual(vec2)).toBeTruthy();
   });
 });

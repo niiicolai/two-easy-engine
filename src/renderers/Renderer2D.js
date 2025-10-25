@@ -1,5 +1,9 @@
 import { Renderer } from "./Renderer.js";
 import { Color } from "../colors/Color.js";
+// eslint-disable-next-line no-unused-vars
+import { Camera2D } from "../cameras/Camera2D.js";
+// eslint-disable-next-line no-unused-vars
+import { Scene } from "../scenes/Scene.js";
 
 /**
  * @class Renderer2D
@@ -41,6 +45,7 @@ export class Renderer2D extends Renderer {
   /**
    * @function initContext
    * @description Init the rendering context
+   * @returns {void}
    */
   initContext() {
     this.ctx = this.canvas.getContext("2d");

@@ -204,4 +204,18 @@ export class Vector2 {
 
     return this;
   }
+
+  /**
+   * @function isEqual
+   * @description Check if the values of this vector is equal to another
+   * @returns {Vector2} The other vector
+   * @returns {boolean} 
+   */
+  isEqual(v) {
+    if (!(v instanceof Vector2)) {
+      throw new Error("v must be of type Vector2");
+    }
+    
+    return this.x === v.x && this.y === v.y;
+  }
 }

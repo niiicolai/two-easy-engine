@@ -29,14 +29,18 @@ describe("Mesh", () => {
     );
   });
 
-  it("should call geometry.drawContext2D when calling drawContext2D()", () => {
+  it("should call geometry.drawContext2D and material.applyToContext2D when calling drawContext2D()", () => {
     const geometry = new RectGeometry(100, 100);
     const material = new BasicMaterial({ fillStyle: new RgbaColor(1, 1, 1, 1) });
     const mesh = new Mesh(geometry, material);
     const canvas = createCanvas(800, 600);
     const ctx = canvas.getContext("2d");
     geometry.drawContext2D = vi.fn();
+    material.applyToContext2D = vi.fn();
+
     mesh.drawContext2D(ctx);
+
+    expect(material.applyToContext2D).toHaveBeenCalledWith(ctx);
     expect(geometry.drawContext2D).toHaveBeenCalledWith(ctx, mesh.transform, material);
   });
 });

@@ -17,7 +17,7 @@ export class Transform {
   constructor(
     position = new Vector2(),
     rotation = 0,
-    scale = new Vector2(1, 1)
+    scale = new Vector2(1, 1),
   ) {
     if (!(position instanceof Vector2)) {
       throw new Error("position must be of type Vector2");

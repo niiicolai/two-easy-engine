@@ -81,7 +81,7 @@ export default {
           {
             text: "Custom Line Shape",
             link: "/examples/custom_line_shape",
-          }
+          },
         ],
       },
       {

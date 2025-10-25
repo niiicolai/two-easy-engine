@@ -4,7 +4,7 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
-    files: ["src/**/*.js"], // lint all JS files in src recursively
+    files: ["src/**/*.js"],
     languageOptions: {
       globals: globals.browser,
     },

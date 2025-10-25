@@ -4,17 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      body,
-      html {
+      html,
+      body {
         margin: 0;
         padding: 0;
         overflow: hidden;
         width: 100%;
         height: 100%;
+        background: black;
       }
       #canvas {
         width: 100%;
         height: 100vh;
+        display: block;
       }
     </style>
   </head>
@@ -34,69 +36,82 @@
         backgroundColor: "black",
       });
 
-      const width = 50;
-      const strokeStyle = new Two.HslaColor(360, 100, 50, 1);
-      const mesh = new Two.Mesh(
-        new Two.LineGeometry([
-          [100, 10, 0, 10],
-          [95, 10, 95, -25],
-          [95, -25, 80, -25],
-          [80, -25, 80, 10],
-          [80, -15, 85, -15],
-          [85, -15, 85, -20],
-          [85, -20, 80, -20],
-          [75, 10, 75, -60],
-          [75, -60, 60, -60],
-          [60, -60, 60, 10],
-          [68, -60, 68, -65],
-          [68, -65, 67, -65],
-          [67, -65, 67, -60],
-          [55, 10, 55, -40],
-          [55, -40, 50, -50],
-          [50, -50, 45, -40],
-          [45, -40, 45, 10],
-          [40, 10, 40, -30],
-          [40, -30, 35, -30],
-          [35, -30, 35, -45],
-          [35, -45, 25, -45],
-          [25, -45, 25, -30],
-          [25, -30, 20, -30],
-          [20, -30, 20, 10],
-          [15, 10, 15, -35],
-          [15, -35, 5, -35],
-          [5, -35, 5, 10],
-          [12, -35, 12, -42],
-          [8, -35, 8, -42],
-          [12, -42, 8, -42],
-          [11, -42, 9, -42],
-          [10, -42, 10, -45],
-        ]),
-        new Two.BasicMaterial({
-          strokeStyle,
-          lineWidth: 2,
-        })
-      );
-      mesh.transform.position.set(
-        window.innerWidth / 2 - width,
+      const center = new Two.Vector2(
+        window.innerWidth / 2,
         window.innerHeight / 2
       );
-      scene.add(mesh);
+      
+      const fadeSpeed = 0.8;
+      const minSpeed = 250;
+      const maxSpeed = 550;
+      const maxLife = 1;
 
+      const numParticles = 80;
+      const particles = [];
+
+      // Create explosion particles
+      for (let i = 0; i < numParticles; i++) {
+        const hue = (i / numParticles) * 360;
+        const fillStyle = new Two.HslaColor(hue, 100, 60, 1);
+        const material = new Two.BasicMaterial({ fillStyle });
+        const geom = new Two.CircleGeometry(3 + Math.random() * 2);
+        const mesh = new Two.Mesh(geom, material);
+        mesh.transform.position.set(center.x, center.y);
+
+        const angle = Math.random() * Math.PI * 2;
+        const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
+        mesh.setUserData({
+          velocity: new Two.Vector2(
+            Math.cos(angle) * speed,
+            Math.sin(angle) * speed
+          ),
+          life: maxLife,
+        });
+
+        scene.add(mesh);
+        particles.push(mesh);
+      }
+
+      // Resize handling
       window.onresize = () => {
-        mesh.transform.position.x = window.innerWidth / 2 - width;
         render.setSize(window.innerWidth, window.innerHeight);
+        center.set(window.innerWidth / 2, window.innerHeight / 2);
       };
 
       render.requestAnimationFrame({
         beforeRender: () => {
-          const speed = 1.5;
-          const dist = 15;
-          const time = clock.getElapsedTime();
-          const hue = (time * 60 * speed) % 360;
+          const delta = clock.getDeltaTime();
 
-          mesh.transform.position.y =
-            Math.sin(time * speed) * dist + window.innerHeight / 2;
-          strokeStyle.setHue(hue);
+          particles.forEach((p) => {
+            // Move outward
+            p.transform.position.translate(
+              p.userData.velocity.x * delta,
+              p.userData.velocity.y * delta
+            );
+
+            // Apply slight slowdown (friction)
+            p.userData.velocity.multiplyScalar(0.97);
+
+            // Fade out gradually
+            p.userData.life -= delta * fadeSpeed;
+            const alpha = Math.max(0, p.userData.life);
+            p.material.fillStyle.setAlpha(alpha);
+
+            // Scale down a bit as it fades
+            p.transform.scale.set(alpha, alpha);
+
+            // Reset explosion when all faded out
+            if (p.userData.life <= 0) {
+              p.transform.position.set(center.x, center.y);
+              const angle = Math.random() * Math.PI * 2;
+              const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
+              p.userData.velocity.set(
+                Math.cos(angle) * speed,
+                Math.sin(angle) * speed
+              );
+              p.userData.life = maxLife;
+            }
+          });
         },
       });
     </script>

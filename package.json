@@ -1,6 +1,6 @@
 {
   "name": "two-easy-engine",
-  "version": "0.0.9",
+  "version": "0.0.91",
   "description": "A simple 2D library.",
   "files": [
     "dist"

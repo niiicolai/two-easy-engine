@@ -15,7 +15,8 @@ export class Material {
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @returns {void}
    */
-  applyToContext2D() {
+  // eslint-disable-next-line no-unused-vars
+  applyToContext2D(ctx) {
     throw new Error("applyToContext2D() must be implemented in the subclass");
   }
 }
