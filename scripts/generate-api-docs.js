@@ -1,4 +1,3 @@
-// scripts/generate-api-docs.js
 import { readdirSync, mkdirSync, writeFileSync, statSync } from "fs";
 import { join, basename, extname } from "path";
 import jsdoc2md from "jsdoc-to-markdown";
