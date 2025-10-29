@@ -1,20 +1,26 @@
 {
   "name": "two-easy-engine",
-  "version": "0.0.91",
+  "version": "0.0.93",
   "description": "A simple 2D library.",
   "files": [
     "dist"
   ],
-  "main": "dist/two-easy-engine.umd.js",
-  "module": "dist/two-easy-engine.js",
+  "main": "dist/index.umd.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vite build --config vite.lib.config.js && tsc && rollup -c rollup.dts.config.js && rm -rf dist/src && cp -r dist/two-easy-engine.js docs/public/demos/two-easy-engine.js",
+    "build": "vite build --config vite.lib.config.js && tsc && rollup -c rollup.dts.config.js && node ./scripts/copy-dist.js",
     "test": "vitest",
     "lint": "eslint src/**/*.js",
-    "docs:gen": "sh ./scripts/generate-api-docs.sh",
+    "docs:gen": "node ./scripts/generate-api-docs.js",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",

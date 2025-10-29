@@ -23,3 +23,13 @@ const scene = new Two.Scene();
 
 // ...
 ```
+
+Using CommonJS:
+```js
+const Two = require("two-easy-engine");
+
+const camera = new Two.Camera2D();
+const scene = new Two.Scene();
+
+// ...
+```

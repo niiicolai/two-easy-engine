@@ -5,7 +5,7 @@ export default defineConfig({
     lib: {
       entry: "index.js",
       name: "TwoEasyEngine",
-      fileName: "two-easy-engine",
+      fileName: "index",
       formats: ["es", "umd"],
     },
     outDir: "dist",
