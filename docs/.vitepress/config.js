@@ -20,9 +20,7 @@ export default {
   description: "2D library for the HTML5 Canvas",
 
   themeConfig: {
-    nav: [
-      { text: "Home", link: "/" },
-    ],
+    nav: [{ text: "Home", link: "/" }],
     sidebar: [
       {
         text: "Get Started",
@@ -33,60 +31,70 @@ export default {
         ],
       },
       {
-        text: "Examples",
+        text: "Animations",
+        collapsed: true,
         items: [
-          { text: "Rotation Animation", link: "/examples/rotation_animation" },
-          { text: "Pulse Animation", link: "/examples/pulse_animation" },
-          { text: "Fade Animation", link: "/examples/fade_animation" },
+          { text: "Rotation", link: "/examples/rotation_animation" },
+          { text: "Pulse", link: "/examples/pulse_animation" },
+          { text: "Fade", link: "/examples/fade_animation" },
           {
-            text: "Random Color Animation",
+            text: "Random Color",
             link: "/examples/random_color_animation",
           },
           {
-            text: "Orbit Particles Animation",
+            text: "Orbit Particles",
             link: "/examples/orbit_particles_animation",
           },
           {
-            text: "Matrix-style Animation",
+            text: "Matrix-style",
             link: "/examples/matrix_style_animation",
           },
           {
-            text: "Particle Explosion Animation",
+            text: "Particle Explosion",
             link: "/examples/particle_explosion_animation",
           },
           {
-            text: "Equalizer-style Animation",
+            text: "Equalizer-style",
             link: "/examples/equalizer_style_animation",
           },
           {
-            text: "Light Follows Mouse",
+            text: "Light Follow",
             link: "/examples/light_follows_mouse",
           },
+        ],
+      },
+      {
+        text: "Materials & Geometry",
+        items: [
+          { text: "Image Material", link: "/examples/image_material" },
+          { text: "Text Geometry", link: "/examples/text_geometry" },
+          { text: "Custom Line", link: "/examples/custom_line_shape" },
+        ],
+      },
+      {
+        text: "Advanced Topics",
+        items: [
           {
             text: "Camera Pan and Zoom",
             link: "/examples/camera_pan_zoom",
           },
           {
-            text: "Image Material",
-            link: "/examples/image_material",
-          },
-          {
-            text: "Text Geometry",
-            link: "/examples/text_geometry",
-          },
-          {
             text: "Offscreen Canvas",
             link: "/examples/offscreen_canvas",
-          },
-          {
-            text: "Custom Line Shape",
-            link: "/examples/custom_line_shape",
           },
         ],
       },
       {
+        text: "Model Context Protocol",
+        items: [
+          { text: "Integration", link: "/mcp/mcp_integration" },
+          { text: "Add to MCP Server", link: "/mcp/mcp_add_server" },
+          { text: "Example Project", link: "/mcp/mcp_example" },
+        ],
+      },
+      {
         text: "API Reference",
-        collapsed: false,
+        collapsed: true,
         items: getApiSidebar(),
       },
       {
