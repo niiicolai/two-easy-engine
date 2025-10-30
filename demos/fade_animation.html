@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      html, body {
+      html,
+      body {
         margin: 0;
         padding: 0;
         overflow: hidden;
@@ -41,22 +42,28 @@
       const material = new Two.BasicMaterial({ fillStyle });
       const geometry = new Two.CircleGeometry(80);
       const circle = new Two.Mesh(geometry, material);
-      circle.transform.position.set(window.innerWidth / 2, window.innerHeight / 2);
+      circle.transform.position.set(
+        window.innerWidth / 2,
+        window.innerHeight / 2
+      );
       scene.add(circle);
 
       // Resize handler
       window.addEventListener("resize", () => {
         render.setSize(window.innerWidth, window.innerHeight);
-        circle.transform.position.set(window.innerWidth / 2, window.innerHeight / 2);
+        circle.transform.position.set(
+          window.innerWidth / 2,
+          window.innerHeight / 2
+        );
       });
 
-      // Animation: simple alpha fade
+      const speed = 1.5; // how fast it fades
+
       render.requestAnimationFrame({
         beforeRender: () => {
-          const speed = 1.5;
           const time = clock.getElapsedTime();
           const alpha = (Math.sin(time * speed) + 1) / 2;
-          
+
           fillStyle.setAlpha(alpha);
         },
       });
