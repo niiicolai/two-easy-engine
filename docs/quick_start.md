@@ -63,10 +63,10 @@ const render = new Two.Renderer2D(canvas, scene, camera, {
 
 Explanation:
 
-- `Clock` tracks time elapsed and frame delta time.
-- `Camera2D` controls what part of the scene is visible.
-- `Scene` holds all your objects (meshes).
-- `Renderer2D` draws the scene onto the canvas.
+- [`Clock`](/api/Clock.html) tracks time elapsed and frame delta time.
+- [`Camera2D`](/api/Camera2D.html) controls what part of the scene is visible.
+- [`Scene`](/api/Scene.html) holds all your objects (meshes).
+- [`Renderer2D`](/api/Renderer2D.html) draws the scene onto the canvas.
 
 ## 3. Add a rectangle mesh
 
@@ -93,8 +93,8 @@ scene.add(mesh);
 
 Notes:
 
-- `RectGeometry` defines the shape.
-- `BasicMaterial` defines the fill and stroke style.
+- [`RectGeometry`](/api/RectGeometry.html) defines the shape.
+- [`BasicMaterial`](/api/BasicMaterial.html) defines the fill and stroke style.
 - `mesh.transform.position` sets the mesh in the center.
 
 ## 4. Handle window resizing

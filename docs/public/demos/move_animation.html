@@ -4,17 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      body,
-      html {
+      html,
+      body {
         margin: 0;
         padding: 0;
-        overflow: hidden;
         width: 100%;
         height: 100%;
+        overflow: hidden;
+        background-color: black;
       }
       #canvas {
         width: 100%;
         height: 100vh;
+        display: block;
       }
     </style>
   </head>
@@ -24,7 +26,7 @@
       import * as Two from "/two-easy-engine/demos/two-easy-engine.js";
 
       const canvas = document.getElementById("canvas");
-      const clock = new Two.Clock(); // create a clock object
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const render = new Two.Renderer2D(canvas, scene, camera, {
@@ -34,34 +36,34 @@
         backgroundColor: "black",
       });
 
-      const fillStyle = new Two.RgbaColor(0, 255, 0, 1);
-      const material = new Two.BasicMaterial({ fillStyle });
-      const geometry = new Two.CircleGeometry(55);
+      const material = new Two.BasicMaterial({
+        fillStyle: new Two.RgbaColor(0, 150, 255, 1),
+        strokeStyle: new Two.RgbaColor(0, 100, 200, 1),
+        lineWidth: 2,
+      });
+      const geometry = new Two.CircleGeometry(40);
       const mesh = new Two.Mesh(geometry, material);
+      scene.add(mesh);
+
       mesh.transform.position.set(
         window.innerWidth / 2,
         window.innerHeight / 2
       );
-      scene.add(mesh);
 
-      window.onresize = () => {
+      window.addEventListener("resize", () => {
         render.setSize(window.innerWidth, window.innerHeight);
-        mesh.transform.position.set(
-          window.innerWidth / 2,
-          window.innerHeight / 2
-        );
-      };
+      });
 
-      const amplitude = 0.3; // how much it grows or shrinks
-      const baseScale = 1; // original scale
-      const speed = 3; // control animation speed
+      const amplitude = 150; // how far it moves from the center
+      const speed = 1.5; // how fast it moves
 
       render.requestAnimationFrame({
         beforeRender: () => {
+          const centerX = window.innerWidth / 2;
           const time = clock.getElapsedTime(); // total time since start
-          const pulse = baseScale + Math.sin(time * speed) * amplitude;
 
-          mesh.transform.scale.set(pulse, pulse);
+          mesh.transform.position.x =
+            centerX + Math.sin(time * speed) * amplitude;
         },
       });
     </script>

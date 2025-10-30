@@ -36,6 +36,7 @@ export default {
         items: [
           { text: "Rotation", link: "/examples/rotation_animation" },
           { text: "Pulse", link: "/examples/pulse_animation" },
+          { text: "Move", link: "/examples/move_animation" },
           { text: "Fade", link: "/examples/fade_animation" },
           {
             text: "Random Color",
