@@ -117,4 +117,30 @@ describe("Renderer2D", () => {
       "backgroundColor must be of type Color or string"
     );
   });
+
+  it("getCenterX() should return half canvas width and update on setSize()", () => {
+    const canvas = createCanvas(800, 600);
+    const scene = new Scene();
+    const camera = new Camera2D();
+    const render = new Renderer2D(canvas, scene, camera);
+
+    expect(render.getCenterX()).toBe(400);
+
+    render.setSize(400, 300);
+
+    expect(render.getCenterX()).toBe(200);
+  });
+
+  it("getCenterY() should return half canvas width and update on setSize()", () => {
+    const canvas = createCanvas(800, 600);
+    const scene = new Scene();
+    const camera = new Camera2D();
+    const render = new Renderer2D(canvas, scene, camera);
+
+    expect(render.getCenterY()).toBe(300);
+
+    render.setSize(400, 300);
+
+    expect(render.getCenterY()).toBe(150);
+  });
 });
