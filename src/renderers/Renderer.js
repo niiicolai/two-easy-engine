@@ -1,6 +1,5 @@
 import { Camera2D } from "../cameras/Camera2D.js";
 import { Color } from "../colors/Color.js";
-import { Vector2 } from "../core/Vector2.js";
 import { Scene } from "../scenes/Scene.js";
 
 /**
