@@ -7,6 +7,8 @@
 **TwoEasyEngine** is a lightweight 2D rendering library built on HTML5 Canvas.
 It provides a clean, object-oriented API for creating interactive scenes, managing meshes, controlling cameras, and animating objects, with minimal setup.
 
+It can be used both in the browser for interactive graphics and in MCP server projects to generate canvas drawings server-side, making it versatile for client-side visuals and AI-driven server workflows alike.
+
 ### Features
 
 - **Meshes with geometry and materials**: Easily create shapes like Rectangles and Circles.

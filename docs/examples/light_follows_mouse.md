@@ -1,4 +1,4 @@
-# Light Follows Mouse
+# Light Follow
 *The following example is designed for laptops and desktop computers only.*
 
 ## Preview
