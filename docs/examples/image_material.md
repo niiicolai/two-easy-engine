@@ -40,12 +40,15 @@
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
         backgroundColor: "black",
       });
+
+      const centerX = renderer.getCenterX();
+      const centerY = renderer.getCenterY();
 
       const rectOffset = new Two.Vector2(-150, -50);
       const logoOffset = new Two.Vector2(50, 50);
@@ -86,8 +89,8 @@
       const rectGeom = new Two.RectGeometry(100, 100);
       const rectMesh = new Two.Mesh(rectGeom, imageRectMaterial);
       rectMesh.transform.position.set(
-        window.innerWidth / 2 + rectOffset.x,
-        window.innerHeight / 2 + rectOffset.y
+        centerX + rectOffset.x,
+        centerY + rectOffset.y
       );
       scene.add(rectMesh);
 
@@ -106,20 +109,23 @@
       const circleGeom = new Two.CircleGeometry(50);
       const circleMesh = new Two.Mesh(circleGeom, imageCircleMaterial);
       circleMesh.transform.position.set(
-        window.innerWidth / 2 + circleOffset.x,
-        window.innerHeight / 2 + circleOffset.y
+        centerX + circleOffset.x,
+        centerY + circleOffset.y
       );
       scene.add(circleMesh);
 
       window.onresize = () => {
-        render.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
       };
 
-      render.requestAnimationFrame({
+      const movementSpeed = 0.5;
+      const rotationSpeed = 1.5;
+      const radius = 50;
+
+      renderer.requestAnimationFrame({
         beforeRender: () => {
-          const movementSpeed = 0.5;
-          const rotationSpeed = 1.5;
-          const radius = 50;
+          const centerX = renderer.getCenterX();
+          const centerY = renderer.getCenterY();
           const time = clock.getElapsedTime() * movementSpeed;
           const delta = clock.getDeltaTime() * rotationSpeed;
 
@@ -129,12 +135,12 @@
           circleMesh.transform.rotation += delta;
 
           rectMesh.transform.position.set(
-            Math.sin(time) * radius + window.innerWidth / 2 + rectOffset.x,
-            Math.cos(time) * radius + window.innerHeight / 2 + rectOffset.y
+            Math.sin(time) * radius + centerX + rectOffset.x,
+            Math.cos(time) * radius + centerY + rectOffset.y
           );
           circleMesh.transform.position.set(
-            Math.sin(time) * radius + window.innerWidth / 2 + circleOffset.x,
-            Math.cos(time) * radius + window.innerHeight / 2 + circleOffset.y
+            Math.sin(time) * radius + centerX + circleOffset.x,
+            Math.cos(time) * radius + centerY + circleOffset.y
           );
         },
       });

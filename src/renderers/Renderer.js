@@ -65,6 +65,7 @@ export class Renderer {
     this.scene = scene;
     this.camera = camera;
     this.options = options;
+    this.cache = { halfWidth: width / 2, halfHeight: height / 2 };
     this.animationFrameId = null;
     this.initContext();
   }
@@ -85,10 +86,6 @@ export class Renderer {
     }
 
     this.options.backgroundColor = backgroundColor;
-
-    if (this.worker) {
-      this.worker.postMessage({ cmd: "update_options", options: this.options });
-    }
   }
 
   /**
@@ -105,6 +102,8 @@ export class Renderer {
     }
     this.options.width = width;
     this.options.height = height;
+    this.cache.halfWidth = width / 2;
+    this.cache.halfHeight = height / 2;
 
     this.recalculateDevicePixelRatio();
   }
@@ -123,6 +122,24 @@ export class Renderer {
     this.options.devicePixelRatio = dpr;
 
     this.recalculateDevicePixelRatio();
+  }
+
+  /**
+   * @function getCenterX
+   * @description Returns a numerical value specifying the center x value
+   * @returns {number}
+   */
+  getCenterX() {
+    return this.cache.halfWidth;
+  }
+
+  /**
+   * @function getCenterY
+   * @description Returns a numerical value specifying the center y value
+   * @returns {number}
+   */
+  getCenterY() {
+    return this.cache.halfHeight;
   }
 
   /**

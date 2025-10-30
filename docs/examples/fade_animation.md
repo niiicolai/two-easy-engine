@@ -26,7 +26,7 @@ To make an object smoothly fade in and out, we can animate its alpha value using
 ```js
 const speed = 1.5; // how fast it fades
 
-render.requestAnimationFrame({
+renderer.requestAnimationFrame({
   beforeRender: () => {
     const time = clock.getElapsedTime();
     const alpha = (Math.sin(time * speed) + 1) / 2;
@@ -72,7 +72,7 @@ Below is the complete example demonstrating the fade effect.
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
@@ -84,24 +84,18 @@ Below is the complete example demonstrating the fade effect.
       const material = new Two.BasicMaterial({ fillStyle });
       const geometry = new Two.CircleGeometry(80);
       const circle = new Two.Mesh(geometry, material);
-      circle.transform.position.set(
-        window.innerWidth / 2,
-        window.innerHeight / 2
-      );
+      circle.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
       scene.add(circle);
 
       // Resize handler
       window.addEventListener("resize", () => {
-        render.setSize(window.innerWidth, window.innerHeight);
-        circle.transform.position.set(
-          window.innerWidth / 2,
-          window.innerHeight / 2
-        );
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        circle.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
       });
 
       const speed = 1.5; // how fast it fades
 
-      render.requestAnimationFrame({
+      renderer.requestAnimationFrame({
         beforeRender: () => {
           const time = clock.getElapsedTime();
           const alpha = (Math.sin(time * speed) + 1) / 2;

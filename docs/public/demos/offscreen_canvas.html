@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,13 +26,23 @@
       const canvas = document.getElementById("canvas");
       const offscreen = canvas.transferControlToOffscreen();
 
-      const worker = new Worker("/two-easy-engine/demos/offscreen_canvas_worker.js", { type: "module" });
+      const worker = new Worker(
+        "/two-easy-engine/demos/offscreen_canvas_worker.js",
+        { type: "module" }
+      );
 
       const options = {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
         backgroundColor: "black",
+      };
+
+      window.onresize = () => {
+        worker.postMessage({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
       };
 
       worker.postMessage({ canvas: offscreen, options }, [offscreen]);

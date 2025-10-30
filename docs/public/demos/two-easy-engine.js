@@ -271,7 +271,7 @@ class A {
     const { width: s, height: a, devicePixelRatio: u, backgroundColor: w } = o;
     if (typeof t != "string")
       throw new Error("context must be a string");
-    if (!(r instanceof M))
+    if (!(r instanceof W))
       throw new Error("scene must be of type Scene");
     if (!(i instanceof v))
       throw new Error("camera must be of type Camera2D");
@@ -281,7 +281,7 @@ class A {
       throw new Error("devicePixelRatio must be a number");
     if (typeof w != "string" && !(w instanceof m))
       throw new Error("backgroundColor must be of type Color or string");
-    this.context = t, this.canvas = e, this.scene = r, this.camera = i, this.options = o, this.animationFrameId = null, this.initContext();
+    this.context = t, this.canvas = e, this.scene = r, this.camera = i, this.options = o, this.cache = { halfWidth: s / 2, halfHeight: a / 2 }, this.animationFrameId = null, this.initContext();
   }
   /**
    * @function setBackgroundColor
@@ -293,7 +293,7 @@ class A {
   setBackgroundColor(t) {
     if (typeof t != "string" && !(t instanceof m))
       throw new Error("backgroundColor must be of type Color or string");
-    this.options.backgroundColor = t, this.worker && this.worker.postMessage({ cmd: "update_options", options: this.options });
+    this.options.backgroundColor = t;
   }
   /**
    * @function setSize
@@ -306,7 +306,7 @@ class A {
   setSize(t, e) {
     if (typeof t != "number" || typeof e != "number")
       throw new Error("width and height must be numbers");
-    this.options.width = t, this.options.height = e, this.recalculateDevicePixelRatio();
+    this.options.width = t, this.options.height = e, this.cache.halfWidth = t / 2, this.cache.halfHeight = e / 2, this.recalculateDevicePixelRatio();
   }
   /**
    * @function setDevicePixelRatio
@@ -319,6 +319,22 @@ class A {
     if (typeof t != "number")
       throw new Error("dpr must be a number");
     this.options.devicePixelRatio = t, this.recalculateDevicePixelRatio();
+  }
+  /**
+   * @function getCenterX
+   * @description Returns a numerical value specifying the center x value
+   * @returns {number}
+   */
+  getCenterX() {
+    return this.cache.halfWidth;
+  }
+  /**
+   * @function getCenterY
+   * @description Returns a numerical value specifying the center y value
+   * @returns {number}
+   */
+  getCenterY() {
+    return this.cache.halfHeight;
   }
   /**
    * @function initContext
@@ -448,7 +464,7 @@ class p {
   drawContext2D(t) {
   }
 }
-class M {
+class W {
   constructor() {
     this.children = [];
   }
@@ -486,7 +502,7 @@ class M {
     this.children.sort((t, e) => t.zIndex - e.zIndex);
   }
 }
-class W extends A {
+class H extends A {
   /**
    * @constructor
    * @param {HTMLCanvasElement} canvas - The canvas element
@@ -545,7 +561,7 @@ class W extends A {
   }
 }
 const d = ["repeat", "repeat-x", "repeat-y", "no-repeat"];
-class z {
+class M {
   /**
    * @constructor
    * @param {Object} [options] - Texture2D configuration options.
@@ -665,7 +681,7 @@ class z {
     } else t instanceof HTMLImageElement && (this.image = t);
   }
 }
-class H {
+class z {
   /**
    * @constructor
    */
@@ -750,7 +766,7 @@ class O extends c {
       throw new Error("strokeStyle must be a Color or null");
     if (i !== null && (typeof i != "number" || i <= 0))
       throw new Error("lineWidth must be a positive number or null");
-    if (o !== null && !(o instanceof z))
+    if (o !== null && !(o instanceof M))
       throw new Error("texture2D must be of type Texture2D or null");
     this.fillStyle = e, this.strokeStyle = r, this.lineWidth = i, this.texture2D = o;
   }
@@ -1096,7 +1112,7 @@ class T extends m {
     return `rgb(${this.r}, ${this.g}, ${this.b})`;
   }
 }
-class G extends p {
+class Y extends p {
   /**
    * @constructor
    * @param {number} radius - The radius of the light
@@ -1133,7 +1149,7 @@ class G extends p {
     u.addColorStop(0, r.toString()), u.addColorStop(1, i.toString()), t.save(), t.globalAlpha = o, t.fillStyle = u, t.fillRect(s - e, a - e, e * 2, e * 2), t.restore();
   }
 }
-class Y extends m {
+class G extends m {
   /**
    * @constructor
    * @param {number} h - hue (0-360)
@@ -1245,22 +1261,22 @@ export {
   O as BasicMaterial,
   v as Camera2D,
   F as CircleGeometry,
-  H as Clock,
+  z as Clock,
   m as Color,
   b as Geometry,
-  Y as HslaColor,
+  G as HslaColor,
   j as LineGeometry,
   c as Material,
   L as Mesh,
   p as Object2D,
-  G as PointLight2D,
+  Y as PointLight2D,
   B as RectGeometry,
   A as Renderer,
-  W as Renderer2D,
+  H as Renderer2D,
   T as RgbaColor,
-  M as Scene,
+  W as Scene,
   U as TextGeometry,
-  z as Texture2D,
+  M as Texture2D,
   f as Transform,
   l as Vector2
 };

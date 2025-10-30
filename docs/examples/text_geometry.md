@@ -42,7 +42,7 @@
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
@@ -67,38 +67,34 @@
       const fillStyle = new Two.Color("white");
       const material = new Two.BasicMaterial({ fillStyle, texture2D });
       const mesh = new Two.Mesh(geometry, material);
-      mesh.transform.position.set(
-        window.innerWidth / 2,
-        window.innerHeight / 2
-      );
+      mesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
       scene.add(mesh);
 
       // Update text on btn click
       btn.onclick = () => {
         geometry.text = input.value;
-      }
+      };
 
       // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
-        mesh.transform.position.set(
-          window.innerWidth / 2,
-          window.innerHeight / 2
-        );
-        render.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        mesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
       };
 
       const speed = 1.5;
       const radius = 50;
 
       // Animation loop
-      render.requestAnimationFrame({
+      renderer.requestAnimationFrame({
         beforeRender: () => {
+          const centerX = renderer.getCenterX();
+          const centerY = renderer.getCenterY();
           const delta = clock.getDeltaTime();
           const time = clock.getElapsedTime();
 
           mesh.transform.position.set(
-            Math.sin(time * speed) * radius + window.innerWidth / 2,
-            Math.cos(time * speed) * radius + window.innerHeight / 2
+            Math.sin(time * speed) * radius + centerX,
+            Math.cos(time * speed) * radius + centerY
           );
           mesh.transform.rotation += delta * speed;
         },

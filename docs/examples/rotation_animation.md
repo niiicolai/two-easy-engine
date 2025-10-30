@@ -31,7 +31,7 @@ const speed = 1.5; // radians per second
 
 /// ...
 
-render.requestAnimationFrame({
+renderer.requestAnimationFrame({
   beforeRender: () => {
     // delta must be called inside the animation loop
     const delta = clock.getDeltaTime(); 
@@ -75,17 +75,21 @@ If we look closely, we can identify several core concepts we learned above:
     <script type="module">
       import * as Two from "two-easy-engine";
 
+      // Get the canvas element
       const canvas = document.getElementById("canvas");
-      const clock = new Two.Clock(); // create the clock object
+
+      // Create a clock, camera, scene, and renderer
+      const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
         backgroundColor: "black",
       });
 
+      // Create a rectangle mesh
       const mesh = new Two.Mesh(
         new Two.RectGeometry(50, 50),
         new Two.BasicMaterial({
@@ -95,27 +99,30 @@ If we look closely, we can identify several core concepts we learned above:
         })
       );
       mesh.transform.position.set(
-        window.innerWidth / 2 - mesh.geometry.width / 2,
-        window.innerHeight / 2 - mesh.geometry.height / 2
+        renderer.getCenterX() - mesh.geometry.width / 2,
+        renderer.getCenterY() - mesh.geometry.height / 2
       );
       scene.add(mesh);
 
+      // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
+        // Resize the canvas
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // Set the new center position
         mesh.transform.position.set(
-          window.innerWidth / 2 - mesh.geometry.width / 2,
-          window.innerHeight / 2 - mesh.geometry.height / 2
+          renderer.getCenterX() - mesh.geometry.width / 2,
+          renderer.getCenterY() - mesh.geometry.height / 2
         );
-        render.setSize(window.innerWidth, window.innerHeight);
       };
 
-      const speed = 1.5; // radians per second
+      const speed = 1.5;
 
-      render.requestAnimationFrame({
+      // Animation loop
+      renderer.requestAnimationFrame({
         beforeRender: () => {
-          // delta must be called inside the animation loop
-          const delta = clock.getDeltaTime(); 
+          const delta = clock.getDeltaTime();
 
-          mesh.transform.rotation += delta * speed;
+          mesh.transform.rotation += delta * speed; // Rotate the rectangle
         },
       });
     </script>

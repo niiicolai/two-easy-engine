@@ -41,7 +41,7 @@
     const canvas = document.getElementById("canvas");
     const camera = new Two.Camera2D();
     const scene = new Two.Scene();
-    const render = new Two.Renderer2D(canvas, scene, camera, {
+    const renderer = new Two.Renderer2D(canvas, scene, camera, {
       width: window.innerWidth,
       height: window.innerHeight,
       devicePixelRatio: window.devicePixelRatio || 1,
@@ -147,11 +147,11 @@
 
     // Resize
     window.addEventListener("resize", () => {
-      render.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
     // Start render loop
-    render.requestAnimationFrame();
+    renderer.requestAnimationFrame();
   </script>
 </body>
 </html>

@@ -30,7 +30,7 @@ Animating a [`HslaColor`](/api/HslaColor.html) is as simple as changing its hue 
 const baseSpeed = 60; // Degrees pr. second
 const multiplier = 3; // Speed multiplier
 
-render.requestAnimationFrame({
+renderer.requestAnimationFrame({
   beforeRender: () => {
     const time = clock.getElapsedTime();
     const hue = (time * baseSpeed * multiplier) % 360; // Wrap hue within 0-360°
@@ -69,40 +69,45 @@ The example below demonstrates a complete solution for adding a random color ani
     <script type="module">
       import * as Two from "two-easy-engine";
 
+      // Get the canvas element
       const canvas = document.getElementById("canvas");
+
+      // Create a clock, camera, scene, and renderer
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const backgroundColor = new Two.HslaColor(360, 100, 50, 1);
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
         backgroundColor,
       });
 
+      // Create a rectangle mesh
       const geometry = new Two.RectGeometry(150, 150);
       const fillStyle = new Two.RgbaColor(0, 0, 0, 1);
       const material = new Two.BasicMaterial({ fillStyle });
       const mesh = new Two.Mesh(geometry, material);
       mesh.transform.position.set(
-        window.innerWidth / 2 - mesh.geometry.width / 2,
-        window.innerHeight / 2 - mesh.geometry.height / 2
+        renderer.getCenterX() - mesh.geometry.width / 2,
+        renderer.getCenterY() - mesh.geometry.height / 2
       );
       scene.add(mesh);
 
+      // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
         mesh.transform.position.set(
-          window.innerWidth / 2 - mesh.geometry.width / 2,
-          window.innerHeight / 2 - mesh.geometry.height / 2
+          renderer.getCenterX() - mesh.geometry.width / 2,
+          renderer.getCenterY() - mesh.geometry.height / 2
         );
-        render.setSize(window.innerWidth, window.innerHeight);
       };
 
       const baseSpeed = 60; // Degrees pr. second
       const multiplier = 3; // Speed multiplier
 
-      render.requestAnimationFrame({
+      renderer.requestAnimationFrame({
         beforeRender: () => {
           const time = clock.getElapsedTime();
           const hue = (time * baseSpeed * multiplier) % 360; // Wrap hue within 0-360°
