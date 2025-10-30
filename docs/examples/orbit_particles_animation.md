@@ -37,7 +37,7 @@
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
@@ -58,27 +58,24 @@
         particles.push(mesh);
       }
 
-      const center = new Two.Vector2(
-        window.innerWidth / 2,
-        window.innerHeight / 2
-      );
-
       window.onresize = () => {
-        render.setSize(window.innerWidth, window.innerHeight);
-        center.set(window.innerWidth / 2, window.innerHeight / 2);
+        renderer.setSize(window.innerWidth, window.innerHeight);
       };
 
-      render.requestAnimationFrame({
+      const speed = 0.5;
+      const baseRadius = 120;
+
+      renderer.requestAnimationFrame({
         beforeRender: () => {
-          const speed = 0.5;
-          const baseRadius = 120;
           const time = clock.getElapsedTime();
           const radius = baseRadius + Math.sin(time * speed);
+          const centerX = renderer.getCenterX();
+          const centerY = renderer.getCenterY();
 
           particles.forEach((p, i) => {
             const angle = (i / numParticles) * Math.PI * 2;
-            const x = center.x + Math.cos(angle + time * speed) * radius;
-            const y = center.y + Math.sin(angle + time * speed) * radius;
+            const x = centerX + Math.cos(angle + time * speed) * radius;
+            const y = centerY + Math.sin(angle + time * speed) * radius;
 
             p.transform.position.set(x, y);
           });

@@ -23,9 +23,9 @@ This gives a smooth left–right motion that loops continuously.
 const amplitude = 150; // how far it moves from the center
 const speed = 1.5; // how fast it moves
 
-render.requestAnimationFrame({
+renderer.requestAnimationFrame({
   beforeRender: () => {
-    const centerX = window.innerWidth / 2;
+    const centerX = renderer.getCenterX();
     const time = clock.getElapsedTime(); // total time since start
 
     obj.transform.position.x = centerX + Math.sin(time * speed) * amplitude;
@@ -68,7 +68,7 @@ You can find a complete example below that demonstrates how to animate an object
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
@@ -90,15 +90,15 @@ You can find a complete example below that demonstrates how to animate an object
       );
 
       window.addEventListener("resize", () => {
-        render.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
       });
 
       const amplitude = 150; // how far it moves from the center
       const speed = 1.5; // how fast it moves
 
-      render.requestAnimationFrame({
+      renderer.requestAnimationFrame({
         beforeRender: () => {
-          const centerX = window.innerWidth / 2;
+          const centerX = renderer.getCenterX();
           const time = clock.getElapsedTime(); // total time since start
 
           mesh.transform.position.x =

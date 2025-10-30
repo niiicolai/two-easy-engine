@@ -37,17 +37,15 @@
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
         backgroundColor: "black",
       });
 
-      const center = new Two.Vector2(
-        window.innerWidth / 2,
-        window.innerHeight / 2
-      );
+      const centerX = renderer.getCenterX();
+      const centerY = renderer.getCenterY();
       
       const fadeSpeed = 0.8;
       const minSpeed = 250;
@@ -64,7 +62,7 @@
         const material = new Two.BasicMaterial({ fillStyle });
         const geom = new Two.CircleGeometry(3 + Math.random() * 2);
         const mesh = new Two.Mesh(geom, material);
-        mesh.transform.position.set(center.x, center.y);
+        mesh.transform.position.set(centerX, centerY);
 
         const angle = Math.random() * Math.PI * 2;
         const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
@@ -82,12 +80,13 @@
 
       // Resize handling
       window.onresize = () => {
-        render.setSize(window.innerWidth, window.innerHeight);
-        center.set(window.innerWidth / 2, window.innerHeight / 2);
+        renderer.setSize(window.innerWidth, window.innerHeight);
       };
 
-      render.requestAnimationFrame({
+      renderer.requestAnimationFrame({
         beforeRender: () => {
+          const centerX = renderer.getCenterX();
+          const centerY = renderer.getCenterY();
           const delta = clock.getDeltaTime();
 
           particles.forEach((p) => {
@@ -110,7 +109,7 @@
 
             // Reset explosion when all faded out
             if (p.userData.life <= 0) {
-              p.transform.position.set(center.x, center.y);
+              p.transform.position.set(centerX, centerY);
               const angle = Math.random() * Math.PI * 2;
               const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
               p.userData.velocity.set(

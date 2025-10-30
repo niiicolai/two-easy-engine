@@ -80,7 +80,7 @@ Create an HTML file with the following content to create a basic scene:
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
@@ -97,24 +97,27 @@ Create an HTML file with the following content to create a basic scene:
         })
       );
       mesh.transform.position.set(
-        window.innerWidth / 2 - mesh.geometry.width / 2,
-        window.innerHeight / 2 - mesh.geometry.height / 2
+        renderer.getCenterX() - mesh.geometry.width / 2,
+        renderer.getCenterY() - mesh.geometry.height / 2
       );
       scene.add(mesh);
 
       // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
+        // Resize the canvas
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // Set the new center position
         mesh.transform.position.set(
-          window.innerWidth / 2 - mesh.geometry.width / 2,
-          window.innerHeight / 2 - mesh.geometry.height / 2
+          renderer.getCenterX() - mesh.geometry.width / 2,
+          renderer.getCenterY() - mesh.geometry.height / 2
         );
-        render.setSize(window.innerWidth, window.innerHeight);
       };
 
+      const speed = 1.5;
+
       // Animation loop
-      render.requestAnimationFrame({
+      renderer.requestAnimationFrame({
         beforeRender: () => {
-          const speed = 1.5;
           const delta = clock.getDeltaTime();
 
           mesh.transform.rotation += delta * speed; // Rotate the rectangle

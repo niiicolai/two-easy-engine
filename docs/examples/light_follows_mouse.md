@@ -36,12 +36,15 @@
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
         backgroundColor: "black",
       });
+
+      const centerX = renderer.getCenterX();
+      const centerY = renderer.getCenterY();
 
       const light = new Two.PointLight2D(
         200,
@@ -50,8 +53,8 @@
         new Two.RgbaColor(255, 255, 200, 0.0),
       );
       light.transform.position.set(
-        window.innerWidth / 2 - light.radius / 2,
-        window.innerHeight / 2 - light.radius / 2
+        centerX - light.radius / 2,
+        centerY - light.radius / 2
       );
       scene.add(light);
 
@@ -60,16 +63,16 @@
       const rectGeometry = new Two.RectGeometry(20, 20);
       const rectMesh = new Two.Mesh(rectGeometry, material);
       rectMesh.transform.position.set(
-        window.innerWidth / 2 - rectMesh.geometry.width / 2,
-        window.innerHeight / 2 - rectMesh.geometry.height / 2
+        centerX - rectMesh.geometry.width / 2,
+        centerY - rectMesh.geometry.height / 2
       );
       scene.add(rectMesh);
 
       window.onresize = () => {
-        render.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
         rectMesh.transform.position.set(
-          window.innerWidth / 2 - rectMesh.geometry.width / 2,
-          window.innerHeight / 2 - rectMesh.geometry.height / 2
+          renderer.getCenterX() - rectMesh.geometry.width / 2,
+          renderer.getCenterY() - rectMesh.geometry.height / 2
         );
       };
 
@@ -79,7 +82,7 @@
         mouse.y = event.clientY;
       });
 
-      render.requestAnimationFrame({
+      renderer.requestAnimationFrame({
         beforeRender: () => {
           const speed = 0.5;
           const delta = clock.getDeltaTime();

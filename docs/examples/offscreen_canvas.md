@@ -37,13 +37,22 @@
       const canvas = document.getElementById("canvas");
       const offscreen = canvas.transferControlToOffscreen();
 
-      const worker = new Worker("./offscreen_canvas_worker.js", { type: "module" });
+      const worker = new Worker("offscreen_canvas_worker.js", {
+        type: "module",
+      });
 
       const options = {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
         backgroundColor: "black",
+      };
+
+      window.onresize = () => {
+        worker.postMessage({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
       };
 
       worker.postMessage({ canvas: offscreen, options }, [offscreen]);
@@ -55,15 +64,16 @@
 ```js [offscreen_canvas_worker.js]
 import * as Two from "two-easy-engine"
 
+let renderer;
+
 onmessage = (e) => {
   if (e.data.canvas && e.data.options) {
 
-    const options = e.data.options;
     const canvas = e.data.canvas;
     const clock = new Two.Clock();
     const camera = new Two.Camera2D();
     const scene = new Two.Scene();
-    const render = new Two.Renderer2D(canvas, scene, camera, e.data.options);
+    renderer = new Two.Renderer2D(canvas, scene, camera, e.data.options);
 
     const numParticles = 500;
     const particles = [];
@@ -77,19 +87,26 @@ onmessage = (e) => {
       particles.push(mesh);
     }
 
-    render.requestAnimationFrame({
+    const speed = 2;
+
+    renderer.requestAnimationFrame({
       beforeRender: () => {
-        const speed = 2;
+        const centerX = renderer.getCenterX();
+        const centerY = renderer.getCenterY();
         const time = clock.getElapsedTime();
 
         particles.forEach((p) => {
           p.transform.position.set(
-            options.width / 2 + Math.sin(time * speed * Math.random()) * 100,
-            options.height / 2 + Math.cos(time * speed * Math.random()) * 100,
+            centerX + Math.sin(time * speed * Math.random()) * 100,
+            centerY + Math.cos(time * speed * Math.random()) * 100,
           );
         });
       },
     });
+  }
+
+  if (renderer && e.data.width && e.data.height) {
+    renderer.setSize(e.data.width, e.data.height);
   }
 };
 ```

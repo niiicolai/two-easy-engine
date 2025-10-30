@@ -31,7 +31,7 @@
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
       const backgroundColor = new Two.HslaColor(360, 100, 50, 1);
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
@@ -44,24 +44,24 @@
       const material = new Two.BasicMaterial({ fillStyle });
       const mesh = new Two.Mesh(geometry, material);
       mesh.transform.position.set(
-        window.innerWidth / 2 - mesh.geometry.width / 2,
-        window.innerHeight / 2 - mesh.geometry.height / 2
+        renderer.getCenterX() - mesh.geometry.width / 2,
+        renderer.getCenterY() - mesh.geometry.height / 2
       );
       scene.add(mesh);
 
       // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
         mesh.transform.position.set(
-          window.innerWidth / 2 - mesh.geometry.width / 2,
-          window.innerHeight / 2 - mesh.geometry.height / 2
+          renderer.getCenterX() - mesh.geometry.width / 2,
+          renderer.getCenterY() - mesh.geometry.height / 2
         );
-        render.setSize(window.innerWidth, window.innerHeight);
       };
 
       const baseSpeed = 60; // Degrees pr. second
       const multiplier = 3; // Speed multiplier
 
-      render.requestAnimationFrame({
+      renderer.requestAnimationFrame({
         beforeRender: () => {
           const time = clock.getElapsedTime();
           const hue = (time * baseSpeed * multiplier) % 360; // Wrap hue within 0-360°
