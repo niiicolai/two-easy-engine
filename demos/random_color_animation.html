@@ -58,14 +58,15 @@
         render.setSize(window.innerWidth, window.innerHeight);
       };
 
-      // Animation loop
+      const baseSpeed = 60; // Degrees pr. second
+      const multiplier = 3; // Speed multiplier
+
       render.requestAnimationFrame({
         beforeRender: () => {
-          const speed = 3;
           const time = clock.getElapsedTime();
-          const hue = (time * 60 * speed) % 360;
+          const hue = (time * baseSpeed * multiplier) % 360; // Wrap hue within 0-360°
 
-          backgroundColor.setHue(hue);
+          backgroundColor.setHue(hue); // Update the hue property
         },
       });
     </script>
