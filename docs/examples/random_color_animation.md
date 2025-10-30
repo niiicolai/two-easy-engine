@@ -41,7 +41,7 @@ render.requestAnimationFrame({
 ```
 
 ## Complete Example
-The example below demonstrates a complete solution for adding a random color animation. It should be noticed the example animates the canvas' background color, instead of the rectangle’s fill color. Both the [`Renderer2D`](/api/Renderer2d.html) `backgroundColor` option and the [`BasicMaterial`](/api/BasicMaterial.html) `fillStyle` and `strokeStyle` properties support objects of type [`Color`](/api/Color.html).
+The example below demonstrates a complete solution for adding a random color animation. It should be noticed the example animates the canvas' background color, instead of the rectangle’s fill color. Both the [`Renderer2D`](/api/Renderer2D.html) `backgroundColor` option and the [`BasicMaterial`](/api/BasicMaterial.html) `fillStyle` and `strokeStyle` properties support objects of type [`Color`](/api/Color.html).
 
 ```html
 <!DOCTYPE html>
