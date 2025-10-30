@@ -27,17 +27,12 @@
       const clock = new Two.Clock();
       const camera = new Two.Camera2D();
       const scene = new Two.Scene();
-      const render = new Two.Renderer2D(canvas, scene, camera, {
+      const renderer = new Two.Renderer2D(canvas, scene, camera, {
         width: window.innerWidth,
         height: window.innerHeight,
         devicePixelRatio: window.devicePixelRatio || 1,
         backgroundColor: "black",
       });
-
-      const center = new Two.Vector2(
-        window.innerWidth / 2,
-        window.innerHeight / 2
-      );
 
       const textGeometry = new Two.TextGeometry("TwoEasyEngine", {
         font: "32px arial",
@@ -48,7 +43,7 @@
       const textFillStyle = new Two.HslaColor(50, 100, 60, 1);
       const textMaterial = new Two.BasicMaterial({ fillStyle: textFillStyle });
       const textMesh = new Two.Mesh(textGeometry, textMaterial);
-      textMesh.transform.position.set(center.x, center.y);
+      textMesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
       scene.add(textMesh);
 
       const lights = [];
@@ -76,17 +71,17 @@
       }
 
       window.onresize = () => {
-        render.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
         textMesh.transform.position.set(
-          window.innerWidth / 2,
-          window.innerHeight / 2
+          renderer.getCenterX(),
+          renderer.getCenterY()
         );
       };
 
       const moveSpeed = 0.3;
       const hueSpeed = 0.1;
 
-      render.requestAnimationFrame({
+      renderer.requestAnimationFrame({
         beforeRender: () => {
           const time = clock.getElapsedTime();
           const hue = (time * 60 * hueSpeed) % 360;
