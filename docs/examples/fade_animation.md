@@ -10,7 +10,7 @@ A [`Color`](/api/Color.html) can be used to specify a [`BasicMaterial`](/api/Bas
 
 For example:
 ```js
-const color = new Two.RgbaColor(0, 255, 100, 1); // R, G, B, Alpha
+const color = new Two.RgbaColor(0, 255, 100, 1); // Red, Green, Blue, Alpha
 const material = new Two.BasicMaterial({ fillStyle: color, strokeStyle: color });
 ```
 
