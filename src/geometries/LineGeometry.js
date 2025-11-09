@@ -1,6 +1,8 @@
 import { Geometry } from "./Geometry.js";
-import { Transform } from "../core/Transform.js";
+// eslint-disable-next-line no-unused-vars
 import { Material } from "../materials/Material.js";
+// eslint-disable-next-line no-unused-vars
+import { Transform } from "../core/Transform.js";
 
 /**
  * @class LineGeometry
@@ -9,16 +11,44 @@ import { Material } from "../materials/Material.js";
  */
 export class LineGeometry extends Geometry {
   /**
+   * @private
+   * @property {Array.<Array<number>>} #points - Array of 4-number arrays describing points/segments. Requires at least one entry.
+   */
+  #points;
+  
+  /**
    * @constructor
    * @param {Array.<Array<number>>} points - Array of 4-number arrays describing points/segments. Requires at least one entry.
+   * @throws {Error} If points is not an array
    * @throws {Error} If points has less than one 4-number arrays
    * @throws {Error} If points has an array with less or more than four numbers
    */
   constructor(points) {
     super();
+    this.points = points;
+  }
 
+  /**
+   * @function get points
+   * @description Gets the lines' points
+   * @returns {Array.<Array<number>>} The lines' points
+   */
+  get points() {
+    return this.#points;
+  }
+
+  /**
+   * @function set points
+   * @description Sets the lines points
+   * @param {Array.<Array<number>>} points - The lines points
+   * @returns {void}
+   * @throws {Error} If points is not an array
+   * @throws {Error} If points has less than one 4-number arrays
+   * @throws {Error} If points has an array with less or more than four numbers
+   */
+  set points(points) {
     if (!Array.isArray(points)) {
-      throw new Error("points must be an array of 4-number arrays");
+      throw new Error("points must be an array");
     }
 
     if (points.length < 1) {
@@ -31,7 +61,20 @@ export class LineGeometry extends Geometry {
       );
     }
 
-    this.points = points;
+    this.#points = points;
+  }
+
+  /**
+   * @function checkMaterialConflicts
+   * @description Check for any conflicts between the geometry and the provided material
+   * @param {Material} material - The material to check against
+   * @returns {void}
+   * @throws {Error} If material does not have a strokeStyle
+   */
+  checkMaterialConflicts(material) {
+    if (!material.strokeStyle) {
+      throw new Error("LineGeometry requires a strokeStyle in the material");
+    }
   }
 
   /**
@@ -41,17 +84,8 @@ export class LineGeometry extends Geometry {
    * @param {Transform} transform - The transform to apply to the circle
    * @param {Material} material - The material to use for rendering the circle
    * @returns {void}
-   * @throws {Error} if material is not of type Material
-   * @throws {Error} if transform is not of type Transform
    */
   drawContext2D(ctx, transform, material) {
-    if (!(material instanceof Material)) {
-      throw new Error("material must be of type Material");
-    }
-    if (!(transform instanceof Transform)) {
-      throw new Error("transform must be of type Transform");
-    }
-
     const { position, rotation, scale } = transform;
 
     ctx.save();
@@ -63,12 +97,13 @@ export class LineGeometry extends Geometry {
       ctx.moveTo(point[0] * scale.x, point[1] * scale.y);
       ctx.lineTo(point[2] * scale.x, point[3] * scale.y);
     });
+    
+    ctx.closePath();
 
     if (material.strokeStyle) {
       ctx.stroke();
     }
 
-    ctx.closePath();
     ctx.restore();
   }
 }

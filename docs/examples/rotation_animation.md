@@ -33,8 +33,9 @@ const speed = 1.5; // radians per second
 
 renderer.requestAnimationFrame({
   beforeRender: () => {
-    // delta must be called inside the animation loop
-    const delta = clock.getDeltaTime(); 
+    clock.update();
+
+    const delta = clock.deltaTime;
 
     obj.transform.rotation += delta * speed;
   },
@@ -99,19 +100,19 @@ If we look closely, we can identify several core concepts we learned above:
         })
       );
       mesh.transform.position.set(
-        renderer.getCenterX() - mesh.geometry.width / 2,
-        renderer.getCenterY() - mesh.geometry.height / 2
+        renderer.centerX - mesh.geometry.width / 2,
+        renderer.centerY - mesh.geometry.height / 2
       );
       scene.add(mesh);
 
       // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
         // Resize the canvas
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
         // Set the new center position
         mesh.transform.position.set(
-          renderer.getCenterX() - mesh.geometry.width / 2,
-          renderer.getCenterY() - mesh.geometry.height / 2
+          renderer.centerX - mesh.geometry.width / 2,
+          renderer.centerY - mesh.geometry.height / 2
         );
       };
 
@@ -120,7 +121,9 @@ If we look closely, we can identify several core concepts we learned above:
       // Animation loop
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const delta = clock.getDeltaTime();
+          clock.update();
+
+          const delta = clock.deltaTime;
 
           mesh.transform.rotation += delta * speed; // Rotate the rectangle
         },

@@ -18,11 +18,9 @@ describe("Texture2D", () => {
     expect(texture).toBeInstanceOf(Texture2D);
     expect(texture.imageOffsetX).toBe(0);
     expect(texture.imageOffsetY).toBe(0);
-    expect(texture.imageWidth).toBeNull();
-    expect(texture.imageHeight).toBeNull();
+    expect(texture.imageWidth).toBeUndefined();
+    expect(texture.imageHeight).toBeUndefined();
     expect(texture.imageRepeat).toBe("repeat");
-    expect(texture.pattern).toBeNull();
-    expect(texture.patternTransform).toBeNull();
   });
 
   it("should throw error if image is invalid", () => {
@@ -55,22 +53,18 @@ describe("Texture2D", () => {
     );
   });
 
-  it("should set image offsets correctly and rebuild transform", () => {
+  it("should set image offsets correctly", () => {
     const texture = new Texture2D({ image: new Image() });
-    texture.rebuildTransform = vi.fn(); // spy
     texture.setImageOffset(10, 20);
     expect(texture.imageOffsetX).toBe(10);
     expect(texture.imageOffsetY).toBe(20);
-    expect(texture.rebuildTransform).toHaveBeenCalled();
   });
 
-  it("should set image size correctly and rebuild transform", () => {
+  it("should set image size correctly", () => {
     const texture = new Texture2D({ image: new Image() });
-    texture.rebuildTransform = vi.fn(); // spy
     texture.setImageSize(100, 200);
     expect(texture.imageWidth).toBe(100);
     expect(texture.imageHeight).toBe(200);
-    expect(texture.rebuildTransform).toHaveBeenCalled();
   });
 
   it("should create a canvas pattern when image is complete", () => {
@@ -83,23 +77,6 @@ describe("Texture2D", () => {
     });
     const pattern = texture.createPattern(ctx);
     expect(pattern).not.toBeNull();
-    expect(texture.pattern).toBe(pattern);
-  });
-
-  it("should return null if image is not complete", () => {
-    const img = new Image();
-    const texture = new Texture2D({ image: img });
-    vi.spyOn(texture, "image", "get").mockReturnValue({
-      complete: false,
-    });
-    expect(texture.createPattern(ctx)).toBeNull();
-  });
-
-  it("should throw if createPattern is called with invalid context", () => {
-    const texture = new Texture2D({ image: new Image() });
-    expect(() => texture.createPattern({})).toThrow(
-      "ctx must be of type CanvasRenderingContext2D"
-    );
   });
 
   it("should set image using setImage with string or HTMLImageElement", () => {

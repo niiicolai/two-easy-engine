@@ -15,9 +15,9 @@ const material = new Two.BasicMaterial({ fillStyle: color, strokeStyle: color })
 ```
 
 The last parameter (1) represents full opacity.
-You can dynamically adjust this with the `setAlpha()` method:
+You can dynamically adjust it using its setter:
 ```js
-color.setAlpha(0.5); // 50% transparent
+color.a = 0.5; // 50% transparent
 ```
 
 ## Animate Alpha
@@ -28,10 +28,12 @@ const speed = 1.5; // how fast it fades
 
 renderer.requestAnimationFrame({
   beforeRender: () => {
-    const time = clock.getElapsedTime();
+    clock.update();
+
+    const time = clock.elapsedTime;
     const alpha = (Math.sin(time * speed) + 1) / 2;
 
-    color.setAlpha(alpha);
+    color.a = alpha;
   },
 });
 ```
@@ -84,23 +86,25 @@ Below is the complete example demonstrating the fade effect.
       const material = new Two.BasicMaterial({ fillStyle });
       const geometry = new Two.CircleGeometry(80);
       const circle = new Two.Mesh(geometry, material);
-      circle.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
+      circle.transform.position.set(renderer.centerX, renderer.centerY);
       scene.add(circle);
 
       // Resize handler
       window.addEventListener("resize", () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        circle.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
+        circle.transform.position.set(renderer.centerX, renderer.centerY);
       });
 
       const speed = 1.5; // how fast it fades
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const time = clock.getElapsedTime();
+          clock.update();
+
+          const time = clock.elapsedTime;
           const alpha = (Math.sin(time * speed) + 1) / 2;
 
-          fillStyle.setAlpha(alpha);
+          fillStyle.a = alpha;
         },
       });
     </script>

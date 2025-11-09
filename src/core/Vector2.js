@@ -4,6 +4,18 @@
  */
 export class Vector2 {
   /**
+   * @private
+   * @property {number} #x - the x coordinate.
+   */
+  #x;
+
+  /**
+   * @private
+   * @property {number} #y - the y coordinate.
+   */
+  #y;
+  
+  /**
    * @constructor
    * @param {number} x - The x coordinate
    * @param {number} y - The y coordinate
@@ -16,6 +28,54 @@ export class Vector2 {
 
     this.x = x;
     this.y = y;
+  }
+
+  /**
+   * @function get x
+   * @description Get the x coordinate
+   * @returns {Vector2} the x coordinate
+   */
+  get x() {
+    return this.#x;
+  }
+
+  /**
+   * @function set x
+   * @description Sets the x coordinate
+   * @param {number} x - The new value
+   * @returns {void}
+   * @throws {Error} If the x is not a number.
+   */
+  set x(x) {
+    if (typeof x !== "number") {
+      throw new Error("x must be a number");
+    }
+
+    this.#x = x;
+  }
+
+  /**
+   * @function get y
+   * @description Get the y coordinate
+   * @returns {Vector2} the y coordinate
+   */
+  get y() {
+    return this.#y;
+  }
+
+  /**
+   * @function set y
+   * @description Sets the y coordinate
+   * @param {number} y - The new value
+   * @returns {void}
+   * @throws {Error} If the y is not a number.
+   */
+  set y(y) {
+    if (typeof y !== "number") {
+      throw new Error("y must be a number");
+    }
+
+    this.#y = y;
   }
 
   /**
@@ -61,6 +121,24 @@ export class Vector2 {
 
     this.x += dx;
     this.y += dy;
+
+    return this;
+  }
+
+  /**
+   * @function copy
+   * @description Copy the values of the given vector to this.
+   * @param {Vector2} v - The vector to copy
+   * @returns {Vector2} This vector
+   * @throws {Error} If v is not of type Vector2
+   */
+  copy(v) {
+    if (!(v instanceof Vector2)) {
+      throw new Error("v must be of type Vector2");
+    }
+
+    this.x = v.x;
+    this.y = v.y;
 
     return this;
   }
@@ -208,7 +286,7 @@ export class Vector2 {
   /**
    * @function isEqual
    * @description Check if the values of this vector is equal to another
-   * @returns {Vector2} The other vector
+   * @param {Vector2} v - The other vector
    * @returns {boolean} 
    */
   isEqual(v) {
@@ -217,5 +295,25 @@ export class Vector2 {
     }
     
     return this.x === v.x && this.y === v.y;
+  }
+
+  /**
+   * @function rotateAround
+   * @description Rotate the coordinates the given radians around the given point
+   * @param {number} px - the x coordinate of the point to rotate around
+   * @param {number} py - the y coordinate of the point to rotate around
+   * @param {number} angle - the rotation angle in radians
+   * @returns {Vector2} the same vector
+   */
+  rotateAround(px, py, angle) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    const x = this.x;
+    const y = this.y;
+
+    this.x = ((x - px) * cos - (y - py) * sin) + px;
+    this.y = ((x - px) * sin + (y - py) * cos) + py;
+
+    return this;
   }
 }

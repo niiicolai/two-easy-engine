@@ -85,14 +85,14 @@
         })
       );
       mesh.transform.position.set(
-        renderer.getCenterX() - width,
-        renderer.getCenterY()
+        renderer.centerX - width,
+        renderer.centerY
       );
       scene.add(mesh);
 
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        mesh.transform.position.x = renderer.getCenterX() - width;
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
+        mesh.transform.position.x = renderer.centerX - width;
       };
 
       const speed = 1.5;
@@ -100,13 +100,15 @@
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const centerY = renderer.getCenterY();
-          const time = clock.getElapsedTime();
+          clock.update();
+
+          const centerY = renderer.centerY;
+          const time = clock.elapsedTime;
           const hue = (time * 60 * speed) % 360;
 
           mesh.transform.position.y =
             Math.sin(time * speed) * dist + centerY;
-          strokeStyle.setHue(hue);
+          strokeStyle.h = hue;
         },
       });
     </script>

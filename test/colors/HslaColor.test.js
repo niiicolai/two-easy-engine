@@ -2,25 +2,25 @@ import { describe, it, expect, test } from "vitest";
 import { HslaColor } from "../../src/colors/HslaColor.js";
 
 describe("HslaColor", () => {
-  test.each(["a", -1, 361])("should throw if h is invalid (%p)", (h) => {
+  test.each(["a", -1, 361])("should throw if h is invalid (%p) in constructor", (h) => {
     expect(() => new HslaColor(h, 50, 50, 1)).toThrow(
       "h must be a number between 0 and 360"
     );
   });
 
-  test.each(["a", -1, 101])("should throw if s is invalid (%p)", (s) => {
+  test.each(["a", -1, 101])("should throw if s is invalid (%p) in constructor", (s) => {
     expect(() => new HslaColor(100, s, 50, 1)).toThrow(
       "s must be a number between 0 and 100"
     );
   });
 
-  test.each(["a", -1, 101])("should throw if l is invalid (%p)", (l) => {
+  test.each(["a", -1, 101])("should throw if l is invalid (%p) in constructor", (l) => {
     expect(() => new HslaColor(100, 50, l, 1)).toThrow(
       "l must be a number between 0 and 100"
     );
   });
 
-  test.each(["a", -1, 2])("should throw if a is invalid (%p)", (a) => {
+  test.each(["a", -1, 2])("should throw if a is invalid (%p) in constructor", (a) => {
     expect(() => new HslaColor(100, 50, 50, a)).toThrow(
       "a must be a number between 0 and 1"
     );
@@ -90,7 +90,7 @@ describe("HslaColor", () => {
 
   test.each(["a", -1, 2])("setAlpha() should throw for invalid a = %p", (a) => {
     const color = new HslaColor(0, 50, 50, 1);
-    expect(() => color.setAlpha(a)).toThrow("alpha must be a number between 0 and 1");
+    expect(() => color.setAlpha(a)).toThrow("a must be a number between 0 and 1");
   });
 
   it("toHslaString() should return hsla() format", () => {
@@ -105,11 +105,8 @@ describe("HslaColor", () => {
 
   it("updateColorStr() should sync colorStr to internal values", () => {
     const color = new HslaColor(100, 50, 50, 1);
-    color.h = 240;
-    color.s = 60;
-    color.l = 70;
-    color.a = 0.6;
+    color.set(200, 60, 70, 0.6);
     color.updateColorStr();
-    expect(color.colorStr).toBe("hsla(240, 60%, 70%, 0.6)");
+    expect(color.colorStr).toBe("hsla(200, 60%, 70%, 0.6)");
   });
 });

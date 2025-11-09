@@ -31,6 +31,11 @@ globalThis.window = {
 };
 
 global.getPixel = function (ctx, x, y) {
+  const { width, height } = ctx.canvas;
+  if (x < 0 || y < 0 || x >= width || y >= height) {
+    return null;
+  }
+
   const data = ctx.getImageData(x, y, 1, 1).data;
   return { r: data[0], g: data[1], b: data[2], a: data[3] };
 };

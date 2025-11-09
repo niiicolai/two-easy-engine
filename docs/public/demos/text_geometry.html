@@ -59,7 +59,7 @@
       const fillStyle = new Two.Color("white");
       const material = new Two.BasicMaterial({ fillStyle, texture2D });
       const mesh = new Two.Mesh(geometry, material);
-      mesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
+      mesh.transform.position.set(renderer.centerX, renderer.centerY);
       scene.add(mesh);
 
       // Update text on btn click
@@ -69,8 +69,8 @@
 
       // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        mesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
+        mesh.transform.position.set(renderer.centerX, renderer.centerY);
       };
 
       const speed = 1.5;
@@ -79,10 +79,12 @@
       // Animation loop
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const centerX = renderer.getCenterX();
-          const centerY = renderer.getCenterY();
-          const delta = clock.getDeltaTime();
-          const time = clock.getElapsedTime();
+          clock.update();
+
+          const centerX = renderer.centerX;
+          const centerY = renderer.centerY;
+          const delta = clock.deltaTime;
+          const time = clock.elapsedTime;
 
           mesh.transform.position.set(
             Math.sin(time * speed) * radius + centerX,

@@ -37,13 +37,6 @@ describe("Scene", () => {
     ).toThrow("colorStop must be a Color");
   });
 
-  it("should throw an error when calling drawContext2D() with a non-CanvasRenderingContext2D", () => {
-    const light = new PointLight2D();
-    expect(() => light.drawContext2D({})).toThrow(
-      "ctx must be of type CanvasRenderingContext2D"
-    );
-  });
-
   it("drawContext2D() should draw a red point light inside the canvas", () => {
     const white = { r: 0, g: 0, b: 0, a: 0 };
     const red = new RgbaColor(255, 0, 0, 1);

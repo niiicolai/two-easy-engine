@@ -9,6 +9,18 @@ import { Material } from "../materials/Material.js";
  */
 export class RectGeometry extends Geometry {
   /**
+   * @private
+   * @property {number} width - the rectangle's width
+   */
+  #width;
+
+  /**
+   * @private
+   * @property {number} height - the rectangle's height
+   */
+  #height;
+
+  /**
    * @constructor
    * @param {number} width - The width of the rectangle (must be positive).
    * @param {number} height - The height of the rectangle (must be positive).
@@ -17,16 +29,56 @@ export class RectGeometry extends Geometry {
    */
   constructor(width, height) {
     super();
+    this.width = width;
+    this.height = height;
+  }
 
-    if (typeof width !== "number" || width <= 0) {
+  /**
+   * @function get width
+   * @description Get the width
+   * @returns {number} width
+   */
+  get width() {
+    return this.#width;
+  }
+
+  /**
+   * @function set width
+   * @description Set width
+   * @param {number} width - the new width
+   * @returns {void}
+   * @throws {Error} if width is not a positive number
+   */
+  set width(width) {
+    if (typeof width !== "number" || width < 0) {
       throw new Error("width must be a positive number");
     }
-    if (typeof height !== "number" || height <= 0) {
+
+    this.#width = width;
+  }
+
+  /**
+   * @function get height
+   * @description Get the height
+   * @returns {number} height
+   */
+  get height() {
+    return this.#height;
+  }
+
+  /**
+   * @function set height
+   * @description Set height
+   * @param {number} height - the new height
+   * @returns {void}
+   * @throws {Error} if height is not a positive number
+   */
+  set height(height) {
+    if (typeof height !== "number" || height < 0) {
       throw new Error("height must be a positive number");
     }
 
-    this.width = width;
-    this.height = height;
+    this.#height = height;
   }
 
   /**

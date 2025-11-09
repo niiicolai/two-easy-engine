@@ -17,10 +17,10 @@ export class Renderer2D extends Renderer {
    * @param {Scene} scene - The scene
    * @param {Camera2D} camera - The camera
    * @param {Object} [options] - Render configuration options.
-   * @param {number} [options.width=window.innerWidth] - Initial canvas width
-   * @param {number} [options.height=window.innerHeight] - Initial canvas height
-   * @param {number} [options.devicePixelRatio=window.devicePixelRatio] - Initial device pixel ratio
-   * @param {string|Color} [options.backgroundColor='transparent'] - Initial background color
+   * @param {number} [options.width] - Initial canvas width
+   * @param {number} [options.height] - Initial canvas height
+   * @param {number} [options.devicePixelRatio] - Initial device pixel ratio
+   * @param {string|Color} [options.backgroundColor] - Initial background color
    * @throws {Error} If canvas is not of type HTMLCanvasElement
    * @throws {Error} If scene is not of type Scene
    * @throws {Error} If camera is not of type Camera2D
@@ -32,22 +32,17 @@ export class Renderer2D extends Renderer {
     canvas,
     scene,
     camera,
-    options = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      devicePixelRatio: window.devicePixelRatio || 1,
-      backgroundColor: "transparent",
-    }
+    options = {}
   ) {
     super("2d", canvas, scene, camera, options);
   }
 
   /**
-   * @function initContext
+   * @function _initContext
    * @description Init the rendering context
    * @returns {void}
    */
-  initContext() {
+  _initContext() {
     this.ctx = this.canvas.getContext("2d");
     this.recalculateDevicePixelRatio();
   }
@@ -93,11 +88,12 @@ export class Renderer2D extends Renderer {
     );
 
     // Draw object 2Ds
-    this.scene.children.forEach((child) => {
+    for (let i = 0; i < this.scene.children.length; i++) {
+      const child = this.scene.children[i];
       if (child.visible) {
         child.draw(this);
       }
-    });
+    }
 
     // Restore
     ctx.restore();

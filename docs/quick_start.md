@@ -83,8 +83,8 @@ const mesh = new Two.Mesh(
 
 // Center the rectangle on screen
 mesh.transform.position.set(
-  renderer.getCenterX() - mesh.geometry.width / 2,
-  renderer.getCenterY() - mesh.geometry.height / 2
+  renderer.centerX - mesh.geometry.width / 2,
+  renderer.centerY - mesh.geometry.height / 2
 );
 
 // Add it to the scene
@@ -96,7 +96,7 @@ Notes:
 - [`RectGeometry`](/api/RectGeometry.html) defines the shape.
 - [`BasicMaterial`](/api/BasicMaterial.html) defines the fill and stroke style.
 - `mesh.transform.position` sets the mesh in the center.
-- `getCenterX()` and `getCenterY()` return the center coordinates (half-width and half-height) of the canvas.
+- `centerX` and `centerY` return the center coordinates (half-width and half-height) of the canvas.
 
 ## 4. Handle window resizing
 
@@ -104,18 +104,19 @@ Notes:
 // Handle window resize to ensure responsiveness rendering
 window.onresize = () => {
   // Resize the canvas
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.options.setSize(window.innerWidth, window.innerHeight);
   // Set the new center position
   mesh.transform.position.set(
-    renderer.getCenterX() - mesh.geometry.width / 2,
-    renderer.getCenterY() - mesh.geometry.height / 2
+    renderer.centerX - mesh.geometry.width / 2,
+    renderer.centerY - mesh.geometry.height / 2
   );
 };
 ```
 
+- `renderer.options.setSize` resize the canvas and recalculate device pixel ratio.
 - Keeps the rectangle centered when resizing the browser.
 - Updates the renderer size accordingly.
-- `getCenterX()` and `getCenterY()` must be called after resizing to get the new center x and y coordinates.
+- `centerX` and `centerY` must be called after resizing to get the new center x and y coordinates.
 
 ## 5. Animate the rectangle
 
@@ -124,7 +125,9 @@ const speed = 1.5;
 
 renderer.requestAnimationFrame({
   beforeRender: () => {
-    const delta = clock.getDeltaTime();
+    clock.update();
+
+    const delta = clock.deltaTime;
 
     mesh.transform.rotation += delta * speed; // Rotate the rectangle
   },
@@ -132,7 +135,8 @@ renderer.requestAnimationFrame({
 ```
 
 - `renderer.requestAnimationFrame` starts the animation loop.
-- `clock.getDeltaTime` use delta time for frame-rate-independent updates.
+- `clock.update` update the clock (must be called at the beginning of the animation loop).
+- `clock.deltaTime` use delta time for frame-rate-independent updates.
 - The `beforeRender` callback runs on each frame.
 - `mesh.transform.rotation` rotates the rectangle continuously.
 
@@ -188,19 +192,19 @@ renderer.requestAnimationFrame({
         })
       );
       mesh.transform.position.set(
-        renderer.getCenterX() - mesh.geometry.width / 2,
-        renderer.getCenterY() - mesh.geometry.height / 2
+        renderer.centerX - mesh.geometry.width / 2,
+        renderer.centerY - mesh.geometry.height / 2
       );
       scene.add(mesh);
 
       // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
         // Resize the canvas
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
         // Set the new center position
         mesh.transform.position.set(
-          renderer.getCenterX() - mesh.geometry.width / 2,
-          renderer.getCenterY() - mesh.geometry.height / 2
+          renderer.centerX - mesh.geometry.width / 2,
+          renderer.centerY - mesh.geometry.height / 2
         );
       };
 
@@ -209,7 +213,9 @@ renderer.requestAnimationFrame({
       // Animation loop
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const delta = clock.getDeltaTime();
+          clock.update();
+
+          const delta = clock.deltaTime;
 
           mesh.transform.rotation += delta * speed; // Rotate the rectangle
         },

@@ -65,16 +65,16 @@
           Math.random() * window.innerWidth,
           Math.random() * window.innerHeight
         );
-        mesh.setUserData({
+        mesh.userData = {
           speed: minSpeed + Math.random() * (maxSpeed - minSpeed),
-        });
+        };
 
         scene.add(mesh);
         particles.push(mesh);
       }
 
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
       };
 
       // Fade configuration
@@ -85,7 +85,9 @@
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const delta = clock.getDeltaTime();
+          clock.update();
+
+          const delta = clock.deltaTime;
 
           particles.forEach((p) => {
             // Move downward
@@ -99,7 +101,7 @@
                   p.transform.position.y * positionFrequency
               ) *
                 alphaAmplitude;
-            p.material.fillStyle.setAlpha(alpha);
+            p.material.fillStyle.a = alpha
 
             // Reset when offscreen
             if (p.transform.position.y > window.innerHeight + 20) {

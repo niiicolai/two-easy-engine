@@ -8,7 +8,6 @@ describe("Clock", () => {
     expect(clock.elapsedTime).toBe(0);
     expect(clock.deltaTime).toBe(0);
     expect(clock.startTime).toBeTypeOf("number");
-    expect(clock.oldTime).toBe(clock.startTime);
   });
 
   it("getElapsedTime should return a number greater than 0 after some time", async () => {

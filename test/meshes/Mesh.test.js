@@ -15,14 +15,54 @@ describe("Mesh", () => {
     expect(mesh.material).toBe(material);
   });
 
-  it("should throw an error if geometry is not a Geometry instance", () => {
+  it("should return the correct geometry using getter and setter", () => {
+    const initialGeometry = new RectGeometry(100, 100);
+    const nextGeometry = new RectGeometry(200, 200);
+    const material = new BasicMaterial({ fillStyle: new RgbaColor(1, 1, 1, 1) });
+    const mesh = new Mesh(initialGeometry, material);
+
+    mesh.geometry = nextGeometry;
+
+    expect(mesh.geometry).toBe(nextGeometry);
+  });
+
+  it("should return the correct material using getter and setter", () => {
+    const geometry = new RectGeometry(100, 100);
+    const initialMaterial = new BasicMaterial({ fillStyle: new RgbaColor(1, 1, 1, 1) });
+    const nextMaterial = new BasicMaterial({ fillStyle: new RgbaColor(0, 0, 0, 1) });
+    const mesh = new Mesh(geometry, initialMaterial);
+
+    mesh.material = nextMaterial;
+
+    expect(mesh.material).toBe(nextMaterial);
+  });
+
+  it("should throw an error if geometry setter is given a non-Geometry instance", () => {
+    const geometry = new RectGeometry(100, 100);
+    const material = new BasicMaterial({ fillStyle: new RgbaColor(1, 1, 1, 1) });
+    const mesh = new Mesh(geometry, material);
+    expect(() => {
+      mesh.geometry = {};
+    }).toThrow("geometry must be of type Geometry");
+  });
+
+  it("should throw an error if material setter is given a non-Material instance", () => {
+    const geometry = new RectGeometry(100, 100);
+    const material = new BasicMaterial({ fillStyle: new RgbaColor(1, 1, 1, 1) });
+    const mesh = new Mesh(geometry, material);
+    expect(() => {
+      mesh.material = {};
+    }).toThrow("material must be of type Material");
+  });
+
+  it("should throw an error if geometry is not a Geometry instance in the constructor", () => {
     const material = new BasicMaterial({ fillStyle: new RgbaColor(1, 1, 1, 1) });
     expect(() => new Mesh({}, material)).toThrow(
       "geometry must be of type Geometry"
     );
   });
 
-  it("should throw an error if material is not a Material instance", () => {
+  it("should throw an error if material is not a Material instance in the constructor", () => {
     const geometry = new RectGeometry(100, 100);
     expect(() => new Mesh(geometry, {})).toThrow(
       "material must be of type Material"

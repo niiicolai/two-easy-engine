@@ -9,6 +9,36 @@ import { Object2D } from "../core/Object2D.js";
  */
 export class PointLight2D extends Object2D {
   /**
+   * @static
+   * @property {number} Z_INDEX - defines the class' default z-index (default: 2000)
+   */
+  static Z_INDEX = 2000;
+
+  /**
+   * @private
+   * @property {number} #radius - The light's radius
+   */
+  #radius;
+
+  /**
+   * @private
+   * @property {number} #intensity - The light's intensity
+   */
+  #intensity;
+
+  /**
+   * @private
+   * @property {Color} #color - The light's color
+   */
+  #color;
+
+  /**
+   * @private
+   * @property {Color} #intensity - The light's colorStop
+   */
+  #colorStop;
+
+  /**
    * @constructor
    * @param {number} radius - The radius of the light
    * @param {number} intensity - The intensity of the light
@@ -27,22 +57,6 @@ export class PointLight2D extends Object2D {
   ) {
     super();
 
-    if (typeof radius !== "number" || radius < 0) {
-      throw new Error("radius must be a positive number");
-    }
-
-    if (typeof intensity !== "number" || radius < 0) {
-      throw new Error("intensity must be a positive number");
-    }
-
-    if (!(color instanceof Color)) {
-      throw new Error("color must be a Color");
-    }
-
-    if (!(colorStop instanceof Color)) {
-      throw new Error("colorStop must be a Color");
-    }
-
     this.radius = radius;
     this.intensity = intensity;
     this.color = color;
@@ -51,17 +65,108 @@ export class PointLight2D extends Object2D {
   }
 
   /**
+   * @function get radius
+   * @description Gets the light's radius
+   * @returns {number} The radius
+   */
+  get radius() {
+    return this.#radius;
+  }
+
+  /**
+   * @function set radius
+   * @description Sets the light's radius
+   * @param {number} radius - The light's radius
+   * @returns {void}
+   * @throws {Error} If the radius is not a positive number.
+   */
+  set radius(radius) {
+    if (typeof radius !== "number" || radius < 0) {
+      throw new Error("radius must be a positive number");
+    }
+
+    this.#radius = radius;
+  }
+
+  /**
+   * @function get intensity
+   * @description Gets the light's intensity
+   * @returns {number} The intensity
+   */
+  get intensity() {
+    return this.#intensity;
+  }
+
+  /**
+   * @function set intensity
+   * @description Sets the light's intensity
+   * @param {number} intensity - The light's intensity
+   * @returns {void}
+   * @throws {Error} If the intensity is not a positive number.
+   */
+  set intensity(intensity) {
+    if (typeof intensity !== "number" || intensity < 0) {
+      throw new Error("intensity must be a positive number");
+    }
+
+    this.#intensity = intensity;
+  }
+
+  /**
+   * @function get color
+   * @description Gets the light's color
+   * @returns {Color} The color
+   */
+  get color() {
+    return this.#color;
+  }
+
+  /**
+   * @function set color
+   * @description Sets the light's color
+   * @param {Color} color - The light's color
+   * @returns {void}
+   * @throws {Error} If the color is not a Color.
+   */
+  set color(color) {
+    if (!(color instanceof Color)) {
+      throw new Error("color must be a Color");
+    }
+
+    this.#color = color;
+  }
+
+  /**
+   * @function get colorStop
+   * @description Gets the light's colorStop
+   * @returns {Color} The colorStop
+   */
+  get colorStop() {
+    return this.#colorStop;
+  }
+
+  /**
+   * @function set colorStop
+   * @description Sets the light's colorStop
+   * @param {Color} color - The light's colorStop
+   * @returns {void}
+   * @throws {Error} If the colorStop is not a Color.
+   */
+  set colorStop(colorStop) {
+    if (!(colorStop instanceof Color)) {
+      throw new Error("colorStop must be a Color");
+    }
+
+    this.#colorStop = colorStop;
+  }
+
+  /**
    * @function drawContext2D
    * @description Renders the light effect on the given 2D rendering context.
    * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
    * @returns {void}
-   * @throws {Error} If ctx is not of type CanvasRenderingContext2D
    */
   drawContext2D(ctx) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      throw new Error("ctx must be of type CanvasRenderingContext2D");
-    }
-
     const { radius, color, colorStop, intensity } = this;
     const { x, y } = this.transform.position;
 

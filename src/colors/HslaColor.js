@@ -1,4 +1,5 @@
 import { Color } from "./Color.js";
+import { deprecate } from "../utilities/deprecate.js";
 
 /**
  * @class HslaColor
@@ -6,6 +7,36 @@ import { Color } from "./Color.js";
  * @classdesc A color defined by hue, saturation, lightness, and alpha
  */
 export class HslaColor extends Color {
+  /**
+   * @private
+   * @property {number} #h - hue (0-360)
+   */
+  #h;
+
+  /**
+   * @private
+   * @property {number} #s - saturation (0-100)
+   */
+  #s;
+
+  /**
+   * @private
+   * @property {number} #l - lightness (0-100)
+   */
+  #l;
+
+  /**
+   * @private
+   * @property {number} #a - alpha (0-1)
+   */
+  #a;
+
+  /**
+   * @private
+   * @property {Renderer} #isBatchSetting - A flag to indicate if batch setting is in progress
+   */
+  #isBatchSetting = false;
+
   /**
    * @constructor
    * @param {number} h - hue (0-360)
@@ -17,8 +48,107 @@ export class HslaColor extends Color {
    */
   constructor(h, s, l, a = 1) {
     super(`hsla(${h}, ${s}%, ${l}%, ${a})`);
-    this.set(h, s, l, a);    
+    this.set(h, s, l, a);
   }
+
+  /**
+   * @function get h
+   * @description Get hue
+   * @returns {number} hue (0-360)
+   */
+  get h() {
+    return this.#h;
+  }
+
+  /**
+   * @function set h
+   * @description Set hue
+   * @param {number} h - hue (0-360)
+   * @returns {void}
+   * @throws {Error} if h is not between 0 and 360
+   */
+  set h(h) {
+    if (typeof h !== "number" || h < 0 || h > 360) {
+      throw new Error("h must be a number between 0 and 360");
+    }
+    this.#h = h;
+
+    if (!this.#isBatchSetting) this.updateColorStr();
+  }
+
+  /**
+   * @function get s
+   * @description Get saturation
+   * @returns {number} saturation (0-100)
+   */
+  get s() {
+    return this.#s;
+  }
+  
+  /**
+   * @function set s
+   * @description Set saturation
+   * @param {number} s - saturation (0-100)
+   */
+  set s(s) {
+    if (typeof s !== "number" || s < 0 || s > 100) {
+      throw new Error("s must be a number between 0 and 100");
+    }
+    this.#s = s;
+
+    if (!this.#isBatchSetting) this.updateColorStr();
+  }
+
+  /**
+   * @function get l
+   * @description Get lightness
+   * @returns {number} lightness (0-100)
+   */
+  get l() {
+    return this.#l;
+  }
+
+  /**
+   * @function set l
+   * @description Set lightness
+   * @param {number} l - lightness (0-100)
+   * @returns {void}
+   * @throws {Error} if l is not between 0 and 100
+   */
+  set l(l) {
+    if (typeof l !== "number" || l < 0 || l > 100) {
+      throw new Error("l must be a number between 0 and 100");
+    }
+    this.#l = l;
+
+    if (!this.#isBatchSetting) this.updateColorStr();
+  }
+
+  /**
+   * @function get a
+   * @description Get alpha
+   * @returns {number} alpha (0-1)
+   */
+  get a() {
+    return this.#a;
+  }
+
+  /**
+   * @function set a
+   * @description Set alpha
+   * @param {number} a - alpha (0-1)
+   * @returns {void}
+   * @throws {Error} if a is not between 0 and 1
+   */
+  set a(a) {
+    if (typeof a !== "number" || a < 0 || a > 1) {
+      throw new Error("a must be a number between 0 and 1");
+    }
+    this.#a = a;
+
+    if (!this.#isBatchSetting) this.updateColorStr();
+  }
+  
 
   /**
    * @function set
@@ -32,25 +162,16 @@ export class HslaColor extends Color {
    * @throws {Error} if a is not between 0 and 1
    */
   set(h, s, l, a = 1) {
-    if (typeof h !== "number" || h < 0 || h > 360) {
-      throw new Error("h must be a number between 0 and 360");
+    try {
+      this.#isBatchSetting = true;
+      this.h = h;
+      this.s = s;
+      this.l = l;
+      this.a = a;
+      this.updateColorStr();
+    } finally {
+      this.#isBatchSetting = false;
     }
-    if (typeof s !== "number" || s < 0 || s > 100) {
-      throw new Error("s must be a number between 0 and 100");
-    }
-    if (typeof l !== "number" || l < 0 || l > 100) {
-      throw new Error("l must be a number between 0 and 100");
-    }
-    if (typeof a !== "number" || a < 0 || a > 1) {
-      throw new Error("a must be a number between 0 and 1");
-    }
-
-    this.h = h;
-    this.s = s;
-    this.l = l;
-    this.a = a;
-
-    this.updateColorStr();
   }
 
   /**
@@ -68,13 +189,11 @@ export class HslaColor extends Color {
    * @param {number} h - hue (0-360)
    * @returns {void}
    * @throws {Error} if h is not between 0 and 360
+   * @deprecated since version 0.1.0 - use h setter instead
    */
   setHue(h) {
-    if (typeof h !== "number" || h < 0 || h > 360) {
-      throw new Error("h must be a number between 0 and 360");
-    }
+    deprecate("setHue()", "h setter", "0.1.0");
     this.h = h;
-    this.updateColorStr();
   }
 
   /**
@@ -83,28 +202,24 @@ export class HslaColor extends Color {
    * @param {number} s - saturation (0-100)
    * @returns {void}
    * @throws {Error} if s is not between 0 and 100
+   * @deprecated since version 0.1.0 - use s setter instead
    */
   setSaturation(s) {
-    if (typeof s !== "number" || s < 0 || s > 100) {
-      throw new Error("s must be a number between 0 and 100");
-    }
+    deprecate("setSaturation()", "s setter", "0.1.0");
     this.s = s;
-    this.updateColorStr();
   }
 
   /**
    * @function setLightness
-   * @description Set saturation
+   * @description Set lightness
    * @param {number} l - lightness (0-100)
    * @returns {void}
    * @throws {Error} if l is not between 0 and 100
+   * @deprecated since version 0.1.0 - use l setter instead
    */
   setLightness(l) {
-    if (typeof l !== "number" || l < 0 || l > 100) {
-      throw new Error("l must be a number between 0 and 100");
-    }
+    deprecate("setLightness()", "l setter", "0.1.0");
     this.l = l;
-    this.updateColorStr();
   }
 
   /**
@@ -113,13 +228,11 @@ export class HslaColor extends Color {
    * @param {number} alpha - alpha (0-1)
    * @returns {void}
    * @throws {Error} if alpha is not between 0 and 1
+   * @deprecated since version 0.1.0 - use a setter instead
    */
   setAlpha(alpha) {
-    if (typeof alpha !== "number" || alpha < 0 || alpha > 1) {
-      throw new Error("alpha must be a number between 0 and 1");
-    }
+    deprecate("setAlpha()", "a setter", "0.1.0");
     this.a = alpha;
-    this.updateColorStr();
   }
 
   /**

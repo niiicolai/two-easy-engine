@@ -11,17 +11,10 @@ The [`HslaColor`](/api/HslaColor.html) model represents color using hue, saturat
 | 240°     | Blue      |
 | 360°     | Red again |
 
-You can update the hue of an [`HslaColor`](/api/HslaColor.html) object in two ways:
-
-Directly via the `h` property:
+You can update the hue of an [`HslaColor`](/api/HslaColor.html) object directly via the `h` property:
 ```js
 const color = new Two.HslaColor(0, 255, 100, 1); // Hue, Saturation, Lightness, Alpha
 color.h = 120; // Change hue to green
-```
-
-Using the `setHue()` method:
-```js
-color.setHue(240); // Change hue to blue
 ```
 
 ## Animate Hue
@@ -32,10 +25,12 @@ const multiplier = 3; // Speed multiplier
 
 renderer.requestAnimationFrame({
   beforeRender: () => {
-    const time = clock.getElapsedTime();
+    clock.update();
+
+    const time = clock.elapsedTime;
     const hue = (time * baseSpeed * multiplier) % 360; // Wrap hue within 0-360°
 
-    color.setHue(hue); // Update the hue property
+    color.h = hue; // Update the hue property
   },
 });
 ```
@@ -90,17 +85,17 @@ The example below demonstrates a complete solution for adding a random color ani
       const material = new Two.BasicMaterial({ fillStyle });
       const mesh = new Two.Mesh(geometry, material);
       mesh.transform.position.set(
-        renderer.getCenterX() - mesh.geometry.width / 2,
-        renderer.getCenterY() - mesh.geometry.height / 2
+        renderer.centerX - mesh.geometry.width / 2,
+        renderer.centerY - mesh.geometry.height / 2
       );
       scene.add(mesh);
 
       // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
         mesh.transform.position.set(
-          renderer.getCenterX() - mesh.geometry.width / 2,
-          renderer.getCenterY() - mesh.geometry.height / 2
+          renderer.centerX - mesh.geometry.width / 2,
+          renderer.centerY - mesh.geometry.height / 2
         );
       };
 
@@ -109,10 +104,12 @@ The example below demonstrates a complete solution for adding a random color ani
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const time = clock.getElapsedTime();
+          clock.update();
+
+          const time = clock.elapsedTime;
           const hue = (time * baseSpeed * multiplier) % 360; // Wrap hue within 0-360°
 
-          backgroundColor.setHue(hue); // Update the hue property
+          backgroundColor.h = hue; // Update the hue property
         },
       });
     </script>

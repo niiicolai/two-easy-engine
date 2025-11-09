@@ -38,12 +38,12 @@
       const material = new Two.BasicMaterial({ fillStyle });
       const geometry = new Two.CircleGeometry(55);
       const mesh = new Two.Mesh(geometry, material);
-      mesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
+      mesh.transform.position.set(renderer.centerX, renderer.centerY);
       scene.add(mesh);
 
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        mesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
+        mesh.transform.position.set(renderer.centerX, renderer.centerY);
       };
 
       const amplitude = 0.3; // how much it grows or shrinks
@@ -52,7 +52,9 @@
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const time = clock.getElapsedTime(); // total time since start
+          clock.update();
+
+          const time = clock.elapsedTime; // total time since start
           const pulse = baseScale + Math.sin(time * speed) * amplitude;
 
           mesh.transform.scale.set(pulse, pulse);

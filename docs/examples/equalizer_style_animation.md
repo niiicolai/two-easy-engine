@@ -64,18 +64,20 @@
           i * (barWidth + spacing) + barWidth / 2,
           baseY
         );
-        mesh.setUserData({ height: baseHeight });
+        mesh.userData = { height: baseHeight };
         scene.add(mesh);
         bars.push(mesh);
       }
 
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
       };
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const time = clock.getElapsedTime();
+          clock.update();
+          
+          const time = clock.elapsedTime;
 
           bars.forEach((bar, i) => {
             const data = bar.userData;
@@ -95,7 +97,7 @@
 
             // Color shift based on height
             const lightness = 40 + (data.height / 200) * 30;
-            bar.material.fillStyle.setLightness(lightness);
+            bar.material.fillStyle.l = lightness;
           });
         },
       });
