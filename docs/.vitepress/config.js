@@ -20,7 +20,14 @@ export default {
   description: "2D library for the HTML5 Canvas",
 
   themeConfig: {
-    nav: [{ text: "Home", link: "/" }],
+    nav: [
+      { text: "Home", link: "/" },
+      {
+        text: "Join Discord Community",
+        link: "https://discord.gg/W3r2scCX5r",
+        target: "_blank",
+      },
+    ],
     sidebar: [
       {
         text: "Get Started",
