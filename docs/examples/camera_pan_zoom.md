@@ -147,7 +147,7 @@
 
     // Resize
     window.addEventListener("resize", () => {
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.options.setSize(window.innerWidth, window.innerHeight);
     });
 
     // Start render loop
