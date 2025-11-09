@@ -1,0 +1,1 @@
+import{_ as a,c as e,o,ae as r}from"./chunks/framework.C4y2S-A3.js";const p=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"api/Camera2D.md","filePath":"api/Camera2D.md"}'),n={name:"api/Camera2D.md"};function d(s,t,m,i,c,l){return o(),e("div",null,[...t[0]||(t[0]=[r("",33)])])}const f=a(n,[["render",d]]);export{p as __pageData,f as default};
