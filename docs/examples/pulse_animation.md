@@ -33,17 +33,21 @@ const speed = 3; // control animation speed
 
 renderer.requestAnimationFrame({
   beforeRender: () => {
-    const time = clock.getElapsedTime(); // total time since start
+    clock.update();
+
+    const time = clock.elapsedTime; // total time since start
     const pulse = baseScale + Math.sin(time * speed) * amplitude;
 
-    obj.transform.scale.set(pulse, pulse);
+    mesh.transform.scale.set(pulse, pulse);
   },
 });
 ```
-Notice we are using `getElapsedTime()` instead of `getDeltaTime()`.
-This is because `getElapsedTime()` returns the total time since the clock started, ensuring that the value passed into `Math.sin()` increases continuously over time.
+
+Notice we are using `elapsedTime` instead of `deltaTime`.
+This is because `elapsedTime` returns the total time since the clock started, ensuring that the value passed into `Math.sin()` increases continuously over time.
 
 ## Complete Example
+
 Below you can see a complete example with the pulse effect fully implemented.
 This example continuously scales a green circle up and down using Math.sin() and the elapsed time from the engine’s clock.
 
@@ -88,12 +92,12 @@ This example continuously scales a green circle up and down using Math.sin() and
       const material = new Two.BasicMaterial({ fillStyle });
       const geometry = new Two.CircleGeometry(55);
       const mesh = new Two.Mesh(geometry, material);
-      mesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
+      mesh.transform.position.set(renderer.centerX, renderer.centerY);
       scene.add(mesh);
 
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        mesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
+        mesh.transform.position.set(renderer.centerX, renderer.centerY);
       };
 
       const amplitude = 0.3; // how much it grows or shrinks
@@ -102,7 +106,9 @@ This example continuously scales a green circle up and down using Math.sin() and
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const time = clock.getElapsedTime(); // total time since start
+          clock.update();
+
+          const time = clock.elapsedTime; // total time since start
           const pulse = baseScale + Math.sin(time * speed) * amplitude;
 
           mesh.transform.scale.set(pulse, pulse);
@@ -116,4 +122,3 @@ This example continuously scales a green circle up and down using Math.sin() and
 ## Preview
 
 <iframe src="/two-easy-engine/demos/pulse_animation.html" width="100%" height="400px" style="border:1px solid #ccc;"></iframe>
-

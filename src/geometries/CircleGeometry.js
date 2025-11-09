@@ -1,6 +1,8 @@
 import { Geometry } from "./Geometry.js";
-import { Transform } from "../core/Transform.js";
+// eslint-disable-next-line no-unused-vars
 import { Material } from "../materials/Material.js";
+// eslint-disable-next-line no-unused-vars
+import { Transform } from "../core/Transform.js";
 
 /**
  * @class CircleGeometry
@@ -9,18 +11,43 @@ import { Material } from "../materials/Material.js";
  */
 export class CircleGeometry extends Geometry {
   /**
+   * @private
+   * @property {number} radius - the circle's radius
+   */
+  #radius;
+
+  /**
    * @constructor
    * @param {number} radius - The radius of the circle (must be positive).
    * @throws {Error} If the radius is not a positive number.
    */
   constructor(radius) {
     super();
+    this.radius = radius;
+  }
 
-    if (typeof radius !== "number" || radius <= 0) {
+  /**
+   * @function get radius
+   * @description Get the radius
+   * @returns {number} radius
+   */
+  get radius() {
+    return this.#radius;
+  }
+
+  /**
+   * @function set radius
+   * @description Set radius
+   * @param {number} radius - the new radius
+   * @returns {void}
+   * @throws {Error} if radius is not a positive number
+   */
+  set radius(radius) {
+    if (typeof radius !== "number" || radius < 0) {
       throw new Error("radius must be a positive number");
     }
 
-    this.radius = radius;
+    this.#radius = radius;
   }
 
   /**
@@ -30,17 +57,8 @@ export class CircleGeometry extends Geometry {
    * @param {Transform} transform - The transform to apply to the circle
    * @param {Material} material - The material to use for rendering the circle
    * @returns {void}
-   * @throws {Error} if material is not of type Material
-   * @throws {Error} if transform is not of type Transform
    */
   drawContext2D(ctx, transform, material) {
-    if (!(material instanceof Material)) {
-      throw new Error("material must be of type Material");
-    }
-    if (!(transform instanceof Transform)) {
-      throw new Error("transform must be of type Transform");
-    }
-
     const { position, rotation, scale } = transform;
     const radius = this.radius * ((scale.x + scale.y) / 2);
 

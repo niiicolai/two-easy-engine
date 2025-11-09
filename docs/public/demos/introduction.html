@@ -43,7 +43,7 @@
       const textFillStyle = new Two.HslaColor(50, 100, 60, 1);
       const textMaterial = new Two.BasicMaterial({ fillStyle: textFillStyle });
       const textMesh = new Two.Mesh(textGeometry, textMaterial);
-      textMesh.transform.position.set(renderer.getCenterX(), renderer.getCenterY());
+      textMesh.transform.position.set(renderer.centerX, renderer.centerY);
       scene.add(textMesh);
 
       const lights = [];
@@ -71,10 +71,10 @@
       }
 
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
         textMesh.transform.position.set(
-          renderer.getCenterX(),
-          renderer.getCenterY()
+          renderer.centerX,
+          renderer.centerY
         );
       };
 
@@ -83,16 +83,18 @@
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const time = clock.getElapsedTime();
+          clock.update();
+
+          const time = clock.elapsedTime;
           const hue = (time * 60 * hueSpeed) % 360;
 
-          textFillStyle.setHue(hue);
+          textFillStyle.h = hue;
 
           for (let i = 0; i < num; i++) {
             const light = lights[i];
 
             light.intensity = Math.random() * 2;
-            light.color.setHue(hue);
+            light.color.h = hue;
             light.transform.position.y += moveSpeed;
 
             if (light.transform.position.y > window.innerHeight + 20) {

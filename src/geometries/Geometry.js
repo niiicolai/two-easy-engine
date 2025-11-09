@@ -13,6 +13,15 @@ export class Geometry {
    */
   constructor() {
   }
+
+  /**
+   * @function checkMaterialConflicts
+   * @description Check for any conflicts between the geometry and the provided material
+   * @param {Material} material - The material to check against
+   * @returns {void}
+   */
+  // eslint-disable-next-line no-unused-vars
+  checkMaterialConflicts(material) {}
   
   /**
    * @function drawContext2D

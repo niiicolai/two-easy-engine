@@ -59,7 +59,7 @@
       }
 
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
       };
 
       const speed = 0.5;
@@ -67,10 +67,12 @@
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const time = clock.getElapsedTime();
+          clock.update();
+
+          const time = clock.elapsedTime;
           const radius = baseRadius + Math.sin(time * speed);
-          const centerX = renderer.getCenterX();
-          const centerY = renderer.getCenterY();
+          const centerX = renderer.centerX;
+          const centerY = renderer.centerY;
 
           particles.forEach((p, i) => {
             const angle = (i / numParticles) * Math.PI * 2;

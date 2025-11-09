@@ -1,6 +1,9 @@
 import { Camera2D } from "../cameras/Camera2D.js";
-import { Color } from "../colors/Color.js";
 import { Scene } from "../scenes/Scene.js";
+import { RendererOptions } from "./RendererOptions.js";
+import { deprecate } from "../utilities/deprecate.js";
+// eslint-disable-next-line no-unused-vars
+import { Color } from "../colors/Color.js";
 
 /**
  * @class Renderer
@@ -8,66 +11,165 @@ import { Scene } from "../scenes/Scene.js";
  */
 export class Renderer {
   /**
+   * @private
+   * @property {string} #contextType - The canvas rendering context type
+   */
+  #contextType;
+
+  /**
+   * @private
+   * @property {HTMLCanvasElement} #canvas - The canvas element
+   */
+  #canvas;
+
+  /**
+   * @private
+   * @property {Scene} #scene - The scene
+   */
+  #scene;
+
+  /**
+   * @private
+   * @property {Camera2D} #camera - The camera
+   */
+  #camera;
+
+  /**
+   * @private
+   * @property {number|null} #animationFrameId - The requestAnimationFrame ID
+   */
+  #animationFrameId = null;
+
+  /**
+   * @private
+   * @property {RendererOptions} #options - The renderer options
+   */
+  #options;
+
+  /**
    * @constructor
-   * @param {string} context - The canvas rendering context
+   * @param {string} contextType - The canvas rendering context type
    * @param {HTMLCanvasElement} canvas - The canvas element
    * @param {Scene} scene - The scene
    * @param {Camera2D} camera - The camera
    * @param {Object} [options] - Render configuration options.
-   * @param {number} [options.width=window.innerWidth] - Initial canvas width
-   * @param {number} [options.height=window.innerHeight] - Initial canvas height
-   * @param {number} [options.devicePixelRatio=window.devicePixelRatio] - Initial device pixel ratio
-   * @param {string|Color} [options.backgroundColor='transparent'] - Initial background color
-   * @throws {Error} If canvas is not of type HTMLCanvasElement
+   * @param {number} [options.width] - Initial canvas width
+   * @param {number} [options.height] - Initial canvas height
+   * @param {number} [options.devicePixelRatio=RendererOptions.DEFAULT_OPTIONS] - Initial device pixel ratio
+   * @param {string|Color} [options.backgroundColor=RendererOptions.DEFAULT_OPTIONS] - Initial background color
    * @throws {Error} If scene is not of type Scene
    * @throws {Error} If camera is not of type Camera2D
    * @throws {Error} If options.width or options.height is not a number
    * @throws {Error} If options.devicePixelRatio is not a number
    * @throws {Error} If options.backgroundColor is not a string or Color
    */
-  constructor(
-    context,
-    canvas,
-    scene,
-    camera,
-    options = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      devicePixelRatio: window.devicePixelRatio || 1,
-      backgroundColor: "transparent",
+  constructor(contextType, canvas, scene, camera, options = {}) {
+    if (typeof contextType !== "string") {
+      throw new Error("contextType must be a string");
     }
-  ) {
-    const { width, height, devicePixelRatio, backgroundColor } = options;
-    if (typeof context !== "string") {
-      throw new Error("context must be a string");
-    }
+
+    // Use setters to validate
+    this.scene = scene;
+    this.camera = camera;
+
+    // Readonly properties
+    this.#contextType = contextType;
+    this.#canvas = canvas;
+    
+    // Options
+    this.#options = new RendererOptions(this, options);
+    
+    // Initialize context
+    this._initContext();
+  }
+
+  /**
+   * @function get options
+   * @description Gets the renderer options
+   * @returns {RendererOptions} The renderer options
+   */
+  get options() {
+    return this.#options;
+  }
+
+  /**
+   * @function get contextType
+   * @description Gets the rendering context type
+   * @returns {string} The rendering context type
+   */
+  get contextType() {
+    return this.#contextType;
+  }
+
+  /**
+   * @function get canvas
+   * @description Gets the canvas element
+   * @returns {HTMLCanvasElement} The canvas element
+   */
+  get canvas() {
+    return this.#canvas;
+  }
+
+  /**
+   * @function get scene
+   * @description Gets the scene
+   * @returns {Scene} The scene
+   */
+  get scene() {
+    return this.#scene;
+  }
+
+  /**
+   * @function set scene
+   * @description Sets the scene
+   * @param {Scene} scene - The new scene to set
+   */
+  set scene(scene) {
     if (!(scene instanceof Scene)) {
       throw new Error("scene must be of type Scene");
     }
+
+    this.#scene = scene;
+  }
+
+  /**
+   * @function get camera
+   * @description Gets the camera
+   * @returns {Camera2D} The camera
+   */
+  get camera() {
+    return this.#camera;
+  }
+
+  /**
+   * @function set camera
+   * @description Sets the camera
+   * @param {Camera2D} camera - The new camera to set
+   */
+  set camera(camera) {
     if (!(camera instanceof Camera2D)) {
       throw new Error("camera must be of type Camera2D");
     }
-    if (typeof width !== "number" || typeof height !== "number") {
-      throw new Error("width and height must be numbers");
-    }
-    if (typeof devicePixelRatio !== "number") {
-      throw new Error("devicePixelRatio must be a number");
-    }
-    if (
-      typeof backgroundColor !== "string" &&
-      !(backgroundColor instanceof Color)
-    ) {
-      throw new Error("backgroundColor must be of type Color or string");
-    }
 
-    this.context = context;
-    this.canvas = canvas;
-    this.scene = scene;
-    this.camera = camera;
-    this.options = options;
-    this.cache = { halfWidth: width / 2, halfHeight: height / 2 };
-    this.animationFrameId = null;
-    this.initContext();
+    this.#camera = camera;
+  }
+
+  /**
+   * @function get centerX
+   * @description Gets the center x value
+   * @returns {number} The center x value
+   */
+  get centerX() {
+    return this.#options.cache.halfWidth;
+  }
+
+  /**
+   * @function get centerY
+   * @description Gets the center y value
+   * @returns {number} The center y value
+   */
+  get centerY() {
+    return this.#options.cache.halfHeight;
   }
 
   /**
@@ -76,16 +178,11 @@ export class Renderer {
    * @param {string|Color} backgroundColor - The color
    * @returns {void}
    * @throws {Error} If backgroundColor is not a string or Color
+   * @deprecated since version 0.1.0 - Use the options.backgroundColor setter instead
    */
   setBackgroundColor(backgroundColor) {
-    if (
-      typeof backgroundColor !== "string" &&
-      !(backgroundColor instanceof Color)
-    ) {
-      throw new Error("backgroundColor must be of type Color or string");
-    }
-
-    this.options.backgroundColor = backgroundColor;
+    deprecate("setBackgroundColor()", "options.backgroundColor setter", "0.1.0");
+    this.#options.backgroundColor = backgroundColor;
   }
 
   /**
@@ -94,18 +191,13 @@ export class Renderer {
    * @param {number} width - The width of the canvas
    * @param {number} height - The height of the canvas
    * @returns {void}
-   * @throws {Error} If width or height is not a number
+   * @throws {Error} If width is not a positive number
+   * @throws {Error} If height is not a positive number
+   * @deprecated since version 0.1.0 - Use the options.setSize() method instead
    */
   setSize(width, height) {
-    if (typeof width !== "number" || typeof height !== "number") {
-      throw new Error("width and height must be numbers");
-    }
-    this.options.width = width;
-    this.options.height = height;
-    this.cache.halfWidth = width / 2;
-    this.cache.halfHeight = height / 2;
-
-    this.recalculateDevicePixelRatio();
+    deprecate("setSize()", "options.setSize()", "0.1.0");
+    this.#options.setSize(width, height);
   }
 
   /**
@@ -114,13 +206,11 @@ export class Renderer {
    * @param {number} dpr - The device pixel ratio
    * @returns {void}
    * @throws {Error} If dpr is not a number
+   * @deprecated since version 0.1.0 - Use the options.devicePixelRatio setter instead
    */
   setDevicePixelRatio(dpr) {
-    if (typeof dpr !== "number") {
-      throw new Error("dpr must be a number");
-    }
-    this.options.devicePixelRatio = dpr;
-
+    deprecate("setDevicePixelRatio()", "options.devicePixelRatio setter", "0.1.0");
+    this.#options.devicePixelRatio = dpr;
     this.recalculateDevicePixelRatio();
   }
 
@@ -128,29 +218,31 @@ export class Renderer {
    * @function getCenterX
    * @description Returns a numerical value specifying the center x value
    * @returns {number}
+   * @deprecated since version 0.1.0 - Use the centerX getter instead
    */
   getCenterX() {
-    return this.cache.halfWidth;
+    deprecate("getCenterX()", "centerX getter", "0.1.0");
+    return this.#options.cache.halfWidth;
   }
 
   /**
    * @function getCenterY
    * @description Returns a numerical value specifying the center y value
    * @returns {number}
+   * @deprecated since version 0.1.0 - Use the centerY getter instead
    */
   getCenterY() {
-    return this.cache.halfHeight;
+    deprecate("getCenterY()", "centerY getter", "0.1.0");
+    return this.#options.cache.halfHeight;
   }
 
   /**
-   * @function initContext
+   * @function _initContext
    * @description Init the rendering context
    * @returns {void}
    */
-  initContext() {
-    throw new Error(
-      "initContext() is not implemented in the subclass"
-    );
+  _initContext() {
+    throw new Error("_initContext() is not implemented in the subclass");
   }
 
   /**
@@ -170,9 +262,7 @@ export class Renderer {
    * @returns {void}
    */
   render() {
-    throw new Error(
-      "render() is not implemented in the subclass"
-    );
+    throw new Error("render() is not implemented in the subclass");
   }
 
   /**
@@ -199,18 +289,14 @@ export class Renderer {
       throw new Error("afterRender must be a function");
     }
 
-    function loop() {
-      if (beforeRender) {
-        beforeRender();
-      }
+    const loop = () => {
+      if (beforeRender) beforeRender();
       this.render();
-      if (afterRender) {
-        afterRender();
-      }
-      requestAnimationFrame(loop.bind(this));
-    }
+      if (afterRender) afterRender();
+      this.#animationFrameId = requestAnimationFrame(loop.bind(this));
+    };
 
-    this.animationFrameId = requestAnimationFrame(loop.bind(this));
+    this.#animationFrameId = requestAnimationFrame(loop.bind(this));
   }
 
   /**
@@ -219,9 +305,9 @@ export class Renderer {
    * @returns {void}
    */
   cancelAnimationFrame() {
-    if (!this.animationFrameId) return;
+    if (this.#animationFrameId === null) return;
 
-    cancelAnimationFrame(this.animationFrameId);
-    this.animationFrameId = null;
+    cancelAnimationFrame(this.#animationFrameId);
+    this.#animationFrameId = null;
   }
 }

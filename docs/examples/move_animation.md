@@ -25,8 +25,10 @@ const speed = 1.5; // how fast it moves
 
 renderer.requestAnimationFrame({
   beforeRender: () => {
-    const centerX = renderer.getCenterX();
-    const time = clock.getElapsedTime(); // total time since start
+    clock.update();
+
+    const centerX = renderer.centerX;
+    const time = clock.elapsedTime; // total time since start
 
     obj.transform.position.x = centerX + Math.sin(time * speed) * amplitude;
   },
@@ -85,12 +87,12 @@ You can find a complete example below that demonstrates how to animate an object
       scene.add(mesh);
 
       mesh.transform.position.set(
-        window.innerWidth / 2,
-        window.innerHeight / 2
+        renderer.centerX,
+        renderer.centerY
       );
 
       window.addEventListener("resize", () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
       });
 
       const amplitude = 150; // how far it moves from the center
@@ -98,8 +100,10 @@ You can find a complete example below that demonstrates how to animate an object
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const centerX = renderer.getCenterX();
-          const time = clock.getElapsedTime(); // total time since start
+          clock.update();
+
+          const centerX = renderer.centerX;
+          const time = clock.elapsedTime; // total time since start
 
           mesh.transform.position.x =
             centerX + Math.sin(time * speed) * amplitude;

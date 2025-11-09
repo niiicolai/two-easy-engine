@@ -47,19 +47,19 @@
         })
       );
       mesh.transform.position.set(
-        renderer.getCenterX() - mesh.geometry.width / 2,
-        renderer.getCenterY() - mesh.geometry.height / 2
+        renderer.centerX - mesh.geometry.width / 2,
+        renderer.centerY - mesh.geometry.height / 2
       );
       scene.add(mesh);
 
       // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
         // Resize the canvas
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
         // Set the new center position
         mesh.transform.position.set(
-          renderer.getCenterX() - mesh.geometry.width / 2,
-          renderer.getCenterY() - mesh.geometry.height / 2
+          renderer.centerX - mesh.geometry.width / 2,
+          renderer.centerY - mesh.geometry.height / 2
         );
       };
 
@@ -68,7 +68,9 @@
       // Animation loop
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const delta = clock.getDeltaTime();
+          clock.update();
+
+          const delta = clock.deltaTime;
 
           mesh.transform.rotation += delta * speed; // Rotate the rectangle
         },

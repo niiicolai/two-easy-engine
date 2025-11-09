@@ -47,8 +47,8 @@
         backgroundColor: "black",
       });
 
-      const centerX = renderer.getCenterX();
-      const centerY = renderer.getCenterY();
+      const centerX = renderer.centerX;
+      const centerY = renderer.centerY;
 
       const rectOffset = new Two.Vector2(-150, -50);
       const logoOffset = new Two.Vector2(50, 50);
@@ -115,7 +115,7 @@
       scene.add(circleMesh);
 
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
       };
 
       const movementSpeed = 0.5;
@@ -124,10 +124,12 @@
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const centerX = renderer.getCenterX();
-          const centerY = renderer.getCenterY();
-          const time = clock.getElapsedTime() * movementSpeed;
-          const delta = clock.getDeltaTime() * rotationSpeed;
+          clock.update();
+
+          const centerX = renderer.centerX;
+          const centerY = renderer.centerY;
+          const time = clock.elapsedTime * movementSpeed;
+          const delta = clock.deltaTime * rotationSpeed;
 
           logoTexture.setImageOffset((time * 50) % 100, 0);
 

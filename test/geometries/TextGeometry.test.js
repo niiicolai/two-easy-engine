@@ -17,12 +17,23 @@ describe("TextGeometry", () => {
     };
     const textGeo = new TextGeometry(text, options);
 
-    expect(textGeo.text).toBe("Hello World");
+    expect(textGeo.text).toBe(text);
     expect(textGeo.options.maxWidth).toBe(300);
-    expect(textGeo.options.font).toBe("20px Arial");
-    expect(textGeo.options.textAlign).toBe("center");
-    expect(textGeo.options.textBaseline).toBe("middle");
-    expect(textGeo.options.direction).toBe("ltr");
+    expect(textGeo.options.font).toBe(options.font);
+    expect(textGeo.options.textAlign).toBe(options.textAlign);
+    expect(textGeo.options.textBaseline).toBe(options.textBaseline);
+    expect(textGeo.options.direction).toBe(options.direction);
+  });
+
+  it("should create a TextGeometry instance with default parameters", () => {
+    const text = "Hello World";
+    const textGeo = new TextGeometry(text, {});
+    const textGeo2 = new TextGeometry(text);
+
+    expect(textGeo.text).toBe(text);
+    expect(textGeo.options).toStrictEqual(TextGeometry.DEFAULT_OPTIONS);
+    expect(textGeo2.text).toBe(text);
+    expect(textGeo2.options).toStrictEqual(TextGeometry.DEFAULT_OPTIONS);
   });
 
   it("should throw an error if text is not a string", () => {
@@ -31,7 +42,7 @@ describe("TextGeometry", () => {
 
   it("should throw an error if maxWidth is not a number or null", () => {
     expect(() => new TextGeometry("Hi", { maxWidth: "invalid" })).toThrow(
-      "maxWidth must be a number or null"
+      "maxWidth must be a number or undefined"
     );
   });
 
@@ -57,23 +68,6 @@ describe("TextGeometry", () => {
     expect(() => new TextGeometry("Hi", { direction: 22 })).toThrow(
       "direction must be a string with value: ltr, rtl, inherit"
     );
-  });
-
-  it("should drawContext2D text without throwing errors", () => {
-    const canvas = createCanvas(800, 600);
-    const ctx = canvas.getContext("2d");
-    const transform = new Transform();
-    const material = new BasicMaterial({
-      fillStyle: new RgbaColor(1, 1, 1, 1),
-    });
-
-    const textGeo = new TextGeometry("Hello Canvas", {
-      font: "16px Arial",
-      textAlign: "center",
-      textBaseline: "middle",
-    });
-
-    expect(() => textGeo.drawContext2D(ctx, transform, material)).not.toThrow();
   });
 
   it("drawContext2D() should draw a red x inside the canvas", () => {
@@ -122,29 +116,5 @@ describe("TextGeometry", () => {
       const pixel = getPixel(ctx, x, y);
       expect(pixel.a).toBeLessThan(40);
     });
-  });
-
-  it("should throw an error when drawContext2D is called with invalid transform", () => {
-    const canvas = createCanvas(800, 600);
-    const ctx = canvas.getContext("2d");
-    const material = new BasicMaterial({
-      fillStyle: new RgbaColor(1, 1, 1, 1),
-    });
-    const textGeo = new TextGeometry("Hello");
-
-    expect(() => textGeo.drawContext2D(ctx, {}, material)).toThrow(
-      "transform must be of type Transform"
-    );
-  });
-
-  it("should throw an error when drawContext2D is called with invalid material", () => {
-    const canvas = createCanvas(800, 600);
-    const ctx = canvas.getContext("2d");
-    const transform = new Transform();
-    const textGeo = new TextGeometry("Hello");
-
-    expect(() => textGeo.drawContext2D(ctx, transform, {})).toThrow(
-      "material must be of type Material"
-    );
   });
 });

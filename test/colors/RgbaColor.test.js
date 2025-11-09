@@ -2,25 +2,25 @@ import { describe, it, expect, test } from "vitest";
 import { RgbaColor } from "../../src/colors/RgbaColor.js";
 
 describe("RgbaColor", () => {
-  test.each(["a", -1, 256])("should throw an error if r is invalid (%p)", (r) => {
+  test.each(["a", -1, 256])("should throw an error if r is invalid (%p) in constructor", (r) => {
     expect(() => new RgbaColor(r, 2, 3, 1)).toThrow(
       "r must be a number between 0 and 255"
     );
   });
 
-  test.each(["a", -1, 256])("should throw an error if g is invalid (%p)", (g) => {
+  test.each(["a", -1, 256])("should throw an error if g is invalid (%p) in constructor", (g) => {
     expect(() => new RgbaColor(1, g, 3, 1)).toThrow(
       "g must be a number between 0 and 255"
     );
   });
 
-  test.each(["a", -1, 256])("should throw an error if b is invalid (%p)", (b) => {
+  test.each(["a", -1, 256])("should throw an error if b is invalid (%p) in constructor", (b) => {
     expect(() => new RgbaColor(1, 2, b, 1)).toThrow(
       "b must be a number between 0 and 255"
     );
   });
 
-  test.each(["a", -1, 2])("should throw an error if a is invalid (%p)", (a) => {
+  test.each(["a", -1, 2])("should throw an error if a is invalid (%p) in constructor", (a) => {
     expect(() => new RgbaColor(1, 2, 3, a)).toThrow(
       "a must be a number between 0 and 1"
     );
@@ -90,7 +90,7 @@ describe("RgbaColor", () => {
 
   test.each(["a", -1, 2])("setAlpha() should throw for invalid a = %p", (a) => {
     const color = new RgbaColor(1, 2, 3, 1);
-    expect(() => color.setAlpha(a)).toThrow("alpha must be a number between 0 and 1");
+    expect(() => color.setAlpha(a)).toThrow("a must be a number between 0 and 1");
   });
 
   it("toRgbaString() should return rgba() format", () => {

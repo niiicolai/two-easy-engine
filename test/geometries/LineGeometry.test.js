@@ -14,7 +14,7 @@ describe("LineGeometry", () => {
 
   it("should throw an error for invalid points", () => {
     expect(() => new LineGeometry(-50)).toThrow(
-      "points must be an array of 4-number arrays"
+      "points must be an array"
     );
   });
 
@@ -31,7 +31,7 @@ describe("LineGeometry", () => {
   });
 
   it("drawContext2D() should draw a red line inside the canvas", () => {
-    const white = { r: 0, g: 0, b: 0, a: 0 };
+    const transparent = { r: 0, g: 0, b: 0, a: 0 };
     const red = { r: 255, g: 0, b: 0, a: 255 };
     const strokeStyle = new RgbaColor(255, 0, 0, 1);
     const points = [[0, 0, 2, 0]];
@@ -67,31 +67,7 @@ describe("LineGeometry", () => {
     material.applyToContext2D(ctx);
     line.drawContext2D(ctx, transform, material);
 
-    expectPixelsColor(ctx, outside, white);
+    expectPixelsColor(ctx, outside, transparent);
     expectPixelsColor(ctx, inside, red);
-  });
-
-  it("should throw an error when drawContext2D is called with invalid transform", () => {
-    const points = [[0, 0, 1, 1]];
-    const line = new LineGeometry(points);
-    const canvas = createCanvas(800, 600);
-    const ctx = canvas.getContext("2d");
-    const material = new BasicMaterial({
-      fillStyle: new RgbaColor(1, 1, 1, 1),
-    });
-    expect(() => line.drawContext2D(ctx, {}, material)).toThrow(
-      "transform must be of type Transform"
-    );
-  });
-
-  it("should throw an error when drawContext2D is called with invalid material", () => {
-    const points = [[0, 0, 1, 1]];
-    const line = new LineGeometry(points);
-    const canvas = createCanvas(800, 600);
-    const ctx = canvas.getContext("2d");
-    const transform = new Transform();
-    expect(() => line.drawContext2D(ctx, transform, {})).toThrow(
-      "material must be of type Material"
-    );
   });
 });

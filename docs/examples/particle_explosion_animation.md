@@ -44,8 +44,8 @@
         backgroundColor: "black",
       });
 
-      const centerX = renderer.getCenterX();
-      const centerY = renderer.getCenterY();
+      const centerX = renderer.centerX;
+      const centerY = renderer.centerY;
       
       const fadeSpeed = 0.8;
       const minSpeed = 250;
@@ -66,13 +66,13 @@
 
         const angle = Math.random() * Math.PI * 2;
         const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
-        mesh.setUserData({
+        mesh.userData = {
           velocity: new Two.Vector2(
             Math.cos(angle) * speed,
             Math.sin(angle) * speed
           ),
           life: maxLife,
-        });
+        };
 
         scene.add(mesh);
         particles.push(mesh);
@@ -80,14 +80,16 @@
 
       // Resize handling
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
       };
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
-          const centerX = renderer.getCenterX();
-          const centerY = renderer.getCenterY();
-          const delta = clock.getDeltaTime();
+          clock.update();
+
+          const centerX = renderer.centerX;
+          const centerY = renderer.centerY;
+          const delta = clock.deltaTime;
 
           particles.forEach((p) => {
             // Move outward
@@ -102,7 +104,7 @@
             // Fade out gradually
             p.userData.life -= delta * fadeSpeed;
             const alpha = Math.max(0, p.userData.life);
-            p.material.fillStyle.setAlpha(alpha);
+            p.material.fillStyle.a = alpha;
 
             // Scale down a bit as it fades
             p.transform.scale.set(alpha, alpha);

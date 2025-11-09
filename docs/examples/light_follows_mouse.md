@@ -43,8 +43,8 @@
         backgroundColor: "black",
       });
 
-      const centerX = renderer.getCenterX();
-      const centerY = renderer.getCenterY();
+      const centerX = renderer.centerX;
+      const centerY = renderer.centerY;
 
       const light = new Two.PointLight2D(
         200,
@@ -69,10 +69,10 @@
       scene.add(rectMesh);
 
       window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.options.setSize(window.innerWidth, window.innerHeight);
         rectMesh.transform.position.set(
-          renderer.getCenterX() - rectMesh.geometry.width / 2,
-          renderer.getCenterY() - rectMesh.geometry.height / 2
+          renderer.centerX - rectMesh.geometry.width / 2,
+          renderer.centerY - rectMesh.geometry.height / 2
         );
       };
 
@@ -84,8 +84,10 @@
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
+          clock.update();
+
           const speed = 0.5;
-          const delta = clock.getDeltaTime();
+          const delta = clock.deltaTime;
 
           rectMesh.transform.rotation += delta * speed;
           light.transform.position.x = mouse.x;

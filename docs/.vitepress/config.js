@@ -69,7 +69,8 @@ export default {
         items: [
           { text: "Image Material", link: "/examples/image_material" },
           { text: "Text Geometry", link: "/examples/text_geometry" },
-          { text: "Custom Line", link: "/examples/custom_line_shape" },
+          { text: "Line Geometry", link: "/examples/custom_line_shape" },
+          { text: "Polygon Geometry", link: "/examples/polygon_geometry" },
         ],
       },
       {
@@ -97,6 +98,17 @@ export default {
         text: "API Reference",
         collapsed: true,
         items: getApiSidebar(),
+      },
+      {
+        text: "Mathematics for 2D Graphics",
+        collapsed: true,
+        items: [
+          {
+            text: "Vector Fundamentals",
+            link: "https://www.bergandersen.com/vector-math-animation/",
+            target: "_blank",
+          },
+        ],
       },
       {
         text: "Resources",

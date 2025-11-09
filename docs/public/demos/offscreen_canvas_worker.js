@@ -27,9 +27,11 @@ onmessage = (e) => {
 
     renderer.requestAnimationFrame({
       beforeRender: () => {
-        const centerX = renderer.getCenterX();
-        const centerY = renderer.getCenterY();
-        const time = clock.getElapsedTime();
+        clock.update();
+
+        const centerX = renderer.centerX;
+        const centerY = renderer.centerY;
+        const time = clock.elapsedTime;
 
         particles.forEach((p) => {
           p.transform.position.set(
@@ -42,6 +44,6 @@ onmessage = (e) => {
   }
 
   if (renderer && e.data.width && e.data.height) {
-    renderer.setSize(e.data.width, e.data.height);
+    renderer.options.setSize(e.data.width, e.data.height);
   }
 };
