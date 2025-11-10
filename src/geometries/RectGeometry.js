@@ -3,9 +3,9 @@ import { Transform } from "../core/Transform.js";
 import { Material } from "../materials/Material.js";
 
 /**
+ * This class provides a rectangle shape with width and height properties.
  * @class RectGeometry
- * @extends Geometry
- * @classdesc This class provides a rectangle shape with width and height properties.
+ * @augments Geometry
  */
 export class RectGeometry extends Geometry {
   /**
@@ -21,7 +21,8 @@ export class RectGeometry extends Geometry {
   #height;
 
   /**
-   * @constructor
+   * This class provides a rectangle shape with width and height properties.
+   * @class
    * @param {number} width - The width of the rectangle (must be positive).
    * @param {number} height - The height of the rectangle (must be positive).
    * @throws {Error} If the width is not a positive number.
@@ -34,8 +35,7 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * @function get width
-   * @description Get the width
+   * Get the width
    * @returns {number} width
    */
   get width() {
@@ -43,8 +43,7 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * @function set width
-   * @description Set width
+   * Set the width
    * @param {number} width - the new width
    * @returns {void}
    * @throws {Error} if width is not a positive number
@@ -58,8 +57,7 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * @function get height
-   * @description Get the height
+   * Get the height
    * @returns {number} height
    */
   get height() {
@@ -67,8 +65,7 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * @function set height
-   * @description Set height
+   * Set the height
    * @param {number} height - the new height
    * @returns {void}
    * @throws {Error} if height is not a positive number
@@ -82,8 +79,7 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * @function drawContext2D
-   * @description Draws the rectangle onto the given canvas 2D context
+   * Draws the rectangle onto the given canvas 2D context
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the rectangle
    * @param {Material} material - The material to use for rendering the rectangle

@@ -3,9 +3,9 @@ import { Geometry } from "../geometries/Geometry.js";
 import { Material } from "../materials/Material.js";
 
 /**
+ * This class combines geometry and material to create a drawable object.
  * @class Mesh
- * @extends Object2D
- * @classdesc This class combines geometry and material to create a drawable object.
+ * @augments Object2D
  */
 export class Mesh extends Object2D {
   /**
@@ -27,7 +27,8 @@ export class Mesh extends Object2D {
   #material;
 
   /**
-   * @constructor
+   * This class combines geometry and material to create a drawable object.
+   * @class
    * @param {Geometry} geometry - The mesh's geometry
    * @param {Material} material - The mesh's material
    * @throws {Error} If geometry is not of type Geometry
@@ -41,8 +42,7 @@ export class Mesh extends Object2D {
   }
 
   /**
-   * @function set geometry
-   * @description Sets the mesh's geometry
+   * Sets the mesh's geometry
    * @param {Geometry} newGeometry - The new geometry to set
    * @returns {void}
    * @throws {Error} If newGeometry is not of type Geometry
@@ -60,8 +60,7 @@ export class Mesh extends Object2D {
   }
 
   /**
-   * @function get geometry
-   * @description Gets the mesh's geometry
+   * Gets the mesh's geometry
    * @returns {Geometry} The mesh's geometry
    */
   get geometry() {
@@ -69,8 +68,7 @@ export class Mesh extends Object2D {
   }
 
   /**
-   * @function set material
-   * @description Sets the mesh's material
+   * Sets the mesh's material
    * @param {Material} newMaterial - The new material to set
    * @returns {void}
    * @throws {Error} If newMaterial is not of type Material
@@ -88,8 +86,7 @@ export class Mesh extends Object2D {
   }
 
   /**
-   * @function get material
-   * @description Gets the mesh's material
+   * Gets the mesh's material
    * @returns {Material} The mesh's material
    */
   get material() {
@@ -97,8 +94,7 @@ export class Mesh extends Object2D {
   }
 
   /**
-   * @function drawContext2D
-   * @description Draws the mesh onto the given canvas 2D context
+   * Draws the mesh onto the given canvas 2D context
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @returns {void}
    */

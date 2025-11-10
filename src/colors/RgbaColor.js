@@ -2,9 +2,9 @@ import { Color } from "./Color.js";
 import { deprecate } from "../utilities/deprecate.js";
 
 /**
+ * A color defined by red, green, blue, and alpha
  * @class RgbaColor
- * @extends Color
- * @classdesc A color defined by red, green, blue, and alpha
+ * @augments Color
  */
 export class RgbaColor extends Color {
   /**
@@ -38,7 +38,8 @@ export class RgbaColor extends Color {
   #isBatchSetting = false;
 
   /**
-   * @constructor
+   * A color defined by red, green, blue, and alpha
+   * @class
    * @param {number} r - red (0-255)
    * @param {number} g - green (0-255)
    * @param {number} b - blue (0-255)
@@ -52,8 +53,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function get r
-   * @description Get red
+   * Get red
    * @returns {number} red (0-255)
    */
   get r() {
@@ -61,8 +61,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function set r
-   * @description Set red
+   * Set red
    * @param {number} r - red (0-255)
    * @returns {void}
    * @throws {Error} if r is not between 0 and 255
@@ -78,8 +77,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function get g
-   * @description Get green
+   * Get green
    * @returns {number} green (0-255)
    */
   get g() {
@@ -87,8 +85,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function set g
-   * @description Set green
+   * Set green
    * @param {number} g - green (0-255)
    * @returns {void}
    * @throws {Error} if g is not between 0 and 255
@@ -104,8 +101,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function get b
-   * @description Get blue
+   * Get blue
    * @returns {number} blue (0-255)
    */
   get b() {
@@ -113,8 +109,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function set b
-   * @description Set blue
+   * Set blue
    * @param {number} b - blue (0-255)
    * @returns {void}
    * @throws {Error} if b is not between 0 and 255
@@ -130,8 +125,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function get a
-   * @description Get alpha
+   * Get alpha
    * @returns {number} alpha (0-1)
    */
   get a() {
@@ -139,8 +133,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function set a
-   * @description Set alpha
+   * Set alpha
    * @param {number} a - alpha (0-1)
    * @returns {void}
    * @throws {Error} if a is not between 0 and 1
@@ -156,8 +149,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function set
-   * @description Set the rgba color
+   * Set the rgba color
    * @param {number} r - red (0-255)
    * @param {number} g - green (0-255)
    * @param {number} b - blue (0-255)
@@ -179,8 +171,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function updateColorStr
-   * @description update the colorStr property based on the rgba props.
+   * update the colorStr property based on the rgba props.
    * @returns {void}
    */
   updateColorStr() {
@@ -188,8 +179,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function setRed
-   * @description Set red
+   * Set red
    * @param {number} r - red (0-255)
    * @returns {void}
    * @throws {Error} if r is not between 0 and 255
@@ -201,8 +191,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function setGreen
-   * @description Set green
+   * Set green
    * @param {number} g - green (0-255)
    * @returns {void}
    * @throws {Error} if g is not between 0 and 255
@@ -214,8 +203,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function setBlue
-   * @description Set blue
+   * Set blue
    * @param {number} b - blue (0-255)
    * @returns {void}
    * @throws {Error} if b is not between 0 and 255
@@ -227,8 +215,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function setAlpha
-   * @description Set the alpha
+   * Set the alpha
    * @param {number} a - alpha (0-1)
    * @returns {void}
    * @throws {Error} if a is not between 0 and 1
@@ -240,8 +227,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function toRgbaString
-   * @description Returns a string representation of the color in rgba format
+   * Returns a string representation of the color in rgba format
    * @returns {string}
    */
   toRgbaString() {
@@ -249,8 +235,7 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * @function toRgbString
-   * @description Returns a string representation of the color in rgb format
+   * Returns a string representation of the color in rgb format
    * @returns {string}
    */
   toRgbString() {

@@ -6,8 +6,8 @@ import { deprecate } from "../utilities/deprecate.js";
 import { Color } from "../colors/Color.js";
 
 /**
+ * The base renderer class
  * @class Renderer
- * @classdesc The base renderer class
  */
 export class Renderer {
   /**
@@ -47,7 +47,14 @@ export class Renderer {
   #options;
 
   /**
-   * @constructor
+   * @private
+   * @property {number|null} #initializedContext - A flag determine if the context is initialized
+   */
+  #initializedContext;
+
+  /**
+   * The base renderer class
+   * @class
    * @param {string} contextType - The canvas rendering context type
    * @param {HTMLCanvasElement} canvas - The canvas element
    * @param {Scene} scene - The scene
@@ -75,17 +82,25 @@ export class Renderer {
     // Readonly properties
     this.#contextType = contextType;
     this.#canvas = canvas;
-    
+
     // Options
     this.#options = new RendererOptions(this, options);
-    
+
     // Initialize context
-    this._initContext();
+    this.initContext();
+    this.#initializedContext = true;
   }
 
   /**
-   * @function get options
-   * @description Gets the renderer options
+   * Check if the context is initialized.
+   * @returns {Boolean}
+   */
+  get initializedContext() {
+    return this.#initializedContext;
+  }
+
+  /**
+   * Gets the renderer options
    * @returns {RendererOptions} The renderer options
    */
   get options() {
@@ -93,8 +108,7 @@ export class Renderer {
   }
 
   /**
-   * @function get contextType
-   * @description Gets the rendering context type
+   * Gets the rendering context type
    * @returns {string} The rendering context type
    */
   get contextType() {
@@ -102,8 +116,7 @@ export class Renderer {
   }
 
   /**
-   * @function get canvas
-   * @description Gets the canvas element
+   * Gets the canvas element
    * @returns {HTMLCanvasElement} The canvas element
    */
   get canvas() {
@@ -111,8 +124,7 @@ export class Renderer {
   }
 
   /**
-   * @function get scene
-   * @description Gets the scene
+   * Gets the scene
    * @returns {Scene} The scene
    */
   get scene() {
@@ -120,8 +132,7 @@ export class Renderer {
   }
 
   /**
-   * @function set scene
-   * @description Sets the scene
+   * Sets the scene
    * @param {Scene} scene - The new scene to set
    */
   set scene(scene) {
@@ -133,8 +144,7 @@ export class Renderer {
   }
 
   /**
-   * @function get camera
-   * @description Gets the camera
+   * Gets the camera
    * @returns {Camera2D} The camera
    */
   get camera() {
@@ -142,8 +152,7 @@ export class Renderer {
   }
 
   /**
-   * @function set camera
-   * @description Sets the camera
+   * Sets the camera
    * @param {Camera2D} camera - The new camera to set
    */
   set camera(camera) {
@@ -155,8 +164,7 @@ export class Renderer {
   }
 
   /**
-   * @function get centerX
-   * @description Gets the center x value
+   * Gets the center x value
    * @returns {number} The center x value
    */
   get centerX() {
@@ -164,8 +172,7 @@ export class Renderer {
   }
 
   /**
-   * @function get centerY
-   * @description Gets the center y value
+   * Gets the center y value
    * @returns {number} The center y value
    */
   get centerY() {
@@ -173,21 +180,23 @@ export class Renderer {
   }
 
   /**
-   * @function setBackgroundColor
-   * @description Sets the background color
+   * Sets the background color
    * @param {string|Color} backgroundColor - The color
    * @returns {void}
    * @throws {Error} If backgroundColor is not a string or Color
    * @deprecated since version 0.1.0 - Use the options.backgroundColor setter instead
    */
   setBackgroundColor(backgroundColor) {
-    deprecate("setBackgroundColor()", "options.backgroundColor setter", "0.1.0");
+    deprecate(
+      "setBackgroundColor()",
+      "options.backgroundColor setter",
+      "0.1.0"
+    );
     this.#options.backgroundColor = backgroundColor;
   }
 
   /**
-   * @function setSize
-   * @description Sets the size of the canvas
+   * Sets the size of the canvas
    * @param {number} width - The width of the canvas
    * @param {number} height - The height of the canvas
    * @returns {void}
@@ -201,22 +210,24 @@ export class Renderer {
   }
 
   /**
-   * @function setDevicePixelRatio
-   * @description Sets the device pixel ratio for the canvas
+   * Sets the device pixel ratio for the canvas
    * @param {number} dpr - The device pixel ratio
    * @returns {void}
    * @throws {Error} If dpr is not a number
    * @deprecated since version 0.1.0 - Use the options.devicePixelRatio setter instead
    */
   setDevicePixelRatio(dpr) {
-    deprecate("setDevicePixelRatio()", "options.devicePixelRatio setter", "0.1.0");
+    deprecate(
+      "setDevicePixelRatio()",
+      "options.devicePixelRatio setter",
+      "0.1.0"
+    );
     this.#options.devicePixelRatio = dpr;
     this.recalculateDevicePixelRatio();
   }
 
   /**
-   * @function getCenterX
-   * @description Returns a numerical value specifying the center x value
+   * Returns a numerical value specifying the center x value
    * @returns {number}
    * @deprecated since version 0.1.0 - Use the centerX getter instead
    */
@@ -226,8 +237,7 @@ export class Renderer {
   }
 
   /**
-   * @function getCenterY
-   * @description Returns a numerical value specifying the center y value
+   * Returns a numerical value specifying the center y value
    * @returns {number}
    * @deprecated since version 0.1.0 - Use the centerY getter instead
    */
@@ -237,17 +247,15 @@ export class Renderer {
   }
 
   /**
-   * @function _initContext
-   * @description Init the rendering context
+   * Init the rendering context
    * @returns {void}
    */
-  _initContext() {
-    throw new Error("_initContext() is not implemented in the subclass");
+  initContext() {
+    throw new Error("initContext() is not implemented in the subclass");
   }
 
   /**
-   * @function recalculateDevicePixelRatio
-   * @description Recalculates the canvas size based on the device pixel ratio
+   * Recalculates the canvas size based on the device pixel ratio
    * @returns {void}
    */
   recalculateDevicePixelRatio() {
@@ -257,8 +265,7 @@ export class Renderer {
   }
 
   /**
-   * @function render
-   * @description Trigger a new render
+   * Trigger a new render
    * @returns {void}
    */
   render() {
@@ -266,8 +273,7 @@ export class Renderer {
   }
 
   /**
-   * @function requestAnimationFrame
-   * @description A helper method that simplifies the use of requestAnimationFrame
+   * A helper method that simplifies the use of requestAnimationFrame
    * @param {Object} [options] - Options for beforeRender and afterRender callbacks
    * @param {Function|null} [options.beforeRender] - A callback function to be called before each render
    * @param {Function|null} [options.afterRender] - A callback function to be called after each render
@@ -300,8 +306,7 @@ export class Renderer {
   }
 
   /**
-   * @function cancelAnimationFrame
-   * @description A helper method that cancel the loop create from renderer.requestAnimationFrame
+   * A helper method that cancel the loop create from renderer.requestAnimationFrame
    * @returns {void}
    */
   cancelAnimationFrame() {

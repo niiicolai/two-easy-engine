@@ -2,9 +2,9 @@ import { Color } from "./Color.js";
 import { deprecate } from "../utilities/deprecate.js";
 
 /**
+ * A color defined by hue, saturation, lightness, and alpha
  * @class HslaColor
- * @extends Color
- * @classdesc A color defined by hue, saturation, lightness, and alpha
+ * @augments Color
  */
 export class HslaColor extends Color {
   /**
@@ -38,7 +38,8 @@ export class HslaColor extends Color {
   #isBatchSetting = false;
 
   /**
-   * @constructor
+   * A color defined by hue, saturation, lightness, and alpha
+   * @class
    * @param {number} h - hue (0-360)
    * @param {number} s - saturation (0-100)
    * @param {number} l - lightness (0-100)
@@ -52,8 +53,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function get h
-   * @description Get hue
+   * Get hue
    * @returns {number} hue (0-360)
    */
   get h() {
@@ -61,8 +61,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function set h
-   * @description Set hue
+   * Set hue
    * @param {number} h - hue (0-360)
    * @returns {void}
    * @throws {Error} if h is not between 0 and 360
@@ -77,8 +76,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function get s
-   * @description Get saturation
+   * Get saturation
    * @returns {number} saturation (0-100)
    */
   get s() {
@@ -86,8 +84,7 @@ export class HslaColor extends Color {
   }
   
   /**
-   * @function set s
-   * @description Set saturation
+   * Set saturation
    * @param {number} s - saturation (0-100)
    */
   set s(s) {
@@ -100,8 +97,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function get l
-   * @description Get lightness
+   * Get lightness
    * @returns {number} lightness (0-100)
    */
   get l() {
@@ -109,8 +105,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function set l
-   * @description Set lightness
+   * Set lightness
    * @param {number} l - lightness (0-100)
    * @returns {void}
    * @throws {Error} if l is not between 0 and 100
@@ -125,8 +120,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function get a
-   * @description Get alpha
+   * Get alpha
    * @returns {number} alpha (0-1)
    */
   get a() {
@@ -134,8 +128,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function set a
-   * @description Set alpha
+   * Set alpha
    * @param {number} a - alpha (0-1)
    * @returns {void}
    * @throws {Error} if a is not between 0 and 1
@@ -151,8 +144,7 @@ export class HslaColor extends Color {
   
 
   /**
-   * @function set
-   * @description Set the hsla color
+   * Set the hsla color
    * @param {number} h - hue (0-360)
    * @param {number} s - saturation (0-100)
    * @param {number} l - lightness (0-100)
@@ -175,8 +167,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function updateColorStr
-   * @description update the colorStr property based on the rgba props.
+   * update the colorStr property based on the rgba props.
    * @returns {void}
    */
   updateColorStr() {
@@ -184,8 +175,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function setHue
-   * @description Set hue
+   * Set hue
    * @param {number} h - hue (0-360)
    * @returns {void}
    * @throws {Error} if h is not between 0 and 360
@@ -197,8 +187,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function setSaturation
-   * @description Set saturation
+   * Set saturation
    * @param {number} s - saturation (0-100)
    * @returns {void}
    * @throws {Error} if s is not between 0 and 100
@@ -210,8 +199,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function setLightness
-   * @description Set lightness
+   * Set lightness
    * @param {number} l - lightness (0-100)
    * @returns {void}
    * @throws {Error} if l is not between 0 and 100
@@ -223,8 +211,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function setAlpha
-   * @description Set the alpha value
+   * Set the alpha value
    * @param {number} alpha - alpha (0-1)
    * @returns {void}
    * @throws {Error} if alpha is not between 0 and 1
@@ -236,8 +223,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function toHslaString
-   * @description Returns a string representation of the color in hsla format
+   * Returns a string representation of the color in hsla format
    * @returns {string}
    */
   toHslaString() {
@@ -245,8 +231,7 @@ export class HslaColor extends Color {
   }
 
   /**
-   * @function toHslString
-   * @description Returns a string representation of the color in hsl format
+   * Returns a string representation of the color in hsl format
    * @returns {string}
    */
   toHslString() {

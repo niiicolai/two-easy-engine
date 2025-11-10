@@ -3,21 +3,23 @@ import { Texture2D } from "../core/Texture2D.js";
 import { Color } from "../colors/Color.js";
 
 /**
+ * A basic material that implements fillStyle, strokeStyle and lineWidth
  * @class BasicMaterial
- * @extends Material
- * @classdesc A basic material that implements fillStyle, strokeStyle and lineWidth
+ * @augments Material
  */
 export class BasicMaterial extends Material {
   /**
+   * The default line width
    * @private
-   * @property {number} #DEFAULT_LINE_WIDTH - The default line width
+   * @property {number} #DEFAULT_LINE_WIDTH
    */
   static #DEFAULT_LINE_WIDTH = 1;
 
   /**
+   * The default line width.
    * @public
    * @static
-   * @returns {number} The default line width.
+   * @returns {number}
    */
   static get DEFAULT_LINE_WIDTH() {
     return BasicMaterial.#DEFAULT_LINE_WIDTH;
@@ -54,7 +56,8 @@ export class BasicMaterial extends Material {
   #isBatchSetting = false;
 
   /**
-   * @constructor
+   * A basic material that implements fillStyle, strokeStyle and lineWidth
+   * @class
    * @param {Object} [options] - Material configuration options.
    * @param {Color|null} [options.fillStyle=null] - Initial fill style
    * @param {Color|null} [options.strokeStyle=null] - Initial stroke style
@@ -81,8 +84,7 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function get fillStyle
-   * @description Gets the material's fillStyle
+   * Gets the material's fillStyle
    * @returns {Color} The fillStyle
    */
   get fillStyle() {
@@ -90,8 +92,7 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function set fillStyle
-   * @description Sets the material's fillStyle
+   * Sets the material's fillStyle
    * @param {Color|null} fillStyle - The new fillStyle to set
    * @returns {void}
    * @throws {Error} If fillStyle is not of type Color
@@ -109,8 +110,7 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function get strokeStyle
-   * @description Gets the material's strokeStyle
+   * Gets the material's strokeStyle
    * @returns {Color|null|undefined} The strokeStyle
    */
   get strokeStyle() {
@@ -118,8 +118,7 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function set strokeStyle
-   * @description Sets the material's strokeStyle
+   * Sets the material's strokeStyle
    * @param {Color|null} strokeStyle - The new strokeStyle to set
    * @returns {void}
    * @throws {Error} If strokeStyle is not of type Color
@@ -137,8 +136,7 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function get lineWidth
-   * @description Gets the material's lineWidth
+   * Gets the material's lineWidth
    * @returns {number|null|undefined} The lineWidth
    */
   get lineWidth() {
@@ -146,8 +144,7 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function set lineWidth
-   * @description Sets the material's lineWidth
+   * Sets the material's lineWidth
    * @param {number|null} lineWidth - The new lineWidth to set (defaults to BasicMaterial.DEFAULT_LINE_WIDTH if null)
    * @returns {void}
    * @throws {Error} If lineWidth is not null or a number.
@@ -165,8 +162,7 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function get texture2D
-   * @description Gets the material's texture2D
+   * Gets the material's texture2D 
    * @returns {Texture2D|null|undefined} The texture2D
    */
   get texture2D() {
@@ -174,8 +170,7 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function set texture2D
-   * @description Sets the material's texture2D
+   * Sets the material's texture2D
    * @param {Texture2D|null} texture2D - The new texture2D to set
    * @returns {void}
    * @throws {Error} If texture2D is not null or of type Texture2D
@@ -189,8 +184,7 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * @function applyToContext2D
-   * @description Apply the material configuration to the given canvas 2D context.
+   * Apply the material configuration to the given canvas 2D context.
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @returns {void}
    */

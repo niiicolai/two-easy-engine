@@ -6,13 +6,14 @@ import { Camera2D } from "../cameras/Camera2D.js";
 import { Scene } from "../scenes/Scene.js";
 
 /**
+ * This class handles the rendering process, including setting up the canvas and drawing the scene using the camera.
  * @class Renderer2D
- * @extends Renderer
- * @classdesc This class handles the rendering process, including setting up the canvas and drawing the scene using the camera.
+ * @augments Renderer
  */
 export class Renderer2D extends Renderer {
   /**
-   * @constructor
+   * The 2D context renderer
+   * @class
    * @param {HTMLCanvasElement} canvas - The canvas element
    * @param {Scene} scene - The scene
    * @param {Camera2D} camera - The camera
@@ -38,18 +39,17 @@ export class Renderer2D extends Renderer {
   }
 
   /**
-   * @function _initContext
-   * @description Init the rendering context
+   * Init the rendering context
    * @returns {void}
    */
-  _initContext() {
+  initContext() {
+    if (this.initializedContext) return;
     this.ctx = this.canvas.getContext("2d");
     this.recalculateDevicePixelRatio();
   }
 
   /**
-   * @function recalculateDevicePixelRatio
-   * @description Recalculates the canvas size based on the device pixel ratio
+   * Recalculates the canvas size based on the device pixel ratio
    * @returns {void}
    */
   recalculateDevicePixelRatio() {
@@ -62,8 +62,7 @@ export class Renderer2D extends Renderer {
   }
 
   /**
-   * @function render
-   * @description Trigger a new render
+   * Trigger a new render
    * @returns {void}
    */
   render() {

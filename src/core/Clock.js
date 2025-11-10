@@ -1,8 +1,8 @@
 import { deprecate } from "../utilities/deprecate.js";
 
 /**
+ * This class can be used to get elapsed and delta time (Remember to call clockObj.update at the beginning of the animation loop).
  * @class Clock
- * @classdesc This class can be used to get elapsed and delta time (Remember to call clockObj.update at the beginning of the animation loop).
  */
 export class Clock {
   /**
@@ -36,15 +36,15 @@ export class Clock {
   #lastFrame;
 
   /**
-   * @constructor
+   * This class can be used to get elapsed and delta time (Remember to call clockObj.update at the beginning of the animation loop).
+   * @class
    */
   constructor() {
     this.restart();
   }
 
   /**
-   * @function get startTime
-   * @description Get the time the object was instantiated.
+   * Get the time the object was instantiated.
    * @returns {number} the time
    */
   get startTime() {
@@ -52,8 +52,7 @@ export class Clock {
   }
 
   /**
-   * @function get elapsedTime
-   * @description Get time since instantiation.
+   * Get time since instantiation.
    * @returns {number} the time
    */
   get elapsedTime() {
@@ -61,8 +60,7 @@ export class Clock {
   }
 
   /**
-   * @function get deltaTime
-   * @description Get time since last frame.
+   * Get time since last frame.
    * @returns {number} the time
    */
   get deltaTime() {
@@ -70,8 +68,7 @@ export class Clock {
   }
 
   /**
-   * @function restart
-   * @description Restart the start time
+   * Restart the start time
    * @returns {void}
    */
   restart() {
@@ -83,8 +80,7 @@ export class Clock {
   }
 
   /**
-   * @function update
-   * @description Update the internal time values (call at the beginning of your animation loop)
+   * Update the internal time values (call at the beginning of your animation loop)
    * @returns {void}
    */
   update() {
@@ -99,8 +95,7 @@ export class Clock {
   }
 
   /**
-   * @function getElapsedTime
-   * @description Get the time elapsed (in seconds) since instantiation
+   * Get the time elapsed (in seconds) since instantiation
    * @returns {number}
    * @deprecated since version 0.1.0 - Use the elapsedTime getter instead
    */
@@ -111,8 +106,7 @@ export class Clock {
   }
 
   /**
-   * @function getDeltaTime
-   * @description Returns the time elapsed (in seconds) since the last frame or call.
+   * Returns the time elapsed (in seconds) since the last frame or call.
    * @returns {number}
    * @deprecated since version 0.1.0 - Use the deltaTime getter instead
    */

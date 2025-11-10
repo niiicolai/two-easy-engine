@@ -5,8 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import { Renderer } from "../renderers/Renderer.js";
 
 /**
+ * This class serves as a base for all 2D objects, providing a transform property.
  * @class Object2D
- * @classdesc This class serves as a base for all 2D objects, providing a transform property.
  */
 export class Object2D {
 
@@ -41,7 +41,8 @@ export class Object2D {
   #uuid;
 
   /**
-   * @constructor
+   * This class serves as a base for all 2D objects, providing a transform property.
+   * @class
    */
   constructor() {
     this.#transform = new Transform();
@@ -51,8 +52,7 @@ export class Object2D {
   }
 
   /**
-   * @function get uuid
-   * @description Get the uuid
+   * Get the uuid
    * @returns {string} the uuid
    */
   get uuid() {
@@ -60,8 +60,7 @@ export class Object2D {
   }
 
   /**
-   * @function get visible
-   * @description Get the visible flag
+   * Get the visible flag
    * @returns {boolean} the flag
    */
   get visible() {
@@ -69,8 +68,7 @@ export class Object2D {
   }
 
   /**
-   * @function set visible
-   * @description Sets the object's visibility
+   * Sets the object's visibility
    * @param {Boolean} visible - The new state
    * @returns {void}
    * @throws {Error} If the visible is not a boolean.
@@ -84,8 +82,7 @@ export class Object2D {
   }
 
   /**
-   * @function get userData
-   * @description Get the custom userData
+   * Get the custom userData
    * @returns {Object} the userData
    */
   get userData() {
@@ -93,8 +90,7 @@ export class Object2D {
   }
 
   /**
-   * @function set userData
-   * @description Sets custom user data
+   * Sets custom user data
    * @param {Boolean} userData - The user data
    * @returns {void}
    */
@@ -103,8 +99,7 @@ export class Object2D {
   }
 
   /**
-   * @function get transform
-   * @description Get the transform
+   * Get the transform
    * @returns {Transform} the transform
    */
   get transform() {
@@ -112,8 +107,7 @@ export class Object2D {
   }
 
   /**
-   * @function set transform
-   * @description Sets the object's transform
+   * Sets the object's transform
    * @param {Transform} transform - The new transform
    * @returns {void}
    * @throws {Error} If the transform is not a Transform.
@@ -127,8 +121,7 @@ export class Object2D {
   }
 
   /**
-   * @function setUserData
-   * @description Sets the userData property reserved for custom user data
+   * Sets the userData property reserved for custom user data
    * @param {object} userData - the userData object
    * @returns {void}
    * @deprecated since version 0.1.0 - Use the userData setter instead
@@ -144,8 +137,7 @@ export class Object2D {
   }
 
   /**
-   * @function setVisible
-   * @description Sets the visibility of the object
+   * Sets the visibility of the object
    * @param {boolean} visible - Whether the object should be visible
    * @returns {void}
    * @throws Will throw an error if visible is not a boolean
@@ -162,8 +154,7 @@ export class Object2D {
   }
 
   /**
-   * @function draw
-   * @description Renders the light effect on the given 2D rendering context.
+   * Renders the light effect on the given 2D rendering context.
    * @param {Renderer} renderer - The selected renderer
    * @returns {void}
    * @throws Will throw an error if the renderer.context is not supported
@@ -177,8 +168,7 @@ export class Object2D {
   }
 
   /**
-   * @function drawContext2D
-   * @description Renders the light effect on the given 2D rendering context.
+   * Renders the light effect on the given 2D rendering context.
    * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
    * @returns {void}
    */

@@ -1,6 +1,6 @@
 /**
+ * This class provides basic vector operations such as addition, subtraction, scaling, and normalization.
  * @class Vector2
- * @classdesc This class provides basic vector operations such as addition, subtraction, scaling, and normalization.
  */
 export class Vector2 {
   /**
@@ -16,7 +16,8 @@ export class Vector2 {
   #y;
   
   /**
-   * @constructor
+   * This class provides basic vector operations such as addition, subtraction, scaling, and normalization.
+   * @class
    * @param {number} x - The x coordinate
    * @param {number} y - The y coordinate
    * @throws {Error} If x or y are not numbers.
@@ -31,8 +32,7 @@ export class Vector2 {
   }
 
   /**
-   * @function get x
-   * @description Get the x coordinate
+   * Get the x coordinate
    * @returns {Vector2} the x coordinate
    */
   get x() {
@@ -40,8 +40,7 @@ export class Vector2 {
   }
 
   /**
-   * @function set x
-   * @description Sets the x coordinate
+   * Sets the x coordinate
    * @param {number} x - The new value
    * @returns {void}
    * @throws {Error} If the x is not a number.
@@ -55,8 +54,7 @@ export class Vector2 {
   }
 
   /**
-   * @function get y
-   * @description Get the y coordinate
+   * Get the y coordinate
    * @returns {Vector2} the y coordinate
    */
   get y() {
@@ -64,8 +62,7 @@ export class Vector2 {
   }
 
   /**
-   * @function set y
-   * @description Sets the y coordinate
+   * Sets the y coordinate
    * @param {number} y - The new value
    * @returns {void}
    * @throws {Error} If the y is not a number.
@@ -79,8 +76,7 @@ export class Vector2 {
   }
 
   /**
-   * @function clone
-   * @description Creates a copy of the vector
+   * Creates a copy of the vector
    * @returns {Vector2} A new Vector2 instance with the same x and y values
    */
   clone() {
@@ -88,8 +84,7 @@ export class Vector2 {
   }
 
   /**
-   * @function set
-   * @description Sets the x and y values of the vector
+   * Sets the x and y values of the vector
    * @param {number} x - The new x value
    * @param {number} y - The new y value
    * @returns {Vector2} This vector
@@ -107,8 +102,7 @@ export class Vector2 {
   }
 
   /**
-   * @function translate
-   * @description Translates the vector by given x and y offsets
+   * Translates the vector by given x and y offsets
    * @param {number} x - The x offset
    * @param {number} y - The y offset
    * @returns {Vector2} This vector
@@ -126,8 +120,7 @@ export class Vector2 {
   }
 
   /**
-   * @function copy
-   * @description Copy the values of the given vector to this.
+   * Copy the values of the given vector to this.
    * @param {Vector2} v - The vector to copy
    * @returns {Vector2} This vector
    * @throws {Error} If v is not of type Vector2
@@ -144,8 +137,7 @@ export class Vector2 {
   }
 
   /**
-   * @function add
-   * @description Adds another vector to this vector
+   * Adds another vector to this vector
    * @param {Vector2} v - The vector to add
    * @returns {Vector2} This vector
    * @throws {Error} If v is not of type Vector2
@@ -162,8 +154,7 @@ export class Vector2 {
   }
 
   /**
-   * @function subtract
-   * @description Subtracts another vector from this vector
+   * Subtracts another vector from this vector
    * @param {Vector2} v - The vector to subtract
    * @returns {Vector2} This vector
    * @throws {Error} If v is not of type Vector2
@@ -180,8 +171,7 @@ export class Vector2 {
   }
 
   /**
-   * @function dot
-   * @description Computes the dot product with another vector
+   * Computes the dot product with another vector
    * @param {Vector2} v - The other vector
    * @returns {number} The dot product
    * @throws {Error} If v is not of type Vector2
@@ -195,8 +185,7 @@ export class Vector2 {
   }
 
   /**
-   * @function vectorTo
-   * @description Computes a new vector from this vector to another vector
+   * Computes a new vector from this vector to another vector
    * @param {Vector2} v - The target vector
    * @returns {Vector2} A new Vector2 representing the vector from this to v
    * @throws {Error} If v is not of type Vector2
@@ -210,8 +199,7 @@ export class Vector2 {
   }
 
   /**
-   * @function multiplyScalar
-   * @description Multiplies this vector by a scalar
+   * Multiplies this vector by a scalar
    * @param {number} s - The scalar to multiply by
    * @returns {Vector2} This vector
    * @throws {Error} If s is not a number
@@ -228,8 +216,7 @@ export class Vector2 {
   }
 
   /**
-   * @function divideScalar
-   * @description Divides this vector by a scalar
+   * Divides this vector by a scalar
    * @param {number} s - The scalar to divide by
    * @returns {Vector2} This vector
    * @throws {Error} If s is not a number
@@ -249,8 +236,7 @@ export class Vector2 {
   }
 
   /**
-   * @function length
-   * @description Computes the length (magnitude) of the vector
+   * Computes the length (magnitude) of the vector
    * @returns {number} The length of the vector
    */
   length() {
@@ -258,8 +244,7 @@ export class Vector2 {
   }
 
   /**
-   * @function lengthSquared
-   * @description Computes the squared length of the vector.
+   * Computes the squared length of the vector.
    * @returns {number} The squared length of the vector
    */
   lengthSquared() {
@@ -267,8 +252,7 @@ export class Vector2 {
   }
 
   /**
-   * @function normalize
-   * @description Normalizes the vector to have a length of 1
+   * Normalizes the vector to have a length of 1
    * @returns {Vector2} This vector
    * @throws {Error} If attempting to normalize a zero-length vector
    */
@@ -284,8 +268,7 @@ export class Vector2 {
   }
 
   /**
-   * @function isEqual
-   * @description Check if the values of this vector is equal to another
+   * Check if the values of this vector is equal to another
    * @param {Vector2} v - The other vector
    * @returns {boolean} 
    */
@@ -298,8 +281,7 @@ export class Vector2 {
   }
 
   /**
-   * @function rotateAround
-   * @description Rotate the coordinates the given radians around the given point
+   * Rotate the coordinates the given radians around the given point
    * @param {number} px - the x coordinate of the point to rotate around
    * @param {number} py - the y coordinate of the point to rotate around
    * @param {number} angle - the rotation angle in radians

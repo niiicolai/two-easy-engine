@@ -1,8 +1,8 @@
 import { Object2D } from "../core/Object2D.js";
 
 /**
+ * This class manages a list of 2D objects and provides methods to add, remove, and render them.
  * @class Scene
- * @classdesc This class manages a list of 2D objects and provides methods to add, remove, and render them.
  */
 export class Scene {
   /**
@@ -18,8 +18,7 @@ export class Scene {
   #zIndexes = new Map();
 
   /**
-   * @function get children
-   * @description Gets a copy of scene's children
+   * Gets a copy of scene's children
    * @returns {Object2D[]} The children
    */
   get children() {
@@ -27,8 +26,7 @@ export class Scene {
   }
 
   /**
-   * @function get zIndexes
-   * @description Gets a copy of the scene's uuid-zIndex map
+   * Gets a copy of the scene's uuid-zIndex map
    * @returns {Map<string, number>} The map object
    */
   get zIndexes() {
@@ -36,8 +34,7 @@ export class Scene {
   }
 
   /**
-   * @function add
-   * @description Adds one or more 2D objects to the scene
+   * Adds one or more 2D objects to the scene
    * @param {...Object2D} children - The 2D object(s) to add to the scene
    * @returns {void}
    * @throws {Error} If any child is not of type Object2D
@@ -56,8 +53,7 @@ export class Scene {
   }
 
   /**
-   * @function remove
-   * @description Removes one or more 2D objects from the scene
+   * Removes one or more 2D objects from the scene
    * @param {...Object2D} children - The 2D object(s) to remove from the scene
    * @returns {void}
    * @throws {Error} If any child is not of type Object2D
@@ -84,8 +80,7 @@ export class Scene {
   }
 
   /**
-   * @function #setZIndex
-   * @description Change one or more object2D's z-index value
+   * Change one or more object2D's z-index value
    * @param {number} zIndex - the new z-index value
    * @param {...Object2D} children - the children
    * @returns {void}
@@ -113,9 +108,8 @@ export class Scene {
   }
 
   /**
+   * Sorts the children based on their zIndex property
    * @private
-   * @function #sortChildrenByZIndex
-   * @description Sorts the children based on their zIndex property
    * @returns {void}
    */
   #sortChildrenByZIndex() {
