@@ -4,19 +4,12 @@ import { Transform } from "../core/Transform.js";
 import { Material } from "../materials/Material.js";
 
 /**
+ * This class serves as a base for all geometric shapes, providing a draw method.
  * @class Geometry
- * @classdesc This class serves as a base for all geometric shapes, providing a draw method.
  */
 export class Geometry {
   /**
-   * @constructor
-   */
-  constructor() {
-  }
-
-  /**
-   * @function checkMaterialConflicts
-   * @description Check for any conflicts between the geometry and the provided material
+   * Check for any conflicts between the geometry and the provided material
    * @param {Material} material - The material to check against
    * @returns {void}
    */
@@ -24,8 +17,7 @@ export class Geometry {
   checkMaterialConflicts(material) {}
   
   /**
-   * @function drawContext2D
-   * @description Draws the mesh onto the given canvas 2D context
+   * Draws the mesh onto the given canvas 2D context
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the rectangle
    * @param {Material} material - The material to use for rendering the rectangle

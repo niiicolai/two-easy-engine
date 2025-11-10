@@ -5,9 +5,9 @@ import { Material } from "../materials/Material.js";
 import { Transform } from "../core/Transform.js";
 
 /**
+ * This class provides a circle shape with a radius property.
  * @class CircleGeometry
- * @extends Geometry
- * @classdesc This class provides a circle shape with a radius property.
+ * @augments Geometry
  */
 export class CircleGeometry extends Geometry {
   /**
@@ -17,7 +17,8 @@ export class CircleGeometry extends Geometry {
   #radius;
 
   /**
-   * @constructor
+   * This class provides a circle shape with a radius property.
+   * @class
    * @param {number} radius - The radius of the circle (must be positive).
    * @throws {Error} If the radius is not a positive number.
    */
@@ -27,8 +28,7 @@ export class CircleGeometry extends Geometry {
   }
 
   /**
-   * @function get radius
-   * @description Get the radius
+   * Get the radius
    * @returns {number} radius
    */
   get radius() {
@@ -36,8 +36,7 @@ export class CircleGeometry extends Geometry {
   }
 
   /**
-   * @function set radius
-   * @description Set radius
+   * Set the radius
    * @param {number} radius - the new radius
    * @returns {void}
    * @throws {Error} if radius is not a positive number
@@ -51,8 +50,7 @@ export class CircleGeometry extends Geometry {
   }
 
   /**
-   * @function drawContext2D
-   * @description Draws the circle onto the given canvas 2D context
+   * Draws the circle onto the given canvas 2D context
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the circle
    * @param {Material} material - The material to use for rendering the circle

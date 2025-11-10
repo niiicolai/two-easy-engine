@@ -3,9 +3,9 @@ import { RgbaColor } from "../colors/RgbaColor.js";
 import { Object2D } from "../core/Object2D.js";
 
 /**
+ * A simple 2D light source for Canvas rendering.
  * @class PointLight2D
- * @extends Object2D
- * @classdesc A simple 2D light source for Canvas rendering.
+ * @augments Object2D
  */
 export class PointLight2D extends Object2D {
   /**
@@ -39,7 +39,8 @@ export class PointLight2D extends Object2D {
   #colorStop;
 
   /**
-   * @constructor
+   * A simple 2D light source for Canvas rendering.
+   * @class
    * @param {number} radius - The radius of the light
    * @param {number} intensity - The intensity of the light
    * @param {Color} color - The color of the light
@@ -65,8 +66,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function get radius
-   * @description Gets the light's radius
+   * Gets the light's radius
    * @returns {number} The radius
    */
   get radius() {
@@ -74,8 +74,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function set radius
-   * @description Sets the light's radius
+   * Sets the light's radius
    * @param {number} radius - The light's radius
    * @returns {void}
    * @throws {Error} If the radius is not a positive number.
@@ -89,8 +88,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function get intensity
-   * @description Gets the light's intensity
+   * Gets the light's intensity
    * @returns {number} The intensity
    */
   get intensity() {
@@ -98,8 +96,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function set intensity
-   * @description Sets the light's intensity
+   * Sets the light's intensity
    * @param {number} intensity - The light's intensity
    * @returns {void}
    * @throws {Error} If the intensity is not a positive number.
@@ -113,8 +110,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function get color
-   * @description Gets the light's color
+   * Gets the light's color
    * @returns {Color} The color
    */
   get color() {
@@ -122,8 +118,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function set color
-   * @description Sets the light's color
+   * Sets the light's color
    * @param {Color} color - The light's color
    * @returns {void}
    * @throws {Error} If the color is not a Color.
@@ -137,8 +132,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function get colorStop
-   * @description Gets the light's colorStop
+   * Gets the light's colorStop
    * @returns {Color} The colorStop
    */
   get colorStop() {
@@ -146,8 +140,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function set colorStop
-   * @description Sets the light's colorStop
+   * Sets the light's colorStop
    * @param {Color} color - The light's colorStop
    * @returns {void}
    * @throws {Error} If the colorStop is not a Color.
@@ -161,8 +154,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * @function drawContext2D
-   * @description Renders the light effect on the given 2D rendering context.
+   * Renders the light effect on the given 2D rendering context.
    * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
    * @returns {void}
    */

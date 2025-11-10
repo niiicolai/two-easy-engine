@@ -1,8 +1,7 @@
 const warned = new Set();
 
 /**
- * @function deprecate
- * @description A utility function for warning about deprecated functionality
+ * A utility function for warning about deprecated functionality
  * @param {string} oldName
  * @param {string} newName
  * @param {string} version

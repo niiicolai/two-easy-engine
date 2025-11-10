@@ -2,14 +2,15 @@ import { Color } from "../colors/Color.js";
 import { Renderer } from "./Renderer.js";
 
 /**
+ * The base RendererOptions class
  * @class RendererOptions
- * @classdesc The base RendererOptions class
  */
 export class RendererOptions {
   /**
+   * The default renderer options
    * @static
    * @private
-   * @property {Object} DEFAULT_OPTIONS - The default renderer options
+   * @property {Object} DEFAULT_OPTIONS
    */
   static #DEFAULT_OPTIONS = {
     devicePixelRatio: 1,
@@ -17,9 +18,10 @@ export class RendererOptions {
   };
 
   /**
+   * The default renderer options
    * @public
    * @static
-   * @returns {Object} The default renderer options
+   * @returns {Object}
    */
   static get DEFAULT_OPTIONS() {
     return RendererOptions.#DEFAULT_OPTIONS;
@@ -71,7 +73,8 @@ export class RendererOptions {
   #isBatchSetting = false;
 
   /**
-   * @constructor
+   * Configuration options for the Renderer.
+   * @class
    * @param {Object} [options] - Render configuration options.
    * @param {number} [options.width] - Initial canvas width
    * @param {number} [options.height] - Initial canvas height
@@ -101,8 +104,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function get cache
-   * @description Gets the cache object
+   * Gets the cache object
    * @returns {Object} The cache object
    */
   get cache() {
@@ -110,8 +112,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function get width
-   * @description Gets the canvas width
+   * Gets the canvas width
    * @returns {number} The canvas width
    */
   get width() {
@@ -119,8 +120,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function set width
-   * @description Sets the canvas width
+   * Sets the canvas width
    * @param {number} width - The new width
    */
   set width(width) {
@@ -137,8 +137,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function get height
-   * @description Gets the canvas height
+   * Gets the canvas height
    * @returns {number} The canvas height
    */
   get height() {
@@ -146,8 +145,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function set height
-   * @description Sets the canvas height
+   * Sets the canvas height
    * @param {number} height - The new height
    */
   set height(height) {
@@ -164,8 +162,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function get devicePixelRatio
-   * @description Gets the device pixel ratio
+   * Gets the device pixel ratio
    * @returns {number} The device pixel ratio
    */
   get devicePixelRatio() {
@@ -173,8 +170,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function set devicePixelRatio
-   * @description Sets the device pixel ratio
+   * Sets the device pixel ratio
    * @param {number} dpr - The new device pixel ratio
    */
   set devicePixelRatio(dpr) {
@@ -190,8 +186,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function get backgroundColor
-   * @description Gets the background color
+   * Gets the background color
    * @returns {string|Color} The background color
    */
   get backgroundColor() {
@@ -199,8 +194,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function set backgroundColor
-   * @description Sets the background color
+   * Sets the background color
    * @param {string|Color} backgroundColor - The new background color
    */
   set backgroundColor(backgroundColor) {
@@ -215,8 +209,7 @@ export class RendererOptions {
   }
 
   /**
-   * @function setSize
-   * @description Sets the size of the canvas
+   * Sets the size of the canvas
    * @param {number} width - The width of the canvas
    * @param {number} height - The height of the canvas
    * @returns {void}

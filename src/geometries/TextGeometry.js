@@ -5,14 +5,15 @@ import { Transform } from "../core/Transform.js";
 import { Material } from "../materials/Material.js";
 
 /**
+ * This class provides functionality for creating and managing text-based geometry.
  * @class TextGeometry
- * @extends Geometry
- * @classdesc This class provides functionality for creating and managing text-based geometry.
+ * @augments Geometry
  */
 export class TextGeometry extends Geometry {
   /**
+   * The valid text alignment types
    * @static
-   * @property {string[]} [TEXT_ALIGNMENT_TYPES] - The valid text alignment types
+   * @property {string[]} [TEXT_ALIGNMENT_TYPES]
    */
   static TEXT_ALIGNMENT_TYPES = {
     start: "start",
@@ -23,8 +24,9 @@ export class TextGeometry extends Geometry {
   }
 
   /**
+   * The valid text direction types
    * @static
-   * @property {string[]} [TEXT_DIRECTION_TYPES] - The valid text direction types
+   * @property {string[]} [TEXT_DIRECTION_TYPES]
    */
   static TEXT_DIRECTION_TYPES = {
     ltr: "ltr",
@@ -46,8 +48,9 @@ export class TextGeometry extends Geometry {
   };
 
   /**
+   * The default options for TextGeometry
    * @static
-   * @property {Object} [DEFAULT_OPTIONS] - The default options for TextGeometry
+   * @property {Object} [DEFAULT_OPTIONS]
    * @property {number|null} [DEFAULT_OPTIONS.maxWidth=undefined] - The default maximum width for the text layout
    * @property {string} [DEFAULT_OPTIONS.font="14px Arial"] - The default font family for the text content
    * @property {"start"|"end"|"left"|"right"|"center"|null} [DEFAULT_OPTIONS.textAlign=null] - The default horizontal alignment for the text content
@@ -75,7 +78,8 @@ export class TextGeometry extends Geometry {
   #options;
 
   /**
-   * @constructor
+   * This class provides functionality for creating and managing text-based geometry.
+   * @class
    * @param {string} text - The text content to generate geometry for.
    * @param {Object} [options] - The geometry options.
    * @param {number|null} [options.maxWidth=null] - The maximum width allowed for the text layout.
@@ -97,8 +101,7 @@ export class TextGeometry extends Geometry {
   }
 
   /**
-   * @function get text
-   * @description Get the text
+   * Get the text
    * @returns {string} text
    */
   get text() {
@@ -106,8 +109,7 @@ export class TextGeometry extends Geometry {
   }
 
   /**
-   * @function set text
-   * @description Set text
+   * Set the text
    * @param {number} text - the new text
    * @returns {void}
    * @throws {Error} if text is not a string
@@ -121,8 +123,7 @@ export class TextGeometry extends Geometry {
   }
 
   /**
-   * @function get options
-   * @description Get the options
+   * Get the options
    * @returns {Object} options
    */
   get options() {
@@ -130,8 +131,7 @@ export class TextGeometry extends Geometry {
   }
 
   /**
-   * @function set options
-   * @description Set options
+   * Set the options
    * @param {Object} [options] - The geometry options.
    * @param {number|null} [options.maxWidth=null] - The maximum width allowed for the text layout.
    * @param {string|null} [options.font="14px Arial"] - The font family used for the text content.
@@ -198,8 +198,7 @@ export class TextGeometry extends Geometry {
   }
 
   /**
-   * @function drawContext2D
-   * @description Draws the text onto the given canvas 2D context
+   * Draws the text onto the given canvas 2D context
    * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the text
    * @param {Material} material - The material to use for rendering the text

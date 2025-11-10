@@ -1,8 +1,8 @@
 import { Transform } from "../core/Transform.js";
 
 /**
+ * This class provides functionality to control the view of the scene, including position, rotation, and zoom.
  * @class Camera2D 
- * @classdesc This class provides functionality to control the view of the scene, including position, rotation, and zoom.
  */
 export class Camera2D {
   /**
@@ -18,8 +18,8 @@ export class Camera2D {
   #transform;
 
   /**
-   * Create a new Camera2D instance.
-   * @constructor
+   * This class provides functionality to control the view of the scene, including position, rotation, and zoom.
+   * @class
    * @param {Object} [options] - Camera configuration options.
    * @param {number} [options.zoom=1] - Initial zoom level of the camera.
    */
@@ -32,8 +32,7 @@ export class Camera2D {
   }
 
   /**
-   * @function get zoom
-   * @description Get the zoom
+   * Get the zoom
    * @returns {number} zoom
    */
   get zoom() {
@@ -41,8 +40,7 @@ export class Camera2D {
   }
 
   /**
-   * @function set zoom
-   * @description Set zoom
+   * Set zoom
    * @param {number} zoom - the new zoom
    * @returns {void}
    * @throws {Error} if zoom is not a number
@@ -56,8 +54,7 @@ export class Camera2D {
   }
 
   /**
-   * @function get transform
-   * @description Get the transform
+   * Get the transform
    * @returns {Transform} transform
    */
   get transform() {
@@ -65,8 +62,7 @@ export class Camera2D {
   }
 
   /**
-   * @function set transform
-   * @description Set transform
+   * Set transform
    * @param {number} transform - the new transform
    * @returns {void}
    * @throws {Error} if transform is not a Transform

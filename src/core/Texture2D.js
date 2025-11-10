@@ -1,13 +1,14 @@
 import { deprecate } from "../utilities/deprecate.js";
 
 /**
+ * Represents a pattern used for drawing an image on geometries.
  * @class Texture2D
- * @classdesc Represents a pattern used for drawing an image on geometries.
  */
 export class Texture2D {
   /**
+   * The valid image repeat types
    * @static
-   * @property {string[]} [IMAGE_REPEAT_TYPES] - The valid image repeat types
+   * @property {string[]} [IMAGE_REPEAT_TYPES]
    */
   static IMAGE_REPEAT_TYPES = {
     repeat: "repeat",
@@ -17,12 +18,14 @@ export class Texture2D {
   };
 
   /**
-   * @property {string} DEFAULT_IMAGE_REPEAT - the default image repeat option
+   * The default image repeat option
+   * @property {string} DEFAULT_IMAGE_REPEAT
    */
   static DEFAULT_IMAGE_REPEAT = "repeat";
 
   /**
-   * @property {Object} DEFAULT_IMAGE_OFFSET - the default image offset
+   * The default image offset
+   * @property {Object} DEFAULT_IMAGE_OFFSET 
    */
   static DEFAULT_IMAGE_OFFSET = {
     x: 0,
@@ -84,7 +87,8 @@ export class Texture2D {
   #isBatchSetting;
 
   /**
-   * @constructor
+   * Represents a pattern used for drawing an image on geometries.
+   * @class
    * @param {Object} [options] - Texture2D configuration options.
    * @param {HTMLImageElement|string} [options.image] - Image or image URL for texture
    * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"} [options.imageRepeat="repeat"] - Pattern repeat mode
@@ -119,8 +123,7 @@ export class Texture2D {
   }
 
   /**
-   * @function get imageRepeat
-   * @description Get the imageRepeat option
+   * Get the imageRepeat option
    * @returns {string} the imageRepeat
    */
   get imageRepeat() {
@@ -128,8 +131,7 @@ export class Texture2D {
   }
 
   /**
-   * @function set imageRepeat
-   * @description Sets the object's imageRepeat
+   * Sets the object's imageRepeat
    * @param {string} imageRepeat - The new imageRepeat
    * @returns {void}
    * @throws {Error} If the imageRepeat is not a string.
@@ -151,8 +153,7 @@ export class Texture2D {
   }
 
   /**
-   * @function get imageOffsetX
-   * @description Get the imageOffsetX
+   * Get the imageOffsetX
    * @returns {number} the imageOffsetX
    */
   get imageOffsetX() {
@@ -160,8 +161,7 @@ export class Texture2D {
   }
 
   /**
-   * @function set imageOffsetX
-   * @description Sets the image offset's x coordinate
+   * Sets the image offset's x coordinate
    * @param {number} imageOffsetX - The offset's new x coordinate
    * @returns {void}
    * @throws {Error} If the imageOffsetX is not a number.
@@ -180,8 +180,7 @@ export class Texture2D {
   }
 
   /**
-   * @function get imageOffsetY
-   * @description Get the imageOffsetY
+   * Get the imageOffsetY
    * @returns {number} the imageOffsetY
    */
   get imageOffsetY() {
@@ -189,8 +188,7 @@ export class Texture2D {
   }
 
   /**
-   * @function set imageOffsetY
-   * @description Sets the image offset's y coordinate
+   * Sets the image offset's y coordinate
    * @param {number} imageOffsetY - The offset's new y coordinate
    * @returns {void}
    * @throws {Error} If the imageOffsetY is not a number.
@@ -209,8 +207,7 @@ export class Texture2D {
   }
 
   /**
-   * @function get imageWidth
-   * @description Get the imageWidth
+   * Get the imageWidth
    * @returns {number} the imageWidth
    */
   get imageWidth() {
@@ -218,8 +215,7 @@ export class Texture2D {
   }
 
   /**
-   * @function set imageWidth
-   * @description Sets the image width
+   * Sets the image width
    * @param {number} imageWidth - The new width
    * @returns {void}
    * @throws {Error} If the imageWidth is not a number.
@@ -242,8 +238,7 @@ export class Texture2D {
   }
 
   /**
-   * @function get imageHeight
-   * @description Get the imageHeight
+   * Get the imageHeight
    * @returns {number} the imageHeight
    */
   get imageHeight() {
@@ -251,8 +246,7 @@ export class Texture2D {
   }
 
   /**
-   * @function set imageHeight
-   * @description Sets the image height
+   * Sets the image height
    * @param {number} imageHeight - The new height
    * @returns {void}
    * @throws {Error} If the imageHeight is not a number.
@@ -275,8 +269,7 @@ export class Texture2D {
   }
 
   /**
-   * @function get image
-   * @description Get the image
+   * Get the image
    * @returns {HTMLImageElement} the image
    */
   get image() {
@@ -284,8 +277,7 @@ export class Texture2D {
   }
 
   /**
-   * @function set image
-   * @description Sets the image
+   * Sets the image
    * @param {HTMLImageElement|string} image - The new image
    * @returns {void}
    * @throws {Error} If the image is not a string or HTMLImageElement.
@@ -311,9 +303,8 @@ export class Texture2D {
   }
 
   /**
+   * Position and scale the pattern's transform
    * @private
-   * @function #rebuildTransform
-   * @description Position and scale the pattern's transform
    * @returns {void}
    */
   #rebuildTransform() {
@@ -348,8 +339,7 @@ export class Texture2D {
   }
 
   /**
-   * @function createPattern
-   * @description Create the pattern based on the image and configuration (used by materials)
+   * Create the pattern based on the image and configuration (used by materials)
    * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
    * @returns {CanvasPattern|null}
    */
@@ -364,8 +354,7 @@ export class Texture2D {
   }
 
   /**
-   * @function setImageOffset
-   * @description Set the image's offset
+   * Set the image's offset
    * @param {number} imageOffsetX - image offset x
    * @param {number} imageOffsetY - image offset y
    * @returns {void}
@@ -384,8 +373,7 @@ export class Texture2D {
   }
 
   /**
-   * @function setImageSize
-   * @description Set the image's width and height
+   * Set the image's width and height
    * @param {number|null} [imageWidth] - image width
    * @param {number|null} [imageHeight] - image height
    * @returns {void}
@@ -404,8 +392,7 @@ export class Texture2D {
   }
 
   /**
-   * @function setImage
-   * @description Loads and sets an image.
+   * Loads and sets an image.
    * @param {HTMLImageElement|string} image - An <img> element or a URL string
    * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"} [repeat="repeat"] - Pattern repeat mode
    * @returns {void}

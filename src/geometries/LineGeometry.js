@@ -5,9 +5,9 @@ import { Material } from "../materials/Material.js";
 import { Transform } from "../core/Transform.js";
 
 /**
+ * This class provides a way to draw a custom shape using lines.
  * @class LineGeometry
- * @extends Geometry
- * @classdesc This class provides a way to draw a custom shape using lines.
+ * @augments Geometry
  */
 export class LineGeometry extends Geometry {
   /**
@@ -17,7 +17,8 @@ export class LineGeometry extends Geometry {
   #points;
   
   /**
-   * @constructor
+   * This class provides a way to draw a custom shape using lines.
+   * @class
    * @param {Array.<Array<number>>} points - Array of 4-number arrays describing points/segments. Requires at least one entry.
    * @throws {Error} If points is not an array
    * @throws {Error} If points has less than one 4-number arrays
@@ -29,8 +30,7 @@ export class LineGeometry extends Geometry {
   }
 
   /**
-   * @function get points
-   * @description Gets the lines' points
+   * Gets the lines' points
    * @returns {Array.<Array<number>>} The lines' points
    */
   get points() {
@@ -38,8 +38,7 @@ export class LineGeometry extends Geometry {
   }
 
   /**
-   * @function set points
-   * @description Sets the lines points
+   * Sets the lines points
    * @param {Array.<Array<number>>} points - The lines points
    * @returns {void}
    * @throws {Error} If points is not an array
@@ -65,8 +64,7 @@ export class LineGeometry extends Geometry {
   }
 
   /**
-   * @function checkMaterialConflicts
-   * @description Check for any conflicts between the geometry and the provided material
+   * Check for any conflicts between the geometry and the provided material
    * @param {Material} material - The material to check against
    * @returns {void}
    * @throws {Error} If material does not have a strokeStyle
@@ -78,8 +76,7 @@ export class LineGeometry extends Geometry {
   }
 
   /**
-   * @function drawContext2D
-   * @description Draws the circle onto the given canvas 2D context
+   * Draws the circle onto the given canvas 2D context
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the circle
    * @param {Material} material - The material to use for rendering the circle

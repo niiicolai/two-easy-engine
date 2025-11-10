@@ -1,6 +1,6 @@
 /**
+ * The base color class
  * @class Color
- * @classdesc The base color class
  */
 export class Color {
   /**
@@ -10,7 +10,8 @@ export class Color {
   #colorStr;
 
   /**
-   * @constructor
+   * The base color class
+   * @class
    * @param {string} colorStr - a string representation of the color
    * @throws {Error} if the colorStr is not a string
    */
@@ -19,8 +20,7 @@ export class Color {
   }
 
   /**
-   * @function get colorStr
-   * @description Get the string representation of the color
+   * Get the string representation of the color
    * @returns {string} colorStr
    */
   get colorStr() {
@@ -28,8 +28,7 @@ export class Color {
   }
 
   /**
-   * @function set colorStr
-   * @description Set colorStr
+   * Set colorStr
    * @param {string} colorStr
    * @returns {void}
    * @throws {Error} if colorStr is not a string
@@ -43,8 +42,7 @@ export class Color {
   }
 
   /**
-   * @function toString
-   * @description Returns the colorStr property
+   * Returns the colorStr property
    * @returns {string}
    */
   toString() {

@@ -1,8 +1,8 @@
 import { Vector2 } from "./Vector2.js";
 
 /**
+ * This class encapsulates the transformation properties of an object in 2D space.
  * @class Transform
- * @classdesc This class encapsulates the transformation properties of an object in 2D space.
  */
 export class Transform {
   /**
@@ -24,7 +24,8 @@ export class Transform {
   #scale;
 
   /**
-   * @constructor
+   * This class encapsulates the transformation properties of an object in 2D space.
+   * @class
    * @param {Vector2} position - The position of the transform.
    * @param {number} rotation - The rotation of the transform.
    * @param {Vector2} scale - The scale of the transform.
@@ -43,8 +44,7 @@ export class Transform {
   }
 
   /**
-   * @function get position
-   * @description Get transform position
+   * Get transform position
    * @returns {Vector2} the position
    */
   get position() {
@@ -52,8 +52,7 @@ export class Transform {
   }
 
   /**
-   * @function set position
-   * @description Set position
+   * Set the position
    * @param {Vector2} position - the position
    * @returns {void}
    * @throws {Error} if position is not a Vector2
@@ -67,8 +66,7 @@ export class Transform {
   }
 
   /**
-   * @function get rotation
-   * @description Get transform rotation
+   * Get the rotation
    * @returns {number} the rotation
    */
   get rotation() {
@@ -76,8 +74,7 @@ export class Transform {
   }
 
   /**
-   * @function set rotation
-   * @description Set rotation
+   * Set the rotation
    * @param {number} rotation - the rotation
    * @returns {void}
    * @throws {Error} if rotation is not a number
@@ -91,8 +88,7 @@ export class Transform {
   }
 
   /**
-   * @function get scale
-   * @description Get transform scale
+   * Get the scale
    * @returns {Vector2} the scale
    */
   get scale() {
@@ -100,8 +96,7 @@ export class Transform {
   }
 
   /**
-   * @function set scale
-   * @description Set scale
+   * Set the scale
    * @param {Vector2} scale - the scale
    * @returns {void}
    * @throws {Error} if scale is not a Vector2

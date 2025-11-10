@@ -6,9 +6,9 @@ import { Material } from "../materials/Material.js";
 import { Transform } from "../core/Transform.js";
 
 /**
+ * This class provides a way to draw a custom polygon.
  * @class PolygonGeometry
- * @extends Geometry
- * @classdesc This class provides a way to draw a custom polygon.
+ * @augments Geometry
  */
 export class PolygonGeometry extends Geometry {
   /**
@@ -24,7 +24,8 @@ export class PolygonGeometry extends Geometry {
   #center;
 
   /**
-   * @constructor
+   * This class provides a way to draw a custom polygon.
+   * @class
    * @param {Array.<Array<number>>} points - Array of 4-number arrays describing points/segments. Requires at least one entry.
    * @throws {Error} If points is not an array
    * @throws {Error} If points has less than three 2-number arrays
@@ -36,8 +37,7 @@ export class PolygonGeometry extends Geometry {
   }
 
   /**
-   * @function get points
-   * @description Gets the polygons's points
+   * Gets the polygons's points
    * @returns {Array.<Array<number>>} The polygons's points
    */
   get points() {
@@ -45,8 +45,7 @@ export class PolygonGeometry extends Geometry {
   }
 
   /**
-   * @function set points
-   * @description Sets the polgyon's points
+   * Sets the polgyon's points
    * @param {Array.<Array<number>>} points - The polgyon's points
    * @returns {void}
    * @throws {Error} If points is not an array
@@ -73,8 +72,7 @@ export class PolygonGeometry extends Geometry {
   }
 
   /**
-   * @function #calculateCenter
-   * @description Calculates the center point of the polygon
+   * Calculates the center point of the polygon
    * @returns {void}
    * @private
    */
@@ -95,8 +93,7 @@ export class PolygonGeometry extends Geometry {
   }
 
   /**
-   * @function drawContext2D
-   * @description Draws the circle onto the given canvas 2D context
+   * Draws the circle onto the given canvas 2D context
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
    * @param {Transform} transform - The transform to apply to the circle
    * @param {Material} material - The material to use for rendering the circle
