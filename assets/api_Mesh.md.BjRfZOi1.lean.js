@@ -1,1 +1,0 @@
-import{_ as t,c as a,o,ae as r}from"./chunks/framework.C4y2S-A3.js";const g=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"api/Mesh.md","filePath":"api/Mesh.md"}'),d={name:"api/Mesh.md"};function s(h,e,n,i,l,c){return o(),a("div",null,[...e[0]||(e[0]=[r("",43)])])}const p=t(d,[["render",s]]);export{g as __pageData,p as default};

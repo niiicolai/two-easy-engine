@@ -1,0 +1,1 @@
+import{_ as t,c as a,o,ae as r}from"./chunks/framework.C4y2S-A3.js";const D=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"api/Object2D.md","filePath":"api/Object2D.md"}'),d={name:"api/Object2D.md"};function c(i,e,s,n,b,l){return o(),a("div",null,[...e[0]||(e[0]=[r("",69)])])}const j=t(d,[["render",c]]);export{D as __pageData,j as default};

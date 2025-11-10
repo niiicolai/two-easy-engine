@@ -1,0 +1,1 @@
+import{_ as a,c as o,o as t,ae as c}from"./chunks/framework.C4y2S-A3.js";const p=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"api/Clock.md","filePath":"api/Clock.md"}'),l={name:"api/Clock.md"};function r(n,e,i,d,s,m){return t(),o("div",null,[...e[0]||(e[0]=[c("",36)])])}const h=a(l,[["render",r]]);export{p as __pageData,h as default};
