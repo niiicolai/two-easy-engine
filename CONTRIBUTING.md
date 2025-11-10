@@ -1,6 +1,6 @@
 # Contribution Guidelines
 
-We welcome contributions to the Two Easy Engine!
+We welcome contributions to the TwoEasyEngine!
 
 ## Getting Started
 1.  **Fork** the repository on GitHub.
