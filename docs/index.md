@@ -1,5 +1,5 @@
 ::: warning
-**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for other rendering contexts is added.
+**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for other rendering contexts is added. Take a look at the TwoEasyEngine [roadmap](https://niiicolai.github.io/two-easy-engine/roadmap.html) for more information.
 :::
 
 <iframe src="/two-easy-engine/demos/introduction.html" width="100%" height="400px" style="border:1px solid #ccc;"></iframe>

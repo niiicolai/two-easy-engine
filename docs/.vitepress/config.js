@@ -22,6 +22,7 @@ export default {
   themeConfig: {
     nav: [
       { text: "Home", link: "/" },
+      { text: "Roadmap", link: "/roadmap" },
       {
         text: "Join Discord Community",
         link: "https://discord.gg/W3r2scCX5r",

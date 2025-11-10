@@ -1,6 +1,4 @@
-**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for other rendering contexts is added.
-
----
+**⚠️ Experimental API:** TwoEasyEngine is a very new project. The API is still evolving and may change in the future, especially as support for other rendering contexts is added. Take a look at the TwoEasyEngine [roadmap](https://niiicolai.github.io/two-easy-engine/roadmap.html) for more information.
 
 [![CI](https://github.com/niiicolai/two-easy-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/niiicolai/two-easy-engine/actions/workflows/ci.yml)
 [![pages-build-deployment](https://github.com/niiicolai/two-easy-engine/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/niiicolai/two-easy-engine/actions/workflows/pages/pages-build-deployment)
@@ -12,7 +10,7 @@
 <img 
     src="./docs/public/images/logo.png" 
     alt="TwoEasyEngine Logo" 
-    width="160" 
+    width="260" 
     style="flex-shrink: 0; border-radius: 1rem;"
   />
 
@@ -169,7 +167,7 @@ npm run docs:deploy # deploy docs
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request on GitHub.
+Contributions are welcome! Get started by reading our [Contributing Guidelines](/CONTRIBUTING.md).
 
 ## License MIT License
 
