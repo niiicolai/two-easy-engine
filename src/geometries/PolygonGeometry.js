@@ -38,7 +38,7 @@ export class PolygonGeometry extends Geometry {
 
   /**
    * Gets the polygons's points
-   * @returns {Array.<Array<number>>} The polygons's points
+   * @returns {Array.<Array<number>>}
    */
   get points() {
     return this.#points;

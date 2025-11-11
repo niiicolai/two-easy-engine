@@ -21,7 +21,7 @@ export class Color {
 
   /**
    * Get the string representation of the color
-   * @returns {string} colorStr
+   * @returns {string}
    */
   get colorStr() {
     return this.#colorStr;

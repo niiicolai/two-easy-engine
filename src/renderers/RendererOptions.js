@@ -105,7 +105,7 @@ export class RendererOptions {
 
   /**
    * Gets the cache object
-   * @returns {Object} The cache object
+   * @returns {Object}
    */
   get cache() {
     return this.#cache;
@@ -113,7 +113,7 @@ export class RendererOptions {
 
   /**
    * Gets the canvas width
-   * @returns {number} The canvas width
+   * @returns {number}
    */
   get width() {
     return this.#width;
@@ -138,7 +138,7 @@ export class RendererOptions {
 
   /**
    * Gets the canvas height
-   * @returns {number} The canvas height
+   * @returns {number}
    */
   get height() {
     return this.#height;
@@ -163,7 +163,7 @@ export class RendererOptions {
 
   /**
    * Gets the device pixel ratio
-   * @returns {number} The device pixel ratio
+   * @returns {number}
    */
   get devicePixelRatio() {
     return this.#devicePixelRatio;
@@ -187,7 +187,7 @@ export class RendererOptions {
 
   /**
    * Gets the background color
-   * @returns {string|Color} The background color
+   * @returns {string|Color}
    */
   get backgroundColor() {
     return this.#backgroundColor;

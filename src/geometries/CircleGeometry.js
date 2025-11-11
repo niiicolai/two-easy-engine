@@ -29,7 +29,7 @@ export class CircleGeometry extends Geometry {
 
   /**
    * Get the radius
-   * @returns {number} radius
+   * @returns {number}
    */
   get radius() {
     return this.#radius;

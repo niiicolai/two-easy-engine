@@ -124,7 +124,7 @@ export class Texture2D {
 
   /**
    * Get the imageRepeat option
-   * @returns {string} the imageRepeat
+   * @returns {string}
    */
   get imageRepeat() {
     return this.#imageRepeat;
@@ -154,7 +154,7 @@ export class Texture2D {
 
   /**
    * Get the imageOffsetX
-   * @returns {number} the imageOffsetX
+   * @returns {number}
    */
   get imageOffsetX() {
     return this.#imageOffsetX;
@@ -181,7 +181,7 @@ export class Texture2D {
 
   /**
    * Get the imageOffsetY
-   * @returns {number} the imageOffsetY
+   * @returns {number}
    */
   get imageOffsetY() {
     return this.#imageOffsetY;
@@ -208,7 +208,7 @@ export class Texture2D {
 
   /**
    * Get the imageWidth
-   * @returns {number} the imageWidth
+   * @returns {number}
    */
   get imageWidth() {
     return this.#imageWidth;
@@ -239,7 +239,7 @@ export class Texture2D {
 
   /**
    * Get the imageHeight
-   * @returns {number} the imageHeight
+   * @returns {number}
    */
   get imageHeight() {
     return this.#imageHeight;
@@ -270,7 +270,7 @@ export class Texture2D {
 
   /**
    * Get the image
-   * @returns {HTMLImageElement} the image
+   * @returns {HTMLImageElement}
    */
   get image() {
     return this.#image;

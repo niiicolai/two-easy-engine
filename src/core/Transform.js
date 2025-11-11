@@ -45,7 +45,7 @@ export class Transform {
 
   /**
    * Get transform position
-   * @returns {Vector2} the position
+   * @returns {Vector2}
    */
   get position() {
     return this.#position;
@@ -67,7 +67,7 @@ export class Transform {
 
   /**
    * Get the rotation
-   * @returns {number} the rotation
+   * @returns {number}
    */
   get rotation() {
     return this.#rotation;
@@ -89,7 +89,7 @@ export class Transform {
 
   /**
    * Get the scale
-   * @returns {Vector2} the scale
+   * @returns {Vector2}
    */
   get scale() {
     return this.#scale;

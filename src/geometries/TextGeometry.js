@@ -102,7 +102,7 @@ export class TextGeometry extends Geometry {
 
   /**
    * Get the text
-   * @returns {string} text
+   * @returns {string}
    */
   get text() {
     return this.#text;
@@ -124,7 +124,7 @@ export class TextGeometry extends Geometry {
 
   /**
    * Get the options
-   * @returns {Object} options
+   * @returns {Object}
    */
   get options() {
     return this.#options;

@@ -53,8 +53,8 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * Get red
-   * @returns {number} red (0-255)
+   * Get red (0-255)
+   * @returns {number}
    */
   get r() {
     return this.#r;
@@ -101,8 +101,8 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * Get blue
-   * @returns {number} blue (0-255)
+   * Get blue (0-255)
+   * @returns {number}
    */
   get b() {
     return this.#b;
@@ -125,8 +125,8 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * Get alpha
-   * @returns {number} alpha (0-1)
+   * Get alpha (0-1)
+   * @returns {number}
    */
   get a() {
     return this.#a;

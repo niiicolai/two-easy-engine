@@ -53,8 +53,8 @@ export class HslaColor extends Color {
   }
 
   /**
-   * Get hue
-   * @returns {number} hue (0-360)
+   * Get hue (0-360)
+   * @returns {number}
    */
   get h() {
     return this.#h;
@@ -76,8 +76,8 @@ export class HslaColor extends Color {
   }
 
   /**
-   * Get saturation
-   * @returns {number} saturation (0-100)
+   * Get saturation (0-100)
+   * @returns {number}
    */
   get s() {
     return this.#s;
@@ -97,8 +97,8 @@ export class HslaColor extends Color {
   }
 
   /**
-   * Get lightness
-   * @returns {number} lightness (0-100)
+   * Get lightness (0-100)
+   * @returns {number}
    */
   get l() {
     return this.#l;
@@ -120,8 +120,8 @@ export class HslaColor extends Color {
   }
 
   /**
-   * Get alpha
-   * @returns {number} alpha (0-1)
+   * Get alpha (0-1)
+   * @returns {number}
    */
   get a() {
     return this.#a;

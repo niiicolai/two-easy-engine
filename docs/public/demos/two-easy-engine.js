@@ -31,7 +31,7 @@ const x = class x {
   }
   /**
    * Get the x coordinate
-   * @returns {Vector2} the x coordinate
+   * @returns {Vector2}
    */
   get x() {
     return r(this, mt);
@@ -49,7 +49,7 @@ const x = class x {
   }
   /**
    * Get the y coordinate
-   * @returns {Vector2} the y coordinate
+   * @returns {Vector2}
    */
   get y() {
     return r(this, dt);
@@ -67,7 +67,7 @@ const x = class x {
   }
   /**
    * Creates a copy of the vector
-   * @returns {Vector2} A new Vector2 instance with the same x and y values
+   * @returns {Vector2}
    */
   clone() {
     return new x(this.x, this.y);
@@ -76,7 +76,7 @@ const x = class x {
    * Sets the x and y values of the vector
    * @param {number} x - The new x value
    * @param {number} y - The new y value
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If x or y is not a number
    */
   set(e, t) {
@@ -88,7 +88,7 @@ const x = class x {
    * Translates the vector by given x and y offsets
    * @param {number} x - The x offset
    * @param {number} y - The y offset
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If x or y is not a number
    */
   translate(e, t) {
@@ -99,7 +99,7 @@ const x = class x {
   /**
    * Copy the values of the given vector to this.
    * @param {Vector2} v - The vector to copy
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   copy(e) {
@@ -110,7 +110,7 @@ const x = class x {
   /**
    * Adds another vector to this vector
    * @param {Vector2} v - The vector to add
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   add(e) {
@@ -121,7 +121,7 @@ const x = class x {
   /**
    * Subtracts another vector from this vector
    * @param {Vector2} v - The vector to subtract
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   subtract(e) {
@@ -132,7 +132,7 @@ const x = class x {
   /**
    * Computes the dot product with another vector
    * @param {Vector2} v - The other vector
-   * @returns {number} The dot product
+   * @returns {number}
    * @throws {Error} If v is not of type Vector2
    */
   dot(e) {
@@ -143,7 +143,7 @@ const x = class x {
   /**
    * Computes a new vector from this vector to another vector
    * @param {Vector2} v - The target vector
-   * @returns {Vector2} A new Vector2 representing the vector from this to v
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   vectorTo(e) {
@@ -154,7 +154,7 @@ const x = class x {
   /**
    * Multiplies this vector by a scalar
    * @param {number} s - The scalar to multiply by
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If s is not a number
    */
   multiplyScalar(e) {
@@ -165,7 +165,7 @@ const x = class x {
   /**
    * Divides this vector by a scalar
    * @param {number} s - The scalar to divide by
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If s is not a number
    * @throws {Error} If division by zero is attempted
    */
@@ -178,21 +178,21 @@ const x = class x {
   }
   /**
    * Computes the length (magnitude) of the vector
-   * @returns {number} The length of the vector
+   * @returns {number}
    */
   length() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
   }
   /**
    * Computes the squared length of the vector.
-   * @returns {number} The squared length of the vector
+   * @returns {number}
    */
   lengthSquared() {
     return this.x * this.x + this.y * this.y;
   }
   /**
    * Normalizes the vector to have a length of 1
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If attempting to normalize a zero-length vector
    */
   normalize() {
@@ -216,7 +216,7 @@ const x = class x {
    * @param {number} px - the x coordinate of the point to rotate around
    * @param {number} py - the y coordinate of the point to rotate around
    * @param {number} angle - the rotation angle in radians
-   * @returns {Vector2} the same vector
+   * @returns {Vector2}
    */
   rotateAround(e, t, i) {
     const h = Math.cos(i), a = Math.sin(i), u = this.x, l = this.y;
@@ -257,7 +257,7 @@ class ft {
   }
   /**
    * Get transform position
-   * @returns {Vector2} the position
+   * @returns {Vector2}
    */
   get position() {
     return r(this, wt);
@@ -275,7 +275,7 @@ class ft {
   }
   /**
    * Get the rotation
-   * @returns {number} the rotation
+   * @returns {number}
    */
   get rotation() {
     return r(this, gt);
@@ -293,7 +293,7 @@ class ft {
   }
   /**
    * Get the scale
-   * @returns {Vector2} the scale
+   * @returns {Vector2}
    */
   get scale() {
     return r(this, bt);
@@ -337,7 +337,7 @@ class ge {
   }
   /**
    * Get the zoom
-   * @returns {number} zoom
+   * @returns {number}
    */
   get zoom() {
     return r(this, pt);
@@ -355,7 +355,7 @@ class ge {
   }
   /**
    * Get the transform
-   * @returns {Transform} transform
+   * @returns {Transform}
    */
   get transform() {
     return r(this, yt);
@@ -427,7 +427,7 @@ class X {
   }
   /**
    * Get the string representation of the color
-   * @returns {string} colorStr
+   * @returns {string}
    */
   get colorStr() {
     return r(this, Et);
@@ -522,14 +522,14 @@ const J = class J {
   }
   /**
    * Gets the cache object
-   * @returns {Object} The cache object
+   * @returns {Object}
    */
   get cache() {
     return r(this, Q);
   }
   /**
    * Gets the canvas width
-   * @returns {number} The canvas width
+   * @returns {number}
    */
   get width() {
     return r(this, St);
@@ -545,7 +545,7 @@ const J = class J {
   }
   /**
    * Gets the canvas height
-   * @returns {number} The canvas height
+   * @returns {number}
    */
   get height() {
     return r(this, Tt);
@@ -561,7 +561,7 @@ const J = class J {
   }
   /**
    * Gets the device pixel ratio
-   * @returns {number} The device pixel ratio
+   * @returns {number}
    */
   get devicePixelRatio() {
     return r(this, Ct);
@@ -577,7 +577,7 @@ const J = class J {
   }
   /**
    * Gets the background color
-   * @returns {string|Color} The background color
+   * @returns {string|Color}
    */
   get backgroundColor() {
     return r(this, xt);
@@ -687,28 +687,28 @@ class ce {
   }
   /**
    * Gets the renderer options
-   * @returns {RendererOptions} The renderer options
+   * @returns {RendererOptions}
    */
   get options() {
     return r(this, y);
   }
   /**
    * Gets the rendering context type
-   * @returns {string} The rendering context type
+   * @returns {string}
    */
   get contextType() {
     return r(this, vt);
   }
   /**
    * Gets the canvas element
-   * @returns {HTMLCanvasElement} The canvas element
+   * @returns {HTMLCanvasElement}
    */
   get canvas() {
     return r(this, Dt);
   }
   /**
    * Gets the scene
-   * @returns {Scene} The scene
+   * @returns {Scene}
    */
   get scene() {
     return r(this, At);
@@ -724,7 +724,7 @@ class ce {
   }
   /**
    * Gets the camera
-   * @returns {Camera2D} The camera
+   * @returns {Camera2D}
    */
   get camera() {
     return r(this, Rt);
@@ -740,14 +740,14 @@ class ce {
   }
   /**
    * Gets the center x value
-   * @returns {number} The center x value
+   * @returns {number}
    */
   get centerX() {
     return r(this, y).cache.halfWidth;
   }
   /**
    * Gets the center y value
-   * @returns {number} The center y value
+   * @returns {number}
    */
   get centerY() {
     return r(this, y).cache.halfHeight;
@@ -894,14 +894,14 @@ class K {
   }
   /**
    * Get the uuid
-   * @returns {string} the uuid
+   * @returns {string}
    */
   get uuid() {
     return r(this, It);
   }
   /**
    * Get the visible flag
-   * @returns {boolean} the flag
+   * @returns {boolean}
    */
   get visible() {
     return r(this, rt);
@@ -919,14 +919,14 @@ class K {
   }
   /**
    * Get the custom userData
-   * @returns {Object} the userData
+   * @returns {Object}
    */
   get userData() {
     return r(this, tt);
   }
   /**
    * Sets custom user data
-   * @param {Boolean} userData - The user data
+   * @param {Object} userData - The user data
    * @returns {void}
    */
   set userData(e) {
@@ -934,7 +934,7 @@ class K {
   }
   /**
    * Get the transform
-   * @returns {Transform} the transform
+   * @returns {Transform}
    */
   get transform() {
     return r(this, et);
@@ -1016,14 +1016,14 @@ class xe {
   }
   /**
    * Gets a copy of scene's children
-   * @returns {Object2D[]} The children
+   * @returns {Object2D[]}
    */
   get children() {
     return [...r(this, F)];
   }
   /**
    * Gets a copy of the scene's uuid-zIndex map
-   * @returns {Map<string, number>} The map object
+   * @returns {Map<string, number>}
    */
   get zIndexes() {
     return new Map(r(this, T));
@@ -1060,7 +1060,7 @@ class xe {
   /**
    * Change one or more object2D's z-index value
    * @param {number} zIndex - the new z-index value
-   * @param {...Object2D} children - the children
+   * @param {...Object2D} children - the children 
    * @returns {void}
    * @throws {Error} if zIndex is not a number.
    * @throws {Error} If any child is not of type Object2D
@@ -1219,7 +1219,7 @@ const C = class C {
   }
   /**
    * Get the imageRepeat option
-   * @returns {string} the imageRepeat
+   * @returns {string}
    */
   get imageRepeat() {
     return r(this, st);
@@ -1241,7 +1241,7 @@ const C = class C {
   }
   /**
    * Get the imageOffsetX
-   * @returns {number} the imageOffsetX
+   * @returns {number}
    */
   get imageOffsetX() {
     return r(this, nt);
@@ -1259,7 +1259,7 @@ const C = class C {
   }
   /**
    * Get the imageOffsetY
-   * @returns {number} the imageOffsetY
+   * @returns {number}
    */
   get imageOffsetY() {
     return r(this, ot);
@@ -1277,7 +1277,7 @@ const C = class C {
   }
   /**
    * Get the imageWidth
-   * @returns {number} the imageWidth
+   * @returns {number}
    */
   get imageWidth() {
     return r(this, B);
@@ -1295,7 +1295,7 @@ const C = class C {
   }
   /**
    * Get the imageHeight
-   * @returns {number} the imageHeight
+   * @returns {number}
    */
   get imageHeight() {
     return r(this, H);
@@ -1313,7 +1313,7 @@ const C = class C {
   }
   /**
    * Get the image
-   * @returns {HTMLImageElement} the image
+   * @returns {HTMLImageElement}
    */
   get image() {
     return r(this, E);
@@ -1460,21 +1460,21 @@ class Re {
   }
   /**
    * Get the time the object was instantiated.
-   * @returns {number} the time
+   * @returns {number}
    */
   get startTime() {
     return r(this, _);
   }
   /**
    * Get time since instantiation.
-   * @returns {number} the time
+   * @returns {number}
    */
   get elapsedTime() {
     return r(this, G);
   }
   /**
    * Get time since last frame.
-   * @returns {number} the time
+   * @returns {number}
    */
   get deltaTime() {
     return r(this, j);
@@ -1584,7 +1584,7 @@ const ct = class ct extends se {
   }
   /**
    * Gets the material's fillStyle
-   * @returns {Color} The fillStyle
+   * @returns {Color}
    */
   get fillStyle() {
     return r(this, M);
@@ -1605,7 +1605,7 @@ const ct = class ct extends se {
   }
   /**
    * Gets the material's strokeStyle
-   * @returns {Color|null|undefined} The strokeStyle
+   * @returns {Color|null|undefined}
    */
   get strokeStyle() {
     return r(this, U);
@@ -1626,7 +1626,7 @@ const ct = class ct extends se {
   }
   /**
    * Gets the material's lineWidth
-   * @returns {number|null|undefined} The lineWidth
+   * @returns {number|null|undefined}
    */
   get lineWidth() {
     return r(this, W);
@@ -1644,7 +1644,7 @@ const ct = class ct extends se {
   }
   /**
    * Gets the material's texture2D 
-   * @returns {Texture2D|null|undefined} The texture2D
+   * @returns {Texture2D|null|undefined}
    */
   get texture2D() {
     return r(this, V);
@@ -1723,7 +1723,7 @@ class Pe extends ut {
   }
   /**
    * Get the width
-   * @returns {number} width
+   * @returns {number}
    */
   get width() {
     return r(this, $t);
@@ -1741,7 +1741,7 @@ class Pe extends ut {
   }
   /**
    * Get the height
-   * @returns {number} height
+   * @returns {number}
    */
   get height() {
     return r(this, kt);
@@ -1793,7 +1793,7 @@ class Ie extends ut {
   }
   /**
    * Get the radius
-   * @returns {number} radius
+   * @returns {number}
    */
   get radius() {
     return r(this, Ot);
@@ -1857,7 +1857,7 @@ const g = class g extends ut {
   }
   /**
    * Get the text
-   * @returns {string} text
+   * @returns {string}
    */
   get text() {
     return r(this, Lt);
@@ -1875,7 +1875,7 @@ const g = class g extends ut {
   }
   /**
    * Get the options
-   * @returns {Object} options
+   * @returns {Object}
    */
   get options() {
     return r(this, Ft);
@@ -2005,7 +2005,7 @@ class $e extends ut {
   }
   /**
    * Gets the lines' points
-   * @returns {Array.<Array<number>>} The lines' points
+   * @returns {Array.<Array<number>>}
    */
   get points() {
     return r(this, Mt);
@@ -2081,7 +2081,7 @@ class ke extends ut {
   }
   /**
    * Gets the polygons's points
-   * @returns {Array.<Array<number>>} The polygons's points
+   * @returns {Array.<Array<number>>}
    */
   get points() {
     return r(this, Z);
@@ -2172,7 +2172,7 @@ class Ce extends K {
   }
   /**
    * Gets the mesh's geometry
-   * @returns {Geometry} The mesh's geometry
+   * @returns {Geometry}
    */
   get geometry() {
     return r(this, z);
@@ -2190,7 +2190,7 @@ class Ce extends K {
   }
   /**
    * Gets the mesh's material
-   * @returns {Material} The mesh's material
+   * @returns {Material}
    */
   get material() {
     return r(this, N);
@@ -2251,8 +2251,8 @@ class ue extends X {
     this.set(t, i, h, a);
   }
   /**
-   * Get red
-   * @returns {number} red (0-255)
+   * Get red (0-255)
+   * @returns {number}
    */
   get r() {
     return r(this, Ut);
@@ -2287,8 +2287,8 @@ class ue extends X {
     s(this, zt, t), r(this, R) || this.updateColorStr();
   }
   /**
-   * Get blue
-   * @returns {number} blue (0-255)
+   * Get blue (0-255)
+   * @returns {number}
    */
   get b() {
     return r(this, Nt);
@@ -2305,8 +2305,8 @@ class ue extends X {
     s(this, Nt, t), r(this, R) || this.updateColorStr();
   }
   /**
-   * Get alpha
-   * @returns {number} alpha (0-1)
+   * Get alpha (0-1)
+   * @returns {number}
    */
   get a() {
     return r(this, Xt);
@@ -2441,7 +2441,7 @@ class ve extends K {
   }
   /**
    * Gets the light's radius
-   * @returns {number} The radius
+   * @returns {number}
    */
   get radius() {
     return r(this, Yt);
@@ -2459,7 +2459,7 @@ class ve extends K {
   }
   /**
    * Gets the light's intensity
-   * @returns {number} The intensity
+   * @returns {number}
    */
   get intensity() {
     return r(this, Bt);
@@ -2477,7 +2477,7 @@ class ve extends K {
   }
   /**
    * Gets the light's color
-   * @returns {Color} The color
+   * @returns {Color}
    */
   get color() {
     return r(this, Ht);
@@ -2495,7 +2495,7 @@ class ve extends K {
   }
   /**
    * Gets the light's colorStop
-   * @returns {Color} The colorStop
+   * @returns {Color}
    */
   get colorStop() {
     return r(this, _t);
@@ -2568,8 +2568,8 @@ class Oe extends X {
     this.set(t, i, h, a);
   }
   /**
-   * Get hue
-   * @returns {number} hue (0-360)
+   * Get hue (0-360)
+   * @returns {number}
    */
   get h() {
     return r(this, Gt);
@@ -2586,8 +2586,8 @@ class Oe extends X {
     s(this, Gt, t), r(this, P) || this.updateColorStr();
   }
   /**
-   * Get saturation
-   * @returns {number} saturation (0-100)
+   * Get saturation (0-100)
+   * @returns {number}
    */
   get s() {
     return r(this, jt);
@@ -2602,8 +2602,8 @@ class Oe extends X {
     s(this, jt, t), r(this, P) || this.updateColorStr();
   }
   /**
-   * Get lightness
-   * @returns {number} lightness (0-100)
+   * Get lightness (0-100)
+   * @returns {number}
    */
   get l() {
     return r(this, Wt);
@@ -2620,8 +2620,8 @@ class Oe extends X {
     s(this, Wt, t), r(this, P) || this.updateColorStr();
   }
   /**
-   * Get alpha
-   * @returns {number} alpha (0-1)
+   * Get alpha (0-1)
+   * @returns {number}
    */
   get a() {
     return r(this, Vt);

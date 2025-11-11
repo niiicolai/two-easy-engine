@@ -101,7 +101,7 @@ export class Renderer {
 
   /**
    * Gets the renderer options
-   * @returns {RendererOptions} The renderer options
+   * @returns {RendererOptions}
    */
   get options() {
     return this.#options;
@@ -109,7 +109,7 @@ export class Renderer {
 
   /**
    * Gets the rendering context type
-   * @returns {string} The rendering context type
+   * @returns {string}
    */
   get contextType() {
     return this.#contextType;
@@ -117,7 +117,7 @@ export class Renderer {
 
   /**
    * Gets the canvas element
-   * @returns {HTMLCanvasElement} The canvas element
+   * @returns {HTMLCanvasElement}
    */
   get canvas() {
     return this.#canvas;
@@ -125,7 +125,7 @@ export class Renderer {
 
   /**
    * Gets the scene
-   * @returns {Scene} The scene
+   * @returns {Scene}
    */
   get scene() {
     return this.#scene;
@@ -145,7 +145,7 @@ export class Renderer {
 
   /**
    * Gets the camera
-   * @returns {Camera2D} The camera
+   * @returns {Camera2D}
    */
   get camera() {
     return this.#camera;
@@ -165,7 +165,7 @@ export class Renderer {
 
   /**
    * Gets the center x value
-   * @returns {number} The center x value
+   * @returns {number}
    */
   get centerX() {
     return this.#options.cache.halfWidth;
@@ -173,7 +173,7 @@ export class Renderer {
 
   /**
    * Gets the center y value
-   * @returns {number} The center y value
+   * @returns {number}
    */
   get centerY() {
     return this.#options.cache.halfHeight;

@@ -53,7 +53,7 @@ export class Object2D {
 
   /**
    * Get the uuid
-   * @returns {string} the uuid
+   * @returns {string}
    */
   get uuid() {
     return this.#uuid;
@@ -61,7 +61,7 @@ export class Object2D {
 
   /**
    * Get the visible flag
-   * @returns {boolean} the flag
+   * @returns {boolean}
    */
   get visible() {
     return this.#visible;
@@ -83,7 +83,7 @@ export class Object2D {
 
   /**
    * Get the custom userData
-   * @returns {Object} the userData
+   * @returns {Object}
    */
   get userData() {
     return this.#userData;
@@ -91,7 +91,7 @@ export class Object2D {
 
   /**
    * Sets custom user data
-   * @param {Boolean} userData - The user data
+   * @param {Object} userData - The user data
    * @returns {void}
    */
   set userData(userData) {
@@ -100,7 +100,7 @@ export class Object2D {
 
   /**
    * Get the transform
-   * @returns {Transform} the transform
+   * @returns {Transform}
    */
   get transform() {
     return this.#transform;

@@ -36,7 +36,7 @@ export class RectGeometry extends Geometry {
 
   /**
    * Get the width
-   * @returns {number} width
+   * @returns {number}
    */
   get width() {
     return this.#width;
@@ -58,7 +58,7 @@ export class RectGeometry extends Geometry {
 
   /**
    * Get the height
-   * @returns {number} height
+   * @returns {number}
    */
   get height() {
     return this.#height;

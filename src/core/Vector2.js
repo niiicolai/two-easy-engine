@@ -33,7 +33,7 @@ export class Vector2 {
 
   /**
    * Get the x coordinate
-   * @returns {Vector2} the x coordinate
+   * @returns {Vector2}
    */
   get x() {
     return this.#x;
@@ -55,7 +55,7 @@ export class Vector2 {
 
   /**
    * Get the y coordinate
-   * @returns {Vector2} the y coordinate
+   * @returns {Vector2}
    */
   get y() {
     return this.#y;
@@ -77,7 +77,7 @@ export class Vector2 {
 
   /**
    * Creates a copy of the vector
-   * @returns {Vector2} A new Vector2 instance with the same x and y values
+   * @returns {Vector2}
    */
   clone() {
     return new Vector2(this.x, this.y);
@@ -87,7 +87,7 @@ export class Vector2 {
    * Sets the x and y values of the vector
    * @param {number} x - The new x value
    * @param {number} y - The new y value
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If x or y is not a number
    */
   set(x, y) {
@@ -105,7 +105,7 @@ export class Vector2 {
    * Translates the vector by given x and y offsets
    * @param {number} x - The x offset
    * @param {number} y - The y offset
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If x or y is not a number
    */
   translate(dx, dy) {
@@ -122,7 +122,7 @@ export class Vector2 {
   /**
    * Copy the values of the given vector to this.
    * @param {Vector2} v - The vector to copy
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   copy(v) {
@@ -139,7 +139,7 @@ export class Vector2 {
   /**
    * Adds another vector to this vector
    * @param {Vector2} v - The vector to add
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   add(v) {
@@ -156,7 +156,7 @@ export class Vector2 {
   /**
    * Subtracts another vector from this vector
    * @param {Vector2} v - The vector to subtract
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   subtract(v) {
@@ -173,7 +173,7 @@ export class Vector2 {
   /**
    * Computes the dot product with another vector
    * @param {Vector2} v - The other vector
-   * @returns {number} The dot product
+   * @returns {number}
    * @throws {Error} If v is not of type Vector2
    */
   dot(v) {
@@ -187,7 +187,7 @@ export class Vector2 {
   /**
    * Computes a new vector from this vector to another vector
    * @param {Vector2} v - The target vector
-   * @returns {Vector2} A new Vector2 representing the vector from this to v
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   vectorTo(v) {
@@ -201,7 +201,7 @@ export class Vector2 {
   /**
    * Multiplies this vector by a scalar
    * @param {number} s - The scalar to multiply by
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If s is not a number
    */
   multiplyScalar(s) {
@@ -218,7 +218,7 @@ export class Vector2 {
   /**
    * Divides this vector by a scalar
    * @param {number} s - The scalar to divide by
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If s is not a number
    * @throws {Error} If division by zero is attempted
    */
@@ -237,7 +237,7 @@ export class Vector2 {
 
   /**
    * Computes the length (magnitude) of the vector
-   * @returns {number} The length of the vector
+   * @returns {number}
    */
   length() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
@@ -245,7 +245,7 @@ export class Vector2 {
 
   /**
    * Computes the squared length of the vector.
-   * @returns {number} The squared length of the vector
+   * @returns {number}
    */
   lengthSquared() {
     return this.x * this.x + this.y * this.y;
@@ -253,7 +253,7 @@ export class Vector2 {
 
   /**
    * Normalizes the vector to have a length of 1
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If attempting to normalize a zero-length vector
    */
   normalize() {
@@ -285,7 +285,7 @@ export class Vector2 {
    * @param {number} px - the x coordinate of the point to rotate around
    * @param {number} py - the y coordinate of the point to rotate around
    * @param {number} angle - the rotation angle in radians
-   * @returns {Vector2} the same vector
+   * @returns {Vector2}
    */
   rotateAround(px, py, angle) {
     const cos = Math.cos(angle);

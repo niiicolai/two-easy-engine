@@ -61,7 +61,7 @@ export class Mesh extends Object2D {
 
   /**
    * Gets the mesh's geometry
-   * @returns {Geometry} The mesh's geometry
+   * @returns {Geometry}
    */
   get geometry() {
     return this.#geometry;
@@ -87,7 +87,7 @@ export class Mesh extends Object2D {
 
   /**
    * Gets the mesh's material
-   * @returns {Material} The mesh's material
+   * @returns {Material}
    */
   get material() {
     return this.#material;

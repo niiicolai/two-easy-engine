@@ -33,7 +33,7 @@ export class Camera2D {
 
   /**
    * Get the zoom
-   * @returns {number} zoom
+   * @returns {number}
    */
   get zoom() {
     return this.#zoom;
@@ -55,7 +55,7 @@ export class Camera2D {
 
   /**
    * Get the transform
-   * @returns {Transform} transform
+   * @returns {Transform}
    */
   get transform() {
     return this.#transform;

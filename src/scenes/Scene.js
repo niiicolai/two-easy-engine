@@ -19,7 +19,7 @@ export class Scene {
 
   /**
    * Gets a copy of scene's children
-   * @returns {Object2D[]} The children
+   * @returns {Object2D[]}
    */
   get children() {
     return [...this.#children];
@@ -27,7 +27,7 @@ export class Scene {
 
   /**
    * Gets a copy of the scene's uuid-zIndex map
-   * @returns {Map<string, number>} The map object
+   * @returns {Map<string, number>}
    */
   get zIndexes() {
     return new Map(this.#zIndexes);
@@ -82,7 +82,7 @@ export class Scene {
   /**
    * Change one or more object2D's z-index value
    * @param {number} zIndex - the new z-index value
-   * @param {...Object2D} children - the children
+   * @param {...Object2D} children - the children 
    * @returns {void}
    * @throws {Error} if zIndex is not a number.
    * @throws {Error} If any child is not of type Object2D
