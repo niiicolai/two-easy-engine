@@ -45,7 +45,7 @@ export class Clock {
 
   /**
    * Get the time the object was instantiated.
-   * @returns {number} the time
+   * @returns {number}
    */
   get startTime() {
     return this.#startTime;
@@ -53,7 +53,7 @@ export class Clock {
 
   /**
    * Get time since instantiation.
-   * @returns {number} the time
+   * @returns {number}
    */
   get elapsedTime() {
     return this.#elapsedTime;
@@ -61,7 +61,7 @@ export class Clock {
 
   /**
    * Get time since last frame.
-   * @returns {number} the time
+   * @returns {number}
    */
   get deltaTime() {
     return this.#deltaTime;

@@ -67,7 +67,7 @@ export class PointLight2D extends Object2D {
 
   /**
    * Gets the light's radius
-   * @returns {number} The radius
+   * @returns {number}
    */
   get radius() {
     return this.#radius;
@@ -89,7 +89,7 @@ export class PointLight2D extends Object2D {
 
   /**
    * Gets the light's intensity
-   * @returns {number} The intensity
+   * @returns {number}
    */
   get intensity() {
     return this.#intensity;
@@ -111,7 +111,7 @@ export class PointLight2D extends Object2D {
 
   /**
    * Gets the light's color
-   * @returns {Color} The color
+   * @returns {Color}
    */
   get color() {
     return this.#color;
@@ -133,7 +133,7 @@ export class PointLight2D extends Object2D {
 
   /**
    * Gets the light's colorStop
-   * @returns {Color} The colorStop
+   * @returns {Color}
    */
   get colorStop() {
     return this.#colorStop;

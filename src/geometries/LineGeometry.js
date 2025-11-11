@@ -31,7 +31,7 @@ export class LineGeometry extends Geometry {
 
   /**
    * Gets the lines' points
-   * @returns {Array.<Array<number>>} The lines' points
+   * @returns {Array.<Array<number>>}
    */
   get points() {
     return this.#points;

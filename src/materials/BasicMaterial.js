@@ -85,7 +85,7 @@ export class BasicMaterial extends Material {
 
   /**
    * Gets the material's fillStyle
-   * @returns {Color} The fillStyle
+   * @returns {Color}
    */
   get fillStyle() {
     return this.#fillStyle;
@@ -111,7 +111,7 @@ export class BasicMaterial extends Material {
 
   /**
    * Gets the material's strokeStyle
-   * @returns {Color|null|undefined} The strokeStyle
+   * @returns {Color|null|undefined}
    */
   get strokeStyle() {
     return this.#strokeStyle;
@@ -137,7 +137,7 @@ export class BasicMaterial extends Material {
 
   /**
    * Gets the material's lineWidth
-   * @returns {number|null|undefined} The lineWidth
+   * @returns {number|null|undefined}
    */
   get lineWidth() {
     return this.#lineWidth;
@@ -163,7 +163,7 @@ export class BasicMaterial extends Material {
 
   /**
    * Gets the material's texture2D 
-   * @returns {Texture2D|null|undefined} The texture2D
+   * @returns {Texture2D|null|undefined}
    */
   get texture2D() {
     return this.#texture2D;
