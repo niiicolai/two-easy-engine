@@ -1,4 +1,4 @@
-import { expect, describe, it, vi } from "vitest";
+import { expect, describe, it } from "vitest";
 import { Scene } from "../../src/scenes/Scene.js";
 import { Object2D } from "../../src/core/Object2D.js";
 

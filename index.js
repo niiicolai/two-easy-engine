@@ -1,4 +1,6 @@
-import { Vector2 } from "./src/core/Vector2.js";
+import { Vector2 } from "./src/math/Vector2.js";
+import { Polygon2D } from "./src/math/Polygon2D.js";
+import { AnchorPoint2D } from "./src/core/AnchorPoint2D.js";
 import { Transform } from "./src/core/Transform.js";
 import { Camera2D } from "./src/cameras/Camera2D.js";
 import { Scene } from "./src/scenes/Scene.js";
@@ -23,8 +25,12 @@ import { RgbaColor } from "./src/colors/RgbaColor.js";
 import { HslaColor } from "./src/colors/HslaColor.js";
 
 export {
-  // Core
+  // Math
   Vector2,
+  Polygon2D,
+
+  // Core
+  AnchorPoint2D,
   Transform,
   Camera2D,
   Scene,

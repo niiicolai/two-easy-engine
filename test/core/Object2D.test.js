@@ -1,8 +1,6 @@
 import { expect, describe, it } from "vitest";
-import { createCanvas } from "canvas";
 import { Object2D } from "../../src/core/Object2D.js";
 import { Transform } from "../../src/core/Transform.js";
-import { Scene } from "../../src/scenes/Scene.js";
 
 describe("Object2D", () => {
   it("should create an Object2D instance", () => {

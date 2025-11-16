@@ -92,17 +92,20 @@ export class RectGeometry extends Geometry {
     if (!(transform instanceof Transform)) {
       throw new Error("transform must be of type Transform");
     }
-
-    const { scale, position, rotation } = transform;
+    const { scale, position, rotation, localAnchorPoint } = transform;
+    const offset = localAnchorPoint.offset;
     const width = this.width * scale.x;
     const height = this.height * scale.y;
-    const pivotX = width / 2;
-    const pivotY = height / 2;
+    const halfWidth = width / 2;
+    const halfHeight = height / 2;
+    const pivotX = -offset[0] * halfWidth;
+    const pivotY = -offset[1] * halfHeight;
 
     ctx.save();
-    ctx.translate(position.x + pivotX, position.y + pivotY);
+    ctx.translate(position.x - pivotX, position.y - pivotY);
+    // Rotate around pivot
     ctx.rotate(rotation);
-    ctx.translate(-pivotX, -pivotY);
+    ctx.translate(pivotX - halfWidth, pivotY - halfHeight);
 
     if (material.fillStyle) {
       ctx.fillRect(0, 0, width, height);

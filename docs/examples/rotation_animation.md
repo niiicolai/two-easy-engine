@@ -99,10 +99,7 @@ If we look closely, we can identify several core concepts we learned above:
           lineWidth: 2,
         })
       );
-      mesh.transform.position.set(
-        renderer.centerX - mesh.geometry.width / 2,
-        renderer.centerY - mesh.geometry.height / 2
-      );
+      mesh.transform.position.set(renderer.centerX, renderer.centerY);
       scene.add(mesh);
 
       // Handle window resize to ensure responsiveness rendering
@@ -110,10 +107,7 @@ If we look closely, we can identify several core concepts we learned above:
         // Resize the canvas
         renderer.options.setSize(window.innerWidth, window.innerHeight);
         // Set the new center position
-        mesh.transform.position.set(
-          renderer.centerX - mesh.geometry.width / 2,
-          renderer.centerY - mesh.geometry.height / 2
-        );
+        mesh.transform.position.set(renderer.centerX, renderer.centerY);
       };
 
       const speed = 1.5;

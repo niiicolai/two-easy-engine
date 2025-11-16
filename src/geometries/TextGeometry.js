@@ -21,7 +21,7 @@ export class TextGeometry extends Geometry {
     left: "left",
     right: "right",
     center: "center",
-  }
+  };
 
   /**
    * The valid text direction types
@@ -78,6 +78,18 @@ export class TextGeometry extends Geometry {
   #options;
 
   /**
+   * @private
+   * @property {number} width - the text's width
+   */
+  #width;
+
+  /**
+   * @private
+   * @property {number} height - the text's height
+   */
+  #height;
+
+  /**
    * This class provides functionality for creating and managing text-based geometry.
    * @class
    * @param {string} text - The text content to generate geometry for.
@@ -120,6 +132,9 @@ export class TextGeometry extends Geometry {
     }
 
     this.#text = text;
+    // If the text changes, the dimensions must be recalculated.
+    this.#width = null;
+    this.#height = null;
   }
 
   /**
@@ -161,9 +176,9 @@ export class TextGeometry extends Geometry {
       !TextGeometry.TEXT_ALIGNMENT_TYPES[textAlign]
     ) {
       throw new Error(
-        `textAlign must be a string with value: ${Object.values(TextGeometry.TEXT_ALIGNMENT_TYPES).join(
-          ", "
-        )}`
+        `textAlign must be a string with value: ${Object.values(
+          TextGeometry.TEXT_ALIGNMENT_TYPES
+        ).join(", ")}`
       );
     }
 
@@ -173,9 +188,9 @@ export class TextGeometry extends Geometry {
       !TextGeometry.TEXT_BASELINE_TYPES[textBaseline]
     ) {
       throw new Error(
-        `textBaseline must be a string with value: ${Object.values(TextGeometry.TEXT_BASELINE_TYPES).join(
-          ", "
-        )}`
+        `textBaseline must be a string with value: ${Object.values(
+          TextGeometry.TEXT_BASELINE_TYPES
+        ).join(", ")}`
       );
     }
 
@@ -185,9 +200,9 @@ export class TextGeometry extends Geometry {
       !TextGeometry.TEXT_DIRECTION_TYPES[direction]
     ) {
       throw new Error(
-        `direction must be a string with value: ${Object.values(TextGeometry.TEXT_DIRECTION_TYPES).join(
-          ", "
-        )}`
+        `direction must be a string with value: ${Object.values(
+          TextGeometry.TEXT_DIRECTION_TYPES
+        ).join(", ")}`
       );
     }
 
@@ -195,6 +210,18 @@ export class TextGeometry extends Geometry {
       ...TextGeometry.DEFAULT_OPTIONS,
       ...options,
     };
+  }
+
+  /**
+   * Recalculate width and height based on text.
+   * @returns {void}
+   */
+  #recalculateDimensions(ctx) {
+    const { width, actualBoundingBoxAscent, actualBoundingBoxDescent } =
+      ctx.measureText(this.#text);
+
+    this.#width = width;
+    this.#height = actualBoundingBoxAscent + actualBoundingBoxDescent;
   }
 
   /**
@@ -206,7 +233,6 @@ export class TextGeometry extends Geometry {
    */
   drawContext2D(ctx, transform, material) {
     const { maxWidth, textAlign, textBaseline, direction, font } = this.options;
-    const { position, rotation } = transform;
     const { fillStyle, strokeStyle } = material;
 
     if (font && ctx.font !== font) {
@@ -222,9 +248,20 @@ export class TextGeometry extends Geometry {
       ctx.direction = direction;
     }
 
+    if (!this.#width || !this.#height) {
+      this.#recalculateDimensions(ctx);
+    }
+
+    const { position, rotation, scale, localAnchorPoint } = transform;
+    const offset = localAnchorPoint.offset;
+    const pivotX = (this.#width / 2) * offset[0] * scale.x;
+    const pivoxY = (this.#height / 2) * offset[1] * scale.y;
+
     ctx.save();
-    ctx.translate(position.x, position.y);
+    ctx.translate(position.x + pivotX, position.y + pivoxY);
+    // Rotate around pivot
     ctx.rotate(rotation);
+    ctx.translate(-pivotX, -pivoxY);
 
     if (fillStyle) {
       ctx.fillText(this.text, 0, 0, maxWidth);

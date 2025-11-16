@@ -26,22 +26,22 @@ describe("RectGeometry", () => {
 
   it("drawContext2D() should draw a red rectangle inside the canvas", () => {
     const transparent  = { r: 0, g: 0, b: 0, a: 0 };
-    const red = { r: 255, g: 0, b: 0, a: 255 };
+    const red = { r: 255, g: 0, b: 0, a: 64 };
     const fillStyle = new RgbaColor(255, 0, 0, 1);
-    const rect = new RectGeometry(2, 2);
+    const rect = new RectGeometry(1, 1);
     const canvas = createCanvas(4, 4);
     const ctx = canvas.getContext("2d");
     const transform = new Transform();
     const material = new BasicMaterial({ fillStyle });
     const outside = [
-      [0, 0], [1, 0], [2, 0], [3, 0],
+      [2, 0], [3, 0],
+      [2, 1], [3, 1], 
+      [0, 2], [1, 2], [2, 2], [3, 2],
       [0, 3], [1, 3], [2, 3], [3, 3],
-      [0, 1], [0, 2],
-      [3, 1], [3, 2],
     ];
     const inside = [
-      [1, 1], [2, 1],
-      [1, 2], [2, 2],
+       [0, 0], [1, 0],
+       [0, 1], [1, 1],
     ];
 
     transform.position.set(1, 1);

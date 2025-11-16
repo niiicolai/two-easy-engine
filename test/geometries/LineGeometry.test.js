@@ -7,26 +7,40 @@ import { RgbaColor } from "../../src/colors/RgbaColor.js";
 
 describe("LineGeometry", () => {
   it("should create a LineGeometry instance with custom parameters", () => {
-    const points = [[0, 0, 1, 1]];
-    const line = new LineGeometry(points);
-    expect(line.points).toBe(points);
+    const vertices = new Float32Array(4);
+    vertices[0] = 1;
+    vertices[1] = 2;
+    vertices[2] = 3;
+    vertices[3] = 4;
+    const line = new LineGeometry(vertices);
+    expect(line.vertices).toBe(vertices);
   });
 
-  it("should throw an error for invalid points", () => {
+  it("should convert nested arrays to Float32Array", () => {
+    const vertices = new Float32Array(4);
+    vertices[0] = 1;
+    vertices[1] = 2;
+    vertices[2] = 3;
+    vertices[3] = 4;
+    const line = new LineGeometry([[1, 2, 3, 4]]);
+    expect(line.vertices).toBeInstanceOf(Float32Array);
+  });
+
+  it("should throw an error for invalid lines", () => {
     expect(() => new LineGeometry(-50)).toThrow(
-      "points must be an array"
+      "vertices must be a array or Float32Array"
     );
   });
 
   it("should throw an error for invalid sized array", () => {
     expect(() => new LineGeometry([[0, 0]])).toThrow(
-      "an array in points must be an array with a length of four numbers"
+      "vertices as array must contain arrays with a length of four numbers"
     );
   });
 
-  it("should throw an error for points of invalid type", () => {
+  it("should throw an error for lines of invalid type", () => {
     expect(() => new LineGeometry([1])).toThrow(
-      "an array in points must be an array with a length of four numbers"
+      "vertices as array must contain arrays with a length of four numbers"
     );
   });
 
@@ -41,9 +55,9 @@ describe("LineGeometry", () => {
     const transform = new Transform();
     const material = new BasicMaterial({ strokeStyle, lineWidth: 2 });
     const outside = [
-      [0, 0],
+      [2, 0],
       [3, 0],
-      [0, 1],
+      [2, 1],
       [3, 1],
       [0, 2],
       [1, 2],
@@ -56,10 +70,10 @@ describe("LineGeometry", () => {
     ];
 
     const inside = [
+      [0, 0],
       [1, 0],
-      [2, 0],
+      [0, 1],
       [1, 1],
-      [2, 1],
     ];
 
     transform.position.x = 1;
