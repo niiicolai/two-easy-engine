@@ -1,12 +1,12 @@
-var de = Object.defineProperty;
-var ne = (o) => {
-  throw TypeError(o);
+var _e = Object.defineProperty;
+var De = (h) => {
+  throw TypeError(h);
 };
-var we = (o, e, t) => e in o ? de(o, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : o[e] = t;
-var S = (o, e, t) => we(o, typeof e != "symbol" ? e + "" : e, t), te = (o, e, t) => e.has(o) || ne("Cannot " + t);
-var r = (o, e, t) => (te(o, e, "read from private field"), t ? t.call(o) : e.get(o)), n = (o, e, t) => e.has(o) ? ne("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(o) : e.set(o, t), s = (o, e, t, i) => (te(o, e, "write to private field"), i ? i.call(o, t) : e.set(o, t), t), p = (o, e, t) => (te(o, e, "access private method"), t);
-var mt, dt;
-const x = class x {
+var Ze = (h, e, t) => e in h ? _e(h, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : h[e] = t;
+var E = (h, e, t) => Ze(h, typeof e != "symbol" ? e + "" : e, t), Ee = (h, e, t) => e.has(h) || De("Cannot " + t);
+var r = (h, e, t) => (Ee(h, e, "read from private field"), t ? t.call(h) : e.get(h)), n = (h, e, t) => e.has(h) ? De("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(h) : e.set(h, t), o = (h, e, t, s) => (Ee(h, e, "write to private field"), s ? s.call(h, t) : e.set(h, t), t), w = (h, e, t) => (Ee(h, e, "access private method"), t);
+var Pt, Ot;
+const P = class P {
   /**
    * This class provides basic vector operations such as addition, subtraction, scaling, and normalization.
    * @class
@@ -19,22 +19,22 @@ const x = class x {
      * @private
      * @property {number} #x - the x coordinate.
      */
-    n(this, mt);
+    n(this, Pt);
     /**
      * @private
      * @property {number} #y - the y coordinate.
      */
-    n(this, dt);
+    n(this, Ot);
     if (typeof e != "number" || typeof t != "number")
       throw new Error("x and y must be numbers");
     this.x = e, this.y = t;
   }
   /**
    * Get the x coordinate
-   * @returns {Vector2} the x coordinate
+   * @returns {Vector2}
    */
   get x() {
-    return r(this, mt);
+    return r(this, Pt);
   }
   /**
    * Sets the x coordinate
@@ -45,14 +45,14 @@ const x = class x {
   set x(e) {
     if (typeof e != "number")
       throw new Error("x must be a number");
-    s(this, mt, e);
+    o(this, Pt, e);
   }
   /**
    * Get the y coordinate
-   * @returns {Vector2} the y coordinate
+   * @returns {Vector2}
    */
   get y() {
-    return r(this, dt);
+    return r(this, Ot);
   }
   /**
    * Sets the y coordinate
@@ -63,20 +63,20 @@ const x = class x {
   set y(e) {
     if (typeof e != "number")
       throw new Error("y must be a number");
-    s(this, dt, e);
+    o(this, Ot, e);
   }
   /**
    * Creates a copy of the vector
-   * @returns {Vector2} A new Vector2 instance with the same x and y values
+   * @returns {Vector2}
    */
   clone() {
-    return new x(this.x, this.y);
+    return new P(this.x, this.y);
   }
   /**
    * Sets the x and y values of the vector
    * @param {number} x - The new x value
    * @param {number} y - The new y value
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If x or y is not a number
    */
   set(e, t) {
@@ -88,7 +88,7 @@ const x = class x {
    * Translates the vector by given x and y offsets
    * @param {number} x - The x offset
    * @param {number} y - The y offset
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If x or y is not a number
    */
   translate(e, t) {
@@ -99,62 +99,62 @@ const x = class x {
   /**
    * Copy the values of the given vector to this.
    * @param {Vector2} v - The vector to copy
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   copy(e) {
-    if (!(e instanceof x))
+    if (!(e instanceof P))
       throw new Error("v must be of type Vector2");
     return this.x = e.x, this.y = e.y, this;
   }
   /**
    * Adds another vector to this vector
    * @param {Vector2} v - The vector to add
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   add(e) {
-    if (!(e instanceof x))
+    if (!(e instanceof P))
       throw new Error("v must be of type Vector2");
     return this.x += e.x, this.y += e.y, this;
   }
   /**
    * Subtracts another vector from this vector
    * @param {Vector2} v - The vector to subtract
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   subtract(e) {
-    if (!(e instanceof x))
+    if (!(e instanceof P))
       throw new Error("v must be of type Vector2");
     return this.x -= e.x, this.y -= e.y, this;
   }
   /**
    * Computes the dot product with another vector
    * @param {Vector2} v - The other vector
-   * @returns {number} The dot product
+   * @returns {number}
    * @throws {Error} If v is not of type Vector2
    */
   dot(e) {
-    if (!(e instanceof x))
+    if (!(e instanceof P))
       throw new Error("v must be of type Vector2");
     return this.x * e.x + this.y * e.y;
   }
   /**
    * Computes a new vector from this vector to another vector
    * @param {Vector2} v - The target vector
-   * @returns {Vector2} A new Vector2 representing the vector from this to v
+   * @returns {Vector2}
    * @throws {Error} If v is not of type Vector2
    */
   vectorTo(e) {
-    if (!(e instanceof x))
+    if (!(e instanceof P))
       throw new Error("v must be of type Vector2");
-    return new x(e.x - this.x, e.y - this.y);
+    return new P(e.x - this.x, e.y - this.y);
   }
   /**
    * Multiplies this vector by a scalar
    * @param {number} s - The scalar to multiply by
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If s is not a number
    */
   multiplyScalar(e) {
@@ -165,7 +165,7 @@ const x = class x {
   /**
    * Divides this vector by a scalar
    * @param {number} s - The scalar to divide by
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If s is not a number
    * @throws {Error} If division by zero is attempted
    */
@@ -178,21 +178,21 @@ const x = class x {
   }
   /**
    * Computes the length (magnitude) of the vector
-   * @returns {number} The length of the vector
+   * @returns {number}
    */
   length() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
   }
   /**
    * Computes the squared length of the vector.
-   * @returns {number} The squared length of the vector
+   * @returns {number}
    */
   lengthSquared() {
     return this.x * this.x + this.y * this.y;
   }
   /**
    * Normalizes the vector to have a length of 1
-   * @returns {Vector2} This vector
+   * @returns {Vector2}
    * @throws {Error} If attempting to normalize a zero-length vector
    */
   normalize() {
@@ -204,10 +204,10 @@ const x = class x {
   /**
    * Check if the values of this vector is equal to another
    * @param {Vector2} v - The other vector
-   * @returns {boolean} 
+   * @returns {boolean}
    */
   isEqual(e) {
-    if (!(e instanceof x))
+    if (!(e instanceof P))
       throw new Error("v must be of type Vector2");
     return this.x === e.x && this.y === e.y;
   }
@@ -216,17 +216,154 @@ const x = class x {
    * @param {number} px - the x coordinate of the point to rotate around
    * @param {number} py - the y coordinate of the point to rotate around
    * @param {number} angle - the rotation angle in radians
-   * @returns {Vector2} the same vector
+   * @returns {Vector2}
    */
-  rotateAround(e, t, i) {
-    const h = Math.cos(i), a = Math.sin(i), u = this.x, l = this.y;
-    return this.x = (u - e) * h - (l - t) * a + e, this.y = (u - e) * a + (l - t) * h + t, this;
+  rotateAround(e, t, s) {
+    const i = Math.cos(s), a = Math.sin(s), l = this.x, u = this.y;
+    return this.x = (l - e) * i - (u - t) * a + e, this.y = (l - e) * a + (u - t) * i + t, this;
   }
 };
-mt = new WeakMap(), dt = new WeakMap();
-let Y = x;
-var wt, gt, bt;
-class ft {
+Pt = new WeakMap(), Ot = new WeakMap();
+let J = P;
+var mt, dt;
+const ge = class ge {
+  /**
+   * This class is responsible for polygon calculations.
+   * @class Polygon2D
+   * @param {Float32Array} vertices - the polygon's vertices
+   */
+  constructor(e) {
+    /**
+     * @property {Vector2} #centroid - Defines the polygon's centeroid
+     */
+    n(this, mt);
+    /**
+     * @private
+     * @property {Float32Array} #vertices - A flat array of vertices.
+     */
+    n(this, dt);
+    o(this, mt, new J()), this.vertices = e;
+  }
+  /**
+   * Get the centroid
+   * @returns {Vector2}
+   */
+  get centroid() {
+    return r(this, mt);
+  }
+  /**
+   * Get the vertices
+   * @returns {Float32Array}
+   */
+  get vertices() {
+    return r(this, dt);
+  }
+  /**
+   * Set the vertices
+   * @returns {Float32Array}
+   */
+  set vertices(e) {
+    o(this, dt, e);
+  }
+  /**
+   * Calculate the centroid of a simple polygon
+   * @returns {void}
+   */
+  calculateCentroid() {
+    const e = r(this, dt), t = e.length;
+    let s = 0, i = 0, a = 0;
+    for (let l = 0; l < t; l += ge.COORDINATES_SIZE) {
+      const u = e[l], d = e[l + 1], c = e[(l + 2) % t], m = e[(l + 3) % t], f = u * m - c * d;
+      s += f, i += (u + c) * f, a += (d + m) * f;
+    }
+    s /= 2, i = i / (6 * s), a = a / (6 * s), r(this, mt).set(i, a);
+  }
+};
+mt = new WeakMap(), dt = new WeakMap(), /**
+ * @property {number} #COORDINATES_SIZE - Defines the number of coordinates stored in the flat array (e.g. 1=x, 2=y).
+ */
+E(ge, "COORDINATES_SIZE", 2);
+let Te = ge;
+var we, Nt, $t;
+const W = class W {
+  /**
+   * This class can be used to get elapsed and delta time (Remember to call clockObj.update at the beginning of the animation loop).
+   * @class
+   */
+  constructor(e) {
+    /**
+     * @private
+     * @property {Array} #offset - the current offest.
+     */
+    n(this, Nt);
+    /**
+     * @private
+     * @property {string} #anchorType - the current anchor type.
+     */
+    n(this, $t);
+    this.anchorType = e;
+  }
+  /**
+   * Get the anchor type.
+   * @returns {string}
+   */
+  get anchorType() {
+    return r(this, $t);
+  }
+  /**
+   * Get the offset.
+   * @returns {number}
+   */
+  get offset() {
+    return r(this, Nt);
+  }
+  /**
+   * Sets the anchor type
+   * @param {string} anchorType - The new type
+   * @returns {void}
+   * @throws {Error} If the anchorType is not a valid type.
+   */
+  set anchorType(e) {
+    if (!W.ANCHOR_POINT_TYPES[e])
+      throw new Error(
+        `Anchor type: ${e}; is not a valid type. It must be: ${Object.values(
+          W.ANCHOR_POINT_TYPES
+        ).join(", ")}`
+      );
+    o(this, $t, e), o(this, Nt, r(W, we)[e]);
+  }
+};
+we = new WeakMap(), Nt = new WeakMap(), $t = new WeakMap(), /**
+ * @property {Object} ANCHOR_POINT_TYPES - the valid anchor point types.
+ */
+E(W, "ANCHOR_POINT_TYPES", {
+  topLeft: "topLeft",
+  topCenter: "topCenter",
+  topRight: "topRight",
+  midLeft: "midLeft",
+  midCenter: "midCenter",
+  midRight: "midRight",
+  bottomLeft: "bottomLeft",
+  bottomCenter: "bottomCenter",
+  bottomRight: "bottomRight"
+}), /**
+ * @private
+ * @property {Object} #ANCHOR_OFFSETS - the offsets returned by type.
+ */
+n(W, we, {
+  topLeft: [-1, -1],
+  topCenter: [0, -1],
+  topRight: [1, -1],
+  midLeft: [-1, 0],
+  midCenter: [0, 0],
+  midRight: [1, 0],
+  bottomLeft: [-1, 1],
+  bottomCenter: [0, 1],
+  bottomRight: [1, 1]
+});
+let It = W;
+var Ft, Lt, kt, Mt;
+class Rt {
   /**
    * This class encapsulates the transformation properties of an object in 2D space.
    * @class
@@ -237,30 +374,53 @@ class ft {
    * @throws {Error} If the rotation is not a number.
    * @throws {Error} If the scale is not a Vector2.
    */
-  constructor(e = new Y(), t = 0, i = new Y(1, 1)) {
+  constructor(e = new J(), t = 0, s = new J(1, 1), i = new It(It.ANCHOR_POINT_TYPES.midCenter)) {
     /**
      * @private
      * @property {Vector2} #position - the transform's position
      */
-    n(this, wt);
+    n(this, Ft);
     /**
      * @private
      * @property {number} #rotation - the transform's rotation
      */
-    n(this, gt);
+    n(this, Lt);
     /**
      * @private
      * @property {Vector2} #scale - the transform's scale
      */
-    n(this, bt);
-    this.position = e, this.rotation = t, this.scale = i;
+    n(this, kt);
+    /**
+     * @private
+     * @property {Vector2} #localAnchorPoint - the transform's localAnchorPoint
+     */
+    n(this, Mt);
+    this.position = e, this.rotation = t, this.scale = s, this.localAnchorPoint = i;
+  }
+  /**
+   * Get transform's localAnchorPoint
+   * @returns {AnchorPoint2D}
+   */
+  get localAnchorPoint() {
+    return r(this, Mt);
+  }
+  /**
+   * Set the localAnchorPoint
+   * @param {AnchorPoint2D} localAnchorPoint - the new localAnchorPoint
+   * @returns {void}
+   * @throws {Error} if localAnchorPoint is not a AnchorPoint2D
+   */
+  set localAnchorPoint(e) {
+    if (!(e instanceof It))
+      throw new Error("localAnchorPoint must be of type AnchorPoint2D");
+    o(this, Mt, e);
   }
   /**
    * Get transform position
-   * @returns {Vector2} the position
+   * @returns {Vector2}
    */
   get position() {
-    return r(this, wt);
+    return r(this, Ft);
   }
   /**
    * Set the position
@@ -269,16 +429,16 @@ class ft {
    * @throws {Error} if position is not a Vector2
    */
   set position(e) {
-    if (!(e instanceof Y))
+    if (!(e instanceof J))
       throw new Error("position must be of type Vector2");
-    s(this, wt, e);
+    o(this, Ft, e);
   }
   /**
    * Get the rotation
-   * @returns {number} the rotation
+   * @returns {number}
    */
   get rotation() {
-    return r(this, gt);
+    return r(this, Lt);
   }
   /**
    * Set the rotation
@@ -289,14 +449,14 @@ class ft {
   set rotation(e) {
     if (typeof e != "number")
       throw new Error("rotation must be a number");
-    s(this, gt, e);
+    o(this, Lt, e);
   }
   /**
    * Get the scale
-   * @returns {Vector2} the scale
+   * @returns {Vector2}
    */
   get scale() {
-    return r(this, bt);
+    return r(this, kt);
   }
   /**
    * Set the scale
@@ -305,14 +465,14 @@ class ft {
    * @throws {Error} if scale is not a Vector2
    */
   set scale(e) {
-    if (!(e instanceof Y))
+    if (!(e instanceof J))
       throw new Error("scale must be of type Vector2");
-    s(this, bt, e);
+    o(this, kt, e);
   }
 }
-wt = new WeakMap(), gt = new WeakMap(), bt = new WeakMap();
-var pt, yt;
-class ge {
+Ft = new WeakMap(), Lt = new WeakMap(), kt = new WeakMap(), Mt = new WeakMap();
+var Yt, Xt;
+class Ve {
   /**
    * This class provides functionality to control the view of the scene, including position, rotation, and zoom.
    * @class
@@ -326,21 +486,21 @@ class ge {
      * @private
      * @property {number} zoom - the camera's zoom
      */
-    n(this, pt);
+    n(this, Yt);
     /**
      * @private
      * @property {Transform} transform - the camera's transform
      */
-    n(this, yt);
+    n(this, Xt);
     const { zoom: t } = e;
-    this.zoom = t, this.transform = new ft();
+    this.zoom = t, this.transform = new Rt();
   }
   /**
    * Get the zoom
-   * @returns {number} zoom
+   * @returns {number}
    */
   get zoom() {
-    return r(this, pt);
+    return r(this, Yt);
   }
   /**
    * Set zoom
@@ -351,14 +511,14 @@ class ge {
   set zoom(e) {
     if (typeof e != "number")
       throw new Error("zoom must be a number");
-    s(this, pt, e);
+    o(this, Yt, e);
   }
   /**
    * Get the transform
-   * @returns {Transform} transform
+   * @returns {Transform}
    */
   get transform() {
-    return r(this, yt);
+    return r(this, Xt);
   }
   /**
    * Set transform
@@ -367,50 +527,50 @@ class ge {
    * @throws {Error} if transform is not a Transform
    */
   set transform(e) {
-    if (!(e instanceof ft))
+    if (!(e instanceof Rt))
       throw new Error("transform must be of type Transform");
-    s(this, yt, e);
+    o(this, Xt, e);
   }
 }
-pt = new WeakMap(), yt = new WeakMap();
-const oe = /* @__PURE__ */ new Set();
-function f(o, e, t) {
-  const i = `${o}:${e}`;
-  if (oe.has(i))
+Yt = new WeakMap(), Xt = new WeakMap();
+const Re = /* @__PURE__ */ new Set();
+function b(h, e, t) {
+  const s = `${h}:${e}`;
+  if (Re.has(s))
     return;
-  const h = `[DEPRECATION] '${o}' is deprecated since version ${t}. Please use '${e}' instead. This feature will be removed in a future release.`;
-  console.warn(h), oe.add(i);
+  const i = `[DEPRECATION] '${h}' is deprecated since version ${t}. Please use '${e}' instead. This feature will be removed in a future release.`;
+  console.warn(i), Re.add(s);
 }
-const m = [];
-for (let o = 0; o < 256; ++o)
-  m.push((o + 256).toString(16).slice(1));
-function be(o, e = 0) {
-  return (m[o[e + 0]] + m[o[e + 1]] + m[o[e + 2]] + m[o[e + 3]] + "-" + m[o[e + 4]] + m[o[e + 5]] + "-" + m[o[e + 6]] + m[o[e + 7]] + "-" + m[o[e + 8]] + m[o[e + 9]] + "-" + m[o[e + 10]] + m[o[e + 11]] + m[o[e + 12]] + m[o[e + 13]] + m[o[e + 14]] + m[o[e + 15]]).toLowerCase();
+const y = [];
+for (let h = 0; h < 256; ++h)
+  y.push((h + 256).toString(16).slice(1));
+function je(h, e = 0) {
+  return (y[h[e + 0]] + y[h[e + 1]] + y[h[e + 2]] + y[h[e + 3]] + "-" + y[h[e + 4]] + y[h[e + 5]] + "-" + y[h[e + 6]] + y[h[e + 7]] + "-" + y[h[e + 8]] + y[h[e + 9]] + "-" + y[h[e + 10]] + y[h[e + 11]] + y[h[e + 12]] + y[h[e + 13]] + y[h[e + 14]] + y[h[e + 15]]).toLowerCase();
 }
-let ee;
-const pe = new Uint8Array(16);
-function ye() {
-  if (!ee) {
+let Se;
+const Ge = new Uint8Array(16);
+function We() {
+  if (!Se) {
     if (typeof crypto > "u" || !crypto.getRandomValues)
       throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-    ee = crypto.getRandomValues.bind(crypto);
+    Se = crypto.getRandomValues.bind(crypto);
   }
-  return ee(pe);
+  return Se(Ge);
 }
-const Ee = typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto), he = { randomUUID: Ee };
-function Se(o, e, t) {
-  var h;
-  o = o || {};
-  const i = o.random ?? ((h = o.rng) == null ? void 0 : h.call(o)) ?? ye();
-  if (i.length < 16)
+const qe = typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto), Pe = { randomUUID: qe };
+function Je(h, e, t) {
+  var i;
+  h = h || {};
+  const s = h.random ?? ((i = h.rng) == null ? void 0 : i.call(h)) ?? We();
+  if (s.length < 16)
     throw new Error("Random bytes length must be >= 16");
-  return i[6] = i[6] & 15 | 64, i[8] = i[8] & 63 | 128, be(i);
+  return s[6] = s[6] & 15 | 64, s[8] = s[8] & 63 | 128, je(s);
 }
-function Te(o, e, t) {
-  return he.randomUUID && !o ? he.randomUUID() : Se(o);
+function Ke(h, e, t) {
+  return Pe.randomUUID && !h ? Pe.randomUUID() : Je(h);
 }
-var Et;
-class X {
+var Ut;
+class V {
   /**
    * The base color class
    * @class
@@ -422,15 +582,15 @@ class X {
      * @private
      * @property {string} #colorStr - a string representation of the color
      */
-    n(this, Et);
+    n(this, Ut);
     this.colorStr = e;
   }
   /**
    * Get the string representation of the color
-   * @returns {string} colorStr
+   * @returns {string}
    */
   get colorStr() {
-    return r(this, Et);
+    return r(this, Ut);
   }
   /**
    * Set colorStr
@@ -441,7 +601,7 @@ class X {
   set colorStr(e) {
     if (typeof e != "string")
       throw new Error("colorStr must be a string");
-    s(this, Et, e);
+    o(this, Ut, e);
   }
   /**
    * Returns the colorStr property
@@ -451,9 +611,9 @@ class X {
     return this.colorStr;
   }
 }
-Et = new WeakMap();
-var Jt, Q, St, Tt, xt, Ct, O, v;
-const J = class J {
+Ut = new WeakMap();
+var be, gt, zt, Bt, Ht, _t, X, N;
+const ct = class ct {
   /**
    * Configuration options for the Renderer.
    * @class
@@ -472,7 +632,7 @@ const J = class J {
      * @private
      * @property {Object} #cache - Cache for computed values
      */
-    n(this, Q, {
+    n(this, gt, {
       halfWidth: 0,
       halfHeight: 0
     });
@@ -480,36 +640,36 @@ const J = class J {
      * @private
      * @property {number} #width - The canvas width
      */
-    n(this, St);
+    n(this, zt);
     /**
      * @private
      * @property {number} #height - The canvas height
      */
-    n(this, Tt);
+    n(this, Bt);
     /**
      * @private
      * @property {string|Color} #backgroundColor - The background color
      */
-    n(this, xt);
+    n(this, Ht);
     /**
      * @private
      * @property {number} #devicePixelRatio - The device pixel ratio
      */
-    n(this, Ct);
+    n(this, _t);
     /**
      * @private
      * @property {Renderer} #renderer - The renderer instance
      */
-    n(this, O);
+    n(this, X);
     /**
      * @private
      * @property {Renderer} #isBatchSetting - A flag to indicate if batch setting is in progress
      */
-    n(this, v, !1);
-    const { width: i, height: h, devicePixelRatio: a, backgroundColor: u } = t;
-    if (!(e instanceof ce))
+    n(this, N, !1);
+    const { width: s, height: i, devicePixelRatio: a, backgroundColor: l } = t;
+    if (!(e instanceof ke))
       throw new Error("renderer must be of type Renderer");
-    s(this, O, e), s(this, v, !0), this.width = i, this.height = h, this.devicePixelRatio = a ?? J.DEFAULT_OPTIONS.devicePixelRatio, this.backgroundColor = u ?? J.DEFAULT_OPTIONS.backgroundColor, s(this, v, !1);
+    o(this, X, e), o(this, N, !0), this.width = s, this.height = i, this.devicePixelRatio = a ?? ct.DEFAULT_OPTIONS.devicePixelRatio, this.backgroundColor = l ?? ct.DEFAULT_OPTIONS.backgroundColor, o(this, N, !1);
   }
   /**
    * The default renderer options
@@ -518,21 +678,21 @@ const J = class J {
    * @returns {Object}
    */
   static get DEFAULT_OPTIONS() {
-    return r(J, Jt);
+    return r(ct, be);
   }
   /**
    * Gets the cache object
-   * @returns {Object} The cache object
+   * @returns {Object}
    */
   get cache() {
-    return r(this, Q);
+    return r(this, gt);
   }
   /**
    * Gets the canvas width
-   * @returns {number} The canvas width
+   * @returns {number}
    */
   get width() {
-    return r(this, St);
+    return r(this, zt);
   }
   /**
    * Sets the canvas width
@@ -541,14 +701,14 @@ const J = class J {
   set width(e) {
     if (typeof e != "number" || e <= 0)
       throw new Error("width must be a positive number");
-    s(this, St, e), r(this, Q).halfWidth = e / 2, r(this, v) || r(this, O).recalculateDevicePixelRatio();
+    o(this, zt, e), r(this, gt).halfWidth = e / 2, r(this, N) || r(this, X).recalculateDevicePixelRatio();
   }
   /**
    * Gets the canvas height
-   * @returns {number} The canvas height
+   * @returns {number}
    */
   get height() {
-    return r(this, Tt);
+    return r(this, Bt);
   }
   /**
    * Sets the canvas height
@@ -557,14 +717,14 @@ const J = class J {
   set height(e) {
     if (typeof e != "number" || e <= 0)
       throw new Error("height must be a positive number");
-    s(this, Tt, e), r(this, Q).halfHeight = e / 2, r(this, v) || r(this, O).recalculateDevicePixelRatio();
+    o(this, Bt, e), r(this, gt).halfHeight = e / 2, r(this, N) || r(this, X).recalculateDevicePixelRatio();
   }
   /**
    * Gets the device pixel ratio
-   * @returns {number} The device pixel ratio
+   * @returns {number}
    */
   get devicePixelRatio() {
-    return r(this, Ct);
+    return r(this, _t);
   }
   /**
    * Sets the device pixel ratio
@@ -573,23 +733,23 @@ const J = class J {
   set devicePixelRatio(e) {
     if (typeof e != "number" || e <= 0)
       throw new Error("devicePixelRatio must be a positive number");
-    s(this, Ct, e), r(this, v) || r(this, O).recalculateDevicePixelRatio();
+    o(this, _t, e), r(this, N) || r(this, X).recalculateDevicePixelRatio();
   }
   /**
    * Gets the background color
-   * @returns {string|Color} The background color
+   * @returns {string|Color}
    */
   get backgroundColor() {
-    return r(this, xt);
+    return r(this, Ht);
   }
   /**
    * Sets the background color
    * @param {string|Color} backgroundColor - The new background color
    */
   set backgroundColor(e) {
-    if (typeof e != "string" && !(e instanceof X))
+    if (typeof e != "string" && !(e instanceof V))
       throw new Error("backgroundColor must be a Color or a string");
-    s(this, xt, e);
+    o(this, Ht, e);
   }
   /**
    * Sets the size of the canvas
@@ -601,25 +761,25 @@ const J = class J {
    */
   setSize(e, t) {
     try {
-      s(this, v, !0), this.width = e, this.height = t, r(this, O).recalculateDevicePixelRatio();
+      o(this, N, !0), this.width = e, this.height = t, r(this, X).recalculateDevicePixelRatio();
     } finally {
-      s(this, v, !1);
+      o(this, N, !1);
     }
   }
 };
-Jt = new WeakMap(), Q = new WeakMap(), St = new WeakMap(), Tt = new WeakMap(), xt = new WeakMap(), Ct = new WeakMap(), O = new WeakMap(), v = new WeakMap(), /**
+be = new WeakMap(), gt = new WeakMap(), zt = new WeakMap(), Bt = new WeakMap(), Ht = new WeakMap(), _t = new WeakMap(), X = new WeakMap(), N = new WeakMap(), /**
  * The default renderer options
  * @static
  * @private
  * @property {Object} DEFAULT_OPTIONS
  */
-n(J, Jt, {
+n(ct, be, {
   devicePixelRatio: 1,
   backgroundColor: "transparent"
 });
-let re = J;
-var vt, Dt, At, Rt, L, y, Pt;
-class ce {
+let xe = ct;
+var Zt, Vt, jt, Gt, U, A, Wt;
+class ke {
   /**
    * The base renderer class
    * @class
@@ -638,119 +798,119 @@ class ce {
    * @throws {Error} If options.devicePixelRatio is not a number
    * @throws {Error} If options.backgroundColor is not a string or Color
    */
-  constructor(e, t, i, h, a = {}) {
+  constructor(e, t, s, i, a = {}) {
     /**
      * @private
      * @property {string} #contextType - The canvas rendering context type
      */
-    n(this, vt);
+    n(this, Zt);
     /**
      * @private
      * @property {HTMLCanvasElement} #canvas - The canvas element
      */
-    n(this, Dt);
+    n(this, Vt);
     /**
      * @private
      * @property {Scene} #scene - The scene
      */
-    n(this, At);
+    n(this, jt);
     /**
      * @private
      * @property {Camera2D} #camera - The camera
      */
-    n(this, Rt);
+    n(this, Gt);
     /**
      * @private
      * @property {number|null} #animationFrameId - The requestAnimationFrame ID
      */
-    n(this, L, null);
+    n(this, U, null);
     /**
      * @private
      * @property {RendererOptions} #options - The renderer options
      */
-    n(this, y);
+    n(this, A);
     /**
      * @private
      * @property {number|null} #initializedContext - A flag determine if the context is initialized
      */
-    n(this, Pt);
+    n(this, Wt);
     if (typeof e != "string")
       throw new Error("contextType must be a string");
-    this.scene = i, this.camera = h, s(this, vt, e), s(this, Dt, t), s(this, y, new re(this, a)), this.initContext(), s(this, Pt, !0);
+    this.scene = s, this.camera = i, o(this, Zt, e), o(this, Vt, t), o(this, A, new xe(this, a)), this.initContext(), o(this, Wt, !0);
   }
   /**
    * Check if the context is initialized.
    * @returns {Boolean}
    */
   get initializedContext() {
-    return r(this, Pt);
+    return r(this, Wt);
   }
   /**
    * Gets the renderer options
-   * @returns {RendererOptions} The renderer options
+   * @returns {RendererOptions}
    */
   get options() {
-    return r(this, y);
+    return r(this, A);
   }
   /**
    * Gets the rendering context type
-   * @returns {string} The rendering context type
+   * @returns {string}
    */
   get contextType() {
-    return r(this, vt);
+    return r(this, Zt);
   }
   /**
    * Gets the canvas element
-   * @returns {HTMLCanvasElement} The canvas element
+   * @returns {HTMLCanvasElement}
    */
   get canvas() {
-    return r(this, Dt);
+    return r(this, Vt);
   }
   /**
    * Gets the scene
-   * @returns {Scene} The scene
+   * @returns {Scene}
    */
   get scene() {
-    return r(this, At);
+    return r(this, jt);
   }
   /**
    * Sets the scene
    * @param {Scene} scene - The new scene to set
    */
   set scene(e) {
-    if (!(e instanceof xe))
+    if (!(e instanceof Qe))
       throw new Error("scene must be of type Scene");
-    s(this, At, e);
+    o(this, jt, e);
   }
   /**
    * Gets the camera
-   * @returns {Camera2D} The camera
+   * @returns {Camera2D}
    */
   get camera() {
-    return r(this, Rt);
+    return r(this, Gt);
   }
   /**
    * Sets the camera
    * @param {Camera2D} camera - The new camera to set
    */
   set camera(e) {
-    if (!(e instanceof ge))
+    if (!(e instanceof Ve))
       throw new Error("camera must be of type Camera2D");
-    s(this, Rt, e);
+    o(this, Gt, e);
   }
   /**
    * Gets the center x value
-   * @returns {number} The center x value
+   * @returns {number}
    */
   get centerX() {
-    return r(this, y).cache.halfWidth;
+    return r(this, A).cache.halfWidth;
   }
   /**
    * Gets the center y value
-   * @returns {number} The center y value
+   * @returns {number}
    */
   get centerY() {
-    return r(this, y).cache.halfHeight;
+    return r(this, A).cache.halfHeight;
   }
   /**
    * Sets the background color
@@ -760,11 +920,11 @@ class ce {
    * @deprecated since version 0.1.0 - Use the options.backgroundColor setter instead
    */
   setBackgroundColor(e) {
-    f(
+    b(
       "setBackgroundColor()",
       "options.backgroundColor setter",
       "0.1.0"
-    ), r(this, y).backgroundColor = e;
+    ), r(this, A).backgroundColor = e;
   }
   /**
    * Sets the size of the canvas
@@ -776,7 +936,7 @@ class ce {
    * @deprecated since version 0.1.0 - Use the options.setSize() method instead
    */
   setSize(e, t) {
-    f("setSize()", "options.setSize()", "0.1.0"), r(this, y).setSize(e, t);
+    b("setSize()", "options.setSize()", "0.1.0"), r(this, A).setSize(e, t);
   }
   /**
    * Sets the device pixel ratio for the canvas
@@ -786,11 +946,11 @@ class ce {
    * @deprecated since version 0.1.0 - Use the options.devicePixelRatio setter instead
    */
   setDevicePixelRatio(e) {
-    f(
+    b(
       "setDevicePixelRatio()",
       "options.devicePixelRatio setter",
       "0.1.0"
-    ), r(this, y).devicePixelRatio = e, this.recalculateDevicePixelRatio();
+    ), r(this, A).devicePixelRatio = e, this.recalculateDevicePixelRatio();
   }
   /**
    * Returns a numerical value specifying the center x value
@@ -798,7 +958,7 @@ class ce {
    * @deprecated since version 0.1.0 - Use the centerX getter instead
    */
   getCenterX() {
-    return f("getCenterX()", "centerX getter", "0.1.0"), r(this, y).cache.halfWidth;
+    return b("getCenterX()", "centerX getter", "0.1.0"), r(this, A).cache.halfWidth;
   }
   /**
    * Returns a numerical value specifying the center y value
@@ -806,7 +966,7 @@ class ce {
    * @deprecated since version 0.1.0 - Use the centerY getter instead
    */
   getCenterY() {
-    return f("getCenterY()", "centerY getter", "0.1.0"), r(this, y).cache.halfHeight;
+    return b("getCenterY()", "centerY getter", "0.1.0"), r(this, A).cache.halfHeight;
   }
   /**
    * Init the rendering context
@@ -844,27 +1004,27 @@ class ce {
     beforeRender: null,
     afterRender: null
   }) {
-    const { beforeRender: t, afterRender: i } = e;
+    const { beforeRender: t, afterRender: s } = e;
     if (t && typeof t != "function")
       throw new Error("beforeRender must be a function");
-    if (i && typeof i != "function")
+    if (s && typeof s != "function")
       throw new Error("afterRender must be a function");
-    const h = () => {
-      t && t(), this.render(), i && i(), s(this, L, requestAnimationFrame(h.bind(this)));
+    const i = () => {
+      t && t(), this.render(), s && s(), o(this, U, requestAnimationFrame(i.bind(this)));
     };
-    s(this, L, requestAnimationFrame(h.bind(this)));
+    o(this, U, requestAnimationFrame(i.bind(this)));
   }
   /**
    * A helper method that cancel the loop create from renderer.requestAnimationFrame
    * @returns {void}
    */
   cancelAnimationFrame() {
-    r(this, L) !== null && (cancelAnimationFrame(r(this, L)), s(this, L, null));
+    r(this, U) !== null && (cancelAnimationFrame(r(this, U)), o(this, U, null));
   }
 }
-vt = new WeakMap(), Dt = new WeakMap(), At = new WeakMap(), Rt = new WeakMap(), L = new WeakMap(), y = new WeakMap(), Pt = new WeakMap();
-var tt, et, rt, It;
-class K {
+Zt = new WeakMap(), Vt = new WeakMap(), jt = new WeakMap(), Gt = new WeakMap(), U = new WeakMap(), A = new WeakMap(), Wt = new WeakMap();
+var wt, bt, pt, qt;
+class ft {
   /**
    * This class serves as a base for all 2D objects, providing a transform property.
    * @class
@@ -874,37 +1034,37 @@ class K {
      * @private
      * @property {number} #userData - custom user data
      */
-    n(this, tt);
+    n(this, wt);
     /**
      * @private
      * @property {Transform} #transform - the object's transform
      */
-    n(this, et);
+    n(this, bt);
     /**
      * @private
      * @property {boolean} #visible - a flag to determine object visibility
      */
-    n(this, rt);
+    n(this, pt);
     /**
      * @private
      * @property {string} #uuid - an universal unique identifier
      */
-    n(this, It);
-    s(this, et, new ft()), s(this, It, Te()), s(this, rt, !0), s(this, tt, {});
+    n(this, qt);
+    o(this, bt, new Rt()), o(this, qt, Ke()), o(this, pt, !0), o(this, wt, {});
   }
   /**
    * Get the uuid
-   * @returns {string} the uuid
+   * @returns {string}
    */
   get uuid() {
-    return r(this, It);
+    return r(this, qt);
   }
   /**
    * Get the visible flag
-   * @returns {boolean} the flag
+   * @returns {boolean}
    */
   get visible() {
-    return r(this, rt);
+    return r(this, pt);
   }
   /**
    * Sets the object's visibility
@@ -915,29 +1075,29 @@ class K {
   set visible(e) {
     if (typeof e != "boolean")
       throw new Error("visible must be a boolean");
-    s(this, rt, e);
+    o(this, pt, e);
   }
   /**
    * Get the custom userData
-   * @returns {Object} the userData
+   * @returns {Object}
    */
   get userData() {
-    return r(this, tt);
+    return r(this, wt);
   }
   /**
    * Sets custom user data
-   * @param {Boolean} userData - The user data
+   * @param {Object} userData - The user data
    * @returns {void}
    */
   set userData(e) {
-    s(this, tt, e);
+    o(this, wt, e);
   }
   /**
    * Get the transform
-   * @returns {Transform} the transform
+   * @returns {Transform}
    */
   get transform() {
-    return r(this, et);
+    return r(this, bt);
   }
   /**
    * Sets the object's transform
@@ -946,9 +1106,9 @@ class K {
    * @throws {Error} If the transform is not a Transform.
    */
   set transform(e) {
-    if (!(e instanceof ft))
+    if (!(e instanceof Rt))
       throw new Error("transform must be of type Transform");
-    s(this, et, e);
+    o(this, bt, e);
   }
   /**
    * Sets the userData property reserved for custom user data
@@ -957,7 +1117,7 @@ class K {
    * @deprecated since version 0.1.0 - Use the userData setter instead
    */
   setUserData(e) {
-    if (f("setUserData()", "userData setter", "0.1.0"), typeof e != "object")
+    if (b("setUserData()", "userData setter", "0.1.0"), typeof e != "object")
       throw new Error("userData must be a object");
     this.userData = e;
   }
@@ -969,7 +1129,7 @@ class K {
    * @deprecated since version 0.1.0 - Use the visible setter instead
    */
   setVisible(e) {
-    if (f("setVisible()", "visible setter", "0.1.0"), typeof e != "boolean")
+    if (b("setVisible()", "visible setter", "0.1.0"), typeof e != "boolean")
       throw new Error("visible must be a boolean");
     this.visible = e;
   }
@@ -994,39 +1154,39 @@ class K {
   drawContext2D(e) {
   }
 }
-tt = new WeakMap(), et = new WeakMap(), rt = new WeakMap(), It = new WeakMap(), /**
+wt = new WeakMap(), bt = new WeakMap(), pt = new WeakMap(), qt = new WeakMap(), /**
  * @static
  * @property {number} Z_INDEX - defines the class' default z-index (default: 0)
  */
-S(K, "Z_INDEX", 0);
-var F, T, it, Zt;
-class xe {
+E(ft, "Z_INDEX", 0);
+var z, D, yt, de;
+class Qe {
   constructor() {
-    n(this, it);
+    n(this, yt);
     /**
      * @private
      * @property {Object2D[]} #children - The scene object2Ds
      */
-    n(this, F, []);
+    n(this, z, []);
     /**
      * @private
      * @property {Map<string, number>} #zIndexes - Holds object and z-index values
      */
-    n(this, T, /* @__PURE__ */ new Map());
+    n(this, D, /* @__PURE__ */ new Map());
   }
   /**
    * Gets a copy of scene's children
-   * @returns {Object2D[]} The children
+   * @returns {Object2D[]}
    */
   get children() {
-    return [...r(this, F)];
+    return [...r(this, z)];
   }
   /**
    * Gets a copy of the scene's uuid-zIndex map
-   * @returns {Map<string, number>} The map object
+   * @returns {Map<string, number>}
    */
   get zIndexes() {
-    return new Map(r(this, T));
+    return new Map(r(this, D));
   }
   /**
    * Adds one or more 2D objects to the scene
@@ -1036,11 +1196,11 @@ class xe {
    */
   add(...e) {
     for (const t of e) {
-      if (!(t instanceof K))
+      if (!(t instanceof ft))
         throw new Error("All arguments to add() must be of type Object2D");
-      r(this, F).push(t), r(this, T).set(t.uuid, t.constructor.Z_INDEX ?? 0);
+      r(this, z).push(t), r(this, D).set(t.uuid, t.constructor.Z_INDEX ?? 0);
     }
-    p(this, it, Zt).call(this);
+    w(this, yt, de).call(this);
   }
   /**
    * Removes one or more 2D objects from the scene
@@ -1050,17 +1210,17 @@ class xe {
    */
   remove(...e) {
     for (const t of e) {
-      if (!(t instanceof K))
+      if (!(t instanceof ft))
         throw new Error("All children arguments must be of type Object2D");
-      const { uuid: i } = t, h = r(this, F).indexOf(t);
-      h !== -1 && r(this, F).splice(h, 1), r(this, T).has(i) && r(this, T).delete(i);
+      const { uuid: s } = t, i = r(this, z).indexOf(t);
+      i !== -1 && r(this, z).splice(i, 1), r(this, D).has(s) && r(this, D).delete(s);
     }
-    p(this, it, Zt).call(this);
+    w(this, yt, de).call(this);
   }
   /**
    * Change one or more object2D's z-index value
    * @param {number} zIndex - the new z-index value
-   * @param {...Object2D} children - the children
+   * @param {...Object2D} children - the children 
    * @returns {void}
    * @throws {Error} if zIndex is not a number.
    * @throws {Error} If any child is not of type Object2D
@@ -1068,27 +1228,27 @@ class xe {
   setZIndex(e, ...t) {
     if (typeof e != "number")
       throw new Error("zIndex must be a number");
-    for (const i of t) {
-      if (!(i instanceof K))
+    for (const s of t) {
+      if (!(s instanceof ft))
         throw new Error("All arguments to remove() must be of type Object2D");
-      const { uuid: h } = i;
-      r(this, T).has(h) && r(this, T).set(h, e);
+      const { uuid: i } = s;
+      r(this, D).has(i) && r(this, D).set(i, e);
     }
-    p(this, it, Zt).call(this);
+    w(this, yt, de).call(this);
   }
 }
-F = new WeakMap(), T = new WeakMap(), it = new WeakSet(), /**
+z = new WeakMap(), D = new WeakMap(), yt = new WeakSet(), /**
  * Sorts the children based on their zIndex property
  * @private
  * @returns {void}
  */
-Zt = function() {
-  r(this, F).sort((e, t) => {
-    const i = r(this, T).get(e.uuid) ?? 0, h = r(this, T).get(t.uuid) ?? 0;
-    return i - h;
+de = function() {
+  r(this, z).sort((e, t) => {
+    const s = r(this, D).get(e.uuid) ?? 0, i = r(this, D).get(t.uuid) ?? 0;
+    return s - i;
   });
 };
-class Ae extends ce {
+class sr extends ke {
   /**
    * The 2D context renderer
    * @class
@@ -1107,8 +1267,8 @@ class Ae extends ce {
    * @throws {Error} If options.devicePixelRatio is not a number
    * @throws {Error} If options.backgroundColor is not a string or Color
    */
-  constructor(e, t, i, h = {}) {
-    super("2d", e, t, i, h);
+  constructor(e, t, s, i = {}) {
+    super("2d", e, t, s, i);
   }
   /**
    * Init the rendering context
@@ -1122,28 +1282,28 @@ class Ae extends ce {
    * @returns {void}
    */
   recalculateDevicePixelRatio() {
-    const e = this.options.devicePixelRatio || 1, t = this.options.width * e, i = this.options.height * e;
-    this.canvas.width = t, this.canvas.height = i, this.ctx.scale(e, e);
+    const e = this.options.devicePixelRatio || 1, t = this.options.width * e, s = this.options.height * e;
+    this.canvas.width = t, this.canvas.height = s, this.ctx.scale(e, e);
   }
   /**
    * Trigger a new render
    * @returns {void}
    */
   render() {
-    const e = this.ctx, t = this.options.backgroundColor instanceof X ? this.options.backgroundColor.toString() : this.options.backgroundColor;
-    e.clearRect(0, 0, this.canvas.width, this.canvas.height), e.fillStyle = t, e.fillRect(0, 0, this.canvas.width, this.canvas.height), e.save(), e.scale(this.camera.zoom, this.camera.zoom), e.rotate(-this.camera.transform.rotation), e.translate(
+    const e = this.ctx, t = this.options.backgroundColor instanceof V ? this.options.backgroundColor.toString() : this.options.backgroundColor;
+    e.clearRect(0, 0, this.options.width, this.options.height), e.fillStyle = t, e.fillRect(0, 0, this.options.width, this.options.height), e.save(), e.scale(this.camera.zoom, this.camera.zoom), e.rotate(-this.camera.transform.rotation), e.translate(
       -this.camera.transform.position.x,
       -this.camera.transform.position.y
     );
-    for (let i = 0; i < this.scene.children.length; i++) {
-      const h = this.scene.children[i];
-      h.visible && h.draw(this);
+    for (let s = 0; s < this.scene.children.length; s++) {
+      const i = this.scene.children[s];
+      i.visible && i.draw(this);
     }
     e.restore();
   }
 }
-var st, nt, ot, B, H, E, D, b, d, A, k;
-const C = class C {
+var Et, St, Tt, K, Q, I, $, v, S, F, M;
+const O = class O {
   /**
    * Represents a pattern used for drawing an image on geometries.
    * @class
@@ -1161,68 +1321,68 @@ const C = class C {
    * @throws {Error} If the imageHeight is not null or a number.
    */
   constructor(e = {}) {
-    n(this, A);
+    n(this, F);
     /**
      * @private
      * @property {string} #imageRepeat - the image repeat option
      */
-    n(this, st);
+    n(this, Et);
     /**
      * @private
      * @property {number} #imageOffsetX - the image offset's x coordinate
      */
-    n(this, nt);
+    n(this, St);
     /**
      * @private
      * @property {number} #imageOffsetY - the image offset's y coordinate
      */
-    n(this, ot);
+    n(this, Tt);
     /**
      * @private
      * @property {number} #imageWidth - the image's width
      */
-    n(this, B);
+    n(this, K);
     /**
      * @private
      * @property {number} #imageOffsetY - the image's height'
      */
-    n(this, H);
+    n(this, Q);
     /**
      * @private
      * @property {HTMLImageElement} #image - the image element
      */
-    n(this, E);
+    n(this, I);
     /**
      * @private
      * @property {Object} #pattern - the pattern
      */
-    n(this, D);
+    n(this, $);
     /**
      * @private
      * @property {DOMMatrix} #patternTransform - the pattern's transform
      */
-    n(this, b);
+    n(this, v);
     /**
      * @private
      * @property {boolean} #isBatchSetting - a flag to determine if batch setting is in progress
      */
-    n(this, d);
+    n(this, S);
     const {
       image: t,
-      imageRepeat: i,
-      imageOffsetX: h,
+      imageRepeat: s,
+      imageOffsetX: i,
       imageOffsetY: a,
-      imageWidth: u,
-      imageHeight: l
+      imageWidth: l,
+      imageHeight: u
     } = e;
-    s(this, d, !0), this.imageRepeat = i, this.imageOffsetX = h, this.imageOffsetY = a, this.imageWidth = u, this.imageHeight = l, this.image = t, s(this, d, !1);
+    o(this, S, !0), this.imageRepeat = s, this.imageOffsetX = i, this.imageOffsetY = a, this.imageWidth = l, this.imageHeight = u, this.image = t, o(this, S, !1);
   }
   /**
    * Get the imageRepeat option
-   * @returns {string} the imageRepeat
+   * @returns {string}
    */
   get imageRepeat() {
-    return r(this, st);
+    return r(this, Et);
   }
   /**
    * Sets the object's imageRepeat
@@ -1231,20 +1391,20 @@ const C = class C {
    * @throws {Error} If the imageRepeat is not a string.
    */
   set imageRepeat(e) {
-    if (e && typeof e != "string" && !C.IMAGE_REPEAT_TYPES[e])
+    if (e && typeof e != "string" && !O.IMAGE_REPEAT_TYPES[e])
       throw new Error(
         `imageRepeat must be string with value: ${Object.values(
-          C.IMAGE_REPEAT_TYPES
+          O.IMAGE_REPEAT_TYPES
         ).join(", ")}`
       );
-    s(this, st, e ?? C.DEFAULT_IMAGE_REPEAT);
+    o(this, Et, e ?? O.DEFAULT_IMAGE_REPEAT);
   }
   /**
    * Get the imageOffsetX
-   * @returns {number} the imageOffsetX
+   * @returns {number}
    */
   get imageOffsetX() {
-    return r(this, nt);
+    return r(this, St);
   }
   /**
    * Sets the image offset's x coordinate
@@ -1255,14 +1415,14 @@ const C = class C {
   set imageOffsetX(e) {
     if (e != null && typeof e != "number")
       throw new Error("imageOffsetX must be a number");
-    s(this, nt, e ?? C.DEFAULT_IMAGE_OFFSET.x), r(this, d) || p(this, A, k).call(this);
+    o(this, St, e ?? O.DEFAULT_IMAGE_OFFSET.x), r(this, S) || w(this, F, M).call(this);
   }
   /**
    * Get the imageOffsetY
-   * @returns {number} the imageOffsetY
+   * @returns {number}
    */
   get imageOffsetY() {
-    return r(this, ot);
+    return r(this, Tt);
   }
   /**
    * Sets the image offset's y coordinate
@@ -1273,14 +1433,14 @@ const C = class C {
   set imageOffsetY(e) {
     if (e != null && typeof e != "number")
       throw new Error("imageOffsetY must be a number");
-    s(this, ot, e ?? C.DEFAULT_IMAGE_OFFSET.y), r(this, d) || p(this, A, k).call(this);
+    o(this, Tt, e ?? O.DEFAULT_IMAGE_OFFSET.y), r(this, S) || w(this, F, M).call(this);
   }
   /**
    * Get the imageWidth
-   * @returns {number} the imageWidth
+   * @returns {number}
    */
   get imageWidth() {
-    return r(this, B);
+    return r(this, K);
   }
   /**
    * Sets the image width
@@ -1291,14 +1451,14 @@ const C = class C {
   set imageWidth(e) {
     if (e != null && typeof e != "number" || e != null && typeof e == "number" && e <= 0)
       throw new Error("imageWidth must be a positive number or null");
-    s(this, B, e), r(this, d) || p(this, A, k).call(this);
+    o(this, K, e), r(this, S) || w(this, F, M).call(this);
   }
   /**
    * Get the imageHeight
-   * @returns {number} the imageHeight
+   * @returns {number}
    */
   get imageHeight() {
-    return r(this, H);
+    return r(this, Q);
   }
   /**
    * Sets the image height
@@ -1309,14 +1469,14 @@ const C = class C {
   set imageHeight(e) {
     if (e != null && typeof e != "number" || e != null && typeof e == "number" && e <= 0)
       throw new Error("imageHeight must be a positive number or null");
-    s(this, H, e), r(this, d) || p(this, A, k).call(this);
+    o(this, Q, e), r(this, S) || w(this, F, M).call(this);
   }
   /**
    * Get the image
-   * @returns {HTMLImageElement} the image
+   * @returns {HTMLImageElement}
    */
   get image() {
-    return r(this, E);
+    return r(this, I);
   }
   /**
    * Sets the image
@@ -1327,12 +1487,12 @@ const C = class C {
   set image(e) {
     if (typeof e != "string" && !(e instanceof HTMLImageElement))
       throw new Error("image must be a string or HTMLImageElement");
-    if (s(this, D, null), typeof e == "string") {
+    if (o(this, $, null), typeof e == "string") {
       const t = new Image();
       t.src = e, t.onload = () => {
-        s(this, E, t);
-      }, s(this, E, t);
-    } else e instanceof HTMLImageElement && s(this, E, e);
+        o(this, I, t);
+      }, o(this, I, t);
+    } else e instanceof HTMLImageElement && o(this, I, e);
   }
   /**
    * Create the pattern based on the image and configuration (used by materials)
@@ -1340,7 +1500,7 @@ const C = class C {
    * @returns {CanvasPattern|null}
    */
   createPattern(e) {
-    return !r(this, E) || !r(this, E).complete ? null : r(this, D) ? r(this, D) : (s(this, D, e.createPattern(r(this, E), r(this, st))), p(this, A, k).call(this), r(this, D));
+    return !r(this, I) || !r(this, I).complete ? null : r(this, $) ? r(this, $) : (o(this, $, e.createPattern(r(this, I), r(this, Et))), w(this, F, M).call(this), r(this, $));
   }
   /**
    * Set the image's offset
@@ -1352,9 +1512,9 @@ const C = class C {
    */
   setImageOffset(e, t) {
     try {
-      s(this, d, !0), this.imageOffsetX = e, this.imageOffsetY = t, p(this, A, k).call(this);
+      o(this, S, !0), this.imageOffsetX = e, this.imageOffsetY = t, w(this, F, M).call(this);
     } finally {
-      s(this, d, !1);
+      o(this, S, !1);
     }
   }
   /**
@@ -1367,9 +1527,9 @@ const C = class C {
    */
   setImageSize(e, t) {
     try {
-      s(this, d, !0), this.imageWidth = e, this.imageHeight = t, p(this, A, k).call(this);
+      o(this, S, !0), this.imageWidth = e, this.imageHeight = t, w(this, F, M).call(this);
     } finally {
-      s(this, d, !1);
+      o(this, S, !1);
     }
   }
   /**
@@ -1381,32 +1541,32 @@ const C = class C {
    * @deprecated since version 0.1.0 - Use the image setter instead
    */
   setImage(e, t = "repeat") {
-    f("setImage()", "image setter", "0.1.0");
+    b("setImage()", "image setter", "0.1.0");
     try {
-      s(this, d, !0), this.imageRepeat = t, this.image = e;
+      o(this, S, !0), this.imageRepeat = t, this.image = e;
     } finally {
-      s(this, d, !1);
+      o(this, S, !1);
     }
   }
 };
-st = new WeakMap(), nt = new WeakMap(), ot = new WeakMap(), B = new WeakMap(), H = new WeakMap(), E = new WeakMap(), D = new WeakMap(), b = new WeakMap(), d = new WeakMap(), A = new WeakSet(), /**
+Et = new WeakMap(), St = new WeakMap(), Tt = new WeakMap(), K = new WeakMap(), Q = new WeakMap(), I = new WeakMap(), $ = new WeakMap(), v = new WeakMap(), S = new WeakMap(), F = new WeakSet(), /**
  * Position and scale the pattern's transform
  * @private
  * @returns {void}
  */
-k = function() {
-  if (!r(this, D)) return;
-  const e = r(this, B) ? r(this, B) / r(this, E).naturalWidth : 1, t = r(this, H) ? r(this, H) / r(this, E).naturalHeight : 1;
-  r(this, b) ?? s(this, b, new DOMMatrix()), r(this, b).a = 1, r(this, b).b = 0, r(this, b).c = 0, r(this, b).d = 1, r(this, b).e = 0, r(this, b).f = 0, r(this, b).translateSelf(
-    r(this, nt),
-    r(this, ot)
-  ), r(this, b).scaleSelf(e, t), r(this, D).setTransform(r(this, b));
+M = function() {
+  if (!r(this, $)) return;
+  const e = r(this, K) ? r(this, K) / r(this, I).naturalWidth : 1, t = r(this, Q) ? r(this, Q) / r(this, I).naturalHeight : 1;
+  r(this, v) ?? o(this, v, new DOMMatrix()), r(this, v).a = 1, r(this, v).b = 0, r(this, v).c = 0, r(this, v).d = 1, r(this, v).e = 0, r(this, v).f = 0, r(this, v).translateSelf(
+    r(this, St),
+    r(this, Tt)
+  ), r(this, v).scaleSelf(e, t), r(this, $).setTransform(r(this, v));
 }, /**
  * The valid image repeat types
  * @static
  * @property {string[]} [IMAGE_REPEAT_TYPES]
  */
-S(C, "IMAGE_REPEAT_TYPES", {
+E(O, "IMAGE_REPEAT_TYPES", {
   repeat: "repeat",
   "repeat-x": "repeat-x",
   "repeat-y": "repeat-y",
@@ -1415,17 +1575,17 @@ S(C, "IMAGE_REPEAT_TYPES", {
  * The default image repeat option
  * @property {string} DEFAULT_IMAGE_REPEAT
  */
-S(C, "DEFAULT_IMAGE_REPEAT", "repeat"), /**
+E(O, "DEFAULT_IMAGE_REPEAT", "repeat"), /**
  * The default image offset
  * @property {Object} DEFAULT_IMAGE_OFFSET 
  */
-S(C, "DEFAULT_IMAGE_OFFSET", {
+E(O, "DEFAULT_IMAGE_OFFSET", {
   x: 0,
   y: 0
 });
-let ie = C;
-var _, ht, G, j, at;
-class Re {
+let Ce = O;
+var tt, xt, et, rt, Ct;
+class ir {
   /**
    * This class can be used to get elapsed and delta time (Remember to call clockObj.update at the beginning of the animation loop).
    * @class
@@ -1435,56 +1595,56 @@ class Re {
      * @private
      * @property {number} #startTime - when the object was created.
      */
-    n(this, _);
+    n(this, tt);
     /**
      * @private
      * @property {number} #oldTime - last frame time.
      */
-    n(this, ht);
+    n(this, xt);
     /**
      * @private
      * @property {number} #elapsedTime - time since instantiation.
      */
-    n(this, G);
+    n(this, et);
     /**
      * @private
      * @property {number} #deltaTime - time since last frame
      */
-    n(this, j);
+    n(this, rt);
     /**
      * @private
      * @property {number} #lastFrame - when the update method was last called.
      */
-    n(this, at);
+    n(this, Ct);
     this.restart();
   }
   /**
    * Get the time the object was instantiated.
-   * @returns {number} the time
+   * @returns {number}
    */
   get startTime() {
-    return r(this, _);
+    return r(this, tt);
   }
   /**
    * Get time since instantiation.
-   * @returns {number} the time
+   * @returns {number}
    */
   get elapsedTime() {
-    return r(this, G);
+    return r(this, et);
   }
   /**
    * Get time since last frame.
-   * @returns {number} the time
+   * @returns {number}
    */
   get deltaTime() {
-    return r(this, j);
+    return r(this, rt);
   }
   /**
    * Restart the start time
    * @returns {void}
    */
   restart() {
-    s(this, _, performance.now()), s(this, ht, r(this, _)), s(this, G, 0), s(this, j, 0), s(this, at, 0);
+    o(this, tt, performance.now()), o(this, xt, r(this, tt)), o(this, et, 0), o(this, rt, 0), o(this, Ct, 0);
   }
   /**
    * Update the internal time values (call at the beginning of your animation loop)
@@ -1492,9 +1652,9 @@ class Re {
    */
   update() {
     const e = performance.now();
-    if (e !== r(this, at)) {
+    if (e !== r(this, Ct)) {
       const t = e;
-      s(this, j, (t - r(this, ht)) / 1e3), s(this, G, (t - r(this, _)) / 1e3), s(this, ht, t), s(this, at, e);
+      o(this, rt, (t - r(this, xt)) / 1e3), o(this, et, (t - r(this, tt)) / 1e3), o(this, xt, t), o(this, Ct, e);
     }
   }
   /**
@@ -1503,7 +1663,7 @@ class Re {
    * @deprecated since version 0.1.0 - Use the elapsedTime getter instead
    */
   getElapsedTime() {
-    return f("getElapsedTime()", "elapsedTime getter", "0.1.0"), this.update(), r(this, G);
+    return b("getElapsedTime()", "elapsedTime getter", "0.1.0"), this.update(), r(this, et);
   }
   /**
    * Returns the time elapsed (in seconds) since the last frame or call.
@@ -1511,11 +1671,11 @@ class Re {
    * @deprecated since version 0.1.0 - Use the deltaTime getter instead
    */
   getDeltaTime() {
-    return f("getDeltaTime()", "deltaTime getter", "0.1.0"), this.update(), r(this, j);
+    return b("getDeltaTime()", "deltaTime getter", "0.1.0"), this.update(), r(this, rt);
   }
 }
-_ = new WeakMap(), ht = new WeakMap(), G = new WeakMap(), j = new WeakMap(), at = new WeakMap();
-class se {
+tt = new WeakMap(), xt = new WeakMap(), et = new WeakMap(), rt = new WeakMap(), Ct = new WeakMap();
+class ve {
   /**
    * Apply the material configuration to the given canvas 2D context.
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
@@ -1526,8 +1686,8 @@ class se {
     throw new Error("applyToContext2D() must be implemented in the subclass");
   }
 }
-var Kt, M, U, W, V, q;
-const ct = class ct extends se {
+var pe, B, H, st, it, ot;
+const Dt = class Dt extends ve {
   /**
    * A basic material that implements fillStyle, strokeStyle and lineWidth
    * @class
@@ -1547,31 +1707,31 @@ const ct = class ct extends se {
      * @private
      * @property {Color} #fillStyle - The material's fillStyle
      */
-    n(this, M);
+    n(this, B);
     /**
      * @private
      * @property {Color} #strokeStyle - The material's strokeStyle
      */
-    n(this, U);
+    n(this, H);
     /**
      * @private
      * @property {number} #lineWidth - The material's lineWidth
      */
-    n(this, W);
+    n(this, st);
     /**
      * @private
      * @property {Texture2D} #texture2D - The material's texture2D
      */
-    n(this, V);
+    n(this, it);
     /**
      * @private
      * @property {boolean} #isBatchSetting - Flag indicating if batch setting is active
      */
-    n(this, q, !1);
-    const { fillStyle: i, strokeStyle: h, lineWidth: a, texture2D: u } = t;
-    if (!i && !h)
+    n(this, ot, !1);
+    const { fillStyle: s, strokeStyle: i, lineWidth: a, texture2D: l } = t;
+    if (!s && !i)
       throw new Error("Either fillStyle or strokeStyle must be provided");
-    s(this, q, !0), this.fillStyle = i, this.strokeStyle = h, this.lineWidth = a, this.texture2D = u, s(this, q, !1);
+    o(this, ot, !0), this.fillStyle = s, this.strokeStyle = i, this.lineWidth = a, this.texture2D = l, o(this, ot, !1);
   }
   /**
    * The default line width.
@@ -1580,14 +1740,14 @@ const ct = class ct extends se {
    * @returns {number}
    */
   static get DEFAULT_LINE_WIDTH() {
-    return r(ct, Kt);
+    return r(Dt, pe);
   }
   /**
    * Gets the material's fillStyle
-   * @returns {Color} The fillStyle
+   * @returns {Color}
    */
   get fillStyle() {
-    return r(this, M);
+    return r(this, B);
   }
   /**
    * Sets the material's fillStyle
@@ -1597,18 +1757,18 @@ const ct = class ct extends se {
    * @throws {Error} If both fillStyle and strokeStyle are null
    */
   set fillStyle(t) {
-    if (t && !(t instanceof X))
+    if (t && !(t instanceof V))
       throw new Error("fillStyle must be a Color or null");
-    if (!r(this, q) && !t && !r(this, U))
+    if (!r(this, ot) && !t && !r(this, H))
       throw new Error("Either fillStyle or strokeStyle must be provided");
-    s(this, M, t);
+    o(this, B, t);
   }
   /**
    * Gets the material's strokeStyle
-   * @returns {Color|null|undefined} The strokeStyle
+   * @returns {Color|null|undefined}
    */
   get strokeStyle() {
-    return r(this, U);
+    return r(this, H);
   }
   /**
    * Sets the material's strokeStyle
@@ -1618,18 +1778,18 @@ const ct = class ct extends se {
    * @throws {Error} If both fillStyle and strokeStyle are null
    */
   set strokeStyle(t) {
-    if (t && !(t instanceof X))
+    if (t && !(t instanceof V))
       throw new Error("strokeStyle must be a Color or null");
-    if (!r(this, q) && !t && !r(this, M))
+    if (!r(this, ot) && !t && !r(this, B))
       throw new Error("Either fillStyle or strokeStyle must be provided");
-    s(this, U, t);
+    o(this, H, t);
   }
   /**
    * Gets the material's lineWidth
-   * @returns {number|null|undefined} The lineWidth
+   * @returns {number|null|undefined}
    */
   get lineWidth() {
-    return r(this, W);
+    return r(this, st);
   }
   /**
    * Sets the material's lineWidth
@@ -1640,14 +1800,14 @@ const ct = class ct extends se {
   set lineWidth(t) {
     if (t != null && (typeof t != "number" || t <= 0))
       throw new Error("lineWidth must be a positive number or null");
-    s(this, W, t ?? ct.DEFAULT_LINE_WIDTH);
+    o(this, st, t ?? Dt.DEFAULT_LINE_WIDTH);
   }
   /**
    * Gets the material's texture2D 
-   * @returns {Texture2D|null|undefined} The texture2D
+   * @returns {Texture2D|null|undefined}
    */
   get texture2D() {
-    return r(this, V);
+    return r(this, it);
   }
   /**
    * Sets the material's texture2D
@@ -1656,9 +1816,9 @@ const ct = class ct extends se {
    * @throws {Error} If texture2D is not null or of type Texture2D
    */
   set texture2D(t) {
-    if (t && !(t instanceof ie))
+    if (t && !(t instanceof Ce))
       throw new Error("texture2D must be of type Texture2D or null");
-    s(this, V, t);
+    o(this, it, t);
   }
   /**
    * Apply the material configuration to the given canvas 2D context.
@@ -1666,17 +1826,17 @@ const ct = class ct extends se {
    * @returns {void}
    */
   applyToContext2D(t) {
-    r(this, V) ? t.fillStyle = r(this, V).createPattern(t) : r(this, M) && (t.fillStyle = r(this, M).toString()), r(this, U) && (t.strokeStyle = r(this, U).toString()), r(this, W) && (t.lineWidth = r(this, W));
+    r(this, it) ? t.fillStyle = r(this, it).createPattern(t) : r(this, B) && (t.fillStyle = r(this, B).toString()), r(this, H) && (t.strokeStyle = r(this, H).toString()), r(this, st) && (t.lineWidth = r(this, st));
   }
 };
-Kt = new WeakMap(), M = new WeakMap(), U = new WeakMap(), W = new WeakMap(), V = new WeakMap(), q = new WeakMap(), /**
+pe = new WeakMap(), B = new WeakMap(), H = new WeakMap(), st = new WeakMap(), it = new WeakMap(), ot = new WeakMap(), /**
  * The default line width
  * @private
  * @property {number} #DEFAULT_LINE_WIDTH
  */
-n(ct, Kt, 1);
-let ae = ct;
-class ut {
+n(Dt, pe, 1);
+let Oe = Dt;
+class At {
   /**
    * Check for any conflicts between the geometry and the provided material
    * @param {Material} material - The material to check against
@@ -1693,12 +1853,12 @@ class ut {
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
-  drawContext2D(e, t, i) {
+  drawContext2D(e, t, s) {
     throw new Error("drawContext2D() must be implemented in the subclass");
   }
 }
-var $t, kt;
-class Pe extends ut {
+var Jt, Kt;
+class or extends At {
   /**
    * This class provides a rectangle shape with width and height properties.
    * @class
@@ -1707,26 +1867,26 @@ class Pe extends ut {
    * @throws {Error} If the width is not a positive number.
    * @throws {Error} If the height is not a positive number.
    */
-  constructor(t, i) {
+  constructor(t, s) {
     super();
     /**
      * @private
      * @property {number} width - the rectangle's width
      */
-    n(this, $t);
+    n(this, Jt);
     /**
      * @private
      * @property {number} height - the rectangle's height
      */
-    n(this, kt);
-    this.width = t, this.height = i;
+    n(this, Kt);
+    this.width = t, this.height = s;
   }
   /**
    * Get the width
-   * @returns {number} width
+   * @returns {number}
    */
   get width() {
-    return r(this, $t);
+    return r(this, Jt);
   }
   /**
    * Set the width
@@ -1737,14 +1897,14 @@ class Pe extends ut {
   set width(t) {
     if (typeof t != "number" || t < 0)
       throw new Error("width must be a positive number");
-    s(this, $t, t);
+    o(this, Jt, t);
   }
   /**
    * Get the height
-   * @returns {number} height
+   * @returns {number}
    */
   get height() {
-    return r(this, kt);
+    return r(this, Kt);
   }
   /**
    * Set the height
@@ -1755,7 +1915,7 @@ class Pe extends ut {
   set height(t) {
     if (typeof t != "number" || t < 0)
       throw new Error("height must be a positive number");
-    s(this, kt, t);
+    o(this, Kt, t);
   }
   /**
    * Draws the rectangle onto the given canvas 2D context
@@ -1764,18 +1924,18 @@ class Pe extends ut {
    * @param {Material} material - The material to use for rendering the rectangle
    * @returns {void}
    */
-  drawContext2D(t, i, h) {
-    if (!(h instanceof se))
+  drawContext2D(t, s, i) {
+    if (!(i instanceof ve))
       throw new Error("material must be of type Material");
-    if (!(i instanceof ft))
+    if (!(s instanceof Rt))
       throw new Error("transform must be of type Transform");
-    const { scale: a, position: u, rotation: l } = i, c = this.width * a.x, w = this.height * a.y, I = c / 2, $ = w / 2;
-    t.save(), t.translate(u.x + I, u.y + $), t.rotate(l), t.translate(-I, -$), h.fillStyle && t.fillRect(0, 0, c, w), h.strokeStyle && t.strokeRect(0, 0, c, w), t.restore();
+    const { scale: a, position: l, rotation: u, localAnchorPoint: d } = s, c = d.offset, m = this.width * a.x, f = this.height * a.y, x = m / 2, p = f / 2, R = -c[0] * x, ut = -c[1] * p;
+    t.save(), t.translate(l.x - R, l.y - ut), t.rotate(u), t.translate(R - x, ut - p), i.fillStyle && t.fillRect(0, 0, m, f), i.strokeStyle && t.strokeRect(0, 0, m, f), t.restore();
   }
 }
-$t = new WeakMap(), kt = new WeakMap();
-var Ot;
-class Ie extends ut {
+Jt = new WeakMap(), Kt = new WeakMap();
+var Qt;
+class nr extends At {
   /**
    * This class provides a circle shape with a radius property.
    * @class
@@ -1788,15 +1948,15 @@ class Ie extends ut {
      * @private
      * @property {number} radius - the circle's radius
      */
-    n(this, Ot);
+    n(this, Qt);
     this.radius = t;
   }
   /**
    * Get the radius
-   * @returns {number} radius
+   * @returns {number}
    */
   get radius() {
-    return r(this, Ot);
+    return r(this, Qt);
   }
   /**
    * Set the radius
@@ -1807,7 +1967,7 @@ class Ie extends ut {
   set radius(t) {
     if (typeof t != "number" || t < 0)
       throw new Error("radius must be a positive number");
-    s(this, Ot, t);
+    o(this, Qt, t);
   }
   /**
    * Draws the circle onto the given canvas 2D context
@@ -1816,14 +1976,14 @@ class Ie extends ut {
    * @param {Material} material - The material to use for rendering the circle
    * @returns {void}
    */
-  drawContext2D(t, i, h) {
-    const { position: a, rotation: u, scale: l } = i, c = this.radius * ((l.x + l.y) / 2);
-    t.save(), t.translate(a.x, a.y), t.rotate(u), t.beginPath(), t.arc(0, 0, c, 0, Math.PI * 2), t.closePath(), h.fillStyle && t.fill(), h.strokeStyle && t.stroke(), t.restore();
+  drawContext2D(t, s, i) {
+    const { position: a, rotation: l, scale: u, localAnchorPoint: d } = s, c = d.offset, m = (u.x + u.y) / 2, f = this.radius * m, x = c[0] * f, p = c[1] * f;
+    t.save(), t.translate(a.x + x, a.y + p), t.rotate(l), t.translate(-x, -p), t.beginPath(), t.arc(0, 0, f, 0, Math.PI * 2), t.closePath(), i.fillStyle && t.fill(), i.strokeStyle && t.stroke(), t.restore();
   }
 }
-Ot = new WeakMap();
-var Lt, Ft;
-const g = class g extends ut {
+Qt = new WeakMap();
+var vt, te, nt, ht, ye, Me;
+const C = class C extends At {
   /**
    * This class provides functionality for creating and managing text-based geometry.
    * @class
@@ -1841,26 +2001,37 @@ const g = class g extends ut {
    * @throws {Error} If textBaseline is not a valid baseline keyword.
    * @throws {Error} If direction is not a valid direction keyword.
    */
-  constructor(t, i = {}) {
+  constructor(t, s = {}) {
     super();
+    n(this, ye);
     /**
      * @private
      * @property {number} #text - the text to be displayed
      */
-    n(this, Lt);
+    n(this, vt);
     /**
      * @private
      * @property {number} #options - the options
      */
-    n(this, Ft);
-    this.text = t, this.options = i;
+    n(this, te);
+    /**
+     * @private
+     * @property {number} width - the text's width
+     */
+    n(this, nt);
+    /**
+     * @private
+     * @property {number} height - the text's height
+     */
+    n(this, ht);
+    this.text = t, this.options = s;
   }
   /**
    * Get the text
-   * @returns {string} text
+   * @returns {string}
    */
   get text() {
-    return r(this, Lt);
+    return r(this, vt);
   }
   /**
    * Set the text
@@ -1871,14 +2042,14 @@ const g = class g extends ut {
   set text(t) {
     if (typeof t != "string")
       throw new Error("text must be a string");
-    s(this, Lt, t);
+    o(this, vt, t), o(this, nt, null), o(this, ht, null);
   }
   /**
    * Get the options
-   * @returns {Object} options
+   * @returns {Object}
    */
   get options() {
-    return r(this, Ft);
+    return r(this, te);
   }
   /**
    * Set the options
@@ -1895,31 +2066,31 @@ const g = class g extends ut {
    * @throws {Error} If direction is not a valid direction keyword.
    */
   set options(t) {
-    const { maxWidth: i, textAlign: h, textBaseline: a, direction: u, font: l } = t;
-    if (i !== void 0 && typeof i != "number")
+    const { maxWidth: s, textAlign: i, textBaseline: a, direction: l, font: u } = t;
+    if (s !== void 0 && typeof s != "number")
       throw new Error("maxWidth must be a number or undefined");
-    if (l && typeof l != "string")
+    if (u && typeof u != "string")
       throw new Error("font must be a string or null");
-    if (h && typeof h != "string" && !g.TEXT_ALIGNMENT_TYPES[h])
+    if (i && typeof i != "string" && !C.TEXT_ALIGNMENT_TYPES[i])
       throw new Error(
-        `textAlign must be a string with value: ${Object.values(g.TEXT_ALIGNMENT_TYPES).join(
-          ", "
-        )}`
+        `textAlign must be a string with value: ${Object.values(
+          C.TEXT_ALIGNMENT_TYPES
+        ).join(", ")}`
       );
-    if (a && typeof a != "string" && !g.TEXT_BASELINE_TYPES[a])
+    if (a && typeof a != "string" && !C.TEXT_BASELINE_TYPES[a])
       throw new Error(
-        `textBaseline must be a string with value: ${Object.values(g.TEXT_BASELINE_TYPES).join(
-          ", "
-        )}`
+        `textBaseline must be a string with value: ${Object.values(
+          C.TEXT_BASELINE_TYPES
+        ).join(", ")}`
       );
-    if (u && typeof u != "string" && !g.TEXT_DIRECTION_TYPES[u])
+    if (l && typeof l != "string" && !C.TEXT_DIRECTION_TYPES[l])
       throw new Error(
-        `direction must be a string with value: ${Object.values(g.TEXT_DIRECTION_TYPES).join(
-          ", "
-        )}`
+        `direction must be a string with value: ${Object.values(
+          C.TEXT_DIRECTION_TYPES
+        ).join(", ")}`
       );
-    s(this, Ft, {
-      ...g.DEFAULT_OPTIONS,
+    o(this, te, {
+      ...C.DEFAULT_OPTIONS,
       ...t
     });
   }
@@ -1930,17 +2101,26 @@ const g = class g extends ut {
    * @param {Material} material - The material to use for rendering the text
    * @returns {void}
    */
-  drawContext2D(t, i, h) {
-    const { maxWidth: a, textAlign: u, textBaseline: l, direction: c, font: w } = this.options, { position: I, rotation: $ } = i, { fillStyle: qt, strokeStyle: me } = h;
-    w && t.font !== w && (t.font = w), u && t.textAlign !== u && (t.textAlign = u), l && t.textBaseline !== l && (t.textBaseline = l), c && t.direction !== c && (t.direction = c), t.save(), t.translate(I.x, I.y), t.rotate($), qt && t.fillText(this.text, 0, 0, a), me && t.strokeText(this.text, 0, 0, a), t.restore();
+  drawContext2D(t, s, i) {
+    const { maxWidth: a, textAlign: l, textBaseline: u, direction: d, font: c } = this.options, { fillStyle: m, strokeStyle: f } = i;
+    c && t.font !== c && (t.font = c), l && t.textAlign !== l && (t.textAlign = l), u && t.textBaseline !== u && (t.textBaseline = u), d && t.direction !== d && (t.direction = d), (!r(this, nt) || !r(this, ht)) && w(this, ye, Me).call(this, t);
+    const { position: x, rotation: p, scale: R, localAnchorPoint: ut } = s, me = ut.offset, Ae = r(this, nt) / 2 * me[0] * R.x, Ie = r(this, ht) / 2 * me[1] * R.y;
+    t.save(), t.translate(x.x + Ae, x.y + Ie), t.rotate(p), t.translate(-Ae, -Ie), m && t.fillText(this.text, 0, 0, a), f && t.strokeText(this.text, 0, 0, a), t.restore();
   }
 };
-Lt = new WeakMap(), Ft = new WeakMap(), /**
+vt = new WeakMap(), te = new WeakMap(), nt = new WeakMap(), ht = new WeakMap(), ye = new WeakSet(), /**
+ * Recalculate width and height based on text.
+ * @returns {void}
+ */
+Me = function(t) {
+  const { width: s, actualBoundingBoxAscent: i, actualBoundingBoxDescent: a } = t.measureText(r(this, vt));
+  o(this, nt, s), o(this, ht, i + a);
+}, /**
  * The valid text alignment types
  * @static
  * @property {string[]} [TEXT_ALIGNMENT_TYPES]
  */
-S(g, "TEXT_ALIGNMENT_TYPES", {
+E(C, "TEXT_ALIGNMENT_TYPES", {
   start: "start",
   end: "end",
   left: "left",
@@ -1951,7 +2131,7 @@ S(g, "TEXT_ALIGNMENT_TYPES", {
  * @static
  * @property {string[]} [TEXT_DIRECTION_TYPES]
  */
-S(g, "TEXT_DIRECTION_TYPES", {
+E(C, "TEXT_DIRECTION_TYPES", {
   ltr: "ltr",
   rtl: "rtl",
   inherit: "inherit"
@@ -1959,7 +2139,7 @@ S(g, "TEXT_DIRECTION_TYPES", {
  * @static
  * @property {string[]} [TEXT_BASELINE_TYPES] - The valid text baseline types
  */
-S(g, "TEXT_BASELINE_TYPES", {
+E(C, "TEXT_BASELINE_TYPES", {
   top: "top",
   hanging: "hanging",
   middle: "middle",
@@ -1976,58 +2156,82 @@ S(g, "TEXT_BASELINE_TYPES", {
  * @property {"top"|"hanging"|"middle"|"alphabetic"|"ideographic"|"bottom"|null} [DEFAULT_OPTIONS.textBaseline=null] - The default vertical alignment for the text content
  * @property {"ltr"|"rtl"|"inherit"|null} [DEFAULT_OPTIONS.direction=null] - The default direction for the text content
  */
-S(g, "DEFAULT_OPTIONS", {
+E(C, "DEFAULT_OPTIONS", {
   // maxWidth: null, Setting default maxWidth to null can cause issues
   font: "14px Arial",
   textAlign: null,
   textBaseline: null,
   direction: null
 });
-let le = g;
-var Mt;
-class $e extends ut {
+let Ne = C;
+var T, at, j, Ye, Xe, Ue;
+const Y = class Y extends At {
   /**
    * This class provides a way to draw a custom shape using lines.
    * @class
-   * @param {Array.<Array<number>>} points - Array of 4-number arrays describing points/segments. Requires at least one entry.
-   * @throws {Error} If points is not an array
-   * @throws {Error} If points has less than one 4-number arrays
-   * @throws {Error} If points has an array with less or more than four numbers
+   * @param {Array.<Array<number>>|Float32Array} vertices - The vertices
+   * @throws {Error} If vertices is not an array or Float32Array
+   * @throws {Error} If vertices as array must contain at least one 4-number arrays
+   * @throws {Error} If vertices as array must contain arrays with a length of four numbers
+   * @throws {Error} If vertices as Float32Array must have a length of 4
+   * @throws {Error} If vertices as Float32Array must contain an even number of values
    */
   constructor(t) {
     super();
+    n(this, j);
     /**
      * @private
-     * @property {Array.<Array<number>>} #points - Array of 4-number arrays describing points/segments. Requires at least one entry.
+     * @property {Float32Array} #vertices - Flat array of lines.
      */
-    n(this, Mt);
-    this.points = t;
+    n(this, T);
+    /**
+     * @private
+     * @property {Array<number>} #centroid - The centroid point of the polygon.
+     */
+    n(this, at);
+    this.vertices = t;
   }
   /**
-   * Gets the lines' points
-   * @returns {Array.<Array<number>>} The lines' points
+   * Gets the lines' vertices
+   * @returns {Float32Array}
    */
-  get points() {
-    return r(this, Mt);
+  get vertices() {
+    return r(this, T);
   }
   /**
-   * Sets the lines points
-   * @param {Array.<Array<number>>} points - The lines points
+   * Set vertices.
+   * @param {Array.<Array<number>>|Float32Array} vertices - The vertices
    * @returns {void}
-   * @throws {Error} If points is not an array
-   * @throws {Error} If points has less than one 4-number arrays
-   * @throws {Error} If points has an array with less or more than four numbers
+   * @throws {Error} If vertices is not an array or Float32Array
+   * @throws {Error} If vertices as array must contain at least one 4-number arrays
+   * @throws {Error} If vertices as array must contain arrays with a length of four numbers
+   * @throws {Error} If vertices as Float32Array must have a length of 4
+   * @throws {Error} If vertices as Float32Array must contain an even number of values
    */
-  set points(t) {
-    if (!Array.isArray(t))
-      throw new Error("points must be an array");
-    if (t.length < 1)
-      throw new Error("points must contain at least one 4-number arrays");
-    if (t.some((i) => !Array.isArray(i) || i.length !== 4))
-      throw new Error(
-        "an array in points must be an array with a length of four numbers"
-      );
-    s(this, Mt, t);
+  set vertices(t) {
+    const s = Array.isArray(t);
+    if (!s && !(t instanceof Float32Array))
+      throw new Error("vertices must be a array or Float32Array");
+    if (s) {
+      if (t.length < 1)
+        throw new Error(
+          "vertices as array must contain at least one 4-number arrays"
+        );
+      if (t.some((i) => !Array.isArray(i) || i.length !== 4))
+        throw new Error(
+          "vertices as array must contain arrays with a length of four numbers"
+        );
+      w(this, j, Ye).call(this, t);
+    } else {
+      if (t.length < 4)
+        throw new Error("vertices as Float32Array must have a length of 4");
+      if (t.length % 2 === 1)
+        throw new Error(
+          "vertices as Float32Array must contain an even number of values"
+        );
+      o(this, T, t);
+    }
+    w(this, j, Xe).call(this), w(this, j, Ue).call(this);
   }
   /**
    * Check for any conflicts between the geometry and the provided material
@@ -2040,70 +2244,126 @@ class $e extends ut {
       throw new Error("LineGeometry requires a strokeStyle in the material");
   }
   /**
-   * Draws the circle onto the given canvas 2D context
+   * Draws the lines onto the given canvas 2D context
    * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
-   * @param {Transform} transform - The transform to apply to the circle
-   * @param {Material} material - The material to use for rendering the circle
+   * @param {Transform} transform - The transform to apply to the line
+   * @param {Material} material - The material to use for rendering the line
    * @returns {void}
    */
-  drawContext2D(t, i, h) {
-    const { position: a, rotation: u, scale: l } = i;
-    t.save(), t.translate(a.x, a.y), t.rotate(u), t.beginPath(), this.points.forEach((c) => {
-      t.moveTo(c[0] * l.x, c[1] * l.y), t.lineTo(c[2] * l.x, c[3] * l.y);
-    }), t.closePath(), h.strokeStyle && t.stroke(), t.restore();
+  drawContext2D(t, s, i) {
+    const { position: a, rotation: l, scale: u, localAnchorPoint: d } = s, { offset: c } = d, m = r(this, T), f = r(this, at)[0] * c[0] * u.x, x = r(this, at)[1] * c[1] * u.y;
+    t.save(), t.translate(a.x + f, a.y + x), t.rotate(l), t.translate(-f, -x), t.beginPath();
+    for (let p = 0; p < m.length; p += Y.SEGMENT_SIZE)
+      t.moveTo(m[p] * u.x, m[p + 1] * u.y), t.lineTo(m[p + 2] * u.x, m[p + 3] * u.y);
+    i.strokeStyle && t.stroke(), t.restore();
   }
-}
-Mt = new WeakMap();
-var Z, lt, Qt, fe;
-class ke extends ut {
+};
+T = new WeakMap(), at = new WeakMap(), j = new WeakSet(), /**
+ * Convert the nested array to Float32Array and set the vertices.
+ * @returns {void}
+ */
+Ye = function(t) {
+  const s = t.length * Y.SEGMENT_SIZE;
+  (!r(this, T) || r(this, T).length !== s) && o(this, T, new Float32Array(s));
+  let i = 0;
+  for (let a = 0; a < t.length; a++) {
+    const l = t[a];
+    r(this, T)[i] = l[0], r(this, T)[i + 1] = l[1], r(this, T)[i + 2] = l[2], r(this, T)[i + 3] = l[3], i += Y.SEGMENT_SIZE;
+  }
+}, /**
+ * Calculates the centroid
+ * @private
+ */
+Xe = function() {
+  const t = r(this, T), s = t.length, i = s / 2, a = [0, 0];
+  for (let l = 0; l < s; l += Y.SEGMENT_SIZE) {
+    const u = t[l], d = t[l + 1], c = t[l + 2], m = t[l + 3];
+    a[0] += u + c, a[1] += d + m;
+  }
+  a[0] = a[0] / i, a[1] = a[1] / i, o(this, at, a);
+}, /**
+ * Translates all points so the geometry is centered around [0, 0].
+ * @private
+ */
+Ue = function() {
+  const t = r(this, T), s = r(this, at);
+  for (let i = 0; i < t.length; i += Y.SEGMENT_SIZE)
+    t[i] -= s[0], t[i + 1] -= s[1], t[i + 2] -= s[0], t[i + 3] -= s[1];
+}, /**
+ * @property {number} #SEGMENT_SIZE - Defines the number of coordinates stored in the flat array for line segments (e.g. 1=x1, 2=y1, 3=x2, 4=y2).
+ */
+E(Y, "SEGMENT_SIZE", 4);
+let $e = Y;
+var g, lt, G, ze, Be, He;
+const q = class q extends At {
   /**
    * This class provides a way to draw a custom polygon.
    * @class
-   * @param {Array.<Array<number>>} points - Array of 4-number arrays describing points/segments. Requires at least one entry.
-   * @throws {Error} If points is not an array
-   * @throws {Error} If points has less than three 2-number arrays
+   * @param {Array.<Array<number>>|Float32Array} vertices - Array of 4-number arrays or a Float32Array describing vertices.
+   * @throws {Error} If vertices is not an array or Float32Array
+   * @throws {Error} If vertices as array has less than three 2-number arrays
+   * @throws {Error} If vertices as array has an array with less or more than two numbers
+   * @throws {Error} If the length of vertices as Float32Array is less than 6
    * @throws {Error} If points has an array with less or more than two numbers
    */
   constructor(t) {
     super();
-    n(this, Qt);
+    n(this, G);
     /**
      * @private
-     * @property {Array.<Array<number>>} #points - Array of 2-number arrays describing points/segments.
+     * @property {Float32Array} #vertices - A flat array of vertices.
      */
-    n(this, Z);
+    n(this, g);
     /**
      * @private
-     * @property {Array<number>} #center - The center point of the polygon.
+     * @property {Polygon2D} #shape - The polygon object is used to calculate center.
      */
     n(this, lt);
-    this.points = t;
-  }
-  /**
-   * Gets the polygons's points
-   * @returns {Array.<Array<number>>} The polygons's points
-   */
-  get points() {
-    return r(this, Z);
+    this.vertices = t;
   }
   /**
    * Sets the polgyon's points
-   * @param {Array.<Array<number>>} points - The polgyon's points
+   * Note: The setter recalculate the shape and its center.
+   * Note: The setter automatically adds the first point as the last if they are not equal to ensure the polygon close.
+   * @param {Array.<Array<number>>|Float32Array} vertices - The polgyon's points
    * @returns {void}
-   * @throws {Error} If points is not an array
-   * @throws {Error} If points has less than three 2-number arrays
+   * @throws {Error} If vertices is not an array or Float32Array
+   * @throws {Error} If vertices as array has less than three 2-number arrays
+   * @throws {Error} If vertices as array has an array with less or more than two numbers
+   * @throws {Error} If the length of vertices as Float32Array is less than 6
    * @throws {Error} If points has an array with less or more than two numbers
    */
-  set points(t) {
-    if (!Array.isArray(t))
-      throw new Error("points must be an array");
-    if (t.length < 3)
-      throw new Error("points must contain at least three 2-number arrays");
-    if (t.some((i) => !Array.isArray(i) || i.length !== 2))
-      throw new Error(
-        "an array in points must be an array with a length of two numbers"
-      );
-    s(this, Z, t), p(this, Qt, fe).call(this);
+  set vertices(t) {
+    const s = Array.isArray(t);
+    if (!s && !(t instanceof Float32Array))
+      throw new Error("vertices must be a array or Float32Array");
+    if (s) {
+      if (t.length < 3)
+        throw new Error(
+          "vertices as array must contain at least three 2-number arrays"
+        );
+      if (t.some((i) => !Array.isArray(i) || i.length !== 2))
+        throw new Error(
+          "vertices as array must contain arrays with a length of two numbers"
+        );
+      w(this, G, ze).call(this, t);
+    } else {
+      if (t.length < 6)
+        throw new Error("vertices as Float32Array must have a length of 6");
+      if (t.length % 2 === 1)
+        throw new Error(
+          "vertices as Float32Array must contain an even number of values"
+        );
+      o(this, g, t);
+    }
+    w(this, G, Be).call(this), o(this, lt, new Te(r(this, g))), r(this, lt).calculateCentroid(), w(this, G, He).call(this);
+  }
+  /**
+   * Gets the polygons's vertices
+   * @returns {Float32Array}
+   */
+  get vertices() {
+    return r(this, g);
   }
   /**
    * Draws the circle onto the given canvas 2D context
@@ -2112,31 +2372,67 @@ class ke extends ut {
    * @param {Material} material - The material to use for rendering the circle
    * @returns {void}
    */
-  drawContext2D(t, i, h) {
-    const { position: a, rotation: u, scale: l } = i, c = r(this, lt).x * l.x, w = r(this, lt).y * l.y;
-    t.save(), t.translate(a.x + c, a.y + w), t.rotate(u), t.translate(-c, -w), t.beginPath();
-    const I = this.points[0];
-    t.moveTo(I[0] * l.x, I[1] * l.y);
-    for (let $ = 1; $ < this.points.length; $++) {
-      const qt = this.points[$];
-      t.lineTo(qt[0] * l.x, qt[1] * l.y);
+  drawContext2D(t, s, i) {
+    const { position: a, rotation: l, scale: u, localAnchorPoint: d } = s, { offset: c } = d, { centroid: m } = r(this, lt), f = r(this, g), x = m.x * u.x * c[0], p = m.y * u.y * c[1];
+    t.save(), t.translate(a.x + x, a.y + p), t.rotate(l), t.translate(-x, -p), t.beginPath(), t.moveTo(f[0] * u.x, f[1] * u.y);
+    for (
+      let R = 2;
+      // Skip the first two.
+      R < f.length;
+      R += q.COORDINATES_SIZE
+    ) {
+      const ut = f[R] * u.x, me = f[R + 1] * u.y;
+      t.lineTo(ut, me);
     }
-    h.strokeStyle && t.stroke(), h.fillStyle && t.fill(), t.restore();
+    t.closePath(), i.strokeStyle && t.stroke(), i.fillStyle && t.fill(), t.restore();
   }
-}
-Z = new WeakMap(), lt = new WeakMap(), Qt = new WeakSet(), /**
- * Calculates the center point of the polygon
- * @returns {void}
- * @private
- */
-fe = function() {
-  const t = r(this, Z), i = new Y(), h = r(this, Z).length;
-  t.forEach((a) => {
-    i.x += a[0], i.y += a[1];
-  }), i.x = i.x / h, i.y = i.y / h, s(this, lt, i);
 };
-var z, N;
-class Ce extends K {
+g = new WeakMap(), lt = new WeakMap(), G = new WeakSet(), /**
+ * Convert the nested array to Float32Array and set the vertices.
+ * @returns {void}
+ */
+ze = function(t) {
+  const s = t.length * q.COORDINATES_SIZE;
+  (!r(this, g) || r(this, g).length !== s) && o(this, g, new Float32Array(s));
+  let i = 0;
+  for (let a = 0; a < t.length; a++) {
+    const l = t[a];
+    r(this, g)[i] = l[0], r(this, g)[i + 1] = l[1], i += q.COORDINATES_SIZE;
+  }
+}, /**
+ * Ensure the first and last coordinate is the same values.
+ * The first and last point must be the same for the polygon to close.
+ * 
+ * @returns {void}
+ */
+Be = function() {
+  const t = r(this, g), s = t.length, i = t[0], a = t[1], l = t[s - 2], u = t[s - 1];
+  (i !== l || a !== u) && (o(this, g, new Float32Array(s + 2)), r(this, g).set(t, 0), r(this, g)[s] = i, r(this, g)[s + 1] = a);
+}, /**
+ * Move the vertices toward the center to ensure the anchor point can be calculated correct.
+ * @throws {Error} If the #shape is undefined.
+ * @throws {Error} If the #shape.center is undefined.
+ */
+He = function() {
+  const t = r(this, lt);
+  if (!t)
+    throw new Error(
+      "#polygon2 is undefined (It is created when using the points setter)."
+    );
+  const { centroid: s } = t;
+  if (!s)
+    throw new Error(
+      "#polygon2.centroid is undefined. #polygon2.calculateCentroid() must be called before correcting points."
+    );
+  for (let i = 0; i < this.vertices.length; i += q.COORDINATES_SIZE)
+    r(this, g)[i] -= s.x, r(this, g)[i + 1] -= s.y;
+}, /**
+ * @property {number} #COORDINATES_SIZE - Defines the number of coordinates stored in the flat array (e.g. 1=x, 2=y).
+ */
+E(q, "COORDINATES_SIZE", 2);
+let Fe = q;
+var _, Z;
+class tr extends ft {
   /**
    * This class combines geometry and material to create a drawable object.
    * @class
@@ -2145,19 +2441,19 @@ class Ce extends K {
    * @throws {Error} If geometry is not of type Geometry
    * @throws {Error} If material  is not of type Material
    */
-  constructor(t, i) {
+  constructor(t, s) {
     super();
     /**
      * @private
      * @property {Geometry} #geometry - The mesh's geometry
      */
-    n(this, z);
+    n(this, _);
     /**
      * @private
      * @property {Material} #material - The mesh's material
      */
-    n(this, N);
-    this.geometry = t, this.material = i;
+    n(this, Z);
+    this.geometry = t, this.material = s;
   }
   /**
    * Sets the mesh's geometry
@@ -2166,16 +2462,16 @@ class Ce extends K {
    * @throws {Error} If newGeometry is not of type Geometry
    */
   set geometry(t) {
-    if (!(t instanceof ut))
+    if (!(t instanceof At))
       throw new Error("geometry must be of type Geometry");
-    s(this, z, t), r(this, N) && r(this, z).checkMaterialConflicts(r(this, N));
+    o(this, _, t), r(this, Z) && r(this, _).checkMaterialConflicts(r(this, Z));
   }
   /**
    * Gets the mesh's geometry
-   * @returns {Geometry} The mesh's geometry
+   * @returns {Geometry}
    */
   get geometry() {
-    return r(this, z);
+    return r(this, _);
   }
   /**
    * Sets the mesh's material
@@ -2184,16 +2480,16 @@ class Ce extends K {
    * @throws {Error} If newMaterial is not of type Material
    */
   set material(t) {
-    if (!(t instanceof se))
+    if (!(t instanceof ve))
       throw new Error("material must be of type Material");
-    s(this, N, t), r(this, z) && r(this, z).checkMaterialConflicts(r(this, N));
+    o(this, Z, t), r(this, _) && r(this, _).checkMaterialConflicts(r(this, Z));
   }
   /**
    * Gets the mesh's material
-   * @returns {Material} The mesh's material
+   * @returns {Material}
    */
   get material() {
-    return r(this, N);
+    return r(this, Z);
   }
   /**
    * Draws the mesh onto the given canvas 2D context
@@ -2204,13 +2500,13 @@ class Ce extends K {
     this.material.applyToContext2D(t), this.geometry.drawContext2D(t, this.transform, this.material);
   }
 }
-z = new WeakMap(), N = new WeakMap(), /**
+_ = new WeakMap(), Z = new WeakMap(), /**
  * @static
  * @property {number} Z_INDEX - defines the class' default z-index (default: 1000)
  */
-S(Ce, "Z_INDEX", 1e3);
-var Ut, zt, Nt, Xt, R;
-class ue extends X {
+E(tr, "Z_INDEX", 1e3);
+var ee, re, se, ie, L;
+class Le extends V {
   /**
    * A color defined by red, green, blue, and alpha
    * @class
@@ -2221,41 +2517,41 @@ class ue extends X {
    * @throws {Error} if r, g, or b is not between 0 and 255
    * @throws {Error} if a is not between 0 and 1
    */
-  constructor(t, i, h, a = 1) {
-    super(`rgba(${t}, ${i}, ${h}, ${a})`);
+  constructor(t, s, i, a = 1) {
+    super(`rgba(${t}, ${s}, ${i}, ${a})`);
     /**
      * @private
      * @property {number} r - red (0-255)
      */
-    n(this, Ut);
+    n(this, ee);
     /**
      * @private
      * @property {number} g - green (0-255)
      */
-    n(this, zt);
+    n(this, re);
     /**
      * @private
      * @property {number} b - blue (0-255)
      */
-    n(this, Nt);
+    n(this, se);
     /**
      * @private
      * @property {number} a - alpha (0-1)
      */
-    n(this, Xt);
+    n(this, ie);
     /**
      * @private
      * @property {Renderer} #isBatchSetting - A flag to indicate if batch setting is in progress
      */
-    n(this, R, !1);
-    this.set(t, i, h, a);
+    n(this, L, !1);
+    this.set(t, s, i, a);
   }
   /**
-   * Get red
-   * @returns {number} red (0-255)
+   * Get red (0-255)
+   * @returns {number}
    */
   get r() {
-    return r(this, Ut);
+    return r(this, ee);
   }
   /**
    * Set red
@@ -2266,14 +2562,14 @@ class ue extends X {
   set r(t) {
     if (typeof t != "number" || t < 0 || t > 255)
       throw new Error("r must be a number between 0 and 255");
-    s(this, Ut, t), r(this, R) || this.updateColorStr();
+    o(this, ee, t), r(this, L) || this.updateColorStr();
   }
   /**
-   * Get green
-   * @returns {number} green (0-255)
+   * Get green (0-255)
+   * @returns {number}
    */
   get g() {
-    return r(this, zt);
+    return r(this, re);
   }
   /**
    * Set green
@@ -2284,14 +2580,14 @@ class ue extends X {
   set g(t) {
     if (typeof t != "number" || t < 0 || t > 255)
       throw new Error("g must be a number between 0 and 255");
-    s(this, zt, t), r(this, R) || this.updateColorStr();
+    o(this, re, t), r(this, L) || this.updateColorStr();
   }
   /**
-   * Get blue
-   * @returns {number} blue (0-255)
+   * Get blue (0-255)
+   * @returns {number}
    */
   get b() {
-    return r(this, Nt);
+    return r(this, se);
   }
   /**
    * Set blue
@@ -2302,14 +2598,14 @@ class ue extends X {
   set b(t) {
     if (typeof t != "number" || t < 0 || t > 255)
       throw new Error("b must be a number between 0 and 255");
-    s(this, Nt, t), r(this, R) || this.updateColorStr();
+    o(this, se, t), r(this, L) || this.updateColorStr();
   }
   /**
-   * Get alpha
-   * @returns {number} alpha (0-1)
+   * Get alpha (0-1)
+   * @returns {number}
    */
   get a() {
-    return r(this, Xt);
+    return r(this, ie);
   }
   /**
    * Set alpha
@@ -2320,7 +2616,7 @@ class ue extends X {
   set a(t) {
     if (typeof t != "number" || t < 0 || t > 1)
       throw new Error("a must be a number between 0 and 1");
-    s(this, Xt, t), r(this, R) || this.updateColorStr();
+    o(this, ie, t), r(this, L) || this.updateColorStr();
   }
   /**
    * Set the rgba color
@@ -2331,11 +2627,11 @@ class ue extends X {
    * @throws {Error} if r, g, or b is not between 0 and 255
    * @throws {Error} if a is not between 0 and 1
    */
-  set(t, i, h, a) {
+  set(t, s, i, a) {
     try {
-      s(this, R, !0), this.r = t, this.g = i, this.b = h, this.a = a, this.updateColorStr();
+      o(this, L, !0), this.r = t, this.g = s, this.b = i, this.a = a, this.updateColorStr();
     } finally {
-      s(this, R, !1);
+      o(this, L, !1);
     }
   }
   /**
@@ -2353,7 +2649,7 @@ class ue extends X {
    * @deprecated since version 0.1.0 - use r setter instead
    */
   setRed(t) {
-    f("setRed()", "r setter", "0.1.0"), this.r = t;
+    b("setRed()", "r setter", "0.1.0"), this.r = t;
   }
   /**
    * Set green
@@ -2363,7 +2659,7 @@ class ue extends X {
    * @deprecated since version 0.1.0 - use g setter instead
    */
   setGreen(t) {
-    f("setGreen()", "g setter", "0.1.0"), this.g = t;
+    b("setGreen()", "g setter", "0.1.0"), this.g = t;
   }
   /**
    * Set blue
@@ -2373,7 +2669,7 @@ class ue extends X {
    * @deprecated since version 0.1.0 - use b setter instead
    */
   setBlue(t) {
-    f("setBlue()", "b setter", "0.1.0"), this.b = t;
+    b("setBlue()", "b setter", "0.1.0"), this.b = t;
   }
   /**
    * Set the alpha
@@ -2383,7 +2679,7 @@ class ue extends X {
    * @deprecated since version 0.1.0 - use a setter instead
    */
   setAlpha(t) {
-    f("setAlpha()", "a setter", "0.1.0"), this.a = t;
+    b("setAlpha()", "a setter", "0.1.0"), this.a = t;
   }
   /**
    * Returns a string representation of the color in rgba format
@@ -2400,9 +2696,9 @@ class ue extends X {
     return `rgb(${this.r}, ${this.g}, ${this.b})`;
   }
 }
-Ut = new WeakMap(), zt = new WeakMap(), Nt = new WeakMap(), Xt = new WeakMap(), R = new WeakMap();
-var Yt, Bt, Ht, _t;
-class ve extends K {
+ee = new WeakMap(), re = new WeakMap(), se = new WeakMap(), ie = new WeakMap(), L = new WeakMap();
+var oe, ne, he, ae;
+class er extends ft {
   /**
    * A simple 2D light source for Canvas rendering.
    * @class
@@ -2415,36 +2711,36 @@ class ve extends K {
    * @throws {Error} If the color is not a Color.
    * @throws {Error} If the colorStop is not a Color.
    */
-  constructor(t = 100, i = 1, h = new ue(255, 255, 200, 1), a = new ue(255, 255, 200, 0)) {
+  constructor(t = 100, s = 1, i = new Le(255, 255, 200, 1), a = new Le(255, 255, 200, 0)) {
     super();
     /**
      * @private
      * @property {number} #radius - The light's radius
      */
-    n(this, Yt);
+    n(this, oe);
     /**
      * @private
      * @property {number} #intensity - The light's intensity
      */
-    n(this, Bt);
+    n(this, ne);
     /**
      * @private
      * @property {Color} #color - The light's color
      */
-    n(this, Ht);
+    n(this, he);
     /**
      * @private
      * @property {Color} #intensity - The light's colorStop
      */
-    n(this, _t);
-    this.radius = t, this.intensity = i, this.color = h, this.colorStop = a, this.zIndex = 1;
+    n(this, ae);
+    this.radius = t, this.intensity = s, this.color = i, this.colorStop = a, this.zIndex = 1;
   }
   /**
    * Gets the light's radius
-   * @returns {number} The radius
+   * @returns {number}
    */
   get radius() {
-    return r(this, Yt);
+    return r(this, oe);
   }
   /**
    * Sets the light's radius
@@ -2455,14 +2751,14 @@ class ve extends K {
   set radius(t) {
     if (typeof t != "number" || t < 0)
       throw new Error("radius must be a positive number");
-    s(this, Yt, t);
+    o(this, oe, t);
   }
   /**
    * Gets the light's intensity
-   * @returns {number} The intensity
+   * @returns {number}
    */
   get intensity() {
-    return r(this, Bt);
+    return r(this, ne);
   }
   /**
    * Sets the light's intensity
@@ -2473,14 +2769,14 @@ class ve extends K {
   set intensity(t) {
     if (typeof t != "number" || t < 0)
       throw new Error("intensity must be a positive number");
-    s(this, Bt, t);
+    o(this, ne, t);
   }
   /**
    * Gets the light's color
-   * @returns {Color} The color
+   * @returns {Color}
    */
   get color() {
-    return r(this, Ht);
+    return r(this, he);
   }
   /**
    * Sets the light's color
@@ -2489,16 +2785,16 @@ class ve extends K {
    * @throws {Error} If the color is not a Color.
    */
   set color(t) {
-    if (!(t instanceof X))
+    if (!(t instanceof V))
       throw new Error("color must be a Color");
-    s(this, Ht, t);
+    o(this, he, t);
   }
   /**
    * Gets the light's colorStop
-   * @returns {Color} The colorStop
+   * @returns {Color}
    */
   get colorStop() {
-    return r(this, _t);
+    return r(this, ae);
   }
   /**
    * Sets the light's colorStop
@@ -2507,9 +2803,9 @@ class ve extends K {
    * @throws {Error} If the colorStop is not a Color.
    */
   set colorStop(t) {
-    if (!(t instanceof X))
+    if (!(t instanceof V))
       throw new Error("colorStop must be a Color");
-    s(this, _t, t);
+    o(this, ae, t);
   }
   /**
    * Renders the light effect on the given 2D rendering context.
@@ -2517,17 +2813,17 @@ class ve extends K {
    * @returns {void}
    */
   drawContext2D(t) {
-    const { radius: i, color: h, colorStop: a, intensity: u } = this, { x: l, y: c } = this.transform.position, w = t.createRadialGradient(l, c, 0, l, c, i);
-    w.addColorStop(0, h.toString()), w.addColorStop(1, a.toString()), t.save(), t.globalAlpha = u, t.fillStyle = w, t.fillRect(l - i, c - i, i * 2, i * 2), t.restore();
+    const { radius: s, color: i, colorStop: a, intensity: l } = this, { x: u, y: d } = this.transform.position, c = t.createRadialGradient(u, d, 0, u, d, s);
+    c.addColorStop(0, i.toString()), c.addColorStop(1, a.toString()), t.save(), t.globalAlpha = l, t.fillStyle = c, t.fillRect(u - s, d - s, s * 2, s * 2), t.restore();
   }
 }
-Yt = new WeakMap(), Bt = new WeakMap(), Ht = new WeakMap(), _t = new WeakMap(), /**
+oe = new WeakMap(), ne = new WeakMap(), he = new WeakMap(), ae = new WeakMap(), /**
  * @static
  * @property {number} Z_INDEX - defines the class' default z-index (default: 2000)
  */
-S(ve, "Z_INDEX", 2e3);
-var Gt, jt, Wt, Vt, P;
-class Oe extends X {
+E(er, "Z_INDEX", 2e3);
+var le, ue, ce, fe, k;
+class hr extends V {
   /**
    * A color defined by hue, saturation, lightness, and alpha
    * @class
@@ -2538,41 +2834,41 @@ class Oe extends X {
    * @throws {Error} if h, s, or l are out of range
    * @throws {Error} if a is not between 0 and 1
    */
-  constructor(t, i, h, a = 1) {
-    super(`hsla(${t}, ${i}%, ${h}%, ${a})`);
+  constructor(t, s, i, a = 1) {
+    super(`hsla(${t}, ${s}%, ${i}%, ${a})`);
     /**
      * @private
      * @property {number} #h - hue (0-360)
      */
-    n(this, Gt);
+    n(this, le);
     /**
      * @private
      * @property {number} #s - saturation (0-100)
      */
-    n(this, jt);
+    n(this, ue);
     /**
      * @private
      * @property {number} #l - lightness (0-100)
      */
-    n(this, Wt);
+    n(this, ce);
     /**
      * @private
      * @property {number} #a - alpha (0-1)
      */
-    n(this, Vt);
+    n(this, fe);
     /**
      * @private
      * @property {Renderer} #isBatchSetting - A flag to indicate if batch setting is in progress
      */
-    n(this, P, !1);
-    this.set(t, i, h, a);
+    n(this, k, !1);
+    this.set(t, s, i, a);
   }
   /**
-   * Get hue
-   * @returns {number} hue (0-360)
+   * Get hue (0-360)
+   * @returns {number}
    */
   get h() {
-    return r(this, Gt);
+    return r(this, le);
   }
   /**
    * Set hue
@@ -2583,14 +2879,14 @@ class Oe extends X {
   set h(t) {
     if (typeof t != "number" || t < 0 || t > 360)
       throw new Error("h must be a number between 0 and 360");
-    s(this, Gt, t), r(this, P) || this.updateColorStr();
+    o(this, le, t), r(this, k) || this.updateColorStr();
   }
   /**
-   * Get saturation
-   * @returns {number} saturation (0-100)
+   * Get saturation (0-100)
+   * @returns {number}
    */
   get s() {
-    return r(this, jt);
+    return r(this, ue);
   }
   /**
    * Set saturation
@@ -2599,14 +2895,14 @@ class Oe extends X {
   set s(t) {
     if (typeof t != "number" || t < 0 || t > 100)
       throw new Error("s must be a number between 0 and 100");
-    s(this, jt, t), r(this, P) || this.updateColorStr();
+    o(this, ue, t), r(this, k) || this.updateColorStr();
   }
   /**
-   * Get lightness
-   * @returns {number} lightness (0-100)
+   * Get lightness (0-100)
+   * @returns {number}
    */
   get l() {
-    return r(this, Wt);
+    return r(this, ce);
   }
   /**
    * Set lightness
@@ -2617,14 +2913,14 @@ class Oe extends X {
   set l(t) {
     if (typeof t != "number" || t < 0 || t > 100)
       throw new Error("l must be a number between 0 and 100");
-    s(this, Wt, t), r(this, P) || this.updateColorStr();
+    o(this, ce, t), r(this, k) || this.updateColorStr();
   }
   /**
-   * Get alpha
-   * @returns {number} alpha (0-1)
+   * Get alpha (0-1)
+   * @returns {number}
    */
   get a() {
-    return r(this, Vt);
+    return r(this, fe);
   }
   /**
    * Set alpha
@@ -2635,7 +2931,7 @@ class Oe extends X {
   set a(t) {
     if (typeof t != "number" || t < 0 || t > 1)
       throw new Error("a must be a number between 0 and 1");
-    s(this, Vt, t), r(this, P) || this.updateColorStr();
+    o(this, fe, t), r(this, k) || this.updateColorStr();
   }
   /**
    * Set the hsla color
@@ -2647,11 +2943,11 @@ class Oe extends X {
    * @throws {Error} if h, s, or l are out of range
    * @throws {Error} if a is not between 0 and 1
    */
-  set(t, i, h, a = 1) {
+  set(t, s, i, a = 1) {
     try {
-      s(this, P, !0), this.h = t, this.s = i, this.l = h, this.a = a, this.updateColorStr();
+      o(this, k, !0), this.h = t, this.s = s, this.l = i, this.a = a, this.updateColorStr();
     } finally {
-      s(this, P, !1);
+      o(this, k, !1);
     }
   }
   /**
@@ -2669,7 +2965,7 @@ class Oe extends X {
    * @deprecated since version 0.1.0 - use h setter instead
    */
   setHue(t) {
-    f("setHue()", "h setter", "0.1.0"), this.h = t;
+    b("setHue()", "h setter", "0.1.0"), this.h = t;
   }
   /**
    * Set saturation
@@ -2679,7 +2975,7 @@ class Oe extends X {
    * @deprecated since version 0.1.0 - use s setter instead
    */
   setSaturation(t) {
-    f("setSaturation()", "s setter", "0.1.0"), this.s = t;
+    b("setSaturation()", "s setter", "0.1.0"), this.s = t;
   }
   /**
    * Set lightness
@@ -2689,7 +2985,7 @@ class Oe extends X {
    * @deprecated since version 0.1.0 - use l setter instead
    */
   setLightness(t) {
-    f("setLightness()", "l setter", "0.1.0"), this.l = t;
+    b("setLightness()", "l setter", "0.1.0"), this.l = t;
   }
   /**
    * Set the alpha value
@@ -2699,7 +2995,7 @@ class Oe extends X {
    * @deprecated since version 0.1.0 - use a setter instead
    */
   setAlpha(t) {
-    f("setAlpha()", "a setter", "0.1.0"), this.a = t;
+    b("setAlpha()", "a setter", "0.1.0"), this.a = t;
   }
   /**
    * Returns a string representation of the color in hsla format
@@ -2716,29 +3012,31 @@ class Oe extends X {
     return `hsl(${this.h}, ${this.s}%, ${this.l}%)`;
   }
 }
-Gt = new WeakMap(), jt = new WeakMap(), Wt = new WeakMap(), Vt = new WeakMap(), P = new WeakMap();
+le = new WeakMap(), ue = new WeakMap(), ce = new WeakMap(), fe = new WeakMap(), k = new WeakMap();
 export {
-  ae as BasicMaterial,
-  ge as Camera2D,
-  Ie as CircleGeometry,
-  Re as Clock,
-  X as Color,
-  ut as Geometry,
-  Oe as HslaColor,
+  It as AnchorPoint2D,
+  Oe as BasicMaterial,
+  Ve as Camera2D,
+  nr as CircleGeometry,
+  ir as Clock,
+  V as Color,
+  At as Geometry,
+  hr as HslaColor,
   $e as LineGeometry,
-  se as Material,
-  Ce as Mesh,
-  K as Object2D,
-  ve as PointLight2D,
-  ke as PolygonGeometry,
-  Pe as RectGeometry,
-  ce as Renderer,
-  Ae as Renderer2D,
-  re as RendererOptions,
-  ue as RgbaColor,
-  xe as Scene,
-  le as TextGeometry,
-  ie as Texture2D,
-  ft as Transform,
-  Y as Vector2
+  ve as Material,
+  tr as Mesh,
+  ft as Object2D,
+  er as PointLight2D,
+  Te as Polygon2D,
+  Fe as PolygonGeometry,
+  or as RectGeometry,
+  ke as Renderer,
+  sr as Renderer2D,
+  xe as RendererOptions,
+  Le as RgbaColor,
+  Qe as Scene,
+  Ne as TextGeometry,
+  Ce as Texture2D,
+  Rt as Transform,
+  J as Vector2
 };
