@@ -1,6 +1,7 @@
 import { expect, describe, it } from "vitest";
 import { Transform } from "../../src/core/Transform.js";
-import { Vector2 } from "../../src/core/Vector2.js";
+import { Vector2 } from "../../src/math/Vector2.js";
+import { AnchorPoint2D } from "../../src/core/AnchorPoint2D.js";
 
 describe("Transform", () => {
   it("should create a Transform instance", () => {
@@ -9,6 +10,12 @@ describe("Transform", () => {
     expect(transform.position).toBeInstanceOf(Vector2);
     expect(transform.scale).toBeInstanceOf(Vector2);
     expect(transform.rotation).toBe(0);
+    expect(transform.localAnchorPoint).toBeInstanceOf(AnchorPoint2D);
+  });
+
+  it("should set midCenter as the default anchor type", () => {
+    const transform = new Transform();
+    expect(transform.localAnchorPoint.anchorType).toBe(AnchorPoint2D.ANCHOR_POINT_TYPES.midCenter);
   });
 
   it("should accept custom position, rotation, and scale", () => {

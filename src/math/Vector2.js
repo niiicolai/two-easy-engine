@@ -14,7 +14,7 @@ export class Vector2 {
    * @property {number} #y - the y coordinate.
    */
   #y;
-  
+
   /**
    * This class provides basic vector operations such as addition, subtraction, scaling, and normalization.
    * @class
@@ -270,13 +270,13 @@ export class Vector2 {
   /**
    * Check if the values of this vector is equal to another
    * @param {Vector2} v - The other vector
-   * @returns {boolean} 
+   * @returns {boolean}
    */
   isEqual(v) {
     if (!(v instanceof Vector2)) {
       throw new Error("v must be of type Vector2");
     }
-    
+
     return this.x === v.x && this.y === v.y;
   }
 
@@ -293,8 +293,8 @@ export class Vector2 {
     const x = this.x;
     const y = this.y;
 
-    this.x = ((x - px) * cos - (y - py) * sin) + px;
-    this.y = ((x - px) * sin + (y - py) * cos) + py;
+    this.x = (x - px) * cos - (y - py) * sin + px;
+    this.y = (x - px) * sin + (y - py) * cos + py;
 
     return this;
   }

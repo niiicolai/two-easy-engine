@@ -1,4 +1,5 @@
-import { Vector2 } from "./Vector2.js";
+import { Vector2 } from "../math/Vector2.js";
+import { AnchorPoint2D } from "./AnchorPoint2D.js";
 
 /**
  * This class encapsulates the transformation properties of an object in 2D space.
@@ -24,6 +25,12 @@ export class Transform {
   #scale;
 
   /**
+   * @private
+   * @property {Vector2} #localAnchorPoint - the transform's localAnchorPoint
+   */
+  #localAnchorPoint;
+
+  /**
    * This class encapsulates the transformation properties of an object in 2D space.
    * @class
    * @param {Vector2} position - The position of the transform.
@@ -37,10 +44,34 @@ export class Transform {
     position = new Vector2(),
     rotation = 0,
     scale = new Vector2(1, 1),
+    localAnchorPoint = new AnchorPoint2D(AnchorPoint2D.ANCHOR_POINT_TYPES.midCenter)
   ) {
     this.position = position;
     this.rotation = rotation;
     this.scale = scale;
+    this.localAnchorPoint = localAnchorPoint;
+  }
+
+  /**
+   * Get transform's localAnchorPoint
+   * @returns {AnchorPoint2D}
+   */
+  get localAnchorPoint() {
+    return this.#localAnchorPoint;
+  }
+
+  /**
+   * Set the localAnchorPoint
+   * @param {AnchorPoint2D} localAnchorPoint - the new localAnchorPoint
+   * @returns {void}
+   * @throws {Error} if localAnchorPoint is not a AnchorPoint2D
+   */
+  set localAnchorPoint(localAnchorPoint) {
+    if (!(localAnchorPoint instanceof AnchorPoint2D)) {
+      throw new Error("localAnchorPoint must be of type AnchorPoint2D");
+    }
+
+    this.#localAnchorPoint = localAnchorPoint;
   }
 
   /**

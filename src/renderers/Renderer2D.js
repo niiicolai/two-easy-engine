@@ -73,9 +73,9 @@ export class Renderer2D extends Renderer {
         : this.options.backgroundColor;
 
     // Clear the canvas and draw bgg
-    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.clearRect(0, 0, this.options.width, this.options.height);
     ctx.fillStyle = bgg;
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.fillRect(0, 0, this.options.width, this.options.height);
 
     // Apply camera transform and zoom
     ctx.save();

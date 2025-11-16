@@ -70,12 +70,11 @@ describe("TextGeometry", () => {
     );
   });
 
-  it("drawContext2D() should draw a red x inside the canvas", () => {
+  it("drawContext2D() should draw a red . inside the canvas", () => {
     const color = new RgbaColor(255, 0, 0, 1);
-    const text = new TextGeometry("x", {
-      font: "2px Arial",
+    const text = new TextGeometry(".", {
+      font: "1px Arial",
       textAlign: "center",
-      textBaseline: "middle",
     });
     const canvas = createCanvas(4, 4);
     const ctx = canvas.getContext("2d");
@@ -85,19 +84,19 @@ describe("TextGeometry", () => {
       [0, 0],
       [1, 0],
       [2, 0],
-      [3, 0],
       [0, 1],
       [1, 1],
       [2, 1],
+    ];
+    const outside = [
+      [3, 0],
       [3, 1],
       [0, 2],
       [1, 2],
       [2, 2],
       [3, 2],
-    ];
-    const outside = [
-      [1, 3],
       [0, 3],
+      [1, 3],
       [2, 3],
       [3, 3],
     ];

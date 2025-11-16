@@ -83,8 +83,8 @@ const mesh = new Two.Mesh(
 
 // Center the rectangle on screen
 mesh.transform.position.set(
-  renderer.centerX - mesh.geometry.width / 2,
-  renderer.centerY - mesh.geometry.height / 2
+  renderer.centerX,
+  renderer.centerY
 );
 
 // Add it to the scene
@@ -106,10 +106,7 @@ window.onresize = () => {
   // Resize the canvas
   renderer.options.setSize(window.innerWidth, window.innerHeight);
   // Set the new center position
-  mesh.transform.position.set(
-    renderer.centerX - mesh.geometry.width / 2,
-    renderer.centerY - mesh.geometry.height / 2
-  );
+  mesh.transform.position.set(renderer.centerX, renderer.centerY);
 };
 ```
 
@@ -191,10 +188,7 @@ renderer.requestAnimationFrame({
           lineWidth: 2,
         })
       );
-      mesh.transform.position.set(
-        renderer.centerX - mesh.geometry.width / 2,
-        renderer.centerY - mesh.geometry.height / 2
-      );
+      mesh.transform.position.set(renderer.centerX, renderer.centerY);
       scene.add(mesh);
 
       // Handle window resize to ensure responsiveness rendering
@@ -202,10 +196,7 @@ renderer.requestAnimationFrame({
         // Resize the canvas
         renderer.options.setSize(window.innerWidth, window.innerHeight);
         // Set the new center position
-        mesh.transform.position.set(
-          renderer.centerX - mesh.geometry.width / 2,
-          renderer.centerY - mesh.geometry.height / 2
-        );
+        mesh.transform.position.set(renderer.centerX, renderer.centerY);
       };
 
       const speed = 1.5;

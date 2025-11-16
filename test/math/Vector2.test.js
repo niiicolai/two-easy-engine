@@ -1,5 +1,5 @@
 import { expect, describe, it } from "vitest";
-import { Vector2 } from "../../src/core/Vector2.js";
+import { Vector2 } from "../../src/math/Vector2.js";
 
 describe("Vector2", () => {
   it("should create a Vector2 instance", () => {

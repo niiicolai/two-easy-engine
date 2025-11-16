@@ -77,8 +77,8 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * Get green
-   * @returns {number} green (0-255)
+   * Get green (0-255)
+   * @returns {number}
    */
   get g() {
     return this.#g;

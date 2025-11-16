@@ -57,15 +57,21 @@ export class CircleGeometry extends Geometry {
    * @returns {void}
    */
   drawContext2D(ctx, transform, material) {
-    const { position, rotation, scale } = transform;
-    const radius = this.radius * ((scale.x + scale.y) / 2);
+    const { position, rotation, scale, localAnchorPoint } = transform;
+    const offset = localAnchorPoint.offset;
+    const uniformScale = (scale.x + scale.y) / 2;
+    const scaledRadius = this.radius * uniformScale;
+    const pivotX = offset[0] * scaledRadius;
+    const pivotY = offset[1] * scaledRadius;
 
     ctx.save();
-    ctx.translate(position.x, position.y);
+    ctx.translate(position.x + pivotX, position.y + pivotY);
+    // Rotate around pivot.
     ctx.rotate(rotation);
+    ctx.translate(-pivotX, -pivotY);
 
     ctx.beginPath();
-    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.arc(0, 0, scaledRadius, 0, Math.PI * 2);
     ctx.closePath();
 
     if (material.fillStyle) {

@@ -57,18 +57,12 @@
           lineWidth: 2,
         })
       );
-      mesh.transform.position.set(
-        renderer.centerX - 50,
-        renderer.centerY - 50
-      );
+      mesh.transform.position.set(renderer.centerX, renderer.centerY);
       scene.add(mesh);
 
       window.onresize = () => {
         renderer.options.setSize(window.innerWidth, window.innerHeight);
-        mesh.transform.position.set(
-          renderer.centerX - 50,
-          renderer.centerY - 50
-        );
+        mesh.transform.position.set(renderer.centerX, renderer.centerY);
       };
 
       const speed = 1.5;

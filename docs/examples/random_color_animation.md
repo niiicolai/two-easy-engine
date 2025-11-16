@@ -84,19 +84,13 @@ The example below demonstrates a complete solution for adding a random color ani
       const fillStyle = new Two.RgbaColor(0, 0, 0, 1);
       const material = new Two.BasicMaterial({ fillStyle });
       const mesh = new Two.Mesh(geometry, material);
-      mesh.transform.position.set(
-        renderer.centerX - mesh.geometry.width / 2,
-        renderer.centerY - mesh.geometry.height / 2
-      );
+      mesh.transform.position.set(renderer.centerX, renderer.centerY);
       scene.add(mesh);
 
       // Handle window resize to ensure responsiveness rendering
       window.onresize = () => {
         renderer.options.setSize(window.innerWidth, window.innerHeight);
-        mesh.transform.position.set(
-          renderer.centerX - mesh.geometry.width / 2,
-          renderer.centerY - mesh.geometry.height / 2
-        );
+        mesh.transform.position.set(renderer.centerX, renderer.centerY);
       };
 
       const baseSpeed = 60; // Degrees pr. second
