@@ -291,7 +291,15 @@ const W = class W {
    * @class
    */
   constructor(e) {
+    /**
+     * @private
+     * @property {Array} #offset - the current offest.
+     */
     n(this, Nt);
+    /**
+     * @private
+     * @property {string} #anchorType - the current anchor type.
+     */
     n(this, $t);
     this.anchorType = e;
   }
@@ -325,7 +333,10 @@ const W = class W {
     o(this, $t, e), o(this, Nt, r(W, we)[e]);
   }
 };
-we = new WeakMap(), Nt = new WeakMap(), $t = new WeakMap(), E(W, "ANCHOR_POINT_TYPES", {
+we = new WeakMap(), Nt = new WeakMap(), $t = new WeakMap(), /**
+ * @property {Object} ANCHOR_POINT_TYPES - the valid anchor point types.
+ */
+E(W, "ANCHOR_POINT_TYPES", {
   topLeft: "topLeft",
   topCenter: "topCenter",
   topRight: "topRight",
@@ -335,7 +346,11 @@ we = new WeakMap(), Nt = new WeakMap(), $t = new WeakMap(), E(W, "ANCHOR_POINT_T
   bottomLeft: "bottomLeft",
   bottomCenter: "bottomCenter",
   bottomRight: "bottomRight"
-}), n(W, we, {
+}), /**
+ * @private
+ * @property {Object} #ANCHOR_OFFSETS - the offsets returned by type.
+ */
+n(W, we, {
   topLeft: [-1, -1],
   topCenter: [0, -1],
   topRight: [1, -1],
