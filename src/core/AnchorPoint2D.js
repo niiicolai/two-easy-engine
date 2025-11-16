@@ -4,6 +4,9 @@
  * @class AnchorPoint2D
  */
 export class AnchorPoint2D {
+  /**
+   * @property {Object} ANCHOR_POINT_TYPES - the valid anchor point types.
+   */
   static ANCHOR_POINT_TYPES = {
     topLeft: "topLeft",
     topCenter: "topCenter",
@@ -16,6 +19,10 @@ export class AnchorPoint2D {
     bottomRight: "bottomRight",
   };
 
+  /**
+   * @private
+   * @property {Object} #ANCHOR_OFFSETS - the offsets returned by type.
+   */
   static #ANCHOR_OFFSETS = {
     topLeft: [-1, -1],
     topCenter: [0, -1],
@@ -28,7 +35,16 @@ export class AnchorPoint2D {
     bottomRight: [1, 1],
   };
 
+  /**
+   * @private
+   * @property {Array} #offset - the current offest.
+   */
   #offset;
+
+  /**
+   * @private
+   * @property {string} #anchorType - the current anchor type.
+   */
   #anchorType;
 
   /**
