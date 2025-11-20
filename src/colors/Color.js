@@ -1,37 +1,37 @@
-/**
- * The base color class
- * @class Color
+/** 
+ * The base color class.
+ * @class Color 
  */
 export class Color {
   /**
+   * A string representation of the color.
    * @private
-   * @property {string} #colorStr - a string representation of the color
+   * @type {string}
    */
   #colorStr;
 
   /**
-   * The base color class
-   * @class
-   * @param {string} colorStr - a string representation of the color
-   * @throws {Error} if the colorStr is not a string
+   * Create a new Color instance.
+   * @param {string} colorStr - a string representation of the color.
+   * @throws {Error} if the colorStr is not a string.
    */
   constructor(colorStr) {
     this.colorStr = colorStr;
   }
 
   /**
-   * Get the string representation of the color
-   * @returns {string}
+   * Gets the string representation of the color.
+   * @returns {string} The color string representation.
    */
   get colorStr() {
     return this.#colorStr;
   }
 
   /**
-   * Set colorStr
-   * @param {string} colorStr
+   * Sets the color's colorStr property.
+   * @param {string} colorStr - the new colorStr.
    * @returns {void}
-   * @throws {Error} if colorStr is not a string
+   * @throws {Error} if the new colorStr is not a string.
    */
   set colorStr(colorStr) {
     if (typeof colorStr !== "string") {
@@ -42,8 +42,8 @@ export class Color {
   }
 
   /**
-   * Returns the colorStr property
-   * @returns {string}
+   * Gets the string representation of the Color instance.
+   * @returns {string} A string representing the color.
    */
   toString() {
     return this.colorStr;

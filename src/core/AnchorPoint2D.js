@@ -1,81 +1,88 @@
 
-/**
- * This class is used to control the transform's anchor point
+/** 
+ * The class is used to control the transform's anchor point. 
  * @class AnchorPoint2D
  */
 export class AnchorPoint2D {
   /**
-   * @property {Object} ANCHOR_POINT_TYPES - the valid anchor point types.
+   * The valid anchor point types.
+   * @static
+   * @type {Object.<string, string>}
    */
   static ANCHOR_POINT_TYPES = {
-    topLeft: "topLeft",
-    topCenter: "topCenter",
-    topRight: "topRight",
-    midLeft: "midLeft",
-    midCenter: "midCenter",
-    midRight: "midRight",
-    bottomLeft: "bottomLeft",
-    bottomCenter: "bottomCenter",
-    bottomRight: "bottomRight",
+    TOP_LEFT: "TOP_LEFT",
+    TOP_CENTER: "TOP_CENTER",
+    TOP_RIGHT: "TOP_RIGHT",
+    MID_LEFT: "MID_LEFT",
+    MID_CENTER: "MID_CENTER",
+    MID_RIGHT: "MID_RIGHT",
+    BOTTOM_LEFT: "BOTTOM_LEFT",
+    BOTTOM_CENTER: "BOTTOM_CENTER",
+    BOTTOM_RIGHT: "BOTTOM_RIGHT",
   };
 
   /**
+   * The offsets defined for each anchor type.
    * @private
-   * @property {Object} #ANCHOR_OFFSETS - the offsets returned by type.
+   * @type {Object.<string, number[]>}
    */
   static #ANCHOR_OFFSETS = {
-    topLeft: [-1, -1],
-    topCenter: [0, -1],
-    topRight: [1, -1],
-    midLeft: [-1, 0],
-    midCenter: [0, 0],
-    midRight: [1, 0],
-    bottomLeft: [-1, 1],
-    bottomCenter: [0, 1],
-    bottomRight: [1, 1],
+    TOP_LEFT: [-1, -1],
+    TOP_CENTER: [0, -1],
+    TOP_RIGHT: [1, -1],
+    MID_LEFT: [-1, 0],
+    MID_CENTER: [0, 0],
+    MID_RIGHT: [1, 0],
+    BOTTOM_LEFT: [-1, 1],
+    BOTTOM_CENTER: [0, 1],
+    BOTTOM_RIGHT: [1, 1],
   };
 
   /**
+   * The current offset.
    * @private
-   * @property {Array} #offset - the current offest.
+   * @type {Array}
    */
   #offset;
 
   /**
+   * The current anchor type.
    * @private
-   * @property {string} #anchorType - the current anchor type.
+   * @type {string}
    */
   #anchorType;
 
   /**
-   * This class can be used to get elapsed and delta time (Remember to call clockObj.update at the beginning of the animation loop).
-   * @class
+   * Create a new AnchorPoint2D instance.
+   * @param {string} anchorType - The anchor type.
+   * @throws {Error} If the anchorType is not a valid type.
    */
   constructor(anchorType) {
     this.anchorType = anchorType;
   }
 
   /**
-   * Get the anchor type.
-   * @returns {string}
+   * Gets the current anchor type.
+   * @returns {string} A string representing the current anchor type.
    */
   get anchorType() {
     return this.#anchorType;
   }
 
   /**
-   * Get the offset.
-   * @returns {number}
+   * Gets the current offset.
+   * @returns {Array} An array containing the x and y values of the offset (e.g. offset[0]=x, offset[1]=y).
    */
   get offset() {
     return this.#offset;
   }
 
   /**
-   * Sets the anchor type
-   * @param {string} anchorType - The new type
+   * Sets the anchor type.
+   * Side-effects: updates the offset.
+   * @param {string} anchorType - The new anchor type.
    * @returns {void}
-   * @throws {Error} If the anchorType is not a valid type.
+   * @throws {Error} If the new anchor type is not a valid type.
    */
   set anchorType(anchorType) {
     if (!AnchorPoint2D.ANCHOR_POINT_TYPES[anchorType]) {

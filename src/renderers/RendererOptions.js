@@ -1,35 +1,36 @@
 import { Color } from "../colors/Color.js";
 import { Renderer } from "./Renderer.js";
 
-/**
- * The base RendererOptions class
+/** 
+ * The base RendererOptions class 
  * @class RendererOptions
  */
 export class RendererOptions {
   /**
-   * The default renderer options
+   * The default renderer options.
    * @static
    * @private
-   * @property {Object} DEFAULT_OPTIONS
+   * @type {Object}
    */
   static #DEFAULT_OPTIONS = {
-    devicePixelRatio: 1,
-    backgroundColor: "transparent",
+    DEVICE_PIXEL_RATIO: 1,
+    BACKGROUND_COLOR: "transparent",
   };
 
   /**
-   * The default renderer options
+   * A copy of the default renderer options.
    * @public
    * @static
    * @returns {Object}
    */
   static get DEFAULT_OPTIONS() {
-    return RendererOptions.#DEFAULT_OPTIONS;
+    return { ...RendererOptions.#DEFAULT_OPTIONS };
   }
 
   /**
+   * Cache object for computed values.
    * @private
-   * @property {Object} #cache - Cache for computed values
+   * @type {Object}
    */
   #cache = {
     halfWidth: 0,
@@ -37,53 +38,58 @@ export class RendererOptions {
   };
 
   /**
+   * The canvas' width.
    * @private
-   * @property {number} #width - The canvas width
+   * @type {number}
    */
   #width;
 
   /**
+   * The canvas' height.
    * @private
-   * @property {number} #height - The canvas height
+   * @type {number}
    */
   #height;
 
   /**
+   * The canvas' background color.
    * @private
-   * @property {string|Color} #backgroundColor - The background color
+   * @type {string|Color}
    */
   #backgroundColor;
 
   /**
+   * The device pixel ratio.
    * @private
-   * @property {number} #devicePixelRatio - The device pixel ratio
+   * @type {number}
    */
   #devicePixelRatio;
 
   /**
+   * The option's renderer instance.
    * @private
-   * @property {Renderer} #renderer - The renderer instance
+   * @type {Renderer}
    */
   #renderer;
 
   /**
+   * A flag to indicate if batch setting is in progress.
    * @private
-   * @property {Renderer} #isBatchSetting - A flag to indicate if batch setting is in progress
+   * @type {Renderer}
    */
   #isBatchSetting = false;
 
   /**
-   * Configuration options for the Renderer.
-   * @class
-   * @param {Object} [options] - Render configuration options.
-   * @param {number} [options.width] - Initial canvas width
-   * @param {number} [options.height] - Initial canvas height
-   * @param {number} [options.devicePixelRatio=RendererOptions.DEFAULT_OPTIONS] - Initial device pixel ratio
-   * @param {string|Color} [options.backgroundColor=RendererOptions.DEFAULT_OPTIONS] - Initial background color
-   * @throws {Error} If options.width is not a positive number
-   * @throws {Error} If options.height is not a positive number
-   * @throws {Error} If options.devicePixelRatio is not a number
-   * @throws {Error} If options.backgroundColor is not a string or Color
+   * Create a new RendererOptions instance.
+   * @param {Object} [options] - Renderer options.
+   * @param {number} [options.width] - The canvas width.
+   * @param {number} [options.height] - The canvas height.
+   * @param {number} [options.devicePixelRatio=RendererOptions.DEFAULT_OPTIONS.DEVICE_PIXEL_RATIO] - The device pixel ratio.
+   * @param {string|Color} [options.backgroundColor=RendererOptions.DEFAULT_OPTIONS.BACKGROUND_COLOR] - The canvas' background color.
+   * @throws {Error} If renderer is not of type Renderer.
+   * @throws {Error} If options.width or options.height is not a number.
+   * @throws {Error} If options.devicePixelRatio is not a number.
+   * @throws {Error} If options.backgroundColor is not a string or Color.
    */
   constructor(renderer, options = {}) {
     const { width, height, devicePixelRatio, backgroundColor } = options;
@@ -97,31 +103,35 @@ export class RendererOptions {
     this.width = width;
     this.height = height;
     this.devicePixelRatio =
-      devicePixelRatio ?? RendererOptions.DEFAULT_OPTIONS.devicePixelRatio;
+      devicePixelRatio ?? RendererOptions.DEFAULT_OPTIONS.DEVICE_PIXEL_RATIO;
     this.backgroundColor =
-      backgroundColor ?? RendererOptions.DEFAULT_OPTIONS.backgroundColor;
+      backgroundColor ?? RendererOptions.DEFAULT_OPTIONS.BACKGROUND_COLOR;
     this.#isBatchSetting = false;
   }
 
   /**
-   * Gets the cache object
-   * @returns {Object}
+   * Gets the cache object.
+   * @returns {Object} An object specifying computed half width and height.
    */
   get cache() {
     return this.#cache;
   }
 
   /**
-   * Gets the canvas width
-   * @returns {number}
+   * Gets the canvas' width.
+   * @returns {number} The canvas' width.
    */
   get width() {
     return this.#width;
   }
 
   /**
-   * Sets the canvas width
-   * @param {number} width - The new width
+   * Sets the canvas' width.
+   * Side-effects: recalculates half width and device pixel ratio.
+   * Tip: use set(width, height) for batch setting the canvas' dimensions.
+   * @param {number} width - The new width.
+   * @returns {void}
+   * @throws {Error} if the width is not a positive number.
    */
   set width(width) {
     if (typeof width !== "number" || width <= 0) {
@@ -137,16 +147,20 @@ export class RendererOptions {
   }
 
   /**
-   * Gets the canvas height
-   * @returns {number}
+   * Gets the canvas' height.
+   * @returns {number} The canvas' height.
    */
   get height() {
     return this.#height;
   }
 
   /**
-   * Sets the canvas height
-   * @param {number} height - The new height
+   * Sets the canvas' height.
+   * Side-effects: recalculates half height and device pixel ratio.
+   * Tip: use set(width, height) for batch setting the canvas' dimensions.
+   * @param {number} height - The new height.
+   * @returns {void}
+   * @throws {Error} if the height is not a positive number.
    */
   set height(height) {
     if (typeof height !== "number" || height <= 0) {
@@ -162,8 +176,8 @@ export class RendererOptions {
   }
 
   /**
-   * Gets the device pixel ratio
-   * @returns {number}
+   * Gets the device pixel ratio.
+   * @returns {number} The device pixel ratio.
    */
   get devicePixelRatio() {
     return this.#devicePixelRatio;
@@ -171,14 +185,16 @@ export class RendererOptions {
 
   /**
    * Sets the device pixel ratio
-   * @param {number} dpr - The new device pixel ratio
+   * @param {number} devicePixelRatio - The new device pixel ratio.
+   * @returns {void}
+   * @throws {Error} if the devicePixelRatio is not a positive number.
    */
-  set devicePixelRatio(dpr) {
-    if (typeof dpr !== "number" || dpr <= 0) {
+  set devicePixelRatio(devicePixelRatio) {
+    if (typeof devicePixelRatio !== "number" || devicePixelRatio <= 0) {
       throw new Error("devicePixelRatio must be a positive number");
     }
 
-    this.#devicePixelRatio = dpr;
+    this.#devicePixelRatio = devicePixelRatio;
 
     if (!this.#isBatchSetting) {
       this.#renderer.recalculateDevicePixelRatio();
@@ -186,16 +202,18 @@ export class RendererOptions {
   }
 
   /**
-   * Gets the background color
-   * @returns {string|Color}
+   * Gets the canvas' background color.
+   * @returns {string|Color} The canvas' background color.
    */
   get backgroundColor() {
     return this.#backgroundColor;
   }
 
   /**
-   * Sets the background color
-   * @param {string|Color} backgroundColor - The new background color
+   * Sets the canvas' background color
+   * @param {string|Color} backgroundColor - The new background color.
+   * @returns {void}
+   * @throws {Error} if the backgroundColor is not a Color or string.
    */
   set backgroundColor(backgroundColor) {
     if (
@@ -209,12 +227,12 @@ export class RendererOptions {
   }
 
   /**
-   * Sets the size of the canvas
-   * @param {number} width - The width of the canvas
-   * @param {number} height - The height of the canvas
+   * Sets the size of the canvas.
+   * @param {number} width - The new canvas width.
+   * @param {number} height - The new canvas height.
    * @returns {void}
-   * @throws {Error} If width is not a positive number
-   * @throws {Error} If height is not a positive number
+   * @throws {Error} If width is not a positive number.
+   * @throws {Error} If height is not a positive number.
    */
   setSize(width, height) {
     try {

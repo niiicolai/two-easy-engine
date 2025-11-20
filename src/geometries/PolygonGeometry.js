@@ -1,43 +1,50 @@
 import { Polygon2D } from "../math/Polygon2D.js";
 import { Geometry } from "./Geometry.js";
+
 // eslint-disable-next-line no-unused-vars
 import { Material } from "../materials/Material.js";
+
 // eslint-disable-next-line no-unused-vars
 import { Transform } from "../core/Transform.js";
 
+// eslint-disable-next-line no-unused-vars
+import { Vector2 } from "../math/Vector2.js";
+
 /**
- * This class provides a way to draw a custom polygon.
+ * The class provides a way to draw a custom polygon.
  * @class PolygonGeometry
  * @augments Geometry
  */
 export class PolygonGeometry extends Geometry {
 
   /**
-   * @property {number} #COORDINATES_SIZE - Defines the number of coordinates stored in the flat array (e.g. 1=x, 2=y).
+   * Defines the number of coordinates stored in the flat array (e.g. 1=x, 2=y).
+   * @type {number}
    */
   static COORDINATES_SIZE = 2;
 
   /**
+   * A flat array of vertices.
    * @private
-   * @property {Float32Array} #vertices - A flat array of vertices.
+   * @type {Float32Array}
    */
   #vertices;
 
   /**
+   * The polygon's centroid.
    * @private
-   * @property {Polygon2D} #shape - The polygon object is used to calculate center.
+   * @type {Vector2}
    */
-  #polygon2D;
+  #centroid;
 
   /**
-   * This class provides a way to draw a custom polygon.
-   * @class
-   * @param {Array.<Array<number>>|Float32Array} vertices - Array of 4-number arrays or a Float32Array describing vertices.
-   * @throws {Error} If vertices is not an array or Float32Array
-   * @throws {Error} If vertices as array has less than three 2-number arrays
-   * @throws {Error} If vertices as array has an array with less or more than two numbers
-   * @throws {Error} If the length of vertices as Float32Array is less than 6
-   * @throws {Error} If points has an array with less or more than two numbers
+   * Creates a new PolygonGeometry instance.
+   * @param {Array.<Array<number>>|Float32Array} vertices - The vertices.
+   * @throws {Error} If the vertices is not an array or Float32Array.
+   * @throws {Error} If the vertices as array has less than three 2-number arrays.
+   * @throws {Error} If the vertices as array has an array with less or more than two numbers.
+   * @throws {Error} If the length of the vertices as Float32Array is less than 6.
+   * @throws {Error} If the length of the vertices as Float32Array is odd.
    */
   constructor(vertices) {
     super();
@@ -45,16 +52,16 @@ export class PolygonGeometry extends Geometry {
   }
 
   /**
-   * Sets the polgyon's points
-   * Note: The setter recalculate the shape and its center.
-   * Note: The setter automatically adds the first point as the last if they are not equal to ensure the polygon close.
-   * @param {Array.<Array<number>>|Float32Array} vertices - The polgyon's points
+   * Sets the polgyon's vertices
+   * Side-effects: The setter recalculates the centroid and move the vertices toward the centroid.
+   * Side-effects: The setter automatically adds the first vertex as the last if they are not equal to ensure the polygon close.
+   * @param {Array.<Array<number>>|Float32Array} vertices - The vertices.
    * @returns {void}
-   * @throws {Error} If vertices is not an array or Float32Array
-   * @throws {Error} If vertices as array has less than three 2-number arrays
-   * @throws {Error} If vertices as array has an array with less or more than two numbers
-   * @throws {Error} If the length of vertices as Float32Array is less than 6
-   * @throws {Error} If points has an array with less or more than two numbers
+   * @throws {Error} If the vertices is not an array or Float32Array.
+   * @throws {Error} If the vertices as array has less than three 2-number arrays.
+   * @throws {Error} If the vertices as array has an array with less or more than two numbers.
+   * @throws {Error} If the length of the vertices as Float32Array is less than 6.
+   * @throws {Error} If the length of the vertices as Float32Array is odd.
    */
   set vertices(vertices) {
     const isArray = Array.isArray(vertices);
@@ -90,104 +97,29 @@ export class PolygonGeometry extends Geometry {
     }
     
     this.#addClosingVert();
-    this.#polygon2D = new Polygon2D(this.#vertices);
-    this.#polygon2D.calculateCentroid();
-    this.#correctPoints();
+    this.#centroid = Polygon2D.calculateCentroid(this.#vertices);
+    this.#correctVertices();
   }
 
   /**
-   * Gets the polygons's vertices
-   * @returns {Float32Array}
+   * Gets the polygons's vertices.
+   * @returns {Float32Array} The Float32Array instance.
    */
   get vertices() {
     return this.#vertices;
   }
 
   /**
-   * Convert the nested array to Float32Array and set the vertices.
-   * @returns {void}
-   */
-  #setVerticesByNestedArray(vertices) {
-    const expectedLength = vertices.length * PolygonGeometry.COORDINATES_SIZE;
-    if (!this.#vertices || this.#vertices.length !== expectedLength) {
-      this.#vertices = new Float32Array(expectedLength);
-    }
-
-    let offset = 0;
-    for (let i = 0; i < vertices.length; i++) {
-      const vert = vertices[i];
-
-      this.#vertices[offset] = vert[0];
-      this.#vertices[offset + 1] = vert[1];
-
-      offset += PolygonGeometry.COORDINATES_SIZE;
-    }
-  }
-
-  /**
-   * Ensure the first and last coordinate is the same values.
-   * The first and last point must be the same for the polygon to close.
-   * 
-   * @returns {void}
-   */
-  #addClosingVert() {
-    const oldVertices = this.#vertices;
-    const length = oldVertices.length;
-
-    const firstX = oldVertices[0];
-    const firstY = oldVertices[1];
-    const lastX = oldVertices[length - 2];
-    const lastY = oldVertices[length - 1];
-
-    if (firstX !== lastX || firstY !== lastY) {
-
-      this.#vertices = new Float32Array(length + 2);
-      this.#vertices.set(oldVertices, 0);
-      this.#vertices[length] = firstX;
-      this.#vertices[length + 1] = firstY;
-    }
-  }
-
-  /**
-   * Move the vertices toward the center to ensure the anchor point can be calculated correct.
-   * @throws {Error} If the #shape is undefined.
-   * @throws {Error} If the #shape.center is undefined.
-   */
-  #correctPoints() {
-    const polygon2D = this.#polygon2D;
-    if (!polygon2D) {
-      throw new Error(
-        "#polygon2 is undefined (It is created when using the points setter)."
-      );
-    }
-    const { centroid } = polygon2D;
-    if (!centroid) {
-      throw new Error(
-        "#polygon2.centroid is undefined. #polygon2.calculateCentroid() must be called before correcting points."
-      );
-    }
-
-    for (
-      let i = 0;
-      i < this.vertices.length;
-      i += PolygonGeometry.COORDINATES_SIZE
-    ) {
-      this.#vertices[i] -= centroid.x;
-      this.#vertices[i + 1] -= centroid.y;
-    }
-  }
-
-  /**
-   * Draws the circle onto the given canvas 2D context
-   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
-   * @param {Transform} transform - The transform to apply to the circle
-   * @param {Material} material - The material to use for rendering the circle
+   * Draws the circle onto the given canvas 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
+   * @param {Transform} transform - The transform.
+   * @param {Material} material - The material.
    * @returns {void}
    */
   drawContext2D(ctx, transform, material) {
     const { position, rotation, scale, localAnchorPoint } = transform;
     const { offset } = localAnchorPoint;
-    const { centroid } = this.#polygon2D;
+    const centroid = this.#centroid;
     const vertices = this.#vertices;
 
     const pivotX = centroid.x * scale.x * offset[0];
@@ -222,5 +154,74 @@ export class PolygonGeometry extends Geometry {
     }
 
     ctx.restore();
+  }
+
+  /**
+   * Convert the nested array to Float32Array and set the vertices.
+   * @param {Array.<Array<number>>} vertices - The vertices.
+   * @returns {void}
+   */
+  #setVerticesByNestedArray(vertices) {
+    const expectedLength = vertices.length * PolygonGeometry.COORDINATES_SIZE;
+    if (!this.#vertices || this.#vertices.length !== expectedLength) {
+      this.#vertices = new Float32Array(expectedLength);
+    }
+
+    let offset = 0;
+    for (let i = 0; i < vertices.length; i++) {
+      const vert = vertices[i];
+
+      this.#vertices[offset] = vert[0];
+      this.#vertices[offset + 1] = vert[1];
+
+      offset += PolygonGeometry.COORDINATES_SIZE;
+    }
+  }
+
+  /**
+   * Ensure the first and last vertex is the same values.
+   * Note: The first and last vertex must be the same to ensure the polygon to close.
+   * @returns {void}
+   */
+  #addClosingVert() {
+    const oldVertices = this.#vertices;
+    const length = oldVertices.length;
+
+    const firstX = oldVertices[0];
+    const firstY = oldVertices[1];
+    const lastX = oldVertices[length - 2];
+    const lastY = oldVertices[length - 1];
+
+    if (firstX !== lastX || firstY !== lastY) {
+
+      this.#vertices = new Float32Array(length + 2);
+      this.#vertices.set(oldVertices, 0);
+      this.#vertices[length] = firstX;
+      this.#vertices[length + 1] = firstY;
+    }
+  }
+
+  /**
+   * Move the vertices toward the centroid to ensure the anchor point can be calculated correct.
+   * @returns {void}
+   * @throws {Error} If the #centroid is undefined.
+   */
+  #correctVertices() {
+    const centroid = this.#centroid;
+
+    if (!centroid) {
+      throw new Error(
+        "#centroid is undefined. The centroid must be calculated before correcting vertices."
+      );
+    }
+
+    for (
+      let i = 0;
+      i < this.vertices.length;
+      i += PolygonGeometry.COORDINATES_SIZE
+    ) {
+      this.#vertices[i] -= centroid.x;
+      this.#vertices[i + 1] -= centroid.y;
+    }
   }
 }

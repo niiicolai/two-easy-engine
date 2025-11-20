@@ -1,49 +1,55 @@
 import { Transform } from "../core/Transform.js";
 
-/**
- * This class provides functionality to control the view of the scene, including position, rotation, and zoom.
- * @class Camera2D 
+/** 
+ * The class provides functionality to control the view of the scene, including position, rotation, and zoom. 
+ * @class Camera2D
  */
 export class Camera2D {
   /**
+   * The default zoom value.
+   * @static
+   * @type {number} 
+   */
+  static DEFAULT_ZOOM = 1;
+
+  /**
+   * The camera's zoom value.
    * @private
-   * @property {number} zoom - the camera's zoom
+   * @type {number}
    */
   #zoom;
 
   /**
+   * The camera's transform.
    * @private
-   * @property {Transform} transform - the camera's transform
+   * @type {Transform}
    */
   #transform;
 
   /**
-   * This class provides functionality to control the view of the scene, including position, rotation, and zoom.
-   * @class
-   * @param {Object} [options] - Camera configuration options.
-   * @param {number} [options.zoom=1] - Initial zoom level of the camera.
+   * Create a new Camera2D instance.
+   * @param {Object} [options] - The camera options.
+   * @param {number} [options.zoom=Camera2D.DEFAULT_ZOOM] - The zoom value.
    */
-  constructor(options = {
-    zoom: 1,
-  }) {
+  constructor(options = {}) {
     const { zoom } = options;
-    this.zoom = zoom;
+    this.zoom = zoom ?? Camera2D.DEFAULT_ZOOM;
     this.transform = new Transform();
   }
 
   /**
-   * Get the zoom
-   * @returns {number}
+   * Gets the zoom value.
+   * @returns {number} A number representing the camera's zoom.
    */
   get zoom() {
     return this.#zoom;
   }
 
   /**
-   * Set zoom
-   * @param {number} zoom - the new zoom
+   * Sets the camera's zoom value.
+   * @param {number} zoom - the new zoom value.
    * @returns {void}
-   * @throws {Error} if zoom is not a number
+   * @throws {Error} if the new zoom value is not a number.
    */
   set zoom(zoom) {
     if (typeof zoom !== "number") {
@@ -54,18 +60,18 @@ export class Camera2D {
   }
 
   /**
-   * Get the transform
-   * @returns {Transform}
+   * Gets the camera's transform.
+   * @returns {Transform} The Transform instance.
    */
   get transform() {
     return this.#transform;
   }
 
   /**
-   * Set transform
-   * @param {number} transform - the new transform
+   * Sets the camera's transform.
+   * @param {Transform} transform - the new transform.
    * @returns {void}
-   * @throws {Error} if transform is not a Transform
+   * @throws {Error} if the new transform is not a Transform.
    */
   set transform(transform) {
     if (!(transform instanceof Transform)) {

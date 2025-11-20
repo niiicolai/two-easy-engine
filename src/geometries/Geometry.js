@@ -4,24 +4,26 @@ import { Transform } from "../core/Transform.js";
 import { Material } from "../materials/Material.js";
 
 /**
- * This class serves as a base for all geometric shapes, providing a draw method.
+ * The class serves as a base for all geometric shapes, providing a draw method.
  * @class Geometry
+ * @abstract
  */
 export class Geometry {
   /**
-   * Check for any conflicts between the geometry and the provided material
-   * @param {Material} material - The material to check against
+   * Check for any conflicts between the geometry and the provided material.
+   * @param {Material} material - The material to check against.
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
   checkMaterialConflicts(material) {}
   
   /**
-   * Draws the mesh onto the given canvas 2D context
-   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
-   * @param {Transform} transform - The transform to apply to the rectangle
-   * @param {Material} material - The material to use for rendering the rectangle
+   * Draws the mesh onto the given canvas 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
+   * @param {Transform} transform - The transform.
+   * @param {Material} material - The material.
    * @returns {void}
+   * @abstract
    */
   // eslint-disable-next-line no-unused-vars
   drawContext2D(ctx, transform, material) {

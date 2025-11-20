@@ -1,10 +1,11 @@
 const warned = new Set();
 
 /**
- * A utility function for warning about deprecated functionality
- * @param {string} oldName
- * @param {string} newName
- * @param {string} version
+ * An utility function for warning about deprecated functionality.
+ * @param {string} oldName - The name of the deprecated function.
+ * @param {string} newName - The name of the function to use instead.
+ * @param {string} version - The version number where the function became deprecated.
+ * @returns {void}
  */
 export function deprecate(oldName, newName, version) {
   const key = `${oldName}:${newName}`;

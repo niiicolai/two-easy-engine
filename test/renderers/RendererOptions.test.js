@@ -47,10 +47,10 @@ describe("RendererOptions", () => {
     expect(options.width).toBe(data.width);
     expect(options.height).toBe(data.height);
     expect(options.devicePixelRatio).toBe(
-      data.devicePixelRatio || RendererOptions.DEFAULT_OPTIONS.devicePixelRatio
+      data.devicePixelRatio || RendererOptions.DEFAULT_OPTIONS.DEVICE_PIXEL_RATIO
     );
     expect(options.backgroundColor).toBe(
-      data.backgroundColor || RendererOptions.DEFAULT_OPTIONS.backgroundColor
+      data.backgroundColor || RendererOptions.DEFAULT_OPTIONS.BACKGROUND_COLOR
     );
     expect(options.cache.halfWidth).toBe(data.width / 2);
     expect(options.cache.halfHeight).toBe(data.height / 2);

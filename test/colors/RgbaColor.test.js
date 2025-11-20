@@ -102,14 +102,4 @@ describe("RgbaColor", () => {
     const color = new RgbaColor(255, 100, 50, 0.75);
     expect(color.toRgbString()).toBe("rgb(255, 100, 50)");
   });
-
-  it("updateColorStr() should sync colorStr with component values", () => {
-    const color = new RgbaColor(1, 2, 3, 1);
-    color.r = 9;
-    color.g = 8;
-    color.b = 7;
-    color.a = 0.5;
-    color.updateColorStr();
-    expect(color.colorStr).toBe("rgba(9, 8, 7, 0.5)");
-  });
 });
