@@ -1,5 +1,9 @@
 import { Geometry } from "./Geometry.js";
+
+// eslint-disable-next-line no-unused-vars
 import { Transform } from "../core/Transform.js";
+
+// eslint-disable-next-line no-unused-vars
 import { Material } from "../materials/Material.js";
 
 /**

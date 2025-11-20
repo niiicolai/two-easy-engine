@@ -20,8 +20,8 @@ export class Scene {
   #zIndexes = new Map();
 
   /**
-   * @returns {Object2D[]} An array of Object2D.
    * Gets a copy of scene's children.
+   * @returns {Object2D[]} An array of Object2D.
    */
   get children() {
     return [...this.#children];
