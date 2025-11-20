@@ -1,43 +1,45 @@
 import { Object2D } from "../core/Object2D.js";
 
-/**
- * This class manages a list of 2D objects and provides methods to add, remove, and render them.
+/** 
+ * The class manages a list of Object2Ds which should be rendered in the canvas. 
  * @class Scene
  */
 export class Scene {
   /**
+   * The scene's object2D array.
    * @private
-   * @property {Object2D[]} #children - The scene object2Ds
+   * @type {Object2D[]}
    */
   #children = [];
 
   /**
+   * Store object and z-index configuration.
    * @private
-   * @property {Map<string, number>} #zIndexes - Holds object and z-index values
+   * @type {Map<string, number>}
    */
   #zIndexes = new Map();
 
   /**
-   * Gets a copy of scene's children
-   * @returns {Object2D[]}
+   * Gets a copy of scene's children.
+   * @returns {Object2D[]} An array of Object2D.
    */
   get children() {
     return [...this.#children];
   }
 
   /**
-   * Gets a copy of the scene's uuid-zIndex map
-   * @returns {Map<string, number>}
+   * Gets a copy of the scene's object and z-index configuration.
+   * @returns {Map<string, number>} A map with object UUIDs and z-indexes.
    */
   get zIndexes() {
     return new Map(this.#zIndexes);
   }
 
   /**
-   * Adds one or more 2D objects to the scene
-   * @param {...Object2D} children - The 2D object(s) to add to the scene
+   * Adds one or more Object2Ds to the scene.
+   * @param {...Object2D} children - The Object2D(s) to add to the scene.
    * @returns {void}
-   * @throws {Error} If any child is not of type Object2D
+   * @throws {Error} If any child is not of type Object2D.
    */
   add(...children) {
     for (const child of children) {
@@ -53,10 +55,10 @@ export class Scene {
   }
 
   /**
-   * Removes one or more 2D objects from the scene
-   * @param {...Object2D} children - The 2D object(s) to remove from the scene
+   * Removes one or more Object2Ds from the scene.
+   * @param {...Object2D} children - The Object2D(s) to remove from the scene.
    * @returns {void}
-   * @throws {Error} If any child is not of type Object2D
+   * @throws {Error} If any child is not of type Object2D.
    */
   remove(...children) {
     for (const child of children) {
@@ -80,12 +82,12 @@ export class Scene {
   }
 
   /**
-   * Change one or more object2D's z-index value
-   * @param {number} zIndex - the new z-index value
-   * @param {...Object2D} children - the children 
+   * Change one or more Object2Ds z-index value.
+   * @param {number} zIndex - the new z-index value.
+   * @param {...Object2D} children - the children.
    * @returns {void}
    * @throws {Error} if zIndex is not a number.
-   * @throws {Error} If any child is not of type Object2D
+   * @throws {Error} If any child is not of type Object2D.
    */
   setZIndex(zIndex, ...children) {
     if (typeof zIndex !== "number") {
@@ -108,7 +110,7 @@ export class Scene {
   }
 
   /**
-   * Sorts the children based on their zIndex property
+   * Sorts the children based on their z-index property.
    * @private
    * @returns {void}
    */

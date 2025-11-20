@@ -1,32 +1,36 @@
 import { Geometry } from "./Geometry.js";
+
+// eslint-disable-next-line no-unused-vars
 import { Transform } from "../core/Transform.js";
+
+// eslint-disable-next-line no-unused-vars
 import { Material } from "../materials/Material.js";
 
 /**
- * This class provides a rectangle shape with width and height properties.
+ * The class provides a rectangle shape with width and height properties.
  * @class RectGeometry
  * @augments Geometry
  */
 export class RectGeometry extends Geometry {
   /**
+   * The rectangle's width.
    * @private
-   * @property {number} width - the rectangle's width
+   * @type {number}
    */
   #width;
 
   /**
+   * The rectangle's height.
    * @private
-   * @property {number} height - the rectangle's height
+   * @type {number}
    */
   #height;
 
   /**
-   * This class provides a rectangle shape with width and height properties.
-   * @class
-   * @param {number} width - The width of the rectangle (must be positive).
-   * @param {number} height - The height of the rectangle (must be positive).
-   * @throws {Error} If the width is not a positive number.
-   * @throws {Error} If the height is not a positive number.
+   * Create a new RectGeometry instance.
+   * @param {number} width - The width.
+   * @param {number} height - The height.
+   * @throws {Error} if the width or height is not a positive number.
    */
   constructor(width, height) {
     super();
@@ -35,18 +39,18 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * Get the width
-   * @returns {number}
+   * Gets the rectangle's width.
+   * @returns {number} A number representing the width.
    */
   get width() {
     return this.#width;
   }
 
   /**
-   * Set the width
-   * @param {number} width - the new width
+   * Sets the rectangle's width.
+   * @param {number} width - The new width.
    * @returns {void}
-   * @throws {Error} if width is not a positive number
+   * @throws {Error} if the new width is not a positive number.
    */
   set width(width) {
     if (typeof width !== "number" || width < 0) {
@@ -57,18 +61,18 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * Get the height
-   * @returns {number}
+   * Gets the rectangle's height.
+   * @returns {number} A number representing the height.
    */
   get height() {
     return this.#height;
   }
 
   /**
-   * Set the height
-   * @param {number} height - the new height
+   * Sets the rectangle's height.
+   * @param {number} height - The new height.
    * @returns {void}
-   * @throws {Error} if height is not a positive number
+   * @throws {Error} if the new height is not a positive number.
    */
   set height(height) {
     if (typeof height !== "number" || height < 0) {
@@ -79,19 +83,13 @@ export class RectGeometry extends Geometry {
   }
 
   /**
-   * Draws the rectangle onto the given canvas 2D context
-   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
-   * @param {Transform} transform - The transform to apply to the rectangle
-   * @param {Material} material - The material to use for rendering the rectangle
+   * Draws the rectangle onto the given canvas 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
+   * @param {Transform} transform - The transform.
+   * @param {Material} material - The material.
    * @returns {void}
    */
   drawContext2D(ctx, transform, material) {
-    if (!(material instanceof Material)) {
-      throw new Error("material must be of type Material");
-    }
-    if (!(transform instanceof Transform)) {
-      throw new Error("transform must be of type Transform");
-    }
     const { scale, position, rotation, localAnchorPoint } = transform;
     const offset = localAnchorPoint.offset;
     const width = this.width * scale.x;

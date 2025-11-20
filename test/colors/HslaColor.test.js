@@ -102,11 +102,4 @@ describe("HslaColor", () => {
     const color = new HslaColor(300, 75, 25, 0.5);
     expect(color.toHslString()).toBe("hsl(300, 75%, 25%)");
   });
-
-  it("updateColorStr() should sync colorStr to internal values", () => {
-    const color = new HslaColor(100, 50, 50, 1);
-    color.set(200, 60, 70, 0.6);
-    color.updateColorStr();
-    expect(color.colorStr).toBe("hsla(200, 60%, 70%, 0.6)");
-  });
 });

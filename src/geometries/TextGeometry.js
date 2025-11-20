@@ -1,19 +1,21 @@
 import { Geometry } from "./Geometry.js";
+
 // eslint-disable-next-line no-unused-vars
 import { Transform } from "../core/Transform.js";
+
 // eslint-disable-next-line no-unused-vars
 import { Material } from "../materials/Material.js";
 
 /**
- * This class provides functionality for creating and managing text-based geometry.
+ * The class provides functionality for creating and managing text-based geometry.
  * @class TextGeometry
  * @augments Geometry
  */
 export class TextGeometry extends Geometry {
   /**
-   * The valid text alignment types
+   * The valid text alignment types.
    * @static
-   * @property {string[]} [TEXT_ALIGNMENT_TYPES]
+   * @type {Object.<string, string>}
    */
   static TEXT_ALIGNMENT_TYPES = {
     start: "start",
@@ -24,9 +26,9 @@ export class TextGeometry extends Geometry {
   };
 
   /**
-   * The valid text direction types
+   * The valid text direction types.
    * @static
-   * @property {string[]} [TEXT_DIRECTION_TYPES]
+   * @type {Object.<string, string>}
    */
   static TEXT_DIRECTION_TYPES = {
     ltr: "ltr",
@@ -35,8 +37,9 @@ export class TextGeometry extends Geometry {
   };
 
   /**
+   * The valid text baseline types.
    * @static
-   * @property {string[]} [TEXT_BASELINE_TYPES] - The valid text baseline types
+   * @type {Object.<string, string>}
    */
   static TEXT_BASELINE_TYPES = {
     top: "top",
@@ -48,17 +51,12 @@ export class TextGeometry extends Geometry {
   };
 
   /**
-   * The default options for TextGeometry
+   * The default TextGeometry options.
    * @static
-   * @property {Object} [DEFAULT_OPTIONS]
-   * @property {number|null} [DEFAULT_OPTIONS.maxWidth=undefined] - The default maximum width for the text layout
-   * @property {string} [DEFAULT_OPTIONS.font="14px Arial"] - The default font family for the text content
-   * @property {"start"|"end"|"left"|"right"|"center"|null} [DEFAULT_OPTIONS.textAlign=null] - The default horizontal alignment for the text content
-   * @property {"top"|"hanging"|"middle"|"alphabetic"|"ideographic"|"bottom"|null} [DEFAULT_OPTIONS.textBaseline=null] - The default vertical alignment for the text content
-   * @property {"ltr"|"rtl"|"inherit"|null} [DEFAULT_OPTIONS.direction=null] - The default direction for the text content
+   * @type {{ font: string, textAlign: ("start"|"end"|"left"|"right"|"center"|null), textBaseline: ("top"|"hanging"|"middle"|"alphabetic"|"ideographic"|"bottom"|null), direction: ("ltr"|"rtl"|"inherit"|null) }}
    */
   static DEFAULT_OPTIONS = {
-    // maxWidth: null, Setting default maxWidth to null can cause issues
+    // maxWidth: null, Setting default maxWidth to null can cause issues.
     font: "14px Arial",
     textAlign: null,
     textBaseline: null,
@@ -66,45 +64,48 @@ export class TextGeometry extends Geometry {
   };
 
   /**
+   * The text to be displayed.
    * @private
-   * @property {number} #text - the text to be displayed
+   * @type {string}
    */
   #text;
 
   /**
+   * The options.
    * @private
-   * @property {number} #options - the options
+   * @type {Object}
    */
   #options;
 
   /**
+   * The text's width.
    * @private
-   * @property {number} width - the text's width
+   * @type {number|null}
    */
   #width;
 
   /**
+   * The text's height.
    * @private
-   * @property {number} height - the text's height
+   * @type {number|null}
    */
   #height;
 
   /**
-   * This class provides functionality for creating and managing text-based geometry.
-   * @class
-   * @param {string} text - The text content to generate geometry for.
+   * Create a new TextGeometry instance.
+   * @param {string} text - The text to be displayed.
    * @param {Object} [options] - The geometry options.
-   * @param {number|null} [options.maxWidth=null] - The maximum width allowed for the text layout.
-   * @param {string|null} [options.font="14px Arial"] - The font family used for the text content.
-   * @param {"start"|"end"|"left"|"right"|"center"|null} [options.textAlign=null] - The horizontal alignment of the text content.
-   * @param {"top"|"hanging"|"middle"|"alphabetic"|"ideographic"|"bottom"|null} [options.textBaseline=null] - The vertical alignment of the text content.
-   * @param {"ltr"|"rtl"|"inherit"|null} [options.direction=null] - The direction of the text content.
-   * @throws {Error} If text is not a string.
-   * @throws {Error} If maxWidth is not a positive number.
-   * @throws {Error} If font is not a string.
-   * @throws {Error} If textAlign is not a valid alignment keyword.
-   * @throws {Error} If textBaseline is not a valid baseline keyword.
-   * @throws {Error} If direction is not a valid direction keyword.
+   * @param {number|null|undefined} [options.maxWidth] - The maximum width allowed for the text layout.
+   * @param {string|null|undefined} [options.font=TextGeometry.DEFAULT_OPTIONS.font] - The font family used for the text content.
+   * @param {"start"|"end"|"left"|"right"|"center"|null|undefined} [options.textAlign=TextGeometry.DEFAULT_OPTIONS.textAlign] - The horizontal alignment of the text content.
+   * @param {"top"|"hanging"|"middle"|"alphabetic"|"ideographic"|"bottom"|null|undefined} [options.textBaseline=TextGeometry.DEFAULT_OPTIONS.textBaseline] - The vertical alignment of the text content.
+   * @param {"ltr"|"rtl"|"inherit"|null|undefined} [options.direction=TextGeometry.DEFAULT_OPTIONS.direction] - The direction of the text content.
+   * @throws {Error} If the text is not a string.
+   * @throws {Error} If the maxWidth is not a number, null, or undefined.
+   * @throws {Error} If the font is not a string, null, or undefined.
+   * @throws {Error} If the textAlign is not a valid alignment type, null, or undefined.
+   * @throws {Error} If the textBaseline is not a valid baseline type, null, or undefined.
+   * @throws {Error} If the direction is not a valid direction type, null, or undefined.
    */
   constructor(text, options = {}) {
     super();
@@ -113,18 +114,19 @@ export class TextGeometry extends Geometry {
   }
 
   /**
-   * Get the text
-   * @returns {string}
+   * Gets the geometry's text.
+   * @returns {string} A string representing the text to be displayed.
    */
   get text() {
     return this.#text;
   }
 
   /**
-   * Set the text
-   * @param {number} text - the new text
+   * Sets the geometry's text.
+   * Side-effects: changing text forces recalculation of text dimensions.
+   * @param {string} text - the new text to be displayed.
    * @returns {void}
-   * @throws {Error} if text is not a string
+   * @throws {Error} if the new text is not a string.
    */
   set text(text) {
     if (typeof text !== "string") {
@@ -132,13 +134,15 @@ export class TextGeometry extends Geometry {
     }
 
     this.#text = text;
+
     // If the text changes, the dimensions must be recalculated.
+    // Why not recalculate dimensions here? Because it require the 2D rendering context.
     this.#width = null;
     this.#height = null;
   }
 
   /**
-   * Get the options
+   * Gets the geometry's options.
    * @returns {Object}
    */
   get options() {
@@ -146,32 +150,42 @@ export class TextGeometry extends Geometry {
   }
 
   /**
-   * Set the options
-   * @param {Object} [options] - The geometry options.
-   * @param {number|null} [options.maxWidth=null] - The maximum width allowed for the text layout.
-   * @param {string|null} [options.font="14px Arial"] - The font family used for the text content.
-   * @param {"start"|"end"|"left"|"right"|"center"|null} [options.textAlign=null] - The horizontal alignment of the text content.
-   * @param {"top"|"hanging"|"middle"|"alphabetic"|"ideographic"|"bottom"|null} [options.textBaseline=null] - The vertical alignment of the text content.
-   * @param {"ltr"|"rtl"|"inherit"|null} [options.direction=null] - The direction of the text content.
-   * @throws {Error} If maxWidth is not a positive number.
-   * @throws {Error} If font is not a string.
-   * @throws {Error} If textAlign is not a valid alignment keyword.
-   * @throws {Error} If textBaseline is not a valid baseline keyword.
-   * @throws {Error} If direction is not a valid direction keyword.
+   * Sets the geometry's options.
+   * Side-effects: changing options forces recalculation of text dimensions.
+   * @param {Object} [options] - The new geometry options.
+   * @param {number|null|undefined} [options.maxWidth] - The new maximum width allowed for the text layout.
+   * @param {string|null|undefined} [options.font=TextGeometry.DEFAULT_OPTIONS.font] - The new font family used for the text content.
+   * @param {"start"|"end"|"left"|"right"|"center"|null|undefined} [options.textAlign=TextGeometry.DEFAULT_OPTIONS.textAlign] - The new horizontal alignment of the text content.
+   * @param {"top"|"hanging"|"middle"|"alphabetic"|"ideographic"|"bottom"|null|undefined} [options.textBaseline=TextGeometry.DEFAULT_OPTIONS.textBaseline] - The new vertical alignment of the text content.
+   * @param {"ltr"|"rtl"|"inherit"|null|undefined} [options.direction=TextGeometry.DEFAULT_OPTIONS.direction] - The new direction of the text content.
+   * @throws {Error} If the new maxWidth is not a number, null, or undefined.
+   * @throws {Error} If the new font is not a string, null, or undefined.
+   * @throws {Error} If the new textAlign is not a valid alignment type, null, or undefined.
+   * @throws {Error} If the new textBaseline is not a valid baseline type, null, or undefined.
+   * @throws {Error} If the new direction is not a valid direction type, null, or undefined.
    */
   set options(options) {
     const { maxWidth, textAlign, textBaseline, direction, font } = options;
 
-    if (maxWidth !== undefined && typeof maxWidth !== "number") {
+    if (
+      maxWidth !== undefined &&
+      maxWidth !== null &&
+      typeof maxWidth !== "number"
+    ) {
       throw new Error("maxWidth must be a number or undefined");
     }
 
-    if (font && typeof font !== "string") {
+    if (
+      font !== undefined && 
+      font !== null && 
+      typeof font !== "string"
+    ) {
       throw new Error("font must be a string or null");
     }
 
     if (
-      textAlign &&
+      textAlign !== undefined &&
+      textAlign !== null &&
       typeof textAlign !== "string" &&
       !TextGeometry.TEXT_ALIGNMENT_TYPES[textAlign]
     ) {
@@ -183,7 +197,8 @@ export class TextGeometry extends Geometry {
     }
 
     if (
-      textBaseline &&
+      textBaseline !== undefined &&
+      textBaseline !== null &&
       typeof textBaseline !== "string" &&
       !TextGeometry.TEXT_BASELINE_TYPES[textBaseline]
     ) {
@@ -195,7 +210,8 @@ export class TextGeometry extends Geometry {
     }
 
     if (
-      direction &&
+      direction !== undefined &&
+      direction !== null &&
       typeof direction !== "string" &&
       !TextGeometry.TEXT_DIRECTION_TYPES[direction]
     ) {
@@ -210,25 +226,18 @@ export class TextGeometry extends Geometry {
       ...TextGeometry.DEFAULT_OPTIONS,
       ...options,
     };
+
+    // If the options changes, the dimensions must be recalculated.
+    // Why not recalculate dimensions here? Because it require the 2D rendering context.
+    this.#width = null;
+    this.#height = null;
   }
 
   /**
-   * Recalculate width and height based on text.
-   * @returns {void}
-   */
-  #recalculateDimensions(ctx) {
-    const { width, actualBoundingBoxAscent, actualBoundingBoxDescent } =
-      ctx.measureText(this.#text);
-
-    this.#width = width;
-    this.#height = actualBoundingBoxAscent + actualBoundingBoxDescent;
-  }
-
-  /**
-   * Draws the text onto the given canvas 2D context
-   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
-   * @param {Transform} transform - The transform to apply to the text
-   * @param {Material} material - The material to use for rendering the text
+   * Draws the text onto the given canvas 2D context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
+   * @param {Transform} transform - The transform.
+   * @param {Material} material - The material.
    * @returns {void}
    */
   drawContext2D(ctx, transform, material) {
@@ -248,6 +257,8 @@ export class TextGeometry extends Geometry {
       ctx.direction = direction;
     }
 
+    // Important: width and height must be calculated after applying
+    // the font, etc. to get the correct dimensions.
     if (!this.#width || !this.#height) {
       this.#recalculateDimensions(ctx);
     }
@@ -272,5 +283,19 @@ export class TextGeometry extends Geometry {
     }
 
     ctx.restore();
+  }
+
+  /**
+   * Recalculates the width and height based on the text to be displayed and the canvas 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
+   * @returns {void}
+   * @private
+   */
+  #recalculateDimensions(ctx) {
+    const { width, actualBoundingBoxAscent, actualBoundingBoxDescent } =
+      ctx.measureText(this.#text);
+
+    this.#width = width;
+    this.#height = actualBoundingBoxAscent + actualBoundingBoxDescent;
   }
 }

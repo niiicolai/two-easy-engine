@@ -1,50 +1,55 @@
 import { Vector2 } from "../math/Vector2.js";
 import { AnchorPoint2D } from "./AnchorPoint2D.js";
 
-/**
- * This class encapsulates the transformation properties of an object in 2D space.
+/** 
+ * The class encapsulates the transformation properties of an object in 2D space. 
  * @class Transform
  */
 export class Transform {
   /**
+   * The transform's position.
    * @private
-   * @property {Vector2} #position - the transform's position
+   * @type {Vector2}
    */
   #position;
 
   /**
+   * The transform's rotation in radians.
    * @private
-   * @property {number} #rotation - the transform's rotation
+   * @type {number} 
    */
   #rotation;
 
   /**
+   * The transform's scale.
    * @private
-   * @property {Vector2} #scale - the transform's scale
+   * @type {Vector2}
    */
   #scale;
 
   /**
+   * The transform's local anchor point.
    * @private
-   * @property {Vector2} #localAnchorPoint - the transform's localAnchorPoint
+   * @type {Vector2} 
    */
   #localAnchorPoint;
 
   /**
-   * This class encapsulates the transformation properties of an object in 2D space.
-   * @class
-   * @param {Vector2} position - The position of the transform.
-   * @param {number} rotation - The rotation of the transform.
-   * @param {Vector2} scale - The scale of the transform.
+   * Create a new Transform instance.
+   * @param {Vector2} [position=new Vector2()] - The position.
+   * @param {number} [rotation=0] - The rotation in radians.
+   * @param {Vector2} [scale=new Vector2(1, 1)] - The scale.
+   * @param {AnchorPoint2D} [localAnchorPoint=new AnchorPoint2D(AnchorPoint2D.ANCHOR_POINT_TYPES.MID_CENTER)] - The local anchor point.
    * @throws {Error} If the position is not a Vector2.
    * @throws {Error} If the rotation is not a number.
    * @throws {Error} If the scale is not a Vector2.
+   * @throws {Error} If the local anchor point is not an AnchorPoint2D.
    */
   constructor(
     position = new Vector2(),
     rotation = 0,
     scale = new Vector2(1, 1),
-    localAnchorPoint = new AnchorPoint2D(AnchorPoint2D.ANCHOR_POINT_TYPES.midCenter)
+    localAnchorPoint = new AnchorPoint2D(AnchorPoint2D.ANCHOR_POINT_TYPES.MID_CENTER)
   ) {
     this.position = position;
     this.rotation = rotation;
@@ -53,18 +58,18 @@ export class Transform {
   }
 
   /**
-   * Get transform's localAnchorPoint
-   * @returns {AnchorPoint2D}
+   * Gets the transform's local anchor point.
+   * @returns {AnchorPoint2D} The AnchorPoint2D instance.
    */
   get localAnchorPoint() {
     return this.#localAnchorPoint;
   }
 
   /**
-   * Set the localAnchorPoint
-   * @param {AnchorPoint2D} localAnchorPoint - the new localAnchorPoint
+   * Sets the transform's local anchor point.
+   * @param {AnchorPoint2D} localAnchorPoint - the new local anchor point.
    * @returns {void}
-   * @throws {Error} if localAnchorPoint is not a AnchorPoint2D
+   * @throws {Error} if the new local anchor point is not an AnchorPoint2D.
    */
   set localAnchorPoint(localAnchorPoint) {
     if (!(localAnchorPoint instanceof AnchorPoint2D)) {
@@ -75,18 +80,18 @@ export class Transform {
   }
 
   /**
-   * Get transform position
-   * @returns {Vector2}
+   * Gets the transform's position.
+   * @returns {Vector2} The Vector2 instance.
    */
   get position() {
     return this.#position;
   }
 
   /**
-   * Set the position
-   * @param {Vector2} position - the position
+   * Sets the transform's position.
+   * @param {Vector2} position - the new position.
    * @returns {void}
-   * @throws {Error} if position is not a Vector2
+   * @throws {Error} if the new position is not a Vector2.
    */
   set position(position) {
     if (!(position instanceof Vector2)) {
@@ -97,18 +102,18 @@ export class Transform {
   }
 
   /**
-   * Get the rotation
-   * @returns {number}
+   * Gets the transform's rotation.
+   * @returns {number} A number representing the rotation angle in radians.
    */
   get rotation() {
     return this.#rotation;
   }
 
   /**
-   * Set the rotation
-   * @param {number} rotation - the rotation
+   * Sets the transform's rotation.
+   * @param {number} rotation - the new rotation in radians.
    * @returns {void}
-   * @throws {Error} if rotation is not a number
+   * @throws {Error} if the new rotation is not a number.
    */
   set rotation(rotation) {
     if (typeof rotation !== "number") {
@@ -119,18 +124,18 @@ export class Transform {
   }
 
   /**
-   * Get the scale
-   * @returns {Vector2}
+   * Gets the transform's scale.
+   * @returns {Vector2} The Vector2 instance.
    */
   get scale() {
     return this.#scale;
   }
 
   /**
-   * Set the scale
-   * @param {Vector2} scale - the scale
+   * Sets the transform's scale.
+   * @param {Vector2} scale - the new scale.
    * @returns {void}
-   * @throws {Error} if scale is not a Vector2
+   * @throws {Error} if the new scale is not a Vector2.
    */
   set scale(scale) {
     if (!(scale instanceof Vector2)) {

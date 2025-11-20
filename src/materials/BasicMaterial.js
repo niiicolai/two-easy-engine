@@ -3,70 +3,75 @@ import { Texture2D } from "../core/Texture2D.js";
 import { Color } from "../colors/Color.js";
 
 /**
- * A basic material that implements fillStyle, strokeStyle and lineWidth
+ * A basic material that implements fillStyle, strokeStyle, texture2D and lineWidth.
  * @class BasicMaterial
  * @augments Material
  */
 export class BasicMaterial extends Material {
   /**
-   * The default line width
+   * The default line width.
    * @private
-   * @property {number} #DEFAULT_LINE_WIDTH
+   * @type {number}
    */
   static #DEFAULT_LINE_WIDTH = 1;
 
   /**
-   * The default line width.
+   * Gets the default line width.
    * @public
    * @static
-   * @returns {number}
+   * @returns {number} A number representing the default line width.
    */
   static get DEFAULT_LINE_WIDTH() {
     return BasicMaterial.#DEFAULT_LINE_WIDTH;
   }
 
   /**
+   * The material's fillStyle.
    * @private
-   * @property {Color} #fillStyle - The material's fillStyle
+   * @type {Color|null|undefined}
    */
   #fillStyle;
 
   /**
+   * The material's strokeStyle.
    * @private
-   * @property {Color} #strokeStyle - The material's strokeStyle
+   * @type {Color|null|undefined}
    */
   #strokeStyle;
 
   /**
+   * The material's lineWidth.
    * @private
-   * @property {number} #lineWidth - The material's lineWidth
+   * @type {number}
    */
   #lineWidth;
 
   /**
+   * The material's texture2D.
    * @private
-   * @property {Texture2D} #texture2D - The material's texture2D
+   * @type {Texture2D|null|undefined}
    */
   #texture2D;
 
   /**
+   * A flag indicating if batch setting is active.
    * @private
-   * @property {boolean} #isBatchSetting - Flag indicating if batch setting is active
+   * @type {boolean}
    */
   #isBatchSetting = false;
 
   /**
-   * A basic material that implements fillStyle, strokeStyle and lineWidth
-   * @class
-   * @param {Object} [options] - Material configuration options.
-   * @param {Color|null} [options.fillStyle=null] - Initial fill style
-   * @param {Color|null} [options.strokeStyle=null] - Initial stroke style
-   * @param {number|null} [options.lineWidth=BasicMaterial.DEFAULT_LINE_WIDTH] - Initial line width
-   * @param {Texture2D|null} [options.texture2D=null] - Image texture
-   * @throws {Error} If the fillStyle is not null or a string.
-   * @throws {Error} If the strokeStyle is not null or a string.
-   * @throws {Error} If the lineWidth is not null or a number.
-   * @throws {Error} If the texture2D is not null or a Texture2D.
+   * Create a new BasicMaterial instance.
+   * @param {Object} [options] - The material's options.
+   * @param {Color|null|undefined} [options.fillStyle] - The fillStyle.
+   * @param {Color|null|undefined} [options.strokeStyle] - The strokeStyle.
+   * @param {number|null|undefined} [options.lineWidth=BasicMaterial.DEFAULT_LINE_WIDTH] - The lineWidth.
+   * @param {Texture2D|null|undefined} [options.texture2D] - The Texture2D.
+   * @throws {Error} If the options.fillStyle is not null, undefined or a Color.
+   * @throws {Error} If the options.strokeStyle is not null, undefined or a Color.
+   * @throws {Error} If the options.lineWidth is not null, undefined or a positive number.
+   * @throws {Error} If the options.texture2D is not null, undefined or a Texture2D.
+   * @throws {Error} If both options.fillStyle and options.strokeStyle are null or undefined.
    */
   constructor(options = {}) {
     super();
@@ -84,22 +89,26 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * Gets the material's fillStyle
-   * @returns {Color}
+   * Gets the material's fillStyle.
+   * @returns {Color|null|undefined} The Color instance, null or undefined.
    */
   get fillStyle() {
     return this.#fillStyle;
   }
 
   /**
-   * Sets the material's fillStyle
-   * @param {Color|null} fillStyle - The new fillStyle to set
+   * Sets the material's fillStyle.
+   * @param {Color|null|undefined} fillStyle - The new fillStyle to assign.
    * @returns {void}
-   * @throws {Error} If fillStyle is not of type Color
-   * @throws {Error} If both fillStyle and strokeStyle are null
+   * @throws {Error} If the new fillStyle is not of type Color, null or undefined.
+   * @throws {Error} If the new fillStyle is null or undefined and the material's strokeStyle also is null or undefined.
    */
   set fillStyle(fillStyle) {
-    if (fillStyle && !(fillStyle instanceof Color)) {
+    if (
+      fillStyle !== null &&
+      fillStyle !== undefined &&
+      !(fillStyle instanceof Color)
+    ) {
       throw new Error("fillStyle must be a Color or null");
     }
     if (!this.#isBatchSetting && !fillStyle && !this.#strokeStyle) {
@@ -110,22 +119,26 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * Gets the material's strokeStyle
-   * @returns {Color|null|undefined}
+   * Gets the material's strokeStyle.
+   * @returns {Color|null|undefined} The Color instance, null or undefined.
    */
   get strokeStyle() {
     return this.#strokeStyle;
   }
 
   /**
-   * Sets the material's strokeStyle
-   * @param {Color|null} strokeStyle - The new strokeStyle to set
+   * Sets the material's strokeStyle.
+   * @param {Color|null|undefined} strokeStyle - The new strokeStyle to assign.
    * @returns {void}
-   * @throws {Error} If strokeStyle is not of type Color
-   * @throws {Error} If both fillStyle and strokeStyle are null
+   * @throws {Error} If the new strokeStyle is not of type Color, null or undefined.
+   * @throws {Error} If the new strokeStyle is null or undefined and the material's fillStyle also is null or undefined.
    */
   set strokeStyle(strokeStyle) {
-    if (strokeStyle && !(strokeStyle instanceof Color)) {
+    if (
+      strokeStyle !== null &&
+      strokeStyle !== undefined &&
+      !(strokeStyle instanceof Color)
+    ) {
       throw new Error("strokeStyle must be a Color or null");
     }
     if (!this.#isBatchSetting && !strokeStyle && !this.#fillStyle) {
@@ -136,24 +149,24 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * Gets the material's lineWidth
-   * @returns {number|null|undefined}
+   * Gets the material's lineWidth.
+   * @returns {number} A number representing the lineWidth.
    */
   get lineWidth() {
     return this.#lineWidth;
   }
 
   /**
-   * Sets the material's lineWidth
-   * @param {number|null} lineWidth - The new lineWidth to set (defaults to BasicMaterial.DEFAULT_LINE_WIDTH if null)
+   * Sets the material's lineWidth (defaults to BasicMaterial.DEFAULT_LINE_WIDTH).
+   * @param {number|null|undefined} lineWidth - The new lineWidth to assign.
    * @returns {void}
-   * @throws {Error} If lineWidth is not null or a number.
+   * @throws {Error} If the new lineWidth is not null, undefined, or a positive number.
    */
   set lineWidth(lineWidth) {
     if (
       lineWidth !== null &&
       lineWidth !== undefined &&
-      (typeof lineWidth !== "number" || lineWidth <= 0)
+      typeof lineWidth !== "number" || lineWidth <= 0
     ) {
       throw new Error("lineWidth must be a positive number or null");
     }
@@ -162,21 +175,25 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * Gets the material's texture2D 
-   * @returns {Texture2D|null|undefined}
+   * Gets the material's texture2D.
+   * @returns {Texture2D|null|undefined} The Texture2D instance, null or undefined.
    */
   get texture2D() {
     return this.#texture2D;
   }
 
   /**
-   * Sets the material's texture2D
-   * @param {Texture2D|null} texture2D - The new texture2D to set
+   * Sets the material's texture2D.
+   * @param {Texture2D|null|undefined} texture2D - The new texture2D to assign.
    * @returns {void}
-   * @throws {Error} If texture2D is not null or of type Texture2D
+   * @throws {Error} If texture2D is not null, undefined or a Texture2D.
    */
   set texture2D(texture2D) {
-    if (texture2D && !(texture2D instanceof Texture2D)) {
+    if (
+      texture2D !== null &&
+      texture2D !== undefined &&
+      !(texture2D instanceof Texture2D)
+    ) {
       throw new Error("texture2D must be of type Texture2D or null");
     }
 
@@ -184,8 +201,8 @@ export class BasicMaterial extends Material {
   }
 
   /**
-   * Apply the material configuration to the given canvas 2D context.
-   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
+   * Apply the material to the given canvas 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
    * @returns {void}
    */
   applyToContext2D(ctx) {

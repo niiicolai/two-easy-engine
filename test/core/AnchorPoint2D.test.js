@@ -3,49 +3,49 @@ import { AnchorPoint2D } from "../../src/core/AnchorPoint2D.js";
 
 describe("AnchorPoint2D", () => {
   it("should create a AnchorPoint2D instance", () => {
-    const anchorType = AnchorPoint2D.ANCHOR_POINT_TYPES.midCenter;
+    const anchorType = AnchorPoint2D.ANCHOR_POINT_TYPES.MID_CENTER;
     const anchorPoint = new AnchorPoint2D(anchorType);
     expect(anchorPoint.anchorType).toBe(anchorType);
     expect(anchorPoint.offset).toStrictEqual([0, 0]);
   });
 
   it("should should return the correct offset", () => {
-    const anchorType = AnchorPoint2D.ANCHOR_POINT_TYPES.midCenter;
+    const anchorType = AnchorPoint2D.ANCHOR_POINT_TYPES.MID_CENTER;
     const anchorPoint = new AnchorPoint2D(anchorType);
 
     expect(anchorPoint.anchorType).toBe(anchorType);
     expect(anchorPoint.offset).toStrictEqual([0, 0]);
     
-    anchorPoint.anchorType = "topLeft";
-    expect(anchorPoint.anchorType).toBe("topLeft");
+    anchorPoint.anchorType = "TOP_LEFT";
+    expect(anchorPoint.anchorType).toBe("TOP_LEFT");
     expect(anchorPoint.offset).toStrictEqual([-1, -1]);
 
-    anchorPoint.anchorType = "topCenter";
-    expect(anchorPoint.anchorType).toBe("topCenter");
+    anchorPoint.anchorType = "TOP_CENTER";
+    expect(anchorPoint.anchorType).toBe("TOP_CENTER");
     expect(anchorPoint.offset).toStrictEqual([0, -1]);
 
-    anchorPoint.anchorType = "topRight";
-    expect(anchorPoint.anchorType).toBe("topRight");
+    anchorPoint.anchorType = "TOP_RIGHT";
+    expect(anchorPoint.anchorType).toBe("TOP_RIGHT");
     expect(anchorPoint.offset).toStrictEqual([1, -1]);
 
-    anchorPoint.anchorType = "midLeft";
-    expect(anchorPoint.anchorType).toBe("midLeft");
+    anchorPoint.anchorType = "MID_LEFT";
+    expect(anchorPoint.anchorType).toBe("MID_LEFT");
     expect(anchorPoint.offset).toStrictEqual([-1, 0]);
 
-    anchorPoint.anchorType = "midRight";
-    expect(anchorPoint.anchorType).toBe("midRight");
+    anchorPoint.anchorType = "MID_RIGHT";
+    expect(anchorPoint.anchorType).toBe("MID_RIGHT");
     expect(anchorPoint.offset).toStrictEqual([1, 0]);
 
-    anchorPoint.anchorType = "bottomLeft";
-    expect(anchorPoint.anchorType).toBe("bottomLeft");
+    anchorPoint.anchorType = "BOTTOM_LEFT";
+    expect(anchorPoint.anchorType).toBe("BOTTOM_LEFT");
     expect(anchorPoint.offset).toStrictEqual([-1, 1]);
 
-    anchorPoint.anchorType = "bottomCenter";
-    expect(anchorPoint.anchorType).toBe("bottomCenter");
+    anchorPoint.anchorType = "BOTTOM_CENTER";
+    expect(anchorPoint.anchorType).toBe("BOTTOM_CENTER");
     expect(anchorPoint.offset).toStrictEqual([0, 1]);
 
-    anchorPoint.anchorType = "bottomRight";
-    expect(anchorPoint.anchorType).toBe("bottomRight");
+    anchorPoint.anchorType = "BOTTOM_RIGHT";
+    expect(anchorPoint.anchorType).toBe("BOTTOM_RIGHT");
     expect(anchorPoint.offset).toStrictEqual([1, 1]);
   });
 });

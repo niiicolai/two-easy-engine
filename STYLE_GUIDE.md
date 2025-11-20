@@ -59,9 +59,11 @@ Constants should be clearly identified, named, and grouped for easy reference.
 
 We use **JSDoc** for automatic documentation and TypeScript declaration file generation (`.d.ts`).
 
-* **JSDoc Requirement:** All public classes, methods, properties, and significant functions **must** be documented using **JSDoc** blocks.
+* **JSDoc Requirements:** 
+* All public classes, methods, properties, and significant functions **must** be documented using **JSDoc** blocks.
+* Classes must contain the `@class` tag to ensure `jsdoc2md` is able to convert the comments to markdown files.
 
-* **TypeScript Dependency Management:** To ensure that the generated TypeScript declaration file includes all necessary type references, any class mentioned within a JSDoc block (e.g., using `@extends {AnotherClass}` or `@type {AnotherClass}`) **must** be explicitly imported, even if it is not used directly in the executable JavaScript code.
+* **TypeScript Dependency Management:** To ensure that the generated TypeScript declaration file includes all necessary type references, any class mentioned within a JSDoc block (e.g., using `@augments {AnotherClass}` or `@type {AnotherClass}`) **must** be explicitly imported, even if it is not used directly in the executable JavaScript code.
 
     ```javascript
     // Example: MyClass needs to reference AnotherClass in its JSDoc
@@ -69,7 +71,7 @@ We use **JSDoc** for automatic documentation and TypeScript declaration file gen
     import { AnotherClass } from './AnotherClass.js'; 
     
     /**
-     * @extends {AnotherClass}
+     * @augments AnotherClass
      */
     class MyClass {
       // ...

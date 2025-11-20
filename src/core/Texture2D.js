@@ -1,14 +1,14 @@
 import { deprecate } from "../utilities/deprecate.js";
 
-/**
- * Represents a pattern used for drawing an image on geometries.
+/** 
+ * Represents a pattern used for drawing geometries with an image texture. 
  * @class Texture2D
  */
 export class Texture2D {
   /**
-   * The valid image repeat types
+   * The valid image repeat types.
    * @static
-   * @property {string[]} [IMAGE_REPEAT_TYPES]
+   * @type {Object.<string, string>}
    */
   static IMAGE_REPEAT_TYPES = {
     repeat: "repeat",
@@ -18,14 +18,14 @@ export class Texture2D {
   };
 
   /**
-   * The default image repeat option
-   * @property {string} DEFAULT_IMAGE_REPEAT
+   * The default image repeat option.
+   * @type {string}
    */
   static DEFAULT_IMAGE_REPEAT = "repeat";
 
   /**
-   * The default image offset
-   * @property {Object} DEFAULT_IMAGE_OFFSET 
+   * The default image offset.
+   * @type {Object}
    */
   static DEFAULT_IMAGE_OFFSET = {
     x: 0,
@@ -33,74 +33,92 @@ export class Texture2D {
   };
 
   /**
+   * The default image dimensions.
+   * @type {Object}
+   */
+  static DEFAULT_IMAGE_DIMENSIONS = {
+    width: 1,
+    height: 1,
+  };
+
+  /**
+   * The current image repeat option.
    * @private
-   * @property {string} #imageRepeat - the image repeat option
+   * @type {string}
    */
   #imageRepeat;
 
   /**
+   * The current image offset's x value.
    * @private
-   * @property {number} #imageOffsetX - the image offset's x coordinate
+   * @type {number}
    */
   #imageOffsetX;
 
   /**
+   * The current image offset's y value.
    * @private
-   * @property {number} #imageOffsetY - the image offset's y coordinate
+   * @type {number}
    */
   #imageOffsetY;
 
   /**
+   * The current width.
    * @private
-   * @property {number} #imageWidth - the image's width
+   * @type {number}
    */
   #imageWidth;
 
   /**
+   * The current height.
    * @private
-   * @property {number} #imageOffsetY - the image's height'
+   * @type {number}
    */
   #imageHeight;
 
   /**
+   * The current image element.
    * @private
-   * @property {HTMLImageElement} #image - the image element
+   * @type {HTMLImageElement}
    */
   #image;
 
   /**
+   * The current pattern.
    * @private
-   * @property {Object} #pattern - the pattern
+   * @type {CanvasPattern|null|undefined}
    */
   #pattern;
 
   /**
+   * The current pattern's transform.
    * @private
-   * @property {DOMMatrix} #patternTransform - the pattern's transform
+   * @type {DOMMatrix|undefined}
    */
   #patternTransform;
 
   /**
+   * A flag determining if batch setting is in progress.
    * @private
-   * @property {boolean} #isBatchSetting - a flag to determine if batch setting is in progress
+   * @type {boolean}
    */
   #isBatchSetting;
 
   /**
-   * Represents a pattern used for drawing an image on geometries.
-   * @class
-   * @param {Object} [options] - Texture2D configuration options.
-   * @param {HTMLImageElement|string} [options.image] - Image or image URL for texture
-   * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"} [options.imageRepeat="repeat"] - Pattern repeat mode
-   * @param {number} [options.imageOffsetX=0] - image offset x
-   * @param {number} [options.imageOffsetY=0] - image offset y
-   * @param {number|null} [options.imageWidth=null] - image width
-   * @param {number|null} [options.imageHeight=null] - image height
-   * @throws {Error} If the image is not a string or HTMLImageElement.
-   * @throws {Error} If the imageRepeat is not a string or valid type.
-   * @throws {Error} If the imageOffsetX is not a number.
-   * @throws {Error} If the imageWidth is not null or a number.
-   * @throws {Error} If the imageHeight is not null or a number.
+   * Create a new Texture2D instance.
+   * @param {Object} options - The Texture2D's options.
+   * @param {HTMLImageElement|string} options.image - A HTML image element or a string representing the image source.
+   * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"|null|undefined} [options.imageRepeat=Texture2D.DEFAULT_IMAGE_REPEAT] - The pattern repeat mode.
+   * @param {number|null|undefined} [options.imageOffsetX=Texture2D.DEFAULT_IMAGE_OFFSET.x] - The image offset x.
+   * @param {number|null|undefined} [options.imageOffsetY=Texture2D.DEFAULT_IMAGE_OFFSET.y] - the image offset y.
+   * @param {number|null|undefined} [options.imageWidth=Texture2D.DEFAULT_IMAGE_DIMENSIONS.width] - The image width.
+   * @param {number|null|undefined} [options.imageHeight=Texture2D.DEFAULT_IMAGE_DIMENSIONS.height] - The image height.
+   * @throws {Error} If the options.image is not a string or HTMLImageElement.
+   * @throws {Error} If the options.imageRepeat is not null, undefined, a string or a valid type.
+   * @throws {Error} If the options.imageOffsetX is not null, undefined or a number.
+   * @throws {Error} If the options.imageOffsetY is not null, undefined or a number.
+   * @throws {Error} If the options.imageWidth is not null, undefined or a positive number.
+   * @throws {Error} If the options.imageHeight is not null, undefined or a positive number.
    */
   constructor(options = {}) {
     const {
@@ -123,22 +141,23 @@ export class Texture2D {
   }
 
   /**
-   * Get the imageRepeat option
-   * @returns {string}
+   * Gets the texture2D's image repeat option.
+   * @returns {string} A string representing the image repeat option.
    */
   get imageRepeat() {
     return this.#imageRepeat;
   }
 
   /**
-   * Sets the object's imageRepeat
-   * @param {string} imageRepeat - The new imageRepeat
+   * Sets the texture2D's image repeat option (Defaults to Texture2D.DEFAULT_IMAGE_REPEAT).
+   * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"|null|undefined} imageRepeat - The new image repeat option.
    * @returns {void}
-   * @throws {Error} If the imageRepeat is not a string.
+   * @throws {Error} If the new image repeat option is not null, undefined, a string or a valid type.
    */
   set imageRepeat(imageRepeat) {
     if (
-      imageRepeat &&
+      imageRepeat !== null &&
+      imageRepeat !== undefined &&
       typeof imageRepeat !== "string" &&
       !Texture2D.IMAGE_REPEAT_TYPES[imageRepeat]
     ) {
@@ -153,18 +172,20 @@ export class Texture2D {
   }
 
   /**
-   * Get the imageOffsetX
-   * @returns {number}
+   * Gets the texture2D's image offet's x value.
+   * @returns {number} A number representing the x value.
    */
   get imageOffsetX() {
     return this.#imageOffsetX;
   }
 
   /**
-   * Sets the image offset's x coordinate
-   * @param {number} imageOffsetX - The offset's new x coordinate
+   * Sets the texture2D's image offset's x value (Defaults to Texture2D.DEFAULT_IMAGE_OFFSET.x).
+   * Side-effects: rebuild the pattern's transform.
+   * Tip: use setImageOffset(imageOffsetX, imageOffsetY) for batch setting the image offset.
+   * @param {number|null|undefined} imageOffsetX - The new x value.
    * @returns {void}
-   * @throws {Error} If the imageOffsetX is not a number.
+   * @throws {Error} If the new x value is null undefined or not a number.
    */
   set imageOffsetX(imageOffsetX) {
     if (
@@ -180,18 +201,20 @@ export class Texture2D {
   }
 
   /**
-   * Get the imageOffsetY
-   * @returns {number}
+   * Gets the texture2D's image offet's y value.
+   * @returns {number} A number representing the y value.
    */
   get imageOffsetY() {
     return this.#imageOffsetY;
   }
 
   /**
-   * Sets the image offset's y coordinate
-   * @param {number} imageOffsetY - The offset's new y coordinate
+   * Sets the texture2D's image offset's y value (Defaults to Texture2D.DEFAULT_IMAGE_OFFSET.y).
+   * Side-effects: rebuild the pattern's transform.
+   * Tip: use setImageOffset(imageOffsetX, imageOffsetY) for batch setting the image offset.
+   * @param {number|null|undefined} imageOffsetY - The new y value.
    * @returns {void}
-   * @throws {Error} If the imageOffsetY is not a number.
+   * @throws {Error} If the new y value is null undefined or not a number.
    */
   set imageOffsetY(imageOffsetY) {
     if (
@@ -207,7 +230,7 @@ export class Texture2D {
   }
 
   /**
-   * Get the imageWidth
+   * Gets the texture2D's image width.
    * @returns {number}
    */
   get imageWidth() {
@@ -215,10 +238,12 @@ export class Texture2D {
   }
 
   /**
-   * Sets the image width
-   * @param {number} imageWidth - The new width
+   * Sets the texture2D's image width (Defaults to Texture2D.DEFAULT_IMAGE_DIMENSIONS.width).
+   * Side-effects: rebuild the pattern's transform.
+   * Tip: use setImageSize(imageWidth, imageHeight) for batch setting the image dimensions.
+   * @param {number|null|undefined} imageWidth - The new width.
    * @returns {void}
-   * @throws {Error} If the imageWidth is not a number.
+   * @throws {Error} If the new width is not null, undefined or a positive number.
    */
   set imageWidth(imageWidth) {
     if (
@@ -233,12 +258,12 @@ export class Texture2D {
       throw new Error("imageWidth must be a positive number or null");
     }
 
-    this.#imageWidth = imageWidth;
+    this.#imageWidth = imageWidth ?? Texture2D.DEFAULT_IMAGE_DIMENSIONS.width;
     if (!this.#isBatchSetting) this.#rebuildTransform();
   }
 
   /**
-   * Get the imageHeight
+   * Gets the texture2D's image height.
    * @returns {number}
    */
   get imageHeight() {
@@ -246,10 +271,12 @@ export class Texture2D {
   }
 
   /**
-   * Sets the image height
-   * @param {number} imageHeight - The new height
+   * Sets the texture2D's image height (Defaults to Texture2D.DEFAULT_IMAGE_DIMENSIONS.height).
+   * Side-effects: rebuild the pattern's transform.
+   * Tip: use setImageSize(imageWidth, imageHeight) for batch setting the image dimensions.
+   * @param {number|null|undefined} imageHeight - The new height.
    * @returns {void}
-   * @throws {Error} If the imageHeight is not a number.
+   * @throws {Error} If the new height is not null, undefined or a positive number.
    */
   set imageHeight(imageHeight) {
     if (
@@ -264,12 +291,12 @@ export class Texture2D {
       throw new Error("imageHeight must be a positive number or null");
     }
 
-    this.#imageHeight = imageHeight;
+    this.#imageHeight = imageHeight ?? Texture2D.DEFAULT_IMAGE_DIMENSIONS.height;
     if (!this.#isBatchSetting) this.#rebuildTransform();
   }
 
   /**
-   * Get the image
+   * Gets the texture2D's image element.
    * @returns {HTMLImageElement}
    */
   get image() {
@@ -277,45 +304,115 @@ export class Texture2D {
   }
 
   /**
-   * Sets the image
-   * @param {HTMLImageElement|string} image - The new image
+   * Sets the texture2D's image element.
+   * @param {HTMLImageElement|string} image - A new HTML image element or a string representing the new image source.
    * @returns {void}
-   * @throws {Error} If the image is not a string or HTMLImageElement.
+   * @throws {Error} If the new image is not a string or HTMLImageElement.
    */
   set image(image) {
     if (typeof image !== "string" && !(image instanceof HTMLImageElement)) {
       throw new Error("image must be a string or HTMLImageElement");
     }
 
-    // Reset pattern
+    // Reset pattern to force the createPattern method
+    // to create a new CanvasPattern instance.
     this.#pattern = null;
 
     if (typeof image === "string") {
+      // Create a new HTML image element
+      // and load the image by the given source.
       const img = new Image();
       img.src = image;
-      img.onload = () => {
-        this.#image = img;
-      };
+      img.onload = () => this.#image = img;
+
       this.#image = img;
     } else if (image instanceof HTMLImageElement) {
+      // Simply use the HTML image element.
       this.#image = image;
     }
   }
 
   /**
-   * Position and scale the pattern's transform
-   * @private
+   * Create and returns a canvas pattern if the internal image property is complete, otherwise it returns null.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
+   * @returns {CanvasPattern|null} The CanvasPattern instance or null.
+   */
+  createPattern(ctx) {
+    if (!this.#image || !this.#image.complete) return null;
+    if (this.#pattern) return this.#pattern;
+
+    this.#pattern = ctx.createPattern(this.#image, this.#imageRepeat);
+    this.#rebuildTransform();
+
+    return this.#pattern;
+  }
+
+  /**
+   * Sets the texture2D's image offset (Defaults to Texture2D.DEFAULT_IMAGE_OFFSET).
+   * @param {number|null|undefined} [imageOffsetX] - The new image offset's x value.
+   * @param {number|null|undefined} [imageOffsetY] - the new image offset's y value.
    * @returns {void}
+   * @throws {Error} If the new image offset's x value is not null, undefined or a number.
+   * @throws {Error} If the new image offset's y value is not null, undefined or a number.
+   */
+  setImageOffset(imageOffsetX, imageOffsetY) {
+    try {
+      this.#isBatchSetting = true;
+      this.imageOffsetX = imageOffsetX;
+      this.imageOffsetY = imageOffsetY;
+      this.#rebuildTransform();
+    } finally {
+      this.#isBatchSetting = false;
+    }
+  }
+
+  /**
+   * Sets the texture2D's image width and height (Defaults to Texture2D.DEFAULT_IMAGE_DIMENSIONS).
+   * @param {number|null|undefined} [imageWidth] - The new image width.
+   * @param {number|null|undefined} [imageHeight] - The new image height.
+   * @returns {void}
+   * @throws {Error} If the new image width is not null, undefined or a positive number.
+   * @throws {Error} If the new image height is not null, undefined or a positive number.
+   */
+  setImageSize(imageWidth, imageHeight) {
+    try {
+      this.#isBatchSetting = true;
+      this.imageWidth = imageWidth;
+      this.imageHeight = imageHeight;
+      this.#rebuildTransform();
+    } finally {
+      this.#isBatchSetting = false;
+    }
+  }
+
+  /**
+   * Sets the texture2D's image element.
+   * @param {HTMLImageElement|string} image - A new HTML image element or a string representing the new image source.
+   * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"|null|undefined} [repeat="repeat"] - The new image repeat option.
+   * @returns {void}
+   * @throws {Error} If the new image is not a string or HTMLImageElement.
+   * @throws {Error} If the new image repeat option is not a valid type.
+   * @deprecated since version 0.1.0 - Use the image setter and imageRepeat setter instead.
+   */
+  setImage(image, repeat = "repeat") {
+    deprecate("setImage()", "image setter", "0.1.0");
+
+    try {
+      this.#isBatchSetting = true;
+      this.imageRepeat = repeat;
+      this.image = image;
+    } finally {
+      this.#isBatchSetting = false;
+    }
+  }
+
+  /**
+   * Position and scale the canvas pattern's transform if the canvas pattern property is not undefined.
+   * @returns {void}
+   * @private
    */
   #rebuildTransform() {
     if (!this.#pattern) return;
-
-    const scaleX = this.#imageWidth
-      ? this.#imageWidth / this.#image.naturalWidth
-      : 1;
-    const scaleY = this.#imageHeight
-      ? this.#imageHeight / this.#image.naturalHeight
-      : 1;
 
     // Reuse existing matrix or create once if it doesn't exist
     this.#patternTransform ??= new DOMMatrix();
@@ -333,81 +430,11 @@ export class Texture2D {
       this.#imageOffsetX,
       this.#imageOffsetY
     );
-    this.#patternTransform.scaleSelf(scaleX, scaleY);
+    this.#patternTransform.scaleSelf(
+      this.#imageWidth / this.#image.naturalWidth, 
+      this.#imageHeight / this.#image.naturalHeight
+    );
 
     this.#pattern.setTransform(this.#patternTransform);
-  }
-
-  /**
-   * Create the pattern based on the image and configuration (used by materials)
-   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw onto
-   * @returns {CanvasPattern|null}
-   */
-  createPattern(ctx) {
-    if (!this.#image || !this.#image.complete) return null;
-    if (this.#pattern) return this.#pattern;
-
-    this.#pattern = ctx.createPattern(this.#image, this.#imageRepeat);
-    this.#rebuildTransform();
-
-    return this.#pattern;
-  }
-
-  /**
-   * Set the image's offset
-   * @param {number} imageOffsetX - image offset x
-   * @param {number} imageOffsetY - image offset y
-   * @returns {void}
-   * @throws {Error} If the imageOffsetX is not a number.
-   * @throws {Error} If the imageOffsetY is not a number.
-   */
-  setImageOffset(imageOffsetX, imageOffsetY) {
-    try {
-      this.#isBatchSetting = true;
-      this.imageOffsetX = imageOffsetX;
-      this.imageOffsetY = imageOffsetY;
-      this.#rebuildTransform();
-    } finally {
-      this.#isBatchSetting = false;
-    }
-  }
-
-  /**
-   * Set the image's width and height
-   * @param {number|null} [imageWidth] - image width
-   * @param {number|null} [imageHeight] - image height
-   * @returns {void}
-   * @throws {Error} If the imageWidth is not null or a number.
-   * @throws {Error} If the imageHeight is not null or a number.
-   */
-  setImageSize(imageWidth, imageHeight) {
-    try {
-      this.#isBatchSetting = true;
-      this.imageWidth = imageWidth;
-      this.imageHeight = imageHeight;
-      this.#rebuildTransform();
-    } finally {
-      this.#isBatchSetting = false;
-    }
-  }
-
-  /**
-   * Loads and sets an image.
-   * @param {HTMLImageElement|string} image - An <img> element or a URL string
-   * @param {"repeat"|"repeat-x"|"repeat-y"|"no-repeat"} [repeat="repeat"] - Pattern repeat mode
-   * @returns {void}
-   * @throws {Error} If the image is not a string or HTMLImageElement.
-   * @deprecated since version 0.1.0 - Use the image setter instead
-   */
-  setImage(image, repeat = "repeat") {
-    deprecate("setImage()", "image setter", "0.1.0");
-
-    try {
-      this.#isBatchSetting = true;
-      this.imageRepeat = repeat;
-      this.image = image;
-    } finally {
-      this.#isBatchSetting = false;
-    }
   }
 }
