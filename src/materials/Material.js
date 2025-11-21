@@ -1,12 +1,14 @@
-/**
- * This serve as the base class for all materials.
+/** 
+ * The class serves as the base class for all materials. 
  * @class Material
+ * @abstract 
  */
 export class Material {
   /**
-   * Apply the material configuration to the given canvas 2D context.
-   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
+   * Apply the material to the given canvas 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
    * @returns {void}
+   * @abstract
    */
   // eslint-disable-next-line no-unused-vars
   applyToContext2D(ctx) {

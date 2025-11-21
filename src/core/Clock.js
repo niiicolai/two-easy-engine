@@ -1,74 +1,77 @@
 import { deprecate } from "../utilities/deprecate.js";
 
 /**
- * This class can be used to get elapsed and delta time (Remember to call clockObj.update at the beginning of the animation loop).
+ * The class can be used to get elapsed- and delta time.
+ * Note: the update method must be called at the beginning of the animation loop.
  * @class Clock
  */
 export class Clock {
   /**
+   * When the object was created.
    * @private
-   * @property {number} #startTime - when the object was created.
+   * @type {number}
    */
   #startTime;
 
   /**
+   * The last frame time.
    * @private
-   * @property {number} #oldTime - last frame time.
+   * @type {number}
    */
   #oldTime;
 
   /**
+   * The time since instantiation.
    * @private
-   * @property {number} #elapsedTime - time since instantiation.
+   * @type {number}
    */
   #elapsedTime;
 
   /**
+   * The time since last frame.
    * @private
-   * @property {number} #deltaTime - time since last frame
+   * @type {number}
    */
   #deltaTime;
 
   /**
+   * When the update method was last called.
    * @private
-   * @property {number} #lastFrame - when the update method was last called.
+   * @type {number}
    */
   #lastFrame;
 
-  /**
-   * This class can be used to get elapsed and delta time (Remember to call clockObj.update at the beginning of the animation loop).
-   * @class
-   */
+  /** Create a new Clock instance. */
   constructor() {
     this.restart();
   }
 
   /**
-   * Get the time the object was instantiated.
-   * @returns {number}
+   * Gets the time the object was instantiated or last restarted.
+   * @returns {number} A number representing the time.
    */
   get startTime() {
     return this.#startTime;
   }
 
   /**
-   * Get time since instantiation.
-   * @returns {number}
+   * Gets the time since instantiation or last restart.
+   * @returns {number} A number representing the time.
    */
   get elapsedTime() {
     return this.#elapsedTime;
   }
 
   /**
-   * Get time since last frame.
-   * @returns {number}
+   * Gets the time since last frame.
+   * @returns {number} A number representing the time.
    */
   get deltaTime() {
     return this.#deltaTime;
   }
 
   /**
-   * Restart the start time
+   * Restarts the clock time.
    * @returns {void}
    */
   restart() {
@@ -80,7 +83,8 @@ export class Clock {
   }
 
   /**
-   * Update the internal time values (call at the beginning of your animation loop)
+   * Updates the internal time values.
+   * Note: the method must be called at the beginning of the animation loop.
    * @returns {void}
    */
   update() {
@@ -95,9 +99,9 @@ export class Clock {
   }
 
   /**
-   * Get the time elapsed (in seconds) since instantiation
-   * @returns {number}
-   * @deprecated since version 0.1.0 - Use the elapsedTime getter instead
+   * Gets the time elapsed since instantiation or last restart.
+   * @returns {number} A number representing the time.
+   * @deprecated since version 0.1.0 - Use the elapsedTime getter instead.
    */
   getElapsedTime() {
     deprecate("getElapsedTime()", "elapsedTime getter", "0.1.0");
@@ -106,9 +110,9 @@ export class Clock {
   }
 
   /**
-   * Returns the time elapsed (in seconds) since the last frame or call.
-   * @returns {number}
-   * @deprecated since version 0.1.0 - Use the deltaTime getter instead
+   * Gets the time elapsed since the last update call.
+   * @returns {number} A number representing the time.
+   * @deprecated since version 0.1.0 - Use the deltaTime getter instead.
    */
   getDeltaTime() {
     deprecate("getDeltaTime()", "deltaTime getter", "0.1.0");

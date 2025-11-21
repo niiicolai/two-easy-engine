@@ -1,66 +1,30 @@
 import { Vector2 } from "./Vector2";
 
-/**
- * This class is responsible for polygon calculations.
+/** 
+ * The polygon class implementing centroid calculations. 
  * @class Polygon2D
  */
 export class Polygon2D {
   /**
-   * @property {number} #COORDINATES_SIZE - Defines the number of coordinates stored in the flat array (e.g. 1=x, 2=y).
+   * The number of components (coordinates) in the vector (e.g., 2 for x and y).
+   * @static
+   * @type {number} 
    */
   static COORDINATES_SIZE = 2;
 
   /**
-   * @property {Vector2} #centroid - Defines the polygon's centeroid
+   * Calculate the centroid of the provided vertices.
+   * @param {Float32Array} vertices - the polygon's vertices.
+   * @returns {Vector2} A new Vector2 instance representing the centroid.
+   * @throws {Error} If the vertices is not a Float32Array.
+   * @throws {Error} If the polygon has a calculated area of zero (division by zero).
+   * @static
    */
-  #centroid;
+  static calculateCentroid(vertices) {
+    if (!(vertices instanceof Float32Array)) {
+      throw new Error("vertices must be a Float32Array");
+    }
 
-  /**
-   * @private
-   * @property {Float32Array} #vertices - A flat array of vertices.
-   */
-  #vertices;
-
-  /**
-   * This class is responsible for polygon calculations.
-   * @class Polygon2D
-   * @param {Float32Array} vertices - the polygon's vertices
-   */
-  constructor(vertices) {
-    this.#centroid = new Vector2();
-    this.vertices = vertices;
-  }
-
-  /**
-   * Get the centroid
-   * @returns {Vector2}
-   */
-  get centroid() {
-    return this.#centroid;
-  }
-
-  /**
-   * Get the vertices
-   * @returns {Float32Array}
-   */
-  get vertices() {
-    return this.#vertices;
-  }
-
-  /**
-   * Set the vertices
-   * @returns {Float32Array}
-   */
-  set vertices(vertices) {
-    this.#vertices = vertices;
-  }
-
-  /**
-   * Calculate the centroid of a simple polygon
-   * @returns {void}
-   */
-  calculateCentroid() {
-    const vertices = this.#vertices;
     const verticesCount = vertices.length;
     let area = 0;
     let cx = 0;
@@ -82,9 +46,13 @@ export class Polygon2D {
 
     area /= 2;
 
+    if (area === 0) { 
+        throw new Error("Cannot calculate centroid for a zero-area polygon (e.g., a line segment).");
+    }
+
     cx = cx / (6 * area);
     cy = cy / (6 * area);
 
-    this.#centroid.set(cx, cy);
+    return new Vector2(cx, cy);
   }
 }

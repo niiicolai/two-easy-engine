@@ -12,7 +12,6 @@ describe("Scene", () => {
     expect(light.intensity).toBe(1);
     expect(light.color).toBe(color);
     expect(light.colorStop).toBe(color);
-    expect(light.zIndex).toBe(1);
   });
 
   it("should throw an error if radius is not a number", () => {

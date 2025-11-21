@@ -15,7 +15,7 @@ describe("Transform", () => {
 
   it("should set midCenter as the default anchor type", () => {
     const transform = new Transform();
-    expect(transform.localAnchorPoint.anchorType).toBe(AnchorPoint2D.ANCHOR_POINT_TYPES.midCenter);
+    expect(transform.localAnchorPoint.anchorType).toBe(AnchorPoint2D.ANCHOR_POINT_TYPES.MID_CENTER);
   });
 
   it("should accept custom position, rotation, and scale", () => {

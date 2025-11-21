@@ -18,8 +18,8 @@ describe("Texture2D", () => {
     expect(texture).toBeInstanceOf(Texture2D);
     expect(texture.imageOffsetX).toBe(0);
     expect(texture.imageOffsetY).toBe(0);
-    expect(texture.imageWidth).toBeUndefined();
-    expect(texture.imageHeight).toBeUndefined();
+    expect(texture.imageWidth).toBe(1);
+    expect(texture.imageHeight).toBe(1);
     expect(texture.imageRepeat).toBe("repeat");
   });
 

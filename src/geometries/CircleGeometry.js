@@ -5,22 +5,22 @@ import { Material } from "../materials/Material.js";
 import { Transform } from "../core/Transform.js";
 
 /**
- * This class provides a circle shape with a radius property.
+ * The class provides a circle shape with a radius property.
  * @class CircleGeometry
  * @augments Geometry
  */
 export class CircleGeometry extends Geometry {
   /**
+   * The circle's radius.
    * @private
-   * @property {number} radius - the circle's radius
+   * @type {number}
    */
   #radius;
 
   /**
-   * This class provides a circle shape with a radius property.
-   * @class
-   * @param {number} radius - The radius of the circle (must be positive).
-   * @throws {Error} If the radius is not a positive number.
+   * Create a new CircleGeometry instance.
+   * @param {number} radius - The radius.
+   * @throws {Error} if the radius is not a positive number.
    */
   constructor(radius) {
     super();
@@ -28,18 +28,18 @@ export class CircleGeometry extends Geometry {
   }
 
   /**
-   * Get the radius
-   * @returns {number}
+   * Gets the circle's radius.
+   * @returns {number} A number representing the radius.
    */
   get radius() {
     return this.#radius;
   }
 
   /**
-   * Set the radius
-   * @param {number} radius - the new radius
+   * Sets the circle's radius.
+   * @param {number} radius - the new radius.
    * @returns {void}
-   * @throws {Error} if radius is not a positive number
+   * @throws {Error} if the new radius is not a positive number.
    */
   set radius(radius) {
     if (typeof radius !== "number" || radius < 0) {
@@ -50,10 +50,10 @@ export class CircleGeometry extends Geometry {
   }
 
   /**
-   * Draws the circle onto the given canvas 2D context
-   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
-   * @param {Transform} transform - The transform to apply to the circle
-   * @param {Material} material - The material to use for rendering the circle
+   * Draws the circle onto the given canvas 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
+   * @param {Transform} transform - The transform.
+   * @param {Material} material - The material.
    * @returns {void}
    */
   drawContext2D(ctx, transform, material) {

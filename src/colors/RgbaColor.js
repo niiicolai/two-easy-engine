@@ -2,50 +2,53 @@ import { Color } from "./Color.js";
 import { deprecate } from "../utilities/deprecate.js";
 
 /**
- * A color defined by red, green, blue, and alpha
+ * A color defined by red, green, blue, and alpha.
  * @class RgbaColor
  * @augments Color
  */
 export class RgbaColor extends Color {
   /**
+   * The red value (0-255).
    * @private
-   * @property {number} r - red (0-255)
+   * @type {number}
    */
   #r;
 
   /**
+   * The green value (0-255).
    * @private
-   * @property {number} g - green (0-255)
+   * @type {number}
    */
   #g;
 
   /**
+   * The blue value (0-255).
    * @private
-   * @property {number} b - blue (0-255)
+   * @type {number}
    */
   #b;
 
   /**
+   * The alpha value (0-1).
    * @private
-   * @property {number} a - alpha (0-1)
+   * @type {number}
    */
   #a;
 
   /**
+   * A flag to indicate if batch setting is in progress.
    * @private
-   * @property {Renderer} #isBatchSetting - A flag to indicate if batch setting is in progress
+   * @type {boolean}
    */
   #isBatchSetting = false;
 
   /**
-   * A color defined by red, green, blue, and alpha
-   * @class
-   * @param {number} r - red (0-255)
-   * @param {number} g - green (0-255)
-   * @param {number} b - blue (0-255)
-   * @param {number} a - alpha (0-1)
-   * @throws {Error} if r, g, or b is not between 0 and 255
-   * @throws {Error} if a is not between 0 and 1
+   * Create a new RgbaColor instance.
+   * @param {number} r - The red value (0-255).
+   * @param {number} g - The green value (0-255).
+   * @param {number} b - The blue value (0-255).
+   * @param {number} a - The alpha value (0-1).
+   * @throws {Error} if red, green, blue or alpha values are not numbers or out of range.
    */
   constructor(r, g, b, a = 1) {
     super(`rgba(${r}, ${g}, ${b}, ${a})`);
@@ -53,18 +56,20 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * Get red (0-255)
-   * @returns {number}
+   * Gets the color's red value (0-255).
+   * @returns {number} A number representing the red value.
    */
   get r() {
     return this.#r;
   }
 
   /**
-   * Set red
-   * @param {number} r - red (0-255)
+   * Sets the color's red value.
+   * Side-effects: updates the colorStr property.
+   * Tip: use set(r, g, b, a) for batch setting the color values.
+   * @param {number} r - The new red value (0-255).
    * @returns {void}
-   * @throws {Error} if r is not between 0 and 255
+   * @throws {Error} if the new red value is not a number or out of range.
    */
   set r(r) {
     if (typeof r !== "number" || r < 0 || r > 255) {
@@ -73,22 +78,24 @@ export class RgbaColor extends Color {
 
     this.#r = r;
 
-    if (!this.#isBatchSetting) this.updateColorStr();
+    if (!this.#isBatchSetting) this.#updateColorStr();
   }
 
   /**
-   * Get green (0-255)
-   * @returns {number}
+   * Gets the color's green value (0-255).
+   * @returns {number} A number representing the green value.
    */
   get g() {
     return this.#g;
   }
 
   /**
-   * Set green
-   * @param {number} g - green (0-255)
+   * Sets the color's green value.
+   * Side-effects: updates the colorStr property.
+   * Tip: use set(r, g, b, a) for batch setting the color values.
+   * @param {number} g - The new green value (0-255).
    * @returns {void}
-   * @throws {Error} if g is not between 0 and 255
+   * @throws {Error} if the new green value is not a number or out of range.
    */
   set g(g) {
     if (typeof g !== "number" || g < 0 || g > 255) {
@@ -97,22 +104,24 @@ export class RgbaColor extends Color {
 
     this.#g = g;
 
-    if (!this.#isBatchSetting) this.updateColorStr();
+    if (!this.#isBatchSetting) this.#updateColorStr();
   }
 
   /**
-   * Get blue (0-255)
-   * @returns {number}
+   * Gets the color's blue value (0-255).
+   * @returns {number} A number representing the blue value.
    */
   get b() {
     return this.#b;
   }
 
   /**
-   * Set blue
-   * @param {number} b - blue (0-255)
+   * Sets the color's blue value.
+   * Side-effects: updates the colorStr property.
+   * Tip: use set(r, g, b, a) for batch setting the color values.
+   * @param {number} b - The new blue value (0-255).
    * @returns {void}
-   * @throws {Error} if b is not between 0 and 255
+   * @throws {Error} if the new blue value is not a number or out of range.
    */
   set b(b) {
     if (typeof b !== "number" || b < 0 || b > 255) {
@@ -121,22 +130,24 @@ export class RgbaColor extends Color {
 
     this.#b = b;
 
-    if (!this.#isBatchSetting) this.updateColorStr();
+    if (!this.#isBatchSetting) this.#updateColorStr();
   }
 
   /**
-   * Get alpha (0-1)
-   * @returns {number}
+   * Gets the color's alpha value (0-1).
+   * @returns {number} A number representing the alpha value.
    */
   get a() {
     return this.#a;
   }
 
   /**
-   * Set alpha
-   * @param {number} a - alpha (0-1)
+   * Sets the color's alpha value.
+   * Side-effects: updates the colorStr property.
+   * Tip: use set(r, g, b, a) for batch setting the color values.
+   * @param {number} a - The new alpha value (0-1).
    * @returns {void}
-   * @throws {Error} if a is not between 0 and 1
+   * @throws {Error} if the new alpha value is not a number or out of range.
    */
   set a(a) {
     if (typeof a !== "number" || a < 0 || a > 1) {
@@ -145,17 +156,17 @@ export class RgbaColor extends Color {
 
     this.#a = a;
 
-    if (!this.#isBatchSetting) this.updateColorStr();
+    if (!this.#isBatchSetting) this.#updateColorStr();
   }
 
   /**
-   * Set the rgba color
-   * @param {number} r - red (0-255)
-   * @param {number} g - green (0-255)
-   * @param {number} b - blue (0-255)
-   * @param {number} a - alpha (0-1)
-   * @throws {Error} if r, g, or b is not between 0 and 255
-   * @throws {Error} if a is not between 0 and 1
+   * Sets the color's red, green, blue and alpha values.
+   * @param {number} r - The new red value (0-255).
+   * @param {number} g - The new green value (0-255).
+   * @param {number} b - The new blue value (0-255).
+   * @param {number} a - The new alpha value (0-1).
+   * @returns {void}
+   * @throws {Error} if red, green, blue or alpha values are not numbers or out of range.
    */
   set(r, g, b, a) {
     try {
@@ -164,7 +175,7 @@ export class RgbaColor extends Color {
       this.g = g;
       this.b = b;
       this.a = a;
-      this.updateColorStr();
+      this.#updateColorStr();
     } finally {
       this.#isBatchSetting = false;
     }
@@ -174,16 +185,18 @@ export class RgbaColor extends Color {
    * update the colorStr property based on the rgba props.
    * @returns {void}
    */
-  updateColorStr() {
+  #updateColorStr() {
     this.colorStr = `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
   }
 
   /**
-   * Set red
-   * @param {number} r - red (0-255)
+   * Sets the color's red value.
+   * Side-effects: updates the colorStr property.
+   * Tip: use set(r, g, b, a) for batch setting the color values.
+   * @param {number} r - The new red value (0-255).
    * @returns {void}
-   * @throws {Error} if r is not between 0 and 255
-   * @deprecated since version 0.1.0 - use r setter instead
+   * @throws {Error} if the new red value is not a number or out of range.
+   * @deprecated since version 0.1.0 - use r setter instead.
    */
   setRed(r) {
     deprecate("setRed()", "r setter", "0.1.0");
@@ -191,11 +204,13 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * Set green
-   * @param {number} g - green (0-255)
+   * Sets the color's green value.
+   * Side-effects: updates the colorStr property.
+   * Tip: use set(r, g, b, a) for batch setting the color values.
+   * @param {number} g - The new green value (0-255).
    * @returns {void}
-   * @throws {Error} if g is not between 0 and 255
-   * @deprecated since version 0.1.0 - use g setter instead
+   * @throws {Error} if the new green value is not a number or out of range.
+   * @deprecated since version 0.1.0 - use g setter instead.
    */
   setGreen(g) {
     deprecate("setGreen()", "g setter", "0.1.0");
@@ -203,11 +218,13 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * Set blue
-   * @param {number} b - blue (0-255)
+   * Sets the color's blue value.
+   * Side-effects: updates the colorStr property.
+   * Tip: use set(r, g, b, a) for batch setting the color values.
+   * @param {number} b - The new blue value (0-255).
    * @returns {void}
-   * @throws {Error} if b is not between 0 and 255
-   * @deprecated since version 0.1.0 - use b setter instead
+   * @throws {Error} if the new blue value is not a number or out of range.
+   * @deprecated since version 0.1.0 - use b setter instead.
    */
   setBlue(b) {
     deprecate("setBlue()", "b setter", "0.1.0");
@@ -215,11 +232,13 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * Set the alpha
-   * @param {number} a - alpha (0-1)
+   * Sets the color's alpha value.
+   * Side-effects: updates the colorStr property.
+   * Tip: use set(r, g, b, a) for batch setting the color values.
+   * @param {number} a - The new alpha value (0-1).
    * @returns {void}
-   * @throws {Error} if a is not between 0 and 1
-   * @deprecated since version 0.1.0 - use a setter instead
+   * @throws {Error} if the new alpha value is not a number or out of range.
+   * @deprecated since version 0.1.0 - use a setter instead.
    */
   setAlpha(alpha) {
     deprecate("setAlpha()", "a setter", "0.1.0");
@@ -227,16 +246,16 @@ export class RgbaColor extends Color {
   }
 
   /**
-   * Returns a string representation of the color in rgba format
-   * @returns {string}
+   * Gets a string representation of the color in RGBA format.
+   * @returns {string} The RGBA string representation of the color.
    */
   toRgbaString() {
     return `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
   }
 
   /**
-   * Returns a string representation of the color in rgb format
-   * @returns {string}
+   * Gets a string representation of the color in RGB format.
+   * @returns {string} The RGB string representation of the color.
    */
   toRgbString() {
     return `rgb(${this.r}, ${this.g}, ${this.b})`;

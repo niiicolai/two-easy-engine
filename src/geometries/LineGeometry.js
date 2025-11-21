@@ -5,37 +5,39 @@ import { Material } from "../materials/Material.js";
 import { Transform } from "../core/Transform.js";
 
 /**
- * This class provides a way to draw a custom shape using lines.
+ * The class provides a way to draw a custom shape using lines.
  * @class LineGeometry
  * @augments Geometry
  */
 export class LineGeometry extends Geometry {
   /**
-   * @property {number} #SEGMENT_SIZE - Defines the number of coordinates stored in the flat array for line segments (e.g. 1=x1, 2=y1, 3=x2, 4=y2).
+   * Defines the number of coordinates stored in the flat array for line segments (e.g. 1=x1, 2=y1, 3=x2, 4=y2).
+   * @type {number}
    */
   static SEGMENT_SIZE = 4;
 
   /**
+   * A flat array of line segments.
    * @private
-   * @property {Float32Array} #vertices - Flat array of lines.
+   * @type {Float32Array}
    */
   #vertices;
 
   /**
+   * The geometry's centroid.
    * @private
-   * @property {Array<number>} #centroid - The centroid point of the polygon.
+   * @type {Array<number>}
    */
   #centroid;
 
   /**
-   * This class provides a way to draw a custom shape using lines.
-   * @class
-   * @param {Array.<Array<number>>|Float32Array} vertices - The vertices
-   * @throws {Error} If vertices is not an array or Float32Array
-   * @throws {Error} If vertices as array must contain at least one 4-number arrays
-   * @throws {Error} If vertices as array must contain arrays with a length of four numbers
-   * @throws {Error} If vertices as Float32Array must have a length of 4
-   * @throws {Error} If vertices as Float32Array must contain an even number of values
+   * Create a new LineGeometry instance.
+   * @param {Array.<Array<number>>|Float32Array} vertices - The vertices.
+   * @throws {Error} If the vertices is not an array or Float32Array.
+   * @throws {Error} If the vertices as array contains less than one 4-number arrays.
+   * @throws {Error} If the vertices as array contains an array with a length not equal to four.
+   * @throws {Error} If the vertices as Float32Array have a length less than 4.
+   * @throws {Error} If the vertices as Float32Array have an odd length.
    */
   constructor(vertices) {
     super();
@@ -43,22 +45,24 @@ export class LineGeometry extends Geometry {
   }
 
   /**
-   * Gets the lines' vertices
-   * @returns {Float32Array}
+   * Gets the geometry's vertices.
+   * @returns {Float32Array} The Float32Array instance.
    */
   get vertices() {
     return this.#vertices;
   }
 
   /**
-   * Set vertices.
-   * @param {Array.<Array<number>>|Float32Array} vertices - The vertices
+   * Sets the geometry's vertices.
+   * Side-effects: If given a nested array, it is converted to a Float32Array instance.
+   * Side-effects: recalculates the centroid and move the vertices toward the centroid.
+   * @param {Array.<Array<number>>|Float32Array} vertices - The new vertices.
    * @returns {void}
-   * @throws {Error} If vertices is not an array or Float32Array
-   * @throws {Error} If vertices as array must contain at least one 4-number arrays
-   * @throws {Error} If vertices as array must contain arrays with a length of four numbers
-   * @throws {Error} If vertices as Float32Array must have a length of 4
-   * @throws {Error} If vertices as Float32Array must contain an even number of values
+   * @throws {Error} If the new vertices is not an array or Float32Array.
+   * @throws {Error} If the new vertices as array contains less than one 4-number arrays.
+   * @throws {Error} If the new vertices as array contains an array with a length not equal to four.
+   * @throws {Error} If the new vertices as Float32Array have a length less than 4.
+   * @throws {Error} If the new vertices as Float32Array have an uneven length.
    */
   set vertices(vertices) {
     const isArray = Array.isArray(vertices);
@@ -98,77 +102,11 @@ export class LineGeometry extends Geometry {
     this.#correctPoints();
   }
 
-
   /**
-   * Convert the nested array to Float32Array and set the vertices.
+   * Check for any conflicts between the geometry and the provided material.
+   * @param {Material} material - The material to check against.
    * @returns {void}
-   */
-  #setVerticesByNestedArray(vertices) {
-    const expectedLength = vertices.length * LineGeometry.SEGMENT_SIZE;
-    if (!this.#vertices || this.#vertices.length !== expectedLength) {
-      this.#vertices = new Float32Array(expectedLength);
-    }
-
-    let offset = 0;
-    for (let i = 0; i < vertices.length; i++) {
-      const line = vertices[i];
-
-      this.#vertices[offset] = line[0];
-      this.#vertices[offset + 1] = line[1];
-      this.#vertices[offset + 2] = line[2];
-      this.#vertices[offset + 3] = line[3];
-
-      offset += LineGeometry.SEGMENT_SIZE;
-    }
-  }
-
-  /**
-   * Calculates the centroid
-   * @private
-   */
-  #calculateCentroid() {
-    const vertices = this.#vertices;
-    const verticesLength = vertices.length;
-    const coordinatesCount = verticesLength / 2;
-    const centroid = [0, 0]; // x, y
-
-    for (let i = 0; i < verticesLength; i += LineGeometry.SEGMENT_SIZE) {
-      const x1 = vertices[i];
-      const y1 = vertices[i + 1];
-      const x2 = vertices[i + 2];
-      const y2 = vertices[i + 3];
-
-      centroid[0] += x1 + x2;
-      centroid[1] += y1 + y2;
-    }
-
-    centroid[0] = centroid[0] / coordinatesCount;
-    centroid[1] = centroid[1] / coordinatesCount;
-
-    this.#centroid = centroid;
-  }
-
-  /**
-   * Translates all points so the geometry is centered around [0, 0].
-   * @private
-   */
-  #correctPoints() {
-    const vertices = this.#vertices;
-    const centroid = this.#centroid;
-
-    for (let i = 0; i < vertices.length; i += LineGeometry.SEGMENT_SIZE) {
-      vertices[i] -= centroid[0];
-      vertices[i + 1] -= centroid[1];
-      vertices[i + 2] -= centroid[0];
-      vertices[i + 3] -= centroid[1];
-    }
-  }
-
-  /**
-   * Check for any conflicts between the geometry and the provided material
-   * @param {Material} material - The material to check against
-   * @returns {void}
-   * @throws {Error} If material does not have a strokeStyle
+   * @throws {Error} If the material does not have a strokeStyle.
    */
   checkMaterialConflicts(material) {
     if (!material.strokeStyle) {
@@ -177,10 +115,10 @@ export class LineGeometry extends Geometry {
   }
 
   /**
-   * Draws the lines onto the given canvas 2D context
-   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
-   * @param {Transform} transform - The transform to apply to the line
-   * @param {Material} material - The material to use for rendering the line
+   * Draws the lines onto the given canvas 2D rendering context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
+   * @param {Transform} transform - The transform.
+   * @param {Material} material - The material.
    * @returns {void}
    */
   drawContext2D(ctx, transform, material) {
@@ -208,5 +146,74 @@ export class LineGeometry extends Geometry {
     }
 
     ctx.restore();
+  }
+
+  /**
+   * Converts the given nested array to a Float32Array and sets the vertices.
+   * @param {Array.<Array<number>>} vertices - The nested array of vertices to convert.
+   * @returns {void}
+   * @private
+   */
+  #setVerticesByNestedArray(vertices) {
+    const expectedLength = vertices.length * LineGeometry.SEGMENT_SIZE;
+    if (!this.#vertices || this.#vertices.length !== expectedLength) {
+      this.#vertices = new Float32Array(expectedLength);
+    }
+
+    let offset = 0;
+    for (let i = 0; i < vertices.length; i++) {
+      const line = vertices[i];
+
+      this.#vertices[offset] = line[0];
+      this.#vertices[offset + 1] = line[1];
+      this.#vertices[offset + 2] = line[2];
+      this.#vertices[offset + 3] = line[3];
+
+      offset += LineGeometry.SEGMENT_SIZE;
+    }
+  }
+
+  /**
+   * Calculates the geometry's centroid.
+   * @returns {void}
+   * @private
+   */
+  #calculateCentroid() {
+    const vertices = this.#vertices;
+    const verticesLength = vertices.length;
+    const coordinatesCount = verticesLength / 2;
+    const centroid = [0, 0]; // x, y
+
+    for (let i = 0; i < verticesLength; i += LineGeometry.SEGMENT_SIZE) {
+      const x1 = vertices[i];
+      const y1 = vertices[i + 1];
+      const x2 = vertices[i + 2];
+      const y2 = vertices[i + 3];
+
+      centroid[0] += x1 + x2;
+      centroid[1] += y1 + y2;
+    }
+
+    centroid[0] = centroid[0] / coordinatesCount;
+    centroid[1] = centroid[1] / coordinatesCount;
+
+    this.#centroid = centroid;
+  }
+
+  /**
+   * Translates all points so the geometry is centered around [0, 0].
+   * @returns {void}
+   * @private
+   */
+  #correctPoints() {
+    const vertices = this.#vertices;
+    const centroid = this.#centroid;
+
+    for (let i = 0; i < vertices.length; i += LineGeometry.SEGMENT_SIZE) {
+      vertices[i] -= centroid[0];
+      vertices[i + 1] -= centroid[1];
+      vertices[i + 2] -= centroid[0];
+      vertices[i + 3] -= centroid[1];
+    }
   }
 }

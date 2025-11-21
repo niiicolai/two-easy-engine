@@ -3,36 +3,38 @@ import { Geometry } from "../geometries/Geometry.js";
 import { Material } from "../materials/Material.js";
 
 /**
- * This class combines geometry and material to create a drawable object.
+ * The class combines geometry and material to create a drawable object.
  * @class Mesh
  * @augments Object2D
  */
 export class Mesh extends Object2D {
   /**
+   * Defines the class' default z-index (default: 1000).
    * @static
-   * @property {number} Z_INDEX - defines the class' default z-index (default: 1000)
+   * @type {number}
    */
   static Z_INDEX = 1000;
 
   /**
+   * The mesh's geometry.
    * @private
-   * @property {Geometry} #geometry - The mesh's geometry
+   * @type {Geometry}
    */
   #geometry;
 
   /**
+   * The mesh's material.
    * @private
-   * @property {Material} #material - The mesh's material
+   * @type {Material} 
    */
   #material;
 
   /**
-   * This class combines geometry and material to create a drawable object.
-   * @class
-   * @param {Geometry} geometry - The mesh's geometry
-   * @param {Material} material - The mesh's material
-   * @throws {Error} If geometry is not of type Geometry
-   * @throws {Error} If material  is not of type Material
+   * Create a new Mesh instance.
+   * @param {Geometry} geometry - The mesh's geometry.
+   * @param {Material} material - The mesh's material.
+   * @throws {Error} If geometry is not of type Geometry.
+   * @throws {Error} If material is not of type Material.
    */
   constructor(geometry, material) {
     super();
@@ -42,10 +44,10 @@ export class Mesh extends Object2D {
   }
 
   /**
-   * Sets the mesh's geometry
-   * @param {Geometry} newGeometry - The new geometry to set
+   * Sets the mesh's geometry.
+   * @param {Geometry} geometry - The new geometry to assign.
    * @returns {void}
-   * @throws {Error} If newGeometry is not of type Geometry
+   * @throws {Error} If the new geometry is not of type Geometry.
    */
   set geometry(geometry) {
     if (!(geometry instanceof Geometry)) {
@@ -60,18 +62,18 @@ export class Mesh extends Object2D {
   }
 
   /**
-   * Gets the mesh's geometry
-   * @returns {Geometry}
+   * Gets the mesh's geometry.
+   * @returns {Geometry} The geometry instance.
    */
   get geometry() {
     return this.#geometry;
   }
 
   /**
-   * Sets the mesh's material
-   * @param {Material} newMaterial - The new material to set
+   * Sets the mesh's material.
+   * @param {Material} material - The new material to assign.
    * @returns {void}
-   * @throws {Error} If newMaterial is not of type Material
+   * @throws {Error} If the new material is not of type Material.
    */
   set material(material) {
     if (!(material instanceof Material)) {
@@ -86,16 +88,16 @@ export class Mesh extends Object2D {
   }
 
   /**
-   * Gets the mesh's material
-   * @returns {Material}
+   * Gets the mesh's material.
+   * @returns {Material} The material instance.
    */
   get material() {
     return this.#material;
   }
 
   /**
-   * Draws the mesh onto the given canvas 2D context
-   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw onto
+   * Draws the mesh onto the given canvas 2D context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context.
    * @returns {void}
    */
   drawContext2D(ctx) {

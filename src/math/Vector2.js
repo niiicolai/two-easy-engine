@@ -1,26 +1,27 @@
-/**
- * This class provides basic vector operations such as addition, subtraction, scaling, and normalization.
+/** 
+ * A mutable vector class implementing operations such as addition, subtraction, scaling, and normalization. 
  * @class Vector2
  */
 export class Vector2 {
   /**
+   * The x value.
    * @private
-   * @property {number} #x - the x coordinate.
+   * @type {number}
    */
   #x;
 
   /**
+   * The y value.
    * @private
-   * @property {number} #y - the y coordinate.
+   * @type {number}
    */
   #y;
 
   /**
-   * This class provides basic vector operations such as addition, subtraction, scaling, and normalization.
-   * @class
-   * @param {number} x - The x coordinate
-   * @param {number} y - The y coordinate
-   * @throws {Error} If x or y are not numbers.
+   * Create a new Vector2 instance.
+   * @param {number} [x=0] - The x value.
+   * @param {number} [y=0] - The y value.
+   * @throws {Error} If the x or y value is not a number.
    */
   constructor(x = 0, y = 0) {
     if (typeof x !== "number" || typeof y !== "number") {
@@ -32,18 +33,18 @@ export class Vector2 {
   }
 
   /**
-   * Get the x coordinate
-   * @returns {Vector2}
+   * Get the x value.
+   * @returns {number} The x value.
    */
   get x() {
     return this.#x;
   }
 
   /**
-   * Sets the x coordinate
-   * @param {number} x - The new value
+   * Sets the x value.
+   * @param {number} x - The new value to assign.
    * @returns {void}
-   * @throws {Error} If the x is not a number.
+   * @throws {Error} If the x value is not a number.
    */
   set x(x) {
     if (typeof x !== "number") {
@@ -54,18 +55,18 @@ export class Vector2 {
   }
 
   /**
-   * Get the y coordinate
-   * @returns {Vector2}
+   * Get the y value.
+   * @returns {number} The y value.
    */
   get y() {
     return this.#y;
   }
 
   /**
-   * Sets the y coordinate
-   * @param {number} y - The new value
+   * Sets the y value.
+   * @param {number} y - The new value to assign.
    * @returns {void}
-   * @throws {Error} If the y is not a number.
+   * @throws {Error} If the y value is not a number.
    */
   set y(y) {
     if (typeof y !== "number") {
@@ -76,19 +77,19 @@ export class Vector2 {
   }
 
   /**
-   * Creates a copy of the vector
-   * @returns {Vector2}
+   * Creates a copy of the Vector2 instance.
+   * @returns {Vector2} The new Vector2 instance.
    */
   clone() {
     return new Vector2(this.x, this.y);
   }
 
   /**
-   * Sets the x and y values of the vector
-   * @param {number} x - The new x value
-   * @param {number} y - The new y value
-   * @returns {Vector2}
-   * @throws {Error} If x or y is not a number
+   * Sets the vector's x and y values.
+   * @param {number} x - The new x value to assign.
+   * @param {number} y - The new y value to assign.
+   * @returns {Vector2} This vector instance for chaining.
+   * @throws {Error} If the x or y value is not a number.
    */
   set(x, y) {
     if (typeof x !== "number" || typeof y !== "number") {
@@ -102,11 +103,11 @@ export class Vector2 {
   }
 
   /**
-   * Translates the vector by given x and y offsets
-   * @param {number} x - The x offset
-   * @param {number} y - The y offset
-   * @returns {Vector2}
-   * @throws {Error} If x or y is not a number
+   * Translates the vector's x and y values by a given offset
+   * @param {number} dx - The x value offset.
+   * @param {number} dy - The y value offset.
+   * @returns {Vector2} This vector instance for chaining.
+   * @throws {Error} If dx or dy are not numbers.
    */
   translate(dx, dy) {
     if (typeof dx !== "number" || typeof dy !== "number") {
@@ -120,10 +121,10 @@ export class Vector2 {
   }
 
   /**
-   * Copy the values of the given vector to this.
-   * @param {Vector2} v - The vector to copy
-   * @returns {Vector2}
-   * @throws {Error} If v is not of type Vector2
+   * Copy the values of the given vector instance to this vector instance.
+   * @param {Vector2} v - The vector instance to copy.
+   * @returns {Vector2} This vector instance for chaining.
+   * @throws {Error} If v is not of type Vector2.
    */
   copy(v) {
     if (!(v instanceof Vector2)) {
@@ -137,10 +138,10 @@ export class Vector2 {
   }
 
   /**
-   * Adds another vector to this vector
-   * @param {Vector2} v - The vector to add
-   * @returns {Vector2}
-   * @throws {Error} If v is not of type Vector2
+   * Add the values of the given vector instance to this vector instance.
+   * @param {Vector2} v - The vector instance to add.
+   * @returns {Vector2} This vector instance for chaining.
+   * @throws {Error} If v is not of type Vector2.
    */
   add(v) {
     if (!(v instanceof Vector2)) {
@@ -154,10 +155,10 @@ export class Vector2 {
   }
 
   /**
-   * Subtracts another vector from this vector
-   * @param {Vector2} v - The vector to subtract
-   * @returns {Vector2}
-   * @throws {Error} If v is not of type Vector2
+   * Subtract the values from this vector instance by a given vector instance.
+   * @param {Vector2} v - The vector instance used for subtraction.
+   * @returns {Vector2} This vector instance for chaining.
+   * @throws {Error} If v is not of type Vector2.
    */
   subtract(v) {
     if (!(v instanceof Vector2)) {
@@ -171,10 +172,11 @@ export class Vector2 {
   }
 
   /**
-   * Computes the dot product with another vector
-   * @param {Vector2} v - The other vector
-   * @returns {number}
-   * @throws {Error} If v is not of type Vector2
+   * Computes this and a given vector instance's dot product.
+   * Formula: x1 * x2 + y1 * y2
+   * @param {Vector2} v - The other vector instance. 
+   * @returns {number} The resulting dot product (scalar value).
+   * @throws {Error} If v is not of type Vector2.
    */
   dot(v) {
     if (!(v instanceof Vector2)) {
@@ -185,9 +187,10 @@ export class Vector2 {
   }
 
   /**
-   * Computes a new vector from this vector to another vector
-   * @param {Vector2} v - The target vector
-   * @returns {Vector2}
+   * Computes the displacement vector from this vector instance to another vector instance.
+   * Calculates: target - this
+   * @param {Vector2} v - The target vector.
+   * @returns {Vector2} A new instance defining the displacement vector.
    * @throws {Error} If v is not of type Vector2
    */
   vectorTo(v) {
@@ -199,10 +202,10 @@ export class Vector2 {
   }
 
   /**
-   * Multiplies this vector by a scalar
-   * @param {number} s - The scalar to multiply by
-   * @returns {Vector2}
-   * @throws {Error} If s is not a number
+   * Multiplies the vector's values by a scalar.
+   * @param {number} s - The scalar.
+   * @returns {Vector2} This vector instance for chaining.
+   * @throws {Error} If s is not a number.
    */
   multiplyScalar(s) {
     if (typeof s !== "number") {
@@ -216,11 +219,11 @@ export class Vector2 {
   }
 
   /**
-   * Divides this vector by a scalar
-   * @param {number} s - The scalar to divide by
-   * @returns {Vector2}
-   * @throws {Error} If s is not a number
-   * @throws {Error} If division by zero is attempted
+   * Divides the vector's values by a scalar.
+   * @param {number} s - The scalar.
+   * @returns {Vector2} This vector instance for chaining.
+   * @throws {Error} If s is not a number.
+   * @throws {Error} If division by zero is attempted.
    */
   divideScalar(s) {
     if (typeof s !== "number") {
@@ -236,25 +239,27 @@ export class Vector2 {
   }
 
   /**
-   * Computes the length (magnitude) of the vector
-   * @returns {number}
+   * Computes the magnitude (length) of the vector.
+   * Formula: Math.sqrt(x * x + y * y)
+   * @returns {number} The scalar length/magnitude of the vector.
    */
   length() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
   }
 
   /**
-   * Computes the squared length of the vector.
-   * @returns {number}
+   * Computes the squared magnitude (length) of the vector.
+   * Formula: x * x + y * y
+   * @returns {number} The squared scalar length/magnitude of the vector.
    */
   lengthSquared() {
     return this.x * this.x + this.y * this.y;
   }
 
   /**
-   * Normalizes the vector to have a length of 1
-   * @returns {Vector2}
-   * @throws {Error} If attempting to normalize a zero-length vector
+   * Normalizes the vector to a length of 1.
+   * @returns {Vector2} This vector instance for chaining.
+   * @throws {Error} If attempting to normalize a zero-length vector.
    */
   normalize() {
     const len = this.length();
@@ -268,9 +273,10 @@ export class Vector2 {
   }
 
   /**
-   * Check if the values of this vector is equal to another
-   * @param {Vector2} v - The other vector
-   * @returns {boolean}
+   * Check if the vector's values are equal to another vector.
+   * @param {Vector2} v - The other vector.
+   * @returns {boolean} Returns true if they are equal.
+   * @throws {Error} If v is not of type Vector2.
    */
   isEqual(v) {
     if (!(v instanceof Vector2)) {
@@ -281,13 +287,18 @@ export class Vector2 {
   }
 
   /**
-   * Rotate the coordinates the given radians around the given point
-   * @param {number} px - the x coordinate of the point to rotate around
-   * @param {number} py - the y coordinate of the point to rotate around
-   * @param {number} angle - the rotation angle in radians
-   * @returns {Vector2}
+   * Rotate the vector's values by an angle (in radians) around the given point.
+   * @param {number} px - the x value to rotate around.
+   * @param {number} py - the y value to rotate around.
+   * @param {number} angle - the angle in radians.
+   * @returns {Vector2} This vector instance for chaining.
+   * @throws {Error} If px, py, or angle are not numbers.
    */
   rotateAround(px, py, angle) {
+    if (typeof px !== 'number' || typeof py !== 'number' || typeof angle !== 'number') {
+      throw new Error("px, py, and angle must be numbers");
+    }
+
     const cos = Math.cos(angle);
     const sin = Math.sin(angle);
     const x = this.x;

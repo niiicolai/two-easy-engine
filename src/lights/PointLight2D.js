@@ -3,48 +3,52 @@ import { RgbaColor } from "../colors/RgbaColor.js";
 import { Object2D } from "../core/Object2D.js";
 
 /**
- * A simple 2D light source for Canvas rendering.
+ * A fake 2D light source effect for canvas 2D rendering context.
  * @class PointLight2D
  * @augments Object2D
  */
 export class PointLight2D extends Object2D {
   /**
+   * Defines the class' default z-index (default: 2000).
    * @static
-   * @property {number} Z_INDEX - defines the class' default z-index (default: 2000)
+   * @type {number}
    */
   static Z_INDEX = 2000;
 
   /**
+   * The light's radius.
    * @private
-   * @property {number} #radius - The light's radius
+   * @type {number}
    */
   #radius;
 
   /**
+   * The light's intensity.
    * @private
-   * @property {number} #intensity - The light's intensity
+   * @type {number}
    */
   #intensity;
 
   /**
+   * The light's color.
    * @private
-   * @property {Color} #color - The light's color
+   * @type {Color}
    */
   #color;
 
   /**
+   * The light's colorStop.
    * @private
-   * @property {Color} #intensity - The light's colorStop
+   * @type {Color}
    */
   #colorStop;
 
   /**
-   * A simple 2D light source for Canvas rendering.
-   * @class
-   * @param {number} radius - The radius of the light
-   * @param {number} intensity - The intensity of the light
-   * @param {Color} color - The color of the light
-   * @param {Color} colorStop - The colorStop of the light
+   * Create a new PointLight2D instance.
+   * @param {number} [radius=100] - The radius.
+   * @param {number} [intensity=1] - The intensity.
+   * @param {Color} [color=new RgbaColor(255, 255, 200, 1)] - The color.
+   * @param {Color} [colorStop=new RgbaColor(255, 255, 200, 0)] - The colorStop.
    * @throws {Error} If the radius is not a positive number.
    * @throws {Error} If the intensity is not a positive number.
    * @throws {Error} If the color is not a Color.
@@ -62,25 +66,24 @@ export class PointLight2D extends Object2D {
     this.intensity = intensity;
     this.color = color;
     this.colorStop = colorStop;
-    this.zIndex = 1;
   }
 
   /**
-   * Gets the light's radius
-   * @returns {number}
+   * Gets the light's radius.
+   * @returns {number} A number representing the light's radius.
    */
   get radius() {
     return this.#radius;
   }
 
   /**
-   * Sets the light's radius
-   * @param {number} radius - The light's radius
+   * Sets the light's radius.
+   * @param {number} radius - The new radius.
    * @returns {void}
-   * @throws {Error} If the radius is not a positive number.
+   * @throws {Error} If the new radius is not a positive number.
    */
   set radius(radius) {
-    if (typeof radius !== "number" || radius < 0) {
+    if (typeof radius !== "number" || radius <= 0) {
       throw new Error("radius must be a positive number");
     }
 
@@ -88,21 +91,21 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * Gets the light's intensity
-   * @returns {number}
+   * Gets the light's intensity.
+   * @returns {number} A number representing the light's intensity.
    */
   get intensity() {
     return this.#intensity;
   }
 
   /**
-   * Sets the light's intensity
-   * @param {number} intensity - The light's intensity
+   * Sets the light's intensity.
+   * @param {number} intensity - The new intensity.
    * @returns {void}
-   * @throws {Error} If the intensity is not a positive number.
+   * @throws {Error} If the new intensity is not a positive number.
    */
   set intensity(intensity) {
-    if (typeof intensity !== "number" || intensity < 0) {
+    if (typeof intensity !== "number" || intensity <= 0) {
       throw new Error("intensity must be a positive number");
     }
 
@@ -110,18 +113,18 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * Gets the light's color
-   * @returns {Color}
+   * Gets the light's color.
+   * @returns {Color} The Color instance.
    */
   get color() {
     return this.#color;
   }
 
   /**
-   * Sets the light's color
-   * @param {Color} color - The light's color
+   * Sets the light's color.
+   * @param {Color} color - The new color.
    * @returns {void}
-   * @throws {Error} If the color is not a Color.
+   * @throws {Error} If the new color is not a Color.
    */
   set color(color) {
     if (!(color instanceof Color)) {
@@ -132,18 +135,18 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * Gets the light's colorStop
-   * @returns {Color}
+   * Gets the light's colorStop.
+   * @returns {Color} The Color instance.
    */
   get colorStop() {
     return this.#colorStop;
   }
 
   /**
-   * Sets the light's colorStop
-   * @param {Color} color - The light's colorStop
+   * Sets the light's colorStop.
+   * @param {Color} colorStop - The new colorStop.
    * @returns {void}
-   * @throws {Error} If the colorStop is not a Color.
+   * @throws {Error} If the new colorStop is not a Color.
    */
   set colorStop(colorStop) {
     if (!(colorStop instanceof Color)) {
@@ -154,7 +157,7 @@ export class PointLight2D extends Object2D {
   }
 
   /**
-   * Renders the light effect on the given 2D rendering context.
+   * Draws the light effect.
    * @param {CanvasRenderingContext2D} ctx - The 2D rendering context.
    * @returns {void}
    */
