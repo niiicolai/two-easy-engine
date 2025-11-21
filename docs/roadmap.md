@@ -21,7 +21,7 @@ This roadmap outlines our major goals, target releases, and long-term vision for
 * **Renderer**: Define a base renderer and a context specific for Canvas 2D rendering context. (**✅ Done**)
 * **TypeScript Support**: Implement generation of TypeScript declaration files. (**✅ Done**)
 * **Test Framework**: Add a test framework for implementing tests. (**✅ Done**)
-* **Anchor Points**: Create a way to manage object anchor points. (**🚧 In Progress**)
+* **Anchor Points**: Create a way to manage object anchor points. (**✅ Done**)
 * **Basic Colliders**: Add management for basic collisions. (**🔜 Planned**)
 * **WebGPU**: Implement support for WebGPU rendering. (**🔜 Planned**)
 :::
