@@ -37,11 +37,11 @@
         backgroundColor: "black",
       });
 
-      const mesh = new Two.Mesh(
+      const triangle = new Two.Mesh(
         new Two.PolygonGeometry([
           [0, 0],
           [100, 0],
-          [100, 100]
+          [100, 100],
         ]),
         new Two.BasicMaterial({
           fillStyle: new Two.RgbaColor(0, 255, 0, 1),
@@ -49,15 +49,138 @@
           lineWidth: 2,
         })
       );
-      mesh.transform.position.set(renderer.centerX, renderer.centerY);
-      scene.add(mesh);
+      triangle.transform.position.set(renderer.centerX, renderer.centerY + 50);
+      scene.add(triangle);
+
+      const pentagon = new Two.Mesh(
+        new Two.PolygonGeometry([
+          [0, 0],
+          [50, -50],
+          [100, 0],
+          [75, 50],
+          [25, 50],
+        ]),
+        new Two.BasicMaterial({
+          fillStyle: new Two.RgbaColor(0, 0, 255, 1),
+          strokeStyle: new Two.RgbaColor(0, 0, 255, 1),
+          lineWidth: 2,
+        })
+      );
+      pentagon.transform.position.set(
+        renderer.centerX - 150,
+        renderer.centerY + 50
+      );
+      scene.add(pentagon);
+
+      const hexagon = new Two.Mesh(
+        new Two.PolygonGeometry([
+          [0, 0],
+          [50, -25],
+          [100, 0],
+          [100, 50],
+          [50, 75],
+          [0, 50],
+        ]),
+        new Two.BasicMaterial({
+          fillStyle: new Two.RgbaColor(255, 0, 0, 1),
+          strokeStyle: new Two.RgbaColor(255, 0, 0, 1),
+          lineWidth: 2,
+        })
+      );
+      hexagon.transform.position.set(renderer.centerX, renderer.centerY - 100);
+      scene.add(hexagon);
+
+      const parallelogram = new Two.Mesh(
+        new Two.PolygonGeometry([
+          [25, 0],
+          [100, 0],
+          [75, 50],
+          [0, 50],
+        ]),
+        new Two.BasicMaterial({
+          fillStyle: new Two.RgbaColor(255, 0, 0, 1),
+          strokeStyle: new Two.RgbaColor(255, 0, 0, 1),
+          lineWidth: 2,
+        })
+      );
+      parallelogram.transform.position.set(renderer.centerX- 150, renderer.centerY - 100);
+      scene.add(parallelogram);
+
+      const star = new Two.Mesh(
+        new Two.PolygonGeometry([
+          [0, 0],
+          [75, 0],
+          [100, -75],
+          [125, 0],
+          [200, 0],
+          [150, 50],
+          [175, 125],
+          [100, 80],
+          [25, 125],
+          [55, 50],
+        ]),
+        new Two.BasicMaterial({
+          fillStyle: new Two.RgbaColor(255, 255, 0, 1),
+          strokeStyle: new Two.RgbaColor(255, 255, 0, 1),
+          lineWidth: 2,
+        })
+      );
+      star.transform.position.set(
+        renderer.centerX + 150,
+        renderer.centerY + 50
+      );
+      star.transform.scale.set(0.5, 0.5);
+      scene.add(star);
+
+      const star2 = new Two.Mesh(
+        new Two.PolygonGeometry([
+          [0, 25],
+          [75, 0],
+          [100, -75],
+          [125, 0],
+          [200, 25],
+          [125, 50],
+          [100, 125],
+          [75, 50],
+        ]),
+        new Two.BasicMaterial({
+          fillStyle: new Two.RgbaColor(255, 150, 255, 1),
+          strokeStyle: new Two.RgbaColor(255, 150, 255, 1),
+          lineWidth: 2,
+        })
+      );
+      star2.transform.position.set(
+        renderer.centerX + 150,
+        renderer.centerY - 100
+      );
+      star2.transform.scale.set(0.5, 0.5);
+      scene.add(star2);
 
       window.onresize = () => {
         renderer.options.setSize(window.innerWidth, window.innerHeight);
-        mesh.transform.position.set(renderer.centerX, renderer.centerY);
+        triangle.transform.position.set(
+          renderer.centerX,
+          renderer.centerY + 50
+        );
+        pentagon.transform.position.set(
+          renderer.centerX - 150,
+          renderer.centerY + 50
+        );
+        hexagon.transform.position.set(
+          renderer.centerX,
+          renderer.centerY - 100
+        );
+        star.transform.position.set(
+          renderer.centerX + 150,
+          renderer.centerY + 50
+        );
+        star2.transform.position.set(
+          renderer.centerX + 150,
+          renderer.centerY - 100
+        );
       };
 
-      const speed = 1.5;
+      const speed = 1;
 
       renderer.requestAnimationFrame({
         beforeRender: () => {
@@ -65,7 +188,12 @@
 
           const delta = clock.deltaTime;
 
-          mesh.transform.rotation += delta * speed;
+          triangle.transform.rotation += delta * speed;
+          pentagon.transform.rotation += delta * speed;
+          hexagon.transform.rotation += delta * speed;
+          parallelogram.transform.rotation += delta * speed;
+          star.transform.rotation += delta * speed;
+          star2.transform.rotation += delta * speed;
         },
       });
     </script>
